@@ -234,9 +234,13 @@ function sortedListings() {
 }
 
 function compactCost(listing) {
+  if (listing.costType === "free") return displayCost(listing);
   const cost = listing.cost.split("·")[0].split(",")[0].trim();
-  if (listing.costType === "free" && /^(free|무료)$/i.test(cost)) return t("intentFree");
   return cost;
+}
+
+function displayCost(listing) {
+  return listing.costType === "free" ? t("valueFreeLabel") : listing.cost;
 }
 
 function verificationAge(value) {
@@ -493,7 +497,7 @@ function detailTemplate(listing) {
       <span>${escapeHtml(t("visualNoteShort"))}</span>
     </section>
     <div class="detail-decision">
-      <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(listing.cost)}</span>
+      <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>
       <h2 id="detailTitle">${escapeHtml(listing.title)}</h2>
       <div class="detail-primary-facts">
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><strong>${escapeHtml(listing.dateLabel)}</strong></p>
@@ -508,8 +512,9 @@ function detailTemplate(listing) {
     <section class="detail-section practical-section">
       <h3>${escapeHtml(t("goodToKnow"))}</h3>
       <div class="practical-key-facts">
-        <div><span>${escapeHtml(t("verifiedPrice"))}</span><strong>${escapeHtml(listing.cost)}</strong></div>
+        <div><span>${escapeHtml(t("verifiedPrice"))}</span><strong>${escapeHtml(displayCost(listing))}</strong></div>
         <div><span>${escapeHtml(t("access"))}</span><strong>${escapeHtml(listing.reservation)}</strong></div>
+        ${listing.costType === "free" ? `<div class="free-scope"><span>${escapeHtml(t("freeScope"))}</span><strong>${escapeHtml(listing.cost)}</strong></div>` : ""}
       </div>
     </section>
     <section class="detail-section before-section">
@@ -634,7 +639,7 @@ function toggleSave(id) {
 async function shareListing(listing) {
   const shareData = {
     title: `${listing.title} | NearFree DFW`,
-    text: `${listing.cost} · ${listing.dateLabel}\n${listing.venue}, ${listing.city}\n${listing.actionUrl}`,
+    text: `${displayCost(listing)} · ${listing.dateLabel}\n${listing.venue}, ${listing.city}\n${listing.actionUrl}`,
     url: listing.actionUrl
   };
   try {

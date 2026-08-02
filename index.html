@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'self'; upgrade-insecure-requests" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f1eb" />
+    <meta name="description" content="Discover verified free plans and near-free local deals across DFW, sorted from your location." />
+    <title>NearFree DFW — More to do. Less to spend.</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#feed" data-i18n="skip">Skip to the benefits feed</a>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="NearFree home" data-i18n-aria="brandHome">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-copy"><strong>NearFree<span class="brand-dot">.</span></strong></span>
+      </a>
+      <button class="location-pill" id="locationButton" type="button" aria-haspopup="dialog">
+        <span class="location-pulse" aria-hidden="true"></span>
+        <span class="location-copy"><small data-i18n="nearby">Near me</small><strong id="locationName">Plano, TX</strong></span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
+      </button>
+      <div class="top-actions">
+        <label class="language-control">
+          <span class="sr-only" data-i18n="language">Language</span>
+          <select id="languageSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="ko">한국어</option>
+          </select>
+        </label>
+        <button class="icon-button saved-trigger" id="savedButton" type="button" aria-label="View saved finds" data-i18n-aria="savedView">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
+          <span class="saved-count" id="savedCount" hidden>0</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="home-main" aria-label="Benefits feed" data-i18n-aria="feedLabel">
+        <section class="discovery-panel" id="discoveryPanel" aria-labelledby="discoveryTitle">
+          <h1 class="sr-only" id="discoveryTitle" data-i18n="discoveryTitle">Find something worth doing near you</h1>
+          <button class="home-location" id="homeLocationButton" type="button" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
+            <strong id="homeLocationName">Plano, TX</strong>
+            <svg class="location-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+          </button>
+          <div class="search-box discovery-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+            <input id="searchInput" type="search" placeholder="What do you want to do?" data-i18n-placeholder="searchPlaceholder" autocomplete="off" />
+            <button id="searchClear" type="button" aria-label="Clear search" data-i18n-aria="clearSearch" hidden>×</button>
+          </div>
+          <div class="intent-scroll" id="intentChips" role="group" aria-label="Quick discovery filters" data-i18n-aria="intentAria">
+            <button class="intent-chip" data-intent="today" data-i18n="intentToday" type="button" aria-pressed="false">Today</button>
+            <button class="intent-chip" data-intent="tonight" data-i18n="intentTonight" type="button" aria-pressed="false">Tonight</button>
+            <button class="intent-chip" data-intent="tomorrow" data-i18n="intentTomorrow" type="button" aria-pressed="false">Tomorrow</button>
+            <button class="intent-chip" data-intent="weekend" data-i18n="intentWeekend" type="button" aria-pressed="false">This weekend</button>
+            <span class="intent-divider" aria-hidden="true"></span>
+            <button class="intent-chip value-intent" data-intent="free" data-i18n="intentFree" type="button" aria-pressed="false">Free</button>
+            <button class="intent-chip value-intent" data-intent="under5" data-i18n="intentUnder5" type="button" aria-pressed="false">Under $5</button>
+            <button class="intent-chip value-intent" data-intent="under10" data-i18n="intentUnder10" type="button" aria-pressed="false">Under $10</button>
+            <span class="intent-divider" aria-hidden="true"></span>
+            <button class="intent-chip" data-intent="kids" data-i18n="intentKids" type="button" aria-pressed="false">Kids</button>
+            <button class="intent-chip" data-intent="date" data-i18n="intentDate" type="button" aria-pressed="false">Date night</button>
+            <button class="intent-chip" data-intent="outdoor" data-i18n="intentOutdoor" type="button" aria-pressed="false">Outdoor</button>
+            <button class="intent-chip" data-intent="indoor" data-i18n="intentIndoor" type="button" aria-pressed="false">Indoor</button>
+            <button class="intent-chip" data-intent="food" data-i18n="intentFood" type="button" aria-pressed="false">Food</button>
+            <button class="intent-chip" data-intent="museums" data-i18n="intentMuseums" type="button" aria-pressed="false">Museums</button>
+            <button class="intent-chip" data-intent="festivals" data-i18n="intentFestivals" type="button" aria-pressed="false">Festivals</button>
+          </div>
+        </section>
+
+        <div class="results-toolbar" id="resultsToolbar">
+          <div class="results-count">
+            <strong><span id="resultCount">0</span> <span data-i18n="resultsSuffix">verified finds</span></strong>
+            <small id="updatedLabel">Updated Jul 25, 2026</small>
+          </div>
+          <button class="sort-button" id="sortButton" type="button" aria-haspopup="menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h12M4 7h.01M12 12h8M4 12h4M16 17h4M4 17h8"/></svg>
+            <span id="sortLabel">Nearest first</span>
+          </button>
+        </div>
+
+        <div class="active-notice" id="activeNotice" hidden>
+          <span id="activeNoticeText"></span>
+          <button id="clearAllFilters" type="button" data-i18n="clearFilters">Reset</button>
+        </div>
+
+        <div class="feed" id="feed" aria-live="polite"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <span>¯\_(ツ)_/¯</span>
+          <h3 data-i18n="emptyTitle">Nothing matches yet</h3>
+          <p data-i18n="emptyDesc">Try another city or loosen your filters.</p>
+          <button id="emptyReset" type="button" data-i18n="emptyReset">View all finds</button>
+        </div>
+
+        <section class="method-card" aria-labelledby="methodTitle">
+          <span class="method-number">02×</span>
+          <div>
+            <span class="section-kicker">HOW WE VERIFY</span>
+            <h2 id="methodTitle" data-i18n="methodTitle">Found once. Checked twice.</h2>
+            <p data-i18n="methodDesc">We compare date, price, eligibility and location across at least two sources, prioritizing official organizers and institutions.</p>
+            <button id="methodButton" type="button"><span class="button-copy" data-i18n="methodButton">See our verification standard</span> <span>↗</span></button>
+          </div>
+        </section>
+      </section>
+
+      <aside class="right-rail" aria-label="Nearby cities and filters" data-i18n-aria="nearbyRailAria">
+        <div class="nearby-card">
+          <span class="section-kicker">NEARBY CITIES</span>
+          <h3 data-i18n="nearbyCities">How far would you go?</h3>
+          <div class="nearby-list" id="nearbyCities"></div>
+          <button id="allCitiesButton" class="all-cities" type="button"><span class="button-copy" data-i18n="allCities">View all DFW cities</span> <span>↗</span></button>
+        </div>
+        <div class="rail-verify">
+          <span class="trust-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 3v5c0 4.8-2.9 8.2-7 10-4.1-1.8-7-5.2-7-10V6z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
+          </span>
+          <strong data-i18n="verifiedSources">Checked with 2+ sources</strong>
+          <p data-i18n="railVerifyDesc">Open any listing to see the exact sources and conditions.</p>
+          <button id="railMethodButton" type="button" data-i18n="methodButton">See our verification standard</button>
+        </div>
+      </aside>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Mobile menu" data-i18n-aria="mobileMenu">
+      <a class="active" href="#feed" aria-label="Home" data-i18n-aria="home"><svg viewBox="0 0 24 24"><path d="m3 11 9-7 9 7v9H6v-9"/><path d="M10 20v-6h4v6"/></svg><span data-i18n="home">Home</span></a>
+      <button id="mobileExplore" type="button"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><span data-i18n="explore">Explore</span></button>
+      <button id="mobileSaved" type="button"><svg viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg><span data-i18n="saved">Saved</span></button>
+      <button id="mobileInfo" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.1"/></svg><span data-i18n="verification">Verified</span></button>
+    </nav>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+
+    <dialog class="sheet location-sheet" id="locationDialog" aria-labelledby="locationTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <div><span class="section-kicker">YOUR AREA</span><h2 id="locationTitle" data-i18n="locationTitle">Where should we start?</h2></div>
+        <button class="modal-close" data-close type="button" aria-label="Close" data-i18n-aria="close">×</button>
+      </div>
+      <button class="detect-location" id="detectLocation" type="button">
+        <span class="detect-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="7"/></svg></span>
+        <span><strong data-i18n="currentLocation">Use current location</strong><small data-i18n="locationPermission">Browser location permission required</small></span>
+        <span class="arrow">→</span>
+      </button>
+      <p class="location-status" id="locationStatus" role="status"></p>
+      <div class="city-grid" id="cityGrid"></div>
+      <p class="privacy-note"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3"/><rect x="5" y="11" width="14" height="10" rx="2"/></svg><span data-i18n="privacy">Your location is used only for distance and is never sent to a server.</span></p>
+    </dialog>
+
+    <dialog class="detail-modal" id="detailDialog" aria-labelledby="detailTitle">
+      <header class="detail-dialog-bar">
+        <button class="detail-back-button" data-close type="button" aria-label="Back" data-i18n-aria="back">
+          <span aria-hidden="true">←</span><span data-i18n="back">Back</span>
+        </button>
+        <div class="detail-dialog-actions">
+          <button class="detail-toolbar-button" id="detailSave" type="button" aria-label="Save" data-i18n-aria="save" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
+          </button>
+          <button class="detail-toolbar-button" id="detailShare" type="button" aria-label="Share" data-i18n-aria="share" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3M7 8l5-5 5 5"/><path d="M5 12v8h14v-8"/></svg>
+          </button>
+          <button class="detail-close-button" data-close type="button" aria-label="Close" data-i18n-aria="close">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>
+          </button>
+        </div>
+      </header>
+      <div class="detail-scroll-area" id="detailScrollArea">
+        <div id="detailContent"></div>
+      </div>
+    </dialog>
+
+    <dialog class="sheet sort-sheet" id="sortDialog" aria-labelledby="sortTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head"><h2 id="sortTitle" data-i18n="sortTitle">Sort by</h2><button class="modal-close" data-close type="button" aria-label="Close" data-i18n-aria="close">×</button></div>
+      <div class="sort-options">
+        <button data-sort="distance" type="button"><span data-i18n="sortDistance">Nearest first</span><small data-i18n="sortDistanceDesc">Shortest distance from your selected location</small><i></i></button>
+        <button data-sort="soon" type="button"><span data-i18n="sortSoon">Happening soon</span><small data-i18n="sortSoonDesc">Upcoming events first</small><i></i></button>
+        <button data-sort="verified" type="button"><span data-i18n="sortVerified">Most sourced</span><small data-i18n="sortVerifiedDesc">Listings with more cross-check sources first</small><i></i></button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

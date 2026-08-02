@@ -12,6 +12,11 @@ export const LISTING_EN = {
       "Tour"
     ],
     "summary": "DMA's September free Sunday includes exhibition admission, Open Studio from noon-4 PM, and a 2 PM Collection Highlights Tour at no cost.",
+    "highlights": [
+      "Explore current exhibitions with no admission charge",
+      "Join Open Studio from noon–4 PM",
+      "Take the 2 PM Collection Highlights Tour"
+    ],
     "finePrint": "Every visitor needs a free admission ticket. Underground museum parking costs $20 and is not included.",
     "reservation": "Free ticket required · reserve ahead or obtain on site",
     "actionLabel": "Check the official free date",
@@ -34,6 +39,11 @@ export const LISTING_EN = {
       "Adults"
     ],
     "summary": "The Dallas, Fort Worth and Arlington film commissions host their first regional mixer with industry connections, local location and permit information, plus light food and drinks.",
+    "highlights": [
+      "Connect with film-community contacts across DFW",
+      "Learn about local locations and permit resources",
+      "Light food, drinks and parking are included free"
+    ],
     "finePrint": "Anyone interested in filmmaking may attend, but RSVP is required. Check the reservation page for alcohol service and age requirements.",
     "reservation": "RSVP required",
     "actionLabel": "Reserve a spot",
@@ -55,6 +65,11 @@ export const LISTING_EN = {
       "All ages"
     ],
     "summary": "An all-ages comic art expo with local indie creators, panels, nerd trivia, a cosplay contest and food trucks.",
+    "highlights": [
+      "Meet local indie comic creators and browse their work",
+      "Panels, nerd trivia and a cosplay contest",
+      "Admission and parking are free; food and merch cost extra"
+    ],
     "finePrint": "Admission and parking are free. A free ticket is recommended for crowd planning; merchandise and food cost extra.",
     "reservation": "Free ticket recommended",
     "actionLabel": "Get free ticket",
@@ -76,6 +91,11 @@ export const LISTING_EN = {
       "Food"
     ],
     "summary": "Denton’s signature free cultural festival brings jazz, blues and cross-cultural music together with art, crafts and children’s activities at the North Texas Fairgrounds in 2026.",
+    "highlights": [
+      "Jazz, blues and cross-cultural music performances",
+      "Art, crafts and activities for children",
+      "Walk in free with no admission ticket"
+    ],
     "finePrint": "Admission is free; food, games and some activities may cost extra. Pets and coolers are not allowed.",
     "reservation": "No ticket needed",
     "actionLabel": "View official schedule",
@@ -98,6 +118,11 @@ export const LISTING_EN = {
       "Culture"
     ],
     "summary": "A 2026 quarterly free-admission day at the Fort Worth Botanic Garden, marking the start of Hispanic Heritage Month.",
+    "highlights": [
+      "Regular garden admission is free for every visitor",
+      "One of the garden's 2026 quarterly free days",
+      "Marks the start of Hispanic Heritage Month"
+    ],
     "finePrint": "Special ticketed programs may not be included. The July–August early closing notice does not apply to this date, but recheck hours before visiting.",
     "reservation": "Recheck operating hours",
     "actionLabel": "View free-day details",
@@ -119,6 +144,11 @@ export const LISTING_EN = {
       "Free hours"
     ],
     "summary": "Six stages, Indigenous dancers, a petting zoo and arts activities fill Old Town. Enter before 6 PM either day and pay no admission.",
+    "highlights": [
+      "Six performance stages throughout Old Town",
+      "Indigenous dancers, a petting zoo and arts activities",
+      "Admission is free before 6 PM on both days"
+    ],
     "finePrint": "General admission is $15 after 6 PM; children 12 and under remain free. Kid Kountry rides and food cost extra.",
     "reservation": "No ticket before 6 PM",
     "actionLabel": "Check free hours",
@@ -140,6 +170,11 @@ export const LISTING_EN = {
       "Military"
     ],
     "summary": "SNAP, WIC and Medicaid households receive free admission for two adults and household children under 15. MusePass, educator, veteran and active-duty family programs also apply.",
+    "highlights": [
+      "Free for two adults and household children under 15",
+      "Available to SNAP, WIC and Medicaid households",
+      "MusePass, educator and military-family programs also apply"
+    ],
     "finePrint": "MusePass must be borrowed with a Fort Worth Public Library card and excludes special events. Check photo ID, eligibility proof and guest limits for each program.",
     "reservation": "Proof of eligibility",
     "actionLabel": "Check my eligibility",
@@ -161,6 +196,11 @@ export const LISTING_EN = {
       "Family"
     ],
     "summary": "Show an EBT card for Museums for All admission at $5 per person for up to four guests, including museum and wildlife sanctuary access.",
+    "highlights": [
+      "One EBT card covers admission for up to four guests",
+      "$5 each includes the museum and wildlife sanctuary",
+      "Purchase at the front desk rather than online"
+    ],
     "finePrint": "The offer is not available online; show your EBT card at the front desk. Seasonal special exhibits and programs may cost extra.",
     "reservation": "Pay on site",
     "actionLabel": "View discount terms",
@@ -182,6 +222,11 @@ export const LISTING_EN = {
       "Dallas residents"
     ],
     "summary": "Use a Dallas Public Library card and PIN to reserve limited free passes for museums, theater, dance workshops, performances and film screenings.",
+    "highlights": [
+      "Free passes for museums, performances, workshops and films",
+      "Reserve with a Dallas Public Library card and PIN",
+      "Up to three active reservations; inventory is limited"
+    ],
     "finePrint": "You may hold up to three active reservations at once, and inventory is limited. Parking varies by partner and may not be free.",
     "reservation": "Library card + PIN",
     "actionLabel": "Find current passes",
@@ -203,6 +248,11 @@ export const LISTING_EN = {
       "Family"
     ],
     "summary": "Carrollton Culture Fest brings international food, live performances, globally inspired craft vendors, and children's crafts to Trinity Mills Station Esplanade.",
+    "highlights": [
+      "Live performances representing multiple cultures",
+      "International food and globally inspired craft vendors",
+      "Children's crafts and free festival admission"
+    ],
     "finePrint": "Entry is free. Food, drinks, crafts, and souvenirs are sold separately; performance, parking, and street-closure details may be updated on the official page.",
     "reservation": "No advance admission ticket or registration listed · walk in",
     "actionLabel": "Check official festival updates",
@@ -224,6 +274,11 @@ export const LISTING_EN = {
       "Festival"
     ],
     "summary": "The two-day fall festival at Cottonwood Park brings together juried artists, a food court, and the children's ArtStop area.",
+    "highlights": [
+      "A two-day festival featuring juried artists",
+      "Artist booths and a food court",
+      "Children's ArtStop area; some activities have a small fee"
+    ],
     "finePrint": "Festival admission is free, but some ArtStop children's activities charge a nominal fee; food and artwork are sold separately.",
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check official festival details",
@@ -246,6 +301,11 @@ export const LISTING_EN = {
       "Outdoors"
     ],
     "summary": "Stewart Creek Park hosts hay rides, games, trick-or-treat booths, crafts, and age-group costume contests, with event activities free to join.",
+    "highlights": [
+      "Hay rides, games, trick-or-treat booths and crafts",
+      "Costume contests divided by age group",
+      "Walk-in entry and event activities are free"
+    ],
     "finePrint": "Entry is free if you park outside the park and walk in. Vehicle entry is $15, or free for annual park pass holders. Food is sold separately.",
     "reservation": "No advance admission reservation listed · walk in or pay at the gate",
     "actionLabel": "Check official entry terms",
@@ -267,6 +327,11 @@ export const LISTING_EN = {
       "Downtown"
     ],
     "summary": "Grand Prairie's three-day downtown festival brings live music, regional bands, a kid zone, and vendors to the City Hall campus.",
+    "highlights": [
+      "Three days of live music and regional bands",
+      "A kid zone and vendor marketplace",
+      "Festival admission and event parking are free"
+    ],
     "finePrint": "Admission and event parking are free. Food, drinks, rides, and vendor purchases may cost extra, and program details may change.",
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check the official festival schedule",
@@ -289,6 +354,11 @@ export const LISTING_EN = {
       "Try it"
     ],
     "summary": "Allen's free Rec Center Leap Day evening lets visitors explore the facility and receive 30% off Fall class sign-ups in arts, music, preschool programs, archery, dance, martial arts, fitness, and more.",
+    "highlights": [
+      "Explore the recreation center and its programs for free",
+      "Discover arts, music, archery, dance, martial arts and fitness",
+      "Event attendees get 30% off Fall class registration"
+    ],
     "finePrint": "The 30% discount applies when event attendees sign up for Fall classes. Check the official page for class capacity and any other enrollment terms.",
     "reservation": "No event registration required",
     "actionLabel": "Check official discount terms",

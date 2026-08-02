@@ -168,7 +168,9 @@ function searchableText(listing) {
   const original = LISTINGS.find(item => item.id === listing.id) || listing;
   return [
     listing.title, listing.city, listing.venue, listing.summary, listing.cost, listing.finePrint,
-    ...listing.tags, original.title, original.summary, original.cost, original.finePrint, ...original.tags
+    ...(listing.highlights || []), ...listing.tags,
+    original.title, original.summary, original.cost, original.finePrint,
+    ...(original.highlights || []), ...original.tags
   ].join(" ").toLocaleLowerCase();
 }
 
@@ -490,6 +492,7 @@ function similarTemplate(listing) {
 function detailTemplate(listing) {
   const distance = formatDistance(distanceMiles(state.location, listing));
   const similar = similarListings(listing);
+  const highlights = listing.highlights || [];
   return `
     <section class="detail-photo">
       <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" />
@@ -497,6 +500,7 @@ function detailTemplate(listing) {
     <div class="detail-decision">
       <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>
       <h2 id="detailTitle">${escapeHtml(listing.title)}</h2>
+      <p class="detail-overview">${escapeHtml(listing.summary)}</p>
       <div class="detail-primary-facts">
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><strong>${escapeHtml(listing.dateLabel)}</strong></p>
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)}</span></p>
@@ -507,17 +511,36 @@ function detailTemplate(listing) {
         <a class="official-action" href="${escapeHtml(listing.actionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("officialSite"))} ↗</a>
       </div>
     </div>
-    <section class="detail-section practical-section">
-      <h3>${escapeHtml(t("goodToKnow"))}</h3>
-      <div class="practical-key-facts">
-        <div><span>${escapeHtml(t("verifiedPrice"))}</span><strong>${escapeHtml(displayCost(listing))}</strong></div>
-        <div><span>${escapeHtml(t("access"))}</span><strong>${escapeHtml(listing.reservation)}</strong></div>
-        ${listing.costType === "free" ? `<div class="free-scope"><span>${escapeHtml(t("freeScope"))}</span><strong>${escapeHtml(listing.cost)}</strong></div>` : ""}
+    <section class="detail-section highlights-section">
+      <header class="detail-section-intro">
+        <span>${escapeHtml(t("goodToKnow"))}</span>
+        <h3>${escapeHtml(t("whatYouGet"))}</h3>
+        <p>${escapeHtml(t("whatYouGetDesc"))}</p>
+      </header>
+      <div class="detail-highlight-list">
+        ${highlights.map((highlight, index) => `
+          <article class="detail-highlight">
+            <span class="detail-highlight-mark">${String(index + 1).padStart(2, "0")}</span>
+            <p>${escapeHtml(highlight)}</p>
+          </article>`).join("")}
       </div>
     </section>
-    <section class="detail-section before-section">
-      <h3>${escapeHtml(t("beforeGo"))}</h3>
-      <p>${escapeHtml(listing.finePrint)}</p>
+    <section class="detail-section visit-section">
+      <h3>${escapeHtml(t("planVisit"))}</h3>
+      <div class="visit-fact-grid">
+        <article class="visit-fact">
+          <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V7Z"/><path d="M12 7v12"/></svg></span>
+          <div><span>${escapeHtml(t("dealCost"))}</span><strong>${escapeHtml(listing.cost)}</strong></div>
+        </article>
+        <article class="visit-fact">
+          <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 11 15l4.8-6"/></svg></span>
+          <div><span>${escapeHtml(t("entryDetails"))}</span><strong>${escapeHtml(listing.reservation)}</strong></div>
+        </article>
+      </div>
+      <aside class="before-callout">
+        <span class="before-callout-mark" aria-hidden="true">!</span>
+        <div><h4>${escapeHtml(t("beforeGo"))}</h4><p>${escapeHtml(listing.finePrint)}</p></div>
+      </aside>
     </section>
     <section class="detail-section verification-section">
       <div class="verification-title">
@@ -547,11 +570,7 @@ function detailTemplate(listing) {
         <h3>${escapeHtml(t("similarNearby"))}</h3>
         <p>${escapeHtml(t("similarNearbyDesc"))}</p>
         <div class="similar-list">${similar.map(similarTemplate).join("")}</div>
-      </section>` : ""}
-    <section class="detail-section description-section">
-      <h3>${escapeHtml(t("aboutThisFind"))}</h3>
-      <p>${escapeHtml(listing.summary)}</p>
-    </section>`;
+      </section>` : ""}`;
 }
 
 function updateDetailControls(listing = null) {

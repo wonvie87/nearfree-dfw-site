@@ -131,7 +131,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "특별전까지 무료로 보는 9월 첫째 일요일",
+    "title": "DMA FREE First Sundays: 유료 특별전까지 무료",
     "kicker": "9월 6일 · 특별전 포함",
     "dateLabel": "9월 6일 일요일 · 오전 11시–오후 5시",
     "cost": "특별전까지 무료",
@@ -211,7 +211,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "DFW 영화인 네트워킹 — 음식·주차도 무료",
+    "title": "DFW Film-Friendly Mixer: 입장·음식·주차 무료",
     "kicker": "네트워킹 · RSVP 필수",
     "dateLabel": "8월 12일 수요일 · 오후 6시 30분–8시 30분",
     "cost": "입장·음식·주차 무료",
@@ -285,7 +285,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "독립 만화부터 코스프레까지, 입장 무료",
+    "title": "Denton Comic Art Expo: 입장·주차 무료",
     "kicker": "온 가족 · 푸드 트럭",
     "dateLabel": "9월 5일 토요일 · 오전 11시–오후 5시",
     "cost": "무료 티켓",
@@ -359,7 +359,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "여섯 개 무대를 무료로 즐기는 Denton Arts & Jazz",
+    "title": "Denton Arts & Jazz Festival: 3일간 입장 무료",
     "kicker": "대형 축제 · 음식 부스",
     "dateLabel": "9월 11–13일 · 금 오후 3시부터",
     "cost": "입장 무료",
@@ -439,7 +439,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "9월 19일, 식물원 일반 입장이 누구나 무료",
+    "title": "Fort Worth Botanic Garden Free Day: 9월 19일 무료 입장",
     "kicker": "분기별 무료 입장일",
     "dateLabel": "9월 19일 토요일 · 히스패닉 문화유산의 달 개막 행사",
     "cost": "누구나 무료",
@@ -513,7 +513,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "오후 6시 전에 입장하면 무료 — Western Days",
+    "title": "Lewisville Western Days: 오후 6시 전 무료 입장",
     "kicker": "2일 축제 · 오후 6시 전 무료",
     "dateLabel": "9월 25–26일 · 양일 오후 6시 전 무료",
     "cost": "6시 전 무료 · 이후 $15",
@@ -587,7 +587,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "자격이 맞으면 온 가족이 무료 — 식물원 입장 프로그램",
+    "title": "FWBG Access to Nature: 도서관 카드·SNAP·교직원 무료 입장",
     "kicker": "상시 혜택 · 자격 조건",
     "dateLabel": "연중 · 프로그램별 자격 증빙 필요",
     "cost": "조건 충족 시 무료",
@@ -661,7 +661,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "EBT 카드 한 장으로 자연 박물관 $5",
+    "title": "Heard Museums for All: EBT 카드 소지자 1인 $5",
     "kicker": "Museums for All · 최대 4명",
     "dateLabel": "연중 일반 운영일 · 현장 구매만",
     "cost": "1인 $5 · 최대 4명",
@@ -735,7 +735,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "도서관 카드로 공연·박물관 무료 패스 받기",
+    "title": "Culture Pass Dallas: 도서관 카드로 박물관·공연 무료 이용권",
     "kicker": "Dallas 거주자 · 상시",
     "dateLabel": "연중 · 제공 수량은 날짜별 변동",
     "cost": "무료 패스",
@@ -809,7 +809,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "세계 음식과 공연을 만나는 무료 Culture Fest",
+    "title": "Carrollton Culture Fest: 세계 문화 축제 무료 입장",
     "kicker": "9월 26일 · Trinity Mills",
     "dateLabel": "9월 26일 토요일 · 오후 3시–9시",
     "cost": "입장 무료",
@@ -883,7 +883,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "200여 작가를 만나는 무료 가을 아트 페스티벌",
+    "title": "Cottonwood Art Festival: 가을 미술 축제 입장 무료",
     "kicker": "10월 3–4일 · 이틀간",
     "dateLabel": "10월 3일 토요일 오전 10시–오후 7시 · 4일 일요일 오전 10시–오후 5시",
     "cost": "입장 무료",
@@ -963,7 +963,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "걸어 들어가면 무료인 Family Fright Fest",
+    "title": "Family Fright Fest: 도보 입장·행사 체험 무료",
     "kicker": "10월 24일 · 가을 가족 축제",
     "dateLabel": "10월 24일 토요일 · 오후 3시–7시",
     "cost": "도보 입장·체험 무료",
@@ -1037,7 +1037,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "다운타운에서 사흘간 열리는 무료 Main Street Fest",
+    "title": "Main Street Fest: 3일간 입장·주차 무료",
     "kicker": "10월 23–25일 · 입장과 주차 무료",
     "dateLabel": "10월 23일 금요일 오후 5시–자정 · 24일 오전 10시–자정 · 25일 정오–오후 8시",
     "cost": "입장·행사 주차 무료",
@@ -1117,7 +1117,7 @@ export const LISTINGS = [
         ]
       }
     },
-    "title": "시설 체험은 무료, 가을 클래스 등록은 30% 할인",
+    "title": "Pass & Play Expo: 시설 무료 이용·가을 강좌 30% 할인",
     "kicker": "9월 1일 · Pass & Play Expo",
     "dateLabel": "9월 1일 화요일 · 오후 6시–8시",
     "cost": "입장 무료 · 가을 클래스 30% 할인",

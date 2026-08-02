@@ -245,6 +245,21 @@ function displayCost(listing) {
   return listing.costType === "free" ? t("valueFreeLabel") : listing.cost;
 }
 
+function titleParts(title) {
+  const separator = title.indexOf(": ");
+  if (separator < 0) return { name: title, offer: "" };
+  return {
+    name: title.slice(0, separator),
+    offer: title.slice(separator + 2)
+  };
+}
+
+function titleMarkup(title, prefix) {
+  const { name, offer } = titleParts(title);
+  if (!offer) return escapeHtml(name);
+  return `<span class="${prefix}-name">${escapeHtml(name)}</span><span class="${prefix}-offer">${escapeHtml(offer)}</span>`;
+}
+
 function verificationAge(value) {
   const hasTime = String(value).includes("T");
   const checked = new Date(hasTime ? value : `${value}T12:00:00`);
@@ -281,7 +296,7 @@ function cardTemplate(listing, index) {
           <span class="listing-time-status">${escapeHtml(getTimeStatus(listing))}</span>
           <span class="listing-date">${escapeHtml(listing.dateLabel)}</span>
         </div>
-        <button class="listing-title" data-action="details" type="button">${escapeHtml(listing.title)}</button>
+        <button class="listing-title" data-action="details" type="button">${titleMarkup(listing.title, "listing-title")}</button>
         <div class="listing-place">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
           <span class="listing-place-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)} · ${escapeHtml(formatDistance(listing.distance))}</span></span>
@@ -499,7 +514,7 @@ function detailTemplate(listing) {
     </section>
     <div class="detail-decision">
       <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>
-      <h2 id="detailTitle">${escapeHtml(listing.title)}</h2>
+      <h2 id="detailTitle">${titleMarkup(listing.title, "detail-title")}</h2>
       <p class="detail-overview">${escapeHtml(listing.summary)}</p>
       <div class="detail-primary-facts">
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><strong>${escapeHtml(listing.dateLabel)}</strong></p>

@@ -399,7 +399,6 @@ svg { display: block; fill: none; stroke: currentColor; stroke-width: 1.9; strok
 .media-copy h3 { max-width: 580px; margin: 0; font-size: clamp(30px, 5.2vw, 45px); line-height: 1.06; letter-spacing: -2px; text-wrap: balance; }
 .media-copy .date-line { margin-top: 13px; display: flex; align-items: center; gap: 7px; color: rgba(255,255,255,.83); font-size: 11px; font-weight: 600; }
 .media-copy .date-line svg { width: 15px; height: 15px; }
-.visual-note { position: absolute; z-index: 2; top: 57px; right: 16px; color: rgba(255,255,255,.68); font-size: 7px; font-weight: 700; letter-spacing: .8px; }
 
 .card-actions { min-height: 60px; display: flex; align-items: center; gap: 3px; padding: 7px 12px; border-bottom: 1px solid #ece9e2; }
 .action-button { min-width: 42px; height: 42px; display: flex; align-items: center; gap: 7px; padding: 0 8px; border: 0; border-radius: 11px; background: none; font-size: 11px; font-weight: 700; cursor: pointer; }
@@ -818,7 +817,6 @@ html[lang="ko"] :is(.card-caption > p, .fine-print, .detail-summary, .condition-
 .listing-save svg { width: 21px; height: 21px; }
 .listing-save.saved { border-color: var(--acid); background: var(--acid); color: var(--ink); }
 .listing-save.saved svg { fill: currentColor; }
-.listing-media .visual-note { top: 12px; right: auto; left: 12px; padding: 4px 6px; border-radius: 5px; background: rgba(12,17,15,.42); font-size: 6px; }
 .listing-body { flex: 1; display: flex; flex-direction: column; padding: 19px 18px 16px; }
 .listing-schedule { display: grid; gap: 4px; padding-bottom: 13px; border-bottom: 1px solid #e8e5de; }
 .listing-time-status { color: #c84b30; font-size: 10px; font-weight: 900; letter-spacing: .65px; text-transform: uppercase; }
@@ -1004,7 +1002,6 @@ html[lang="ko"] :is(.card-caption > p, .fine-print, .detail-summary, .condition-
 .detail-photo { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #39423d; }
 .detail-photo img { width: 100%; height: 100%; object-fit: cover; }
 .detail-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,15,12,.16), transparent 42%); }
-.detail-photo > span { position: absolute; z-index: 2; left: 13px; bottom: 11px; padding: 5px 7px; border-radius: 6px; background: rgba(12,17,15,.54); color: rgba(255,255,255,.78); font-size: 6px; font-weight: 800; letter-spacing: .7px; }
 .detail-decision { padding: 30px 32px 28px; }
 .detail-price { display: inline-flex; padding: 8px 11px; border-radius: 9px; background: var(--acid); font-size: 14px; font-weight: 950; line-height: 1; text-transform: uppercase; }
 .detail-price.discount { background: #ffd4c8; }

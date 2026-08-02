@@ -15,6 +15,7 @@ export const LISTING_EN = {
     "finePrint": "Every visitor needs a free admission ticket. Underground museum parking costs $20 and is not included.",
     "reservation": "Free ticket required · reserve ahead or obtain on site",
     "actionLabel": "Check the official free date",
+    "imageAlt": "An editorial image of a family making art in an open studio inside a contemporary museum",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",
@@ -36,6 +37,7 @@ export const LISTING_EN = {
     "finePrint": "Anyone interested in filmmaking may attend, but RSVP is required. Check the reservation page for alcohol service and age requirements.",
     "reservation": "RSVP required",
     "actionLabel": "Reserve a spot",
+    "imageAlt": "An editorial image of filmmakers discussing a storyboard and camera at an evening networking mixer",
     "sourceNotes": [
       "Confirmed schedule, complimentary food, parking and RSVP",
       "Cross-checked hosts and free public mixer"
@@ -56,6 +58,7 @@ export const LISTING_EN = {
     "finePrint": "Admission and parking are free. A free ticket is recommended for crowd planning; merchandise and food cost extra.",
     "reservation": "Free ticket recommended",
     "actionLabel": "Get free ticket",
+    "imageAlt": "An editorial image of an indie comic artist sharing work at a lively comic art expo table",
     "sourceNotes": [
       "Confirmed 2026 date, hours and free event",
       "Cross-checked venue, family program and food trucks"
@@ -76,6 +79,7 @@ export const LISTING_EN = {
     "finePrint": "Admission is free; food, games and some activities may cost extra. Pets and coolers are not allowed.",
     "reservation": "No ticket needed",
     "actionLabel": "View official schedule",
+    "imageAlt": "An editorial image of a saxophonist and jazz band performing for an outdoor festival crowd",
     "sourceNotes": [
       "Confirmed 2026 dates, free admission and program",
       "Cross-checked new venue, hours and family activities",
@@ -97,6 +101,7 @@ export const LISTING_EN = {
     "finePrint": "Special ticketed programs may not be included. The July–August early closing notice does not apply to this date, but recheck hours before visiting.",
     "reservation": "Recheck operating hours",
     "actionLabel": "View free-day details",
+    "imageAlt": "An editorial image of a family observing flowers along a botanical garden path in the morning",
     "sourceNotes": [
       "Confirmed September 19, 2026 free-admission day",
       "Cross-checked year-round access programs"
@@ -117,6 +122,7 @@ export const LISTING_EN = {
     "finePrint": "General admission is $15 after 6 PM; children 12 and under remain free. Kid Kountry rides and food cost extra.",
     "reservation": "No ticket before 6 PM",
     "actionLabel": "Check free hours",
+    "imageAlt": "An editorial image of a family enjoying western-themed crafts and live music at a Texas downtown festival",
     "sourceNotes": [
       "Confirmed dates and festival hours on official calendar",
       "Confirmed pre-6 PM and under-12 free terms plus paid extras"
@@ -137,6 +143,7 @@ export const LISTING_EN = {
     "finePrint": "MusePass must be borrowed with a Fort Worth Public Library card and excludes special events. Check photo ID, eligibility proof and guest limits for each program.",
     "reservation": "Proof of eligibility",
     "actionLabel": "Check my eligibility",
+    "imageAlt": "An editorial image of a family presenting an unbranded access card at a botanical garden welcome desk",
     "sourceNotes": [
       "Confirmed SNAP/WIC/Medicaid, educator and military benefits",
       "Confirmed MusePass checkout, guest and exclusion terms"
@@ -157,6 +164,7 @@ export const LISTING_EN = {
     "finePrint": "The offer is not available online; show your EBT card at the front desk. Seasonal special exhibits and programs may cost extra.",
     "reservation": "Pay on site",
     "actionLabel": "View discount terms",
+    "imageAlt": "An editorial image of a family of four exploring a nature display beside a wildlife trail",
     "sourceNotes": [
       "Confirmed $5 price, four-person limit and walk-up terms",
       "Cross-checked Museums for All participation"
@@ -177,6 +185,7 @@ export const LISTING_EN = {
     "finePrint": "You may hold up to three active reservations at once, and inventory is limited. Parking varies by partner and may not be free.",
     "reservation": "Library card + PIN",
     "actionLabel": "Find current passes",
+    "imageAlt": "An editorial image of hands using a library card and phone to choose museum and performance passes",
     "sourceNotes": [
       "Confirmed partners and free-pass service",
       "Confirmed card, reservation and three-active-pass rules"
@@ -197,6 +206,7 @@ export const LISTING_EN = {
     "finePrint": "Entry is free. Food, drinks, crafts, and souvenirs are sold separately; performance, parking, and street-closure details may be updated on the official page.",
     "reservation": "No advance admission ticket or registration listed · walk in",
     "actionLabel": "Check official festival updates",
+    "imageAlt": "An editorial image of a family enjoying crafts and a live performance at an outdoor culture festival",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page"
@@ -217,6 +227,7 @@ export const LISTING_EN = {
     "finePrint": "Festival admission is free, but some ArtStop children's activities charge a nominal fee; food and artwork are sold separately.",
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check official festival details",
+    "imageAlt": "An editorial image of an artist and family viewing handmade work at a fall park art festival",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",
@@ -238,6 +249,7 @@ export const LISTING_EN = {
     "finePrint": "Entry is free if you park outside the park and walk in. Vehicle entry is $15, or free for annual park pass holders. Food is sold separately.",
     "reservation": "No advance admission reservation listed · walk in or pay at the gate",
     "actionLabel": "Check official entry terms",
+    "imageAlt": "An editorial image of children enjoying crafts and trick-or-treat activities at a fall lakeside park",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page"
@@ -258,6 +270,7 @@ export const LISTING_EN = {
     "finePrint": "Admission and event parking are free. Food, drinks, rides, and vendor purchases may cost extra, and program details may change.",
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check the official festival schedule",
+    "imageAlt": "An editorial image of a family enjoying live music and vendors at an evening downtown street festival",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",
@@ -279,6 +292,7 @@ export const LISTING_EN = {
     "finePrint": "The 30% discount applies when event attendees sign up for Fall classes. Check the official page for class capacity and any other enrollment terms.",
     "reservation": "No event registration required",
     "actionLabel": "Check official discount terms",
+    "imageAlt": "An editorial image of a family exploring activity stations inside a modern recreation center",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",

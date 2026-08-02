@@ -266,9 +266,8 @@ function cardTemplate(listing, index) {
     <article class="listing-card" data-id="${listing.id}">
       <div class="listing-media">
         <button class="listing-media-open" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
-          <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(t("generatedAlt", { category: listing.category }))}" loading="${index < 4 ? "eager" : "lazy"}" />
+          <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" loading="${index < 4 ? "eager" : "lazy"}" />
           <span class="listing-media-shade"></span>
-          <span class="visual-note">${escapeHtml(t("visualNoteShort"))}</span>
         </button>
         <span class="listing-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(compactCost(listing))}</span>
         <button class="listing-save ${saved ? "saved" : ""}" data-action="save" type="button" aria-label="${escapeHtml(saved ? t("unsave") : t("save"))}">
@@ -493,8 +492,7 @@ function detailTemplate(listing) {
   const similar = similarListings(listing);
   return `
     <section class="detail-photo">
-      <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(t("generatedAlt", { category: listing.category }))}" />
-      <span>${escapeHtml(t("visualNoteShort"))}</span>
+      <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" />
     </section>
     <div class="detail-decision">
       <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>

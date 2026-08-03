@@ -115,8 +115,8 @@ function distanceMiles(a, b) {
 
 function formatDistance(miles) {
   if (miles < .3) return t("within");
-  if (miles < 10) return `${miles.toFixed(1)} mi`;
-  return `${Math.round(miles)} mi`;
+  if (miles < 10) return t("distanceMiles", { distance: miles.toFixed(1) });
+  return t("distanceMiles", { distance: Math.round(miles) });
 }
 
 function getTimeStatus(listing) {
@@ -614,7 +614,7 @@ function openMethodology() {
       <p class="detail-summary">${escapeHtml(t("methodology"))}</p>
       <div class="condition-box"><strong>${escapeHtml(t("liveChangesTitle"))}</strong><p>${escapeHtml(t("disclaimer"))}</p></div>
       <section class="sources-panel">
-        <div class="source-head"><h3>${escapeHtml(t("cardShows"))}</h3><span>TRANSPARENT</span></div>
+        <div class="source-head"><h3>${escapeHtml(t("cardShows"))}</h3><span>${escapeHtml(t("transparencyLabel"))}</span></div>
         <div class="source-item"><span class="source-index">01</span><span class="source-copy"><strong>${escapeHtml(t("accurateTerms"))}</strong><small>${escapeHtml(t("accurateTermsDesc"))}</small></span></div>
         <div class="source-item"><span class="source-index">02</span><span class="source-copy"><strong>${escapeHtml(t("directLinks"))}</strong><small>${escapeHtml(t("directLinksDesc"))}</small></span></div>
         <div class="source-item"><span class="source-index">03</span><span class="source-copy"><strong>${escapeHtml(t("visualsSeparated"))}</strong><small>${escapeHtml(t("visualsSeparatedDesc"))}</small></span></div>

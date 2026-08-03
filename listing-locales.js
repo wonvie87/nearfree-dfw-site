@@ -107,7 +107,7 @@ export const LISTING_EN = {
     ]
   },
   "fwbg-free-day": {
-    "title": "Hispanic Heritage Month Kickoff",
+    "title": "Hispanic Heritage Month Kickoff — Free Admission to the Fort Worth Botanic Garden",
     "kicker": "Quarterly free admission day",
     "dateLabel": "Saturday, September 19 · Hispanic Heritage Kickoff",
     "cost": "Free for everyone",
@@ -133,7 +133,7 @@ export const LISTING_EN = {
     ]
   },
   "lewisville-western-days": {
-    "title": "Lewisville Western Days",
+    "title": "Lewisville Western Days — Free Admission Before 6 PM",
     "kicker": "Two-day festival · Timed discount",
     "dateLabel": "September 25–26 · Free before 6 PM both days",
     "cost": "Free before 6 · $15 after",
@@ -159,7 +159,7 @@ export const LISTING_EN = {
     ]
   },
   "fwbg-access-programs": {
-    "title": "Access to Nature",
+    "title": "Access to Nature — Free Admission for SNAP, WIC & Medicaid Households",
     "kicker": "Year-round · Eligibility applies",
     "dateLabel": "Year-round · Proof varies by program",
     "cost": "Free if eligible",
@@ -185,7 +185,7 @@ export const LISTING_EN = {
     ]
   },
   "heard-museums-for-all": {
-    "title": "Museums for All",
+    "title": "Museums for All — $5 Heard Museum Admission with EBT",
     "kicker": "Museums for All · Up to 4",
     "dateLabel": "Year-round regular days · Walk-up purchase only",
     "cost": "$5 each · up to 4",
@@ -211,7 +211,7 @@ export const LISTING_EN = {
     ]
   },
   "dallas-culture-pass": {
-    "title": "Culture Pass Dallas",
+    "title": "Culture Pass Dallas — Free Arts & Culture Passes with a Library Card",
     "kicker": "Dallas residents · Year-round",
     "dateLabel": "Year-round · Inventory changes by date",
     "cost": "Free passes",
@@ -343,7 +343,7 @@ export const LISTING_EN = {
     ]
   },
   "allen-pass-play-expo": {
-    "title": "Pass & Play Expo",
+    "title": "Pass & Play Expo — 30% Off Fall Classes",
     "kicker": "September 1 · Pass & Play Expo",
     "dateLabel": "Tuesday, September 1 · 6-8 PM",
     "cost": "Free entry · 30% off Fall classes",

@@ -1,7 +1,7 @@
 // Generated from catalog/listings.json by npm run listings:generate. Do not edit directly.
 export const LISTING_EN = {
   "dma-free-sunday": {
-    "title": "DMA FREE First Sundays: Ticketed exhibitions included free",
+    "title": "DMA FREE First Sundays: Access for All",
     "kicker": "September 6 · Exhibitions included",
     "dateLabel": "Sunday, September 6 · 11 AM-5 PM",
     "cost": "Free, including exhibitions",
@@ -28,7 +28,7 @@ export const LISTING_EN = {
     ]
   },
   "arlington-film-mixer": {
-    "title": "DFW Film-Friendly Mixer: Free admission, food & parking",
+    "title": "North Texas Film-Friendly Mixer",
     "kicker": "Networking · RSVP required",
     "dateLabel": "Wednesday, August 12 · 6:30–8:30 PM",
     "cost": "Free entry, food & parking",
@@ -54,7 +54,7 @@ export const LISTING_EN = {
     ]
   },
   "denton-comic-art-expo": {
-    "title": "Denton Comic Art Expo: Free admission and parking",
+    "title": "The Denton Comic Art Expo",
     "kicker": "Family event · Food trucks",
     "dateLabel": "Saturday, September 5 · 11 AM–5 PM",
     "cost": "Free ticket",
@@ -80,7 +80,7 @@ export const LISTING_EN = {
     ]
   },
   "denton-jazz-fest": {
-    "title": "Denton Arts & Jazz Festival: Three days of free admission",
+    "title": "Denton Arts & Jazz Fest",
     "kicker": "Major festival · Food vendors",
     "dateLabel": "September 11–13 · Friday from 3 PM",
     "cost": "Free admission",
@@ -107,7 +107,7 @@ export const LISTING_EN = {
     ]
   },
   "fwbg-free-day": {
-    "title": "Fort Worth Botanic Garden Free Day: Free admission September 19",
+    "title": "Hispanic Heritage Month Kickoff",
     "kicker": "Quarterly free admission day",
     "dateLabel": "Saturday, September 19 · Hispanic Heritage Kickoff",
     "cost": "Free for everyone",
@@ -133,7 +133,7 @@ export const LISTING_EN = {
     ]
   },
   "lewisville-western-days": {
-    "title": "Lewisville Western Days: Free admission before 6 PM",
+    "title": "Lewisville Western Days",
     "kicker": "Two-day festival · Timed discount",
     "dateLabel": "September 25–26 · Free before 6 PM both days",
     "cost": "Free before 6 · $15 after",
@@ -159,7 +159,7 @@ export const LISTING_EN = {
     ]
   },
   "fwbg-access-programs": {
-    "title": "FWBG Access to Nature: Free entry with a library card, SNAP or educator ID",
+    "title": "Access to Nature",
     "kicker": "Year-round · Eligibility applies",
     "dateLabel": "Year-round · Proof varies by program",
     "cost": "Free if eligible",
@@ -185,7 +185,7 @@ export const LISTING_EN = {
     ]
   },
   "heard-museums-for-all": {
-    "title": "Heard Museums for All: $5 admission with an EBT card",
+    "title": "Museums for All",
     "kicker": "Museums for All · Up to 4",
     "dateLabel": "Year-round regular days · Walk-up purchase only",
     "cost": "$5 each · up to 4",
@@ -211,7 +211,7 @@ export const LISTING_EN = {
     ]
   },
   "dallas-culture-pass": {
-    "title": "Culture Pass Dallas: Free museum and performance passes with a library card",
+    "title": "Culture Pass Dallas",
     "kicker": "Dallas residents · Year-round",
     "dateLabel": "Year-round · Inventory changes by date",
     "cost": "Free passes",
@@ -237,7 +237,7 @@ export const LISTING_EN = {
     ]
   },
   "carrollton-culture-fest": {
-    "title": "Carrollton Culture Fest: Free festival admission",
+    "title": "Carrollton Culture Fest",
     "kicker": "September 26 · Trinity Mills",
     "dateLabel": "Saturday, September 26 · 3-9 PM",
     "cost": "Free entry",
@@ -263,7 +263,7 @@ export const LISTING_EN = {
     ]
   },
   "cottonwood-art-festival-fall": {
-    "title": "Cottonwood Art Festival: Free admission to the fall festival",
+    "title": "Cottonwood Art Festival",
     "kicker": "October 3-4 · Two days",
     "dateLabel": "Saturday, October 3, 10 AM-7 PM · Sunday, October 4, 10 AM-5 PM",
     "cost": "Free admission",
@@ -290,7 +290,7 @@ export const LISTING_EN = {
     ]
   },
   "the-colony-family-fright-fest": {
-    "title": "Family Fright Fest: Free walk-in entry and activities",
+    "title": "Family Fright Fest",
     "kicker": "October 24 · Fall family festival",
     "dateLabel": "Saturday, October 24 · 3-7 PM",
     "cost": "Free walk-in entry and activities",
@@ -316,7 +316,7 @@ export const LISTING_EN = {
     ]
   },
   "grand-prairie-main-street-fest": {
-    "title": "Main Street Fest: Three days of free admission and parking",
+    "title": "Main Street Fest",
     "kicker": "October 23-25 · Free admission and parking",
     "dateLabel": "Friday, October 23, 5 PM-midnight · Saturday, 10 AM-midnight · Sunday, noon-8 PM",
     "cost": "Free admission and event parking",
@@ -343,7 +343,7 @@ export const LISTING_EN = {
     ]
   },
   "allen-pass-play-expo": {
-    "title": "Pass & Play Expo: Free facility entry plus 30% off fall classes",
+    "title": "Pass & Play Expo",
     "kicker": "September 1 · Pass & Play Expo",
     "dateLabel": "Tuesday, September 1 · 6-8 PM",
     "cost": "Free entry · 30% off Fall classes",

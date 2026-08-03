@@ -21,6 +21,7 @@ export const LISTING_EN = {
     "reservation": "Free ticket required · reserve ahead or obtain on site",
     "actionLabel": "Check the official free date",
     "imageAlt": "An editorial image of a family making art in an open studio inside a contemporary museum",
+    "titleBase": "DMA FREE First Sundays: Access for All",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",
@@ -48,6 +49,7 @@ export const LISTING_EN = {
     "reservation": "RSVP required",
     "actionLabel": "Reserve a spot",
     "imageAlt": "An editorial image of filmmakers discussing a storyboard and camera at an evening networking mixer",
+    "titleBase": "North Texas Film-Friendly Mixer",
     "sourceNotes": [
       "Confirmed schedule, complimentary food, parking and RSVP",
       "Cross-checked hosts and free public mixer"
@@ -74,6 +76,7 @@ export const LISTING_EN = {
     "reservation": "Free ticket recommended",
     "actionLabel": "Get free ticket",
     "imageAlt": "An editorial image of an indie comic artist sharing work at a lively comic art expo table",
+    "titleBase": "The Denton Comic Art Expo",
     "sourceNotes": [
       "Confirmed 2026 date, hours and free event",
       "Cross-checked venue, family program and food trucks"
@@ -100,6 +103,7 @@ export const LISTING_EN = {
     "reservation": "No ticket needed",
     "actionLabel": "View official schedule",
     "imageAlt": "An editorial image of a saxophonist and jazz band performing for an outdoor festival crowd",
+    "titleBase": "Denton Arts & Jazz Fest",
     "sourceNotes": [
       "Confirmed 2026 dates, free admission and program",
       "Cross-checked new venue, hours and family activities",
@@ -127,6 +131,8 @@ export const LISTING_EN = {
     "reservation": "Recheck operating hours",
     "actionLabel": "View free-day details",
     "imageAlt": "An editorial image of a family observing flowers along a botanical garden path in the morning",
+    "titleBase": "Hispanic Heritage Month Kickoff",
+    "titleBenefit": "Free Admission to the Fort Worth Botanic Garden",
     "sourceNotes": [
       "Confirmed September 19, 2026 free-admission day",
       "Cross-checked year-round access programs"
@@ -153,6 +159,8 @@ export const LISTING_EN = {
     "reservation": "No ticket before 6 PM",
     "actionLabel": "Check free hours",
     "imageAlt": "An editorial image of a family enjoying western-themed crafts and live music at a Texas downtown festival",
+    "titleBase": "Lewisville Western Days",
+    "titleBenefit": "Free Admission Before 6 PM",
     "sourceNotes": [
       "Confirmed dates and festival hours on official calendar",
       "Confirmed pre-6 PM and under-12 free terms plus paid extras"
@@ -179,6 +187,8 @@ export const LISTING_EN = {
     "reservation": "Proof of eligibility",
     "actionLabel": "Check my eligibility",
     "imageAlt": "An editorial image of a family presenting an unbranded access card at a botanical garden welcome desk",
+    "titleBase": "Access to Nature",
+    "titleBenefit": "Free Admission for SNAP, WIC & Medicaid Households",
     "sourceNotes": [
       "Confirmed SNAP/WIC/Medicaid, educator and military benefits",
       "Confirmed MusePass checkout, guest and exclusion terms"
@@ -205,6 +215,8 @@ export const LISTING_EN = {
     "reservation": "Pay on site",
     "actionLabel": "View discount terms",
     "imageAlt": "An editorial image of a family of four exploring a nature display beside a wildlife trail",
+    "titleBase": "Museums for All",
+    "titleBenefit": "$5 Heard Museum Admission with EBT",
     "sourceNotes": [
       "Confirmed $5 price, four-person limit and walk-up terms",
       "Cross-checked Museums for All participation"
@@ -231,6 +243,8 @@ export const LISTING_EN = {
     "reservation": "Library card + PIN",
     "actionLabel": "Find current passes",
     "imageAlt": "An editorial image of hands using a library card and phone to choose museum and performance passes",
+    "titleBase": "Culture Pass Dallas",
+    "titleBenefit": "Free Arts & Culture Passes with a Library Card",
     "sourceNotes": [
       "Confirmed partners and free-pass service",
       "Confirmed card, reservation and three-active-pass rules"
@@ -257,6 +271,7 @@ export const LISTING_EN = {
     "reservation": "No advance admission ticket or registration listed · walk in",
     "actionLabel": "Check official festival updates",
     "imageAlt": "An editorial image of a family enjoying crafts and a live performance at an outdoor culture festival",
+    "titleBase": "Carrollton Culture Fest",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page"
@@ -283,6 +298,7 @@ export const LISTING_EN = {
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check official festival details",
     "imageAlt": "An editorial image of an artist and family viewing handmade work at a fall park art festival",
+    "titleBase": "Cottonwood Art Festival",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",
@@ -310,6 +326,7 @@ export const LISTING_EN = {
     "reservation": "No advance admission reservation listed · walk in or pay at the gate",
     "actionLabel": "Check official entry terms",
     "imageAlt": "An editorial image of children enjoying crafts and trick-or-treat activities at a fall lakeside park",
+    "titleBase": "Family Fright Fest",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page"
@@ -336,6 +353,7 @@ export const LISTING_EN = {
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check the official festival schedule",
     "imageAlt": "An editorial image of a family enjoying live music and vendors at an evening downtown street festival",
+    "titleBase": "Main Street Fest",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",
@@ -363,6 +381,8 @@ export const LISTING_EN = {
     "reservation": "No event registration required",
     "actionLabel": "Check official discount terms",
     "imageAlt": "An editorial image of a family exploring activity stations inside a modern recreation center",
+    "titleBase": "Pass & Play Expo",
+    "titleBenefit": "30% Off Fall Classes",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
       "Confirmed core date, location, price and access terms on the official page",

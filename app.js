@@ -262,6 +262,14 @@ function verificationAge(value) {
   return t("verifiedOn", { date: formatVerifiedDate(value) });
 }
 
+function cardTitleContent(listing) {
+  const base = listing.titleBase || listing.title;
+  const benefit = listing.titleBenefit
+    ? `<span class="listing-title-benefit">${escapeHtml(listing.titleBenefit)}</span>`
+    : "";
+  return `<span class="listing-title-base">${escapeHtml(base)}</span>${benefit}`;
+}
+
 function cardTemplate(listing, index) {
   const saved = state.saved.has(listing.id);
   return `
@@ -281,7 +289,7 @@ function cardTemplate(listing, index) {
           <span class="listing-time-status">${escapeHtml(getTimeStatus(listing))}</span>
           <span class="listing-date">${escapeHtml(listing.dateLabel)}</span>
         </div>
-        <button class="listing-title" data-action="details" type="button">${escapeHtml(listing.title)}</button>
+        <button class="listing-title" data-action="details" type="button" aria-label="${escapeHtml(listing.title)}">${cardTitleContent(listing)}</button>
         <div class="listing-place">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
           <span class="listing-place-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)} · ${escapeHtml(formatDistance(listing.distance))}</span></span>
@@ -493,6 +501,7 @@ function detailTemplate(listing) {
   const distance = formatDistance(distanceMiles(state.location, listing));
   const similar = similarListings(listing);
   const highlights = listing.highlights || [];
+  const practicalTips = listing.practicalTips || [];
   return `
     <section class="detail-photo">
       <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" />
@@ -512,11 +521,7 @@ function detailTemplate(listing) {
       </div>
     </div>
     <section class="detail-section highlights-section">
-      <header class="detail-section-intro">
-        <span>${escapeHtml(t("goodToKnow"))}</span>
-        <h3>${escapeHtml(t("whatYouGet"))}</h3>
-        <p>${escapeHtml(t("whatYouGetDesc"))}</p>
-      </header>
+      <h3>${escapeHtml(t("highlights"))}</h3>
       <div class="detail-highlight-list">
         ${highlights.map((highlight, index) => `
           <article class="detail-highlight">
@@ -537,6 +542,13 @@ function detailTemplate(listing) {
           <div><span>${escapeHtml(t("entryDetails"))}</span><strong>${escapeHtml(listing.reservation)}</strong></div>
         </article>
       </div>
+      ${practicalTips.length ? `
+        <section class="practical-tips" aria-labelledby="practicalTipsTitle">
+          <h4 id="practicalTipsTitle">${escapeHtml(t("practicalTips"))}</h4>
+          <ul class="practical-tip-list">
+            ${practicalTips.map(tip => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
+          </ul>
+        </section>` : ""}
       <aside class="before-callout">
         <span class="before-callout-mark" aria-hidden="true">!</span>
         <div><h4>${escapeHtml(t("beforeGo"))}</h4><p>${escapeHtml(listing.finePrint)}</p></div>
@@ -568,7 +580,6 @@ function detailTemplate(listing) {
     ${similar.length ? `
       <section class="detail-section similar-section">
         <h3>${escapeHtml(t("similarNearby"))}</h3>
-        <p>${escapeHtml(t("similarNearbyDesc"))}</p>
         <div class="similar-list">${similar.map(similarTemplate).join("")}</div>
       </section>` : ""}`;
 }
@@ -591,7 +602,6 @@ function openDetails(id) {
   if (!listing) return;
   updateDetailControls(listing);
   elements.detailContent.innerHTML = detailTemplate(translatedListing(listing));
-  elements.detailScrollArea.scrollTo({ top: 0 });
   openDialog(elements.detailDialog);
 }
 
@@ -620,8 +630,14 @@ function openMethodology() {
         <div class="source-item"><span class="source-index">03</span><span class="source-copy"><strong>${escapeHtml(t("visualsSeparated"))}</strong><small>${escapeHtml(t("visualsSeparatedDesc"))}</small></span></div>
       </section>
     </div>`;
-  elements.detailScrollArea.scrollTo({ top: 0 });
   openDialog(elements.detailDialog);
+}
+
+function resetDetailScroll() {
+  elements.detailScrollArea.scrollTop = 0;
+  requestAnimationFrame(() => {
+    elements.detailScrollArea.scrollTop = 0;
+  });
 }
 
 function openDialog(dialog) {
@@ -629,6 +645,7 @@ function openDialog(dialog) {
   elements.modalBackdrop.hidden = false;
   if (typeof dialog.showModal === "function") dialog.showModal();
   else dialog.setAttribute("open", "");
+  if (dialog === elements.detailDialog) resetDetailScroll();
   document.body.classList.add("modal-open");
 }
 

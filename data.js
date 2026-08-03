@@ -151,6 +151,7 @@ export const LISTINGS = [
     "reservation": "무료 입장권 필요 · 온라인 예약 또는 현장 발권",
     "actionLabel": "무료 개방일 확인",
     "imageAlt": "미술관 오픈 스튜디오에서 가족이 작품을 만드는 모습을 표현한 서비스용 이미지",
+    "titleBase": "DMA 무료 첫째 일요일: Access for All",
     "verifiedAt": "2026-08-02T18:33:41.000Z",
     "sources": [
       {
@@ -231,6 +232,7 @@ export const LISTINGS = [
     "reservation": "사전 신청 필수",
     "actionLabel": "참가 신청",
     "imageAlt": "저녁 네트워킹 행사에서 영화 제작자들이 카메라와 스토리보드를 살펴보는 모습을 표현한 서비스용 이미지",
+    "titleBase": "북텍사스 영화인 네트워킹",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -305,6 +307,7 @@ export const LISTINGS = [
     "reservation": "무료 티켓 사전 등록 권장",
     "actionLabel": "무료 티켓 신청",
     "imageAlt": "코믹 아트 엑스포의 작가 부스에서 독립 만화를 소개하는 모습을 표현한 서비스용 이미지",
+    "titleBase": "덴턴 코믹 아트 엑스포",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -379,6 +382,7 @@ export const LISTINGS = [
     "reservation": "별도 입장권 없음",
     "actionLabel": "공식 일정 보기",
     "imageAlt": "야외 문화 축제에서 관객이 재즈 밴드와 색소폰 연주자의 공연을 즐기는 모습을 표현한 서비스용 이미지",
+    "titleBase": "덴턴 아트 & 재즈 페스티벌",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -459,6 +463,8 @@ export const LISTINGS = [
     "reservation": "방문 전 운영 시간 확인",
     "actionLabel": "무료 입장 안내",
     "imageAlt": "아침 식물원 산책로에서 가족이 꽃과 식물을 관찰하는 모습을 표현한 서비스용 이미지",
+    "titleBase": "히스패닉 문화유산의 달 개막 행사",
+    "titleBenefit": "포트워스 식물원 무료입장",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -533,6 +539,8 @@ export const LISTINGS = [
     "reservation": "오후 6시 전 별도 입장권 없음",
     "actionLabel": "무료 시간 확인",
     "imageAlt": "텍사스 도심 축제에서 가족이 서부 테마 공예와 라이브 음악을 즐기는 모습을 표현한 서비스용 이미지",
+    "titleBase": "루이스빌 웨스턴 데이즈",
+    "titleBenefit": "오후 6시 전 무료입장",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -607,6 +615,8 @@ export const LISTINGS = [
     "reservation": "자격 증빙 지참",
     "actionLabel": "이용 자격 확인",
     "imageAlt": "식물원 안내 데스크에서 가족이 이용 자격 카드를 제시하는 모습을 표현한 서비스용 이미지",
+    "titleBase": "포트워스 식물원 Access to Nature",
+    "titleBenefit": "SNAP·WIC·Medicaid 가구 무료입장",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -681,6 +691,8 @@ export const LISTINGS = [
     "reservation": "현장 안내 데스크에서 결제",
     "actionLabel": "할인 조건 보기",
     "imageAlt": "가족이 자연과학박물관 전시와 야외 산책로를 둘러보는 모습을 표현한 서비스용 이미지",
+    "titleBase": "허드 자연과학박물관 Museums for All",
+    "titleBenefit": "EBT 카드 소지자 1인 $5 입장",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -755,6 +767,8 @@ export const LISTINGS = [
     "reservation": "도서관 카드와 PIN 필요",
     "actionLabel": "이용 가능한 패스 보기",
     "imageAlt": "도서관 카드와 휴대전화로 박물관·공연 패스를 고르는 모습을 표현한 서비스용 이미지",
+    "titleBase": "달라스 컬처 패스",
+    "titleBenefit": "도서관 카드로 문화예술 무료 이용",
     "verifiedAt": "2026-07-25",
     "sources": [
       {
@@ -829,6 +843,7 @@ export const LISTINGS = [
     "reservation": "사전 예약 없이 바로 입장",
     "actionLabel": "최신 축제 안내 보기",
     "imageAlt": "야외 문화 축제에서 가족이 공예 부스와 라이브 공연을 즐기는 모습을 표현한 서비스용 이미지",
+    "titleBase": "캐럴턴 컬처 페스트",
     "verifiedAt": "2026-08-02T18:33:41.000Z",
     "sources": [
       {
@@ -903,6 +918,7 @@ export const LISTINGS = [
     "reservation": "사전 예약 없이 바로 입장",
     "actionLabel": "공식 축제 정보 확인",
     "imageAlt": "가을 공원 미술 축제에서 작가와 가족이 작품을 살펴보는 모습을 표현한 서비스용 이미지",
+    "titleBase": "코튼우드 아트 페스티벌",
     "verifiedAt": "2026-08-02T18:33:41.000Z",
     "sources": [
       {
@@ -983,6 +999,7 @@ export const LISTINGS = [
     "reservation": "사전 예약 없음 · 차량 입장료는 현장 결제",
     "actionLabel": "공식 이용 조건 확인",
     "imageAlt": "가을 호숫가 공원에서 아이들이 공예와 트릭 오어 트리트를 즐기는 모습의 서비스용 이미지",
+    "titleBase": "패밀리 프라이트 페스트",
     "verifiedAt": "2026-08-02T18:33:41.000Z",
     "sources": [
       {
@@ -1057,6 +1074,7 @@ export const LISTINGS = [
     "reservation": "사전 예약 없이 바로 입장",
     "actionLabel": "공식 축제 일정 확인",
     "imageAlt": "저녁 도심 거리 축제에서 가족이 라이브 음악과 부스를 즐기는 모습의 서비스용 이미지",
+    "titleBase": "그랜드프레리 메인 스트리트 페스트",
     "verifiedAt": "2026-08-02T18:33:41.000Z",
     "sources": [
       {
@@ -1137,6 +1155,8 @@ export const LISTINGS = [
     "reservation": "행사 사전 신청 없음",
     "actionLabel": "공식 행사 정보 확인",
     "imageAlt": "현대적인 레크리에이션 센터에서 가족이 여러 활동 공간을 둘러보는 모습의 서비스용 이미지",
+    "titleBase": "패스 & 플레이 엑스포",
+    "titleBenefit": "가을 강좌 30% 할인",
     "verifiedAt": "2026-08-02T18:33:41.000Z",
     "sources": [
       {

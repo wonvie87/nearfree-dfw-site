@@ -298,6 +298,7 @@ function cardTemplate(listing, index) {
           <span class="listing-date">${escapeHtml(listing.dateLabel)}</span>
         </div>
         <button class="listing-title" data-action="details" type="button" aria-label="${escapeHtml(listing.title)}">${cardTitleContent(listing)}</button>
+        <p class="listing-summary">${escapeHtml(listing.summary)}</p>
         <div class="listing-place">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
           <span class="listing-place-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)} · ${escapeHtml(formatDistance(listing.distance))}</span></span>

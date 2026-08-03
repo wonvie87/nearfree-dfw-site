@@ -823,7 +823,6 @@ html[lang="ko"] :is(.card-caption > p, .fine-print, .detail-summary, .condition-
 .listing-date { color: #414844; font-size: 12px; font-weight: 750; line-height: 1.45; }
 .listing-title {
   width: 100%;
-  min-height: 94px;
   margin: 14px 0 0;
   padding: 0;
   display: grid;
@@ -844,14 +843,25 @@ html[lang="ko"] :is(.card-caption > p, .fine-print, .detail-summary, .condition-
 .listing-title-base { display: block; text-wrap: balance; }
 .listing-title-benefit {
   display: block;
-  color: #506159;
-  font-size: 13px;
-  font-weight: 800;
-  line-height: 1.38;
-  letter-spacing: -.15px;
+  color: #3f4d46;
+  font-size: 17px;
+  font-weight: 850;
+  line-height: 1.3;
+  letter-spacing: -.35px;
   text-wrap: balance;
 }
 .listing-title:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.listing-summary {
+  margin: 9px 0 0;
+  overflow: hidden;
+  display: -webkit-box;
+  color: #606862;
+  font-size: 12px;
+  line-height: 1.55;
+  text-wrap: pretty;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
 .listing-place { margin-top: 14px; display: flex; align-items: flex-start; gap: 9px; }
 .listing-place > svg { width: 17px; height: 17px; flex: 0 0 auto; margin-top: 2px; color: #686f6a; }
 .listing-place-copy { min-width: 0; display: grid; gap: 3px; }
@@ -924,7 +934,7 @@ html[lang="ko"] :is(.card-caption > p, .fine-print, .detail-summary, .condition-
   .listing-card { border-radius: 20px; }
   .listing-media { aspect-ratio: 16 / 9.5; }
   .listing-price { font-size: 16px; }
-  .listing-title { min-height: 0; font-size: 22px; }
+  .listing-title { font-size: 22px; }
   .method-card { margin: 40px 14px 18px; }
   .empty-state { margin: 0 14px; }
   .mobile-nav { bottom: 9px; }
@@ -1023,7 +1033,7 @@ html[lang="ko"] :is(.card-caption > p, .fine-print, .detail-summary, .condition-
 .detail-price.discount { background: #ffd4c8; }
 .detail-decision h2 { max-width: 580px; margin: 16px 0 12px; display: grid; gap: 9px; font-size: 35px; line-height: 1.13; letter-spacing: -1.4px; text-wrap: balance; overflow-wrap: anywhere; }
 .detail-title-base { display: block; text-wrap: balance; }
-.detail-title-benefit { display: block; color: #506159; font-size: 20px; font-weight: 800; line-height: 1.35; letter-spacing: -.35px; text-wrap: balance; }
+.detail-title-benefit { display: block; color: #3f4d46; font-size: 25px; font-weight: 850; line-height: 1.28; letter-spacing: -.55px; text-wrap: balance; }
 .detail-overview { max-width: 540px; margin: 0 0 24px; color: #4c554f; font-size: 15px; line-height: 1.68; letter-spacing: -.08px; text-wrap: pretty; }
 .detail-primary-facts { display: grid; gap: 13px; }
 .detail-primary-facts p { margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: #404743; font-size: 13px; line-height: 1.5; }
@@ -1099,7 +1109,7 @@ html[lang="ko"] :is(.card-caption > p, .fine-print, .detail-summary, .condition-
   .detail-photo { aspect-ratio: 4 / 2.7; }
   .detail-decision { padding: 23px 20px 22px; }
   .detail-decision h2 { margin-top: 13px; font-size: 29px; letter-spacing: -1.1px; }
-  .detail-title-benefit { font-size: 17px; }
+  .detail-title-benefit { font-size: 21px; }
   .detail-overview { margin-bottom: 21px; font-size: 14px; line-height: 1.65; }
   .detail-section { padding: 24px 20px; }
   .detail-highlight { padding-right: 13px; }

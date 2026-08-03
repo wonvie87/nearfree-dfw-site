@@ -270,6 +270,14 @@ function cardTitleContent(listing) {
   return `<span class="listing-title-base">${escapeHtml(base)}</span>${benefit}`;
 }
 
+function detailTitleContent(listing) {
+  const base = listing.titleBase || listing.title;
+  const benefit = listing.titleBenefit
+    ? `<span class="detail-title-benefit">${escapeHtml(listing.titleBenefit)}</span>`
+    : "";
+  return `<span class="detail-title-base">${escapeHtml(base)}</span>${benefit}`;
+}
+
 function cardTemplate(listing, index) {
   const saved = state.saved.has(listing.id);
   return `
@@ -508,7 +516,7 @@ function detailTemplate(listing) {
     </section>
     <div class="detail-decision">
       <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>
-      <h2 id="detailTitle">${escapeHtml(listing.title)}</h2>
+      <h2 id="detailTitle" aria-label="${escapeHtml(listing.title)}">${detailTitleContent(listing)}</h2>
       <p class="detail-overview">${escapeHtml(listing.summary)}</p>
       <div class="detail-primary-facts">
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><strong>${escapeHtml(listing.dateLabel)}</strong></p>

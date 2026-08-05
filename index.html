@@ -6,7 +6,7 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f4f1eb" />
-    <meta name="description" content="Discover verified free plans and near-free local deals across DFW, sorted from your location." />
+    <meta name="description" content="Discover verified free plans and near-free local deals across DFW, then narrow by area, time, price and activity." />
     <title>NearFree DFW — More to do. Less to spend.</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
@@ -21,7 +21,7 @@
       </a>
       <button class="location-pill" id="locationButton" type="button" aria-haspopup="dialog">
         <span class="location-pulse" aria-hidden="true"></span>
-        <span class="location-copy"><small data-i18n="nearby">Near me</small><strong id="locationName">Plano, TX</strong></span>
+        <span class="location-copy"><small id="locationModeLabel">Browse area</small><strong id="locationName">All DFW</strong></span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
       </button>
       <div class="top-actions">
@@ -42,10 +42,10 @@
     <main class="page-shell">
       <section class="home-main" aria-label="Benefits feed" data-i18n-aria="feedLabel">
         <section class="discovery-panel" id="discoveryPanel" aria-labelledby="discoveryTitle">
-          <h1 class="sr-only" id="discoveryTitle" data-i18n="discoveryTitle">Find something worth doing near you</h1>
+          <h1 class="sr-only" id="discoveryTitle" data-i18n="discoveryTitle">Find something worth doing across DFW</h1>
           <button class="home-location" id="homeLocationButton" type="button" aria-haspopup="dialog">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
-            <strong id="homeLocationName">Plano, TX</strong>
+            <strong id="homeLocationName">All DFW</strong>
             <svg class="location-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
           </button>
           <div class="search-box discovery-search">
@@ -54,22 +54,36 @@
             <button id="searchClear" type="button" aria-label="Clear search" data-i18n-aria="clearSearch" hidden>×</button>
           </div>
           <div class="intent-scroll" id="intentChips" role="group" aria-label="Quick discovery filters" data-i18n-aria="intentAria">
-            <button class="intent-chip" data-intent="today" data-i18n="intentToday" type="button" aria-pressed="false">Today</button>
-            <button class="intent-chip" data-intent="tonight" data-i18n="intentTonight" type="button" aria-pressed="false">Tonight</button>
-            <button class="intent-chip" data-intent="tomorrow" data-i18n="intentTomorrow" type="button" aria-pressed="false">Tomorrow</button>
-            <button class="intent-chip" data-intent="weekend" data-i18n="intentWeekend" type="button" aria-pressed="false">This weekend</button>
-            <span class="intent-divider" aria-hidden="true"></span>
-            <button class="intent-chip value-intent" data-intent="free" data-i18n="intentFree" type="button" aria-pressed="false">Free</button>
-            <button class="intent-chip value-intent" data-intent="under5" data-i18n="intentUnder5" type="button" aria-pressed="false">Under $5</button>
-            <button class="intent-chip value-intent" data-intent="under10" data-i18n="intentUnder10" type="button" aria-pressed="false">Under $10</button>
-            <span class="intent-divider" aria-hidden="true"></span>
-            <button class="intent-chip" data-intent="kids" data-i18n="intentKids" type="button" aria-pressed="false">Kids</button>
-            <button class="intent-chip" data-intent="date" data-i18n="intentDate" type="button" aria-pressed="false">Date night</button>
-            <button class="intent-chip" data-intent="outdoor" data-i18n="intentOutdoor" type="button" aria-pressed="false">Outdoor</button>
-            <button class="intent-chip" data-intent="indoor" data-i18n="intentIndoor" type="button" aria-pressed="false">Indoor</button>
-            <button class="intent-chip" data-intent="food" data-i18n="intentFood" type="button" aria-pressed="false">Food</button>
-            <button class="intent-chip" data-intent="museums" data-i18n="intentMuseums" type="button" aria-pressed="false">Museums</button>
-            <button class="intent-chip" data-intent="festivals" data-i18n="intentFestivals" type="button" aria-pressed="false">Festivals</button>
+            <div class="intent-group" role="group" aria-labelledby="whenFilterLabel">
+              <span class="intent-group-label" id="whenFilterLabel" data-i18n="filterWhen">When</span>
+              <button class="intent-chip intent-default active" data-clear-group="when" data-i18n="filterAnyTime" type="button" aria-pressed="true">Any time</button>
+              <button class="intent-chip" data-intent="today" data-intent-group="when" data-i18n="intentToday" type="button" aria-pressed="false">Today</button>
+              <button class="intent-chip" data-intent="tonight" data-intent-group="when" data-i18n="intentTonight" type="button" aria-pressed="false">Tonight</button>
+              <button class="intent-chip" data-intent="tomorrow" data-intent-group="when" data-i18n="intentTomorrow" type="button" aria-pressed="false">Tomorrow</button>
+              <button class="intent-chip" data-intent="weekend" data-intent-group="when" data-i18n="intentWeekend" type="button" aria-pressed="false">This weekend</button>
+            </div>
+            <div class="intent-group" role="group" aria-labelledby="priceFilterLabel">
+              <span class="intent-group-label" id="priceFilterLabel" data-i18n="filterPrice">Price</span>
+              <button class="intent-chip intent-default active" data-clear-group="price" data-i18n="filterAnyPrice" type="button" aria-pressed="true">Any price</button>
+              <button class="intent-chip value-intent" data-intent="free" data-intent-group="price" data-i18n="intentFree" type="button" aria-pressed="false">Free</button>
+              <button class="intent-chip value-intent" data-intent="under5" data-intent-group="price" data-i18n="intentUnder5" type="button" aria-pressed="false">Under $5</button>
+              <button class="intent-chip value-intent" data-intent="under10" data-intent-group="price" data-i18n="intentUnder10" type="button" aria-pressed="false">Under $10</button>
+            </div>
+            <div class="intent-group" role="group" aria-labelledby="audienceFilterLabel">
+              <span class="intent-group-label" id="audienceFilterLabel" data-i18n="filterFor">For</span>
+              <button class="intent-chip intent-default active" data-clear-group="audience" data-i18n="filterAnyone" type="button" aria-pressed="true">Anyone</button>
+              <button class="intent-chip" data-intent="kids" data-intent-group="audience" data-i18n="intentKids" type="button" aria-pressed="false">Kids</button>
+              <button class="intent-chip" data-intent="date" data-intent-group="audience" data-i18n="intentDate" type="button" aria-pressed="false">Date night</button>
+            </div>
+            <div class="intent-group" role="group" aria-labelledby="activityFilterLabel">
+              <span class="intent-group-label" id="activityFilterLabel" data-i18n="filterType">Type</span>
+              <button class="intent-chip intent-default active" data-clear-group="activity" data-i18n="filterAnyType" type="button" aria-pressed="true">Any type</button>
+              <button class="intent-chip" data-intent="outdoor" data-intent-group="activity" data-i18n="intentOutdoor" type="button" aria-pressed="false">Outdoor</button>
+              <button class="intent-chip" data-intent="indoor" data-intent-group="activity" data-i18n="intentIndoor" type="button" aria-pressed="false">Indoor</button>
+              <button class="intent-chip" data-intent="food" data-intent-group="activity" data-i18n="intentFood" type="button" aria-pressed="false">Food</button>
+              <button class="intent-chip" data-intent="museums" data-intent-group="activity" data-i18n="intentMuseums" type="button" aria-pressed="false">Museums</button>
+              <button class="intent-chip" data-intent="festivals" data-intent-group="activity" data-i18n="intentFestivals" type="button" aria-pressed="false">Festivals</button>
+            </div>
           </div>
         </section>
 
@@ -80,7 +94,7 @@
           </div>
           <button class="sort-button" id="sortButton" type="button" aria-haspopup="menu">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h12M4 7h.01M12 12h8M4 12h4M16 17h4M4 17h8"/></svg>
-            <span id="sortLabel">Nearest first</span>
+            <span id="sortLabel">Happening soon</span>
           </button>
         </div>
 
@@ -109,10 +123,10 @@
         </section>
       </section>
 
-      <aside class="right-rail" aria-label="Nearby cities and filters" data-i18n-aria="nearbyRailAria">
+      <aside class="right-rail" aria-label="City navigation and filters" data-i18n-aria="nearbyRailAria">
         <div class="nearby-card">
-          <span class="section-kicker" data-i18n="nearbyKicker">NEARBY CITIES</span>
-          <h3 data-i18n="nearbyCities">How far would you go?</h3>
+          <span class="section-kicker" data-i18n="nearbyKicker">DFW CITIES</span>
+          <h3 id="nearbyCitiesTitle" data-i18n="browseCities">Browse by city</h3>
           <div class="nearby-list" id="nearbyCities"></div>
           <button id="allCitiesButton" class="all-cities" type="button"><span class="button-copy" data-i18n="allCities">View all DFW cities</span> <span>↗</span></button>
         </div>
@@ -142,12 +156,18 @@
         <div><span class="section-kicker" data-i18n="locationKicker">YOUR AREA</span><h2 id="locationTitle" data-i18n="locationTitle">Where should we start?</h2></div>
         <button class="modal-close" data-close type="button" aria-label="Close" data-i18n-aria="close">×</button>
       </div>
+      <button class="all-dfw-option" id="allDfwOption" type="button" data-scope="all" aria-pressed="true">
+        <span class="all-dfw-icon" aria-hidden="true">DFW</span>
+        <span><strong data-i18n="allDfw">All DFW</strong><small data-i18n="allDfwDesc">See every verified find across the metroplex</small></span>
+        <span class="area-check" aria-hidden="true">✓</span>
+      </button>
       <button class="detect-location" id="detectLocation" type="button">
         <span class="detect-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="7"/></svg></span>
         <span><strong data-i18n="currentLocation">Use current location</strong><small data-i18n="locationPermission">Browser location permission required</small></span>
         <span class="arrow">→</span>
       </button>
       <p class="location-status" id="locationStatus" role="status"></p>
+      <div class="city-grid-head"><span data-i18n="chooseCity">Or show one city</span><small data-i18n="cityCountHint">Cities with active finds are available</small></div>
       <div class="city-grid" id="cityGrid"></div>
       <p class="privacy-note"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3"/><rect x="5" y="11" width="14" height="10" rx="2"/></svg><span data-i18n="privacy">Your location is used only for distance and is never sent to a server.</span></p>
     </dialog>

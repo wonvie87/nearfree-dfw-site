@@ -7,20 +7,25 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const storedLocationValue = safeParse(localStorage.getItem("nearfree-location"));
 const storedSaved = safeParse(localStorage.getItem("nearfree-saved"));
 const storedLocale = localStorage.getItem("nearfree-locale");
+const storedScope = localStorage.getItem("nearfree-scope");
 const storedLocationName = typeof storedLocationValue === "string"
   ? storedLocationValue
   : storedLocationValue?.name;
-const storedLocation = CITY_PRESETS.find(city => city.name === storedLocationName) || CITY_PRESETS[0];
+const storedLocation = CITY_PRESETS.find(city => city.name === storedLocationName) || null;
+const hasValidStoredScope = storedScope === "all"
+  || (Boolean(storedLocation) && ["city", "nearby"].includes(storedScope));
+const initialScope = hasValidStoredScope ? storedScope : storedLocation ? "nearby" : "all";
 
 // Older versions stored precise coordinates. Normalize them to a city name on load.
-if (storedLocationValue !== null) {
+if (storedLocationValue !== null && storedLocation) {
   localStorage.setItem("nearfree-location", JSON.stringify(storedLocation.name));
 }
 
 const state = {
   location: storedLocation || CITY_PRESETS[0],
+  scope: initialScope,
   intents: new Set(),
-  sort: "distance",
+  sort: initialScope === "all" ? "soon" : "distance",
   search: "",
   saved: new Set(Array.isArray(storedSaved) ? storedSaved : []),
   savedOnly: false,
@@ -31,12 +36,15 @@ const elements = {
   feed: $("#feed"),
   resultCount: $("#resultCount"),
   emptyState: $("#emptyState"),
+  locationModeLabel: $("#locationModeLabel"),
   locationName: $("#locationName"),
   homeLocationName: $("#homeLocationName"),
   locationDialog: $("#locationDialog"),
   locationStatus: $("#locationStatus"),
   cityGrid: $("#cityGrid"),
+  allDfwOption: $("#allDfwOption"),
   nearbyCities: $("#nearbyCities"),
+  nearbyCitiesTitle: $("#nearbyCitiesTitle"),
   detailDialog: $("#detailDialog"),
   detailScrollArea: $("#detailScrollArea"),
   detailContent: $("#detailContent"),
@@ -206,6 +214,7 @@ function matchesIntent(listing, intent) {
 
 function listingMatches(listing) {
   if (state.savedOnly && !state.saved.has(listing.id)) return false;
+  if (state.scope === "city" && listing.city !== state.location.name) return false;
   if (![...state.intents].every(intent => matchesIntent(listing, intent))) return false;
 
   if (state.search) {
@@ -221,14 +230,16 @@ function sortedListings() {
     distance: distanceMiles(state.location, listing)
   }));
 
-  if (state.sort === "soon") {
+  if (state.sort === "soon" || (state.scope === "all" && state.sort === "distance")) {
     results.sort((a, b) => {
       const aRank = a.kind === "event" ? 0 : 1;
       const bRank = b.kind === "event" ? 0 : 1;
-      return aRank - bRank || new Date(a.start) - new Date(b.start) || a.distance - b.distance;
+      const fallback = state.scope === "all" ? a.city.localeCompare(b.city) : a.distance - b.distance;
+      return aRank - bRank || new Date(a.start) - new Date(b.start) || fallback;
     });
   } else if (state.sort === "verified") {
-    results.sort((a, b) => b.sources.length - a.sources.length || a.distance - b.distance);
+    results.sort((a, b) => b.sources.length - a.sources.length
+      || (state.scope === "all" ? new Date(a.start) - new Date(b.start) : a.distance - b.distance));
   } else {
     results.sort((a, b) => a.distance - b.distance || new Date(a.start) - new Date(b.start));
   }
@@ -280,6 +291,9 @@ function detailTitleContent(listing) {
 
 function cardTemplate(listing, index) {
   const saved = state.saved.has(listing.id);
+  const placeMeta = state.scope === "all"
+    ? listing.city
+    : `${listing.city} · ${formatDistance(listing.distance)}`;
   return `
     <article class="listing-card" data-id="${listing.id}">
       <div class="listing-media">
@@ -301,7 +315,7 @@ function cardTemplate(listing, index) {
         <p class="listing-summary">${escapeHtml(listing.summary)}</p>
         <div class="listing-place">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
-          <span class="listing-place-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)} · ${escapeHtml(formatDistance(listing.distance))}</span></span>
+          <span class="listing-place-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(placeMeta)}</span></span>
         </div>
         <button class="listing-verification" data-action="details" type="button">
           <span class="verified-check" aria-hidden="true">✓</span>
@@ -313,7 +327,7 @@ function cardTemplate(listing, index) {
 }
 
 function homeSections(listings) {
-  const filteredMode = state.savedOnly || Boolean(state.search) || state.intents.size > 0;
+  const filteredMode = state.scope === "city" || state.savedOnly || Boolean(state.search) || state.intents.size > 0;
   if (filteredMode) return [{ key: "results", items: listings }];
 
   const pool = [...listings];
@@ -326,10 +340,10 @@ function homeSections(listings) {
     return selected;
   };
 
-  const weekend = take(listing => listing.costType === "free" && overlapsWindow(listing, weekendWindow()), 4);
-  const budget = take(listing => listing.costType === "discount" && lowestPrice(listing) <= 10, 4);
   const good = take(() => true, 4);
   const worth = take(listing => listing.kind === "event", 4);
+  const weekend = take(listing => listing.costType === "free" && overlapsWindow(listing, weekendWindow()), 4);
+  const budget = take(listing => listing.costType === "discount" && lowestPrice(listing) <= 10, 4);
   return [
     { key: "good", items: good },
     { key: "worth", items: worth },
@@ -341,11 +355,14 @@ function homeSections(listings) {
 
 function sectionTemplate(section, startIndex) {
   const icon = { good: "✦", worth: "🔥", weekend: "☀", budget: "$", more: "+", results: "✦" }[section.key];
+  const sectionName = section.key[0].toUpperCase() + section.key.slice(1);
+  const titleKey = section.key === "good" && state.scope === "all" ? "sectionGoodAll" : `section${sectionName}`;
+  const descKey = section.key === "good" && state.scope === "all" ? "sectionGoodAllDesc" : `section${sectionName}Desc`;
   return `
     <section class="listing-section" aria-labelledby="section-${section.key}">
       <div class="listing-section-head">
-        <div><span class="section-symbol" aria-hidden="true">${icon}</span><h2 id="section-${section.key}">${escapeHtml(t(`section${section.key[0].toUpperCase()}${section.key.slice(1)}`))}</h2></div>
-        <p>${escapeHtml(t(`section${section.key[0].toUpperCase()}${section.key.slice(1)}Desc`))}</p>
+        <div><span class="section-symbol" aria-hidden="true">${icon}</span><h2 id="section-${section.key}">${escapeHtml(t(titleKey))}</h2></div>
+        <p>${escapeHtml(t(descKey))}</p>
       </div>
       <div class="listing-grid">${section.items.map((listing, index) => cardTemplate(listing, startIndex + index)).join("")}</div>
     </section>`;
@@ -370,6 +387,8 @@ function renderFeed() {
 
 function updateActiveNotice() {
   const notices = [];
+  if (state.scope === "city") notices.push(t("cityOnly", { city: state.location.label || state.location.name }));
+  if (state.scope === "nearby") notices.push(t("sortedNear", { city: state.location.label || state.location.name }));
   if (state.savedOnly) notices.push(t("savedOnly"));
   if (state.search) notices.push(t("searchResults", { query: state.search }));
   state.intents.forEach(intent => {
@@ -382,7 +401,10 @@ function updateActiveNotice() {
 
 function updateIntentUI() {
   $$(".intent-chip").forEach(chip => {
-    const active = state.intents.has(chip.dataset.intent);
+    const group = chip.dataset.clearGroup;
+    const active = chip.dataset.intent
+      ? state.intents.has(chip.dataset.intent)
+      : group ? !$$(`[data-intent-group="${group}"]`).some(item => state.intents.has(item.dataset.intent)) : false;
     chip.classList.toggle("active", active);
     chip.setAttribute("aria-pressed", String(active));
   });
@@ -395,52 +417,82 @@ function updateSavedCount() {
 }
 
 function updateLocationUI() {
-  const isPreset = CITY_PRESETS.some(city => city.lat === state.location.lat && city.lng === state.location.lng);
-  const label = isPreset
-    ? (state.location.label || state.location.name)
-    : t("currentNear", { city: state.location.name });
-  elements.locationName.textContent = label;
-  elements.homeLocationName.textContent = label;
+  if (state.scope === "all") {
+    elements.locationModeLabel.textContent = t("browseArea");
+    elements.locationName.textContent = t("allDfw");
+    elements.homeLocationName.textContent = t("allDfw");
+  } else {
+    const isPreset = CITY_PRESETS.some(city => city.lat === state.location.lat && city.lng === state.location.lng);
+    const label = isPreset
+      ? (state.location.label || state.location.name)
+      : t("currentNear", { city: state.location.name });
+    elements.locationModeLabel.textContent = state.scope === "city" ? t("cityFilter") : t("nearby");
+    elements.locationName.textContent = label;
+    elements.homeLocationName.textContent = label;
+  }
+  elements.allDfwOption.classList.toggle("active", state.scope === "all");
+  elements.allDfwOption.setAttribute("aria-pressed", String(state.scope === "all"));
   $$(".city-button", elements.cityGrid).forEach(button => {
-    button.classList.toggle("active", button.dataset.city === state.location.name);
+    const active = state.scope === "city" && button.dataset.city === state.location.name;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
   });
 }
 
 function renderCityGrid() {
-  elements.cityGrid.innerHTML = CITY_PRESETS.map(city => `
-    <button class="city-button ${city.name === state.location.name ? "active" : ""}" data-city="${escapeHtml(city.name)}" type="button">${escapeHtml(city.name)}</button>
-  `).join("");
+  elements.cityGrid.innerHTML = CITY_PRESETS.map(city => {
+    const count = LISTINGS.filter(listing => listing.city === city.name).length;
+    const active = state.scope === "city" && city.name === state.location.name;
+    return `
+      <button class="city-button ${active ? "active" : ""}" data-city="${escapeHtml(city.name)}" type="button" aria-pressed="${active}" aria-label="${escapeHtml(t("cityButtonLabel", { city: city.name, count }))}" ${count === 0 ? "disabled" : ""}>
+        <strong>${escapeHtml(city.name)}</strong><small>${escapeHtml(t("benefitsCount", { count }))}</small>
+      </button>`;
+  }).join("");
 }
 
 function renderNearbyCities() {
   const nearby = CITY_PRESETS
-    .filter(city => city.name !== state.location.name)
+    .filter(city => state.scope === "all" || city.name !== state.location.name)
     .map(city => ({ ...city, distance: distanceMiles(state.location, city), count: LISTINGS.filter(item => item.city === city.name).length }))
     .filter(city => city.count > 0)
-    .sort((a, b) => a.distance - b.distance)
+    .sort((a, b) => state.scope === "all" ? b.count - a.count || a.name.localeCompare(b.name) : a.distance - b.distance)
     .slice(0, 5);
 
+  elements.nearbyCitiesTitle.textContent = t(state.scope === "all" ? "browseCities" : "nearbyCities");
   elements.nearbyCities.innerHTML = nearby.map(city => `
     <button class="nearby-city" data-city="${escapeHtml(city.name)}" type="button">
-      <span><strong>${escapeHtml(city.name)}</strong><small>${formatDistance(city.distance)} · ${escapeHtml(t("benefitsCount", { count: city.count }))}</small></span>
+      <span><strong>${escapeHtml(city.name)}</strong><small>${state.scope === "all" ? "" : `${escapeHtml(formatDistance(city.distance))} · `}${escapeHtml(t("benefitsCount", { count: city.count }))}</small></span>
       <span>${escapeHtml(t("view"))}</span>
     </button>
   `).join("");
 }
 
-function persistLocation() {
-  localStorage.setItem("nearfree-location", JSON.stringify(state.location.name));
+function persistArea() {
+  localStorage.setItem("nearfree-scope", state.scope);
+  if (state.scope !== "all") localStorage.setItem("nearfree-location", JSON.stringify(state.location.name));
+}
+
+function selectAllDfw() {
+  state.scope = "all";
+  if (state.sort === "distance") state.sort = "soon";
+  persistArea();
+  applyStaticTranslations();
+  updateLocationUI();
+  renderFeed();
+  closeDialogs();
+  showToast(t("allDfwSelected"));
 }
 
 function selectCity(name) {
   const city = CITY_PRESETS.find(item => item.name === name);
   if (!city) return;
   state.location = city;
-  persistLocation();
+  state.scope = "city";
+  persistArea();
   updateLocationUI();
   renderFeed();
   closeDialogs();
-  showToast(t("citySelected", { city: city.label }));
+  showToast(t("citySelected", { city: city.label || city.name }));
 }
 
 function nearestCity(location) {
@@ -462,6 +514,10 @@ function useCurrentLocation() {
     const exact = { lat: position.coords.latitude, lng: position.coords.longitude };
     const nearest = nearestCity(exact);
     state.location = { name: nearest.name, isCurrent: true, ...exact };
+    state.scope = "nearby";
+    state.sort = "distance";
+    persistArea();
+    applyStaticTranslations();
     updateLocationUI();
     renderFeed();
     button.disabled = false;
@@ -522,7 +578,7 @@ function detailTemplate(listing) {
       <div class="detail-primary-facts">
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><strong>${escapeHtml(listing.dateLabel)}</strong></p>
         <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)}</span></p>
-        <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M5 17l2-7h10l2 7M8 17v2M16 17v2"/></svg><strong>${escapeHtml(t("approxDistance", { distance }))}</strong></p>
+        ${state.scope === "all" ? "" : `<p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M5 17l2-7h10l2 7M8 17v2M16 17v2"/></svg><strong>${escapeHtml(t("approxDistance", { distance }))}</strong></p>`}
       </div>
       <div class="detail-action-row">
         <a href="${mapUrl(listing)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("directions"))}</a>
@@ -733,11 +789,16 @@ function focusSearch() {
 }
 
 function resetFilters() {
+  state.scope = "all";
+  if (state.sort === "distance") state.sort = "soon";
   state.intents.clear();
   state.search = "";
   state.savedOnly = false;
+  persistArea();
   elements.searchInput.value = "";
   elements.searchClear.hidden = true;
+  applyStaticTranslations();
+  updateLocationUI();
   renderFeed();
 }
 
@@ -746,6 +807,7 @@ function setLocale(locale) {
   state.locale = locale;
   localStorage.setItem("nearfree-locale", locale);
   applyStaticTranslations();
+  renderCityGrid();
   updateLocationUI();
   renderFeed();
 }
@@ -755,6 +817,7 @@ function bindEvents() {
   $("#locationButton").addEventListener("click", () => openDialog(elements.locationDialog));
   $("#homeLocationButton").addEventListener("click", () => openDialog(elements.locationDialog));
   $("#allCitiesButton").addEventListener("click", () => openDialog(elements.locationDialog));
+  elements.allDfwOption.addEventListener("click", selectAllDfw);
   $("#detectLocation").addEventListener("click", useCurrentLocation);
 
   $("#mobileExplore").addEventListener("click", focusSearch);
@@ -775,13 +838,17 @@ function bindEvents() {
     const chip = event.target.closest(".intent-chip");
     if (!chip) return;
     const intent = chip.dataset.intent;
-    if (state.intents.has(intent)) state.intents.delete(intent);
-    else state.intents.add(intent);
+    const group = chip.dataset.intentGroup || chip.dataset.clearGroup;
+    $$(`[data-intent-group="${group}"]`).forEach(item => state.intents.delete(item.dataset.intent));
+    if (intent && chip.getAttribute("aria-pressed") !== "true") state.intents.add(intent);
     renderFeed();
   });
 
   $("#sortButton").addEventListener("click", () => {
-    $$("[data-sort]", elements.sortDialog).forEach(button => button.classList.toggle("active", button.dataset.sort === state.sort));
+    $$("[data-sort]", elements.sortDialog).forEach(button => {
+      button.disabled = button.dataset.sort === "distance" && state.scope === "all";
+      button.classList.toggle("active", button.dataset.sort === state.sort);
+    });
     openDialog(elements.sortDialog);
   });
   elements.sortDialog.addEventListener("click", event => {

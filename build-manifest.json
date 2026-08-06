@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "files": {
+    "discovery": "discovery.8729b9e2a76d.js",
+    "browserStorage": "browser-storage.05ba53c5f819.js",
+    "listingTemplates": "listing-templates.f9af763c770a.js",
+    "data": "data.52eab6b09a3a.js",
+    "listingLocales": "listing-locales.5df451b8a39e.js",
+    "locales": "locales.683cd2c87ef5.js",
+    "app": "app.4c1120bad870.js",
+    "styles": "styles.b0125e34276c.css"
+  }
+}

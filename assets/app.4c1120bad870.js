@@ -1,13 +1,27 @@
-import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.js";
-import { UI, localizeListing } from "./locales.js";
+import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.52eab6b09a3a.js";
+import { UI, localizeListing } from "./locales.683cd2c87ef5.js";
+import {
+  createDiscoveryIndex,
+  calendarDayDifference,
+  dateKeyInTimeZone,
+  dayWindow,
+  DFW_TIME_ZONE,
+  distanceMiles,
+  matchesIntent,
+  overlapsWindow,
+  weekendWindow
+} from "./discovery.8729b9e2a76d.js";
+import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
+import { createListingTemplates } from "./listing-templates.f9af763c770a.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-const storedLocationValue = safeParse(localStorage.getItem("nearfree-location"));
-const storedSaved = safeParse(localStorage.getItem("nearfree-saved"));
-const storedLocale = localStorage.getItem("nearfree-locale");
-const storedScope = localStorage.getItem("nearfree-scope");
+const storage = createBrowserStorage();
+const storedLocationValue = storage.readJson("nearfree-location");
+const storedSaved = storage.readJson("nearfree-saved");
+const storedLocale = storage.read("nearfree-locale");
+const storedScope = storage.read("nearfree-scope");
 const storedLocationName = typeof storedLocationValue === "string"
   ? storedLocationValue
   : storedLocationValue?.name;
@@ -18,7 +32,7 @@ const initialScope = hasValidStoredScope ? storedScope : storedLocation ? "nearb
 
 // Older versions stored precise coordinates. Normalize them to a city name on load.
 if (storedLocationValue !== null && storedLocation) {
-  localStorage.setItem("nearfree-location", JSON.stringify(storedLocation.name));
+  storage.writeJson("nearfree-location", storedLocation.name);
 }
 
 const state = {
@@ -64,10 +78,7 @@ const elements = {
 };
 
 let toastTimer;
-
-function safeParse(value) {
-  try { return value ? JSON.parse(value) : null; } catch { return null; }
-}
+const discoveryIndexes = new Map();
 
 function escapeHtml(value = "") {
   return String(value)
@@ -90,9 +101,22 @@ function translatedListing(listing) {
   return localizeListing(listing, state.locale);
 }
 
+function discoveryIndex() {
+  if (!discoveryIndexes.has(state.locale)) {
+    const locale = state.locale;
+    discoveryIndexes.set(locale, createDiscoveryIndex(LISTINGS, (listing) => localizeListing(listing, locale)));
+  }
+  return discoveryIndexes.get(state.locale);
+}
+
+function sourceListing(id) {
+  return discoveryIndex().originalById.get(id) || null;
+}
+
 function formatVerifiedDate(value) {
   const locale = state.locale === "ko" ? "ko-KR" : "en-US";
-  return new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })
+  const timeZone = String(value).includes("T") ? DFW_TIME_ZONE : "UTC";
+  return new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone })
     .format(new Date(String(value).includes("T") ? value : `${value}T00:00:00Z`));
 }
 
@@ -109,18 +133,6 @@ function applyStaticTranslations() {
   elements.sortLabel.textContent = t({ distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[state.sort]);
 }
 
-function radians(degrees) { return degrees * Math.PI / 180; }
-
-function distanceMiles(a, b) {
-  const earthRadius = 3958.8;
-  const dLat = radians(b.lat - a.lat);
-  const dLng = radians(b.lng - a.lng);
-  const lat1 = radians(a.lat);
-  const lat2 = radians(b.lat);
-  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
-  return earthRadius * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
-}
-
 function formatDistance(miles) {
   if (miles < .3) return t("within");
   if (miles < 10) return t("distanceMiles", { distance: miles.toFixed(1) });
@@ -134,101 +146,31 @@ function getTimeStatus(listing) {
   const end = listing.end ? new Date(listing.end) : null;
   if (end && now > end) return t("ended");
   if (listing.kind === "ongoing" && start <= now) return t("availableNow");
-  if (overlapsWindow(listing, dayWindow())) return t("today");
-  if (overlapsWindow(listing, dayWindow(1))) return t("tomorrow");
-  const startDay = new Date(start);
-  const today = new Date(now);
-  startDay.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
-  const diff = Math.round((startDay - today) / 86400000);
+  if (overlapsWindow(listing, dayWindow(now))) return t("today");
+  if (overlapsWindow(listing, dayWindow(now, 1))) return t("tomorrow");
+  const diff = calendarDayDifference(now, start);
   if (diff <= 7) return t("daysAway", { count: diff });
   if (diff <= 31) return t("weeksAway", { count: Math.ceil(diff / 7) });
   return listing.kicker.split("·")[0].trim();
 }
 
-function dayWindow(offset = 0) {
-  const start = new Date();
-  start.setHours(0, 0, 0, 0);
-  start.setDate(start.getDate() + offset);
-  const end = new Date(start);
-  end.setDate(end.getDate() + 1);
-  return { start, end };
-}
-
-function weekendWindow() {
-  const today = dayWindow().start;
-  const day = today.getDay();
-  const daysUntilSaturday = day === 0 ? 6 : (6 - day + 7) % 7;
-  const start = new Date(today);
-  start.setDate(start.getDate() + daysUntilSaturday);
-  const end = new Date(start);
-  end.setDate(end.getDate() + 2);
-  return { start, end };
-}
-
-function overlapsWindow(listing, window) {
-  const start = new Date(listing.start);
-  const end = listing.end ? new Date(listing.end) : new Date("2999-12-31T23:59:59Z");
-  return start < window.end && end >= window.start;
-}
-
-function searchableText(listing) {
-  const original = LISTINGS.find(item => item.id === listing.id) || listing;
-  return [
-    listing.title, listing.city, listing.venue, listing.summary, listing.cost, listing.finePrint,
-    ...(listing.highlights || []), ...listing.tags,
-    original.title, original.summary, original.cost, original.finePrint,
-    ...(original.highlights || []), ...original.tags
-  ].join(" ").toLocaleLowerCase();
-}
-
-function lowestPrice(listing) {
-  if (listing.costType === "free") return 0;
-  if (/free|무료/i.test(searchableText(listing))) return 0;
-  const amounts = [...searchableText(listing).matchAll(/\$\s*(\d+(?:\.\d+)?)/g)].map(match => Number(match[1]));
-  return amounts.length ? Math.min(...amounts) : Number.POSITIVE_INFINITY;
-}
-
-function matchesIntent(listing, intent) {
-  const text = searchableText(listing);
-  if (intent === "today") return overlapsWindow(listing, dayWindow());
-  if (intent === "tomorrow") return overlapsWindow(listing, dayWindow(1));
-  if (intent === "weekend") return overlapsWindow(listing, weekendWindow());
-  if (intent === "tonight") {
-    const window = dayWindow();
-    window.start.setHours(17, 0, 0, 0);
-    return overlapsWindow(listing, window);
-  }
-  if (intent === "free") return lowestPrice(listing) === 0;
-  if (intent === "under5") return lowestPrice(listing) <= 5;
-  if (intent === "under10") return lowestPrice(listing) <= 10;
-  if (intent === "kids") return listing.category === "family" || /아이와|가족|전 연령|키즈|kids?|family|all ages/.test(text);
-  if (intent === "date") return /라이브 음악|재즈|예술|갤러리|영화|성인|콘서트|축제|마켓|live music|jazz|art|gallery|film|adult|concert|festival|market/.test(text);
-  if (intent === "outdoor") return listing.category === "outdoors" || /야외|공원|정원|트레일|outdoors?|park|garden|trail/.test(text);
-  if (intent === "indoor") return /실내|박물관|갤러리|도서관|전시|indoors?|museum|gallery|library|exhibit/.test(text);
-  if (intent === "food") return /음식|푸드|먹|푸드 트럭|food|eat|restaurant|happy hour/.test(text);
-  if (intent === "museums") return /박물관|미술관|갤러리|전시|museum|gallery|exhibit/.test(text);
-  if (intent === "festivals") return listing.category === "festival" || /축제|페스티벌|festival|fest/.test(text);
-  return true;
-}
-
-function listingMatches(listing) {
+function listingMatches(record, now) {
+  const { listing, searchText, minimumPrice } = record;
   if (state.savedOnly && !state.saved.has(listing.id)) return false;
   if (state.scope === "city" && listing.city !== state.location.name) return false;
-  if (![...state.intents].every(intent => matchesIntent(listing, intent))) return false;
+  if (![...state.intents].every((intent) => matchesIntent(listing, intent, { now, searchText, minimumPrice }))) return false;
 
   if (state.search) {
-    const haystack = searchableText(listing);
-    if (!haystack.includes(state.search.toLocaleLowerCase(state.locale))) return false;
+    if (!searchText.includes(state.search.toLocaleLowerCase(state.locale))) return false;
   }
   return true;
 }
 
 function sortedListings() {
-  const results = LISTINGS.map(translatedListing).filter(listingMatches).map(listing => ({
-    ...listing,
-    distance: distanceMiles(state.location, listing)
-  }));
+  const now = new Date();
+  const results = discoveryIndex().records
+    .filter((record) => listingMatches(record, now))
+    .map(({ listing }) => ({ ...listing, distance: distanceMiles(state.location, listing) }));
 
   if (state.sort === "soon" || (state.scope === "all" && state.sort === "distance")) {
     results.sort((a, b) => {
@@ -258,72 +200,19 @@ function displayCost(listing) {
 
 function verificationAge(value) {
   const hasTime = String(value).includes("T");
-  const checked = new Date(hasTime ? value : `${value}T12:00:00`);
+  const checked = new Date(hasTime ? value : `${value}T00:00:00Z`);
   const today = new Date();
   if (hasTime) {
     const hours = Math.floor((today - checked) / 3_600_000);
     if (hours >= 0 && hours < 1) return t("verifiedRecently");
     if (hours >= 1 && hours < 24) return t("verifiedHoursAgo", { count: hours });
   }
-  checked.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
-  const days = Math.round((today - checked) / 86400000);
+  const checkedKey = hasTime ? dateKeyInTimeZone(checked) : String(value).slice(0, 10);
+  const todayKey = dateKeyInTimeZone(today);
+  const days = Math.round((Date.parse(`${todayKey}T00:00:00Z`) - Date.parse(`${checkedKey}T00:00:00Z`)) / 86400000);
   if (days <= 0) return t("verifiedToday");
   if (days === 1) return t("verifiedYesterday");
   return t("verifiedOn", { date: formatVerifiedDate(value) });
-}
-
-function cardTitleContent(listing) {
-  const base = listing.titleBase || listing.title;
-  const benefit = listing.titleBenefit
-    ? `<span class="listing-title-benefit">${escapeHtml(listing.titleBenefit)}</span>`
-    : "";
-  return `<span class="listing-title-base">${escapeHtml(base)}</span>${benefit}`;
-}
-
-function detailTitleContent(listing) {
-  const base = listing.titleBase || listing.title;
-  const benefit = listing.titleBenefit
-    ? `<span class="detail-title-benefit">${escapeHtml(listing.titleBenefit)}</span>`
-    : "";
-  return `<span class="detail-title-base">${escapeHtml(base)}</span>${benefit}`;
-}
-
-function cardTemplate(listing, index) {
-  const saved = state.saved.has(listing.id);
-  const placeMeta = state.scope === "all"
-    ? listing.city
-    : `${listing.city} · ${formatDistance(listing.distance)}`;
-  return `
-    <article class="listing-card" data-id="${listing.id}">
-      <div class="listing-media">
-        <button class="listing-media-open" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
-          <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" loading="${index < 4 ? "eager" : "lazy"}" />
-          <span class="listing-media-shade"></span>
-        </button>
-        <span class="listing-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(compactCost(listing))}</span>
-        <button class="listing-save ${saved ? "saved" : ""}" data-action="save" type="button" aria-label="${escapeHtml(saved ? t("unsave") : t("save"))}">
-          <svg viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
-        </button>
-      </div>
-      <div class="listing-body">
-        <div class="listing-schedule">
-          <span class="listing-time-status">${escapeHtml(getTimeStatus(listing))}</span>
-          <span class="listing-date">${escapeHtml(listing.dateLabel)}</span>
-        </div>
-        <button class="listing-title" data-action="details" type="button" aria-label="${escapeHtml(listing.title)}">${cardTitleContent(listing)}</button>
-        <p class="listing-summary">${escapeHtml(listing.summary)}</p>
-        <div class="listing-place">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
-          <span class="listing-place-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(placeMeta)}</span></span>
-        </div>
-        <button class="listing-verification" data-action="details" type="button">
-          <span class="verified-check" aria-hidden="true">✓</span>
-          <span>${escapeHtml(verificationAge(listing.verifiedAt))} · ${escapeHtml(t("sourcesShort", { count: listing.sources.length }))}</span>
-          <span aria-hidden="true">→</span>
-        </button>
-      </div>
-    </article>`;
 }
 
 function homeSections(listings) {
@@ -331,6 +220,8 @@ function homeSections(listings) {
   if (filteredMode) return [{ key: "results", items: listings }];
 
   const pool = [...listings];
+  const currentWeekend = weekendWindow(new Date());
+  const minimumPriceFor = (listing) => discoveryIndex().recordById.get(listing.id)?.minimumPrice ?? Number.POSITIVE_INFINITY;
   const take = (predicate, limit) => {
     const selected = [];
     for (let index = 0; index < pool.length && selected.length < limit;) {
@@ -342,8 +233,8 @@ function homeSections(listings) {
 
   const good = take(() => true, 4);
   const worth = take(listing => listing.kind === "event", 4);
-  const weekend = take(listing => listing.costType === "free" && overlapsWindow(listing, weekendWindow()), 4);
-  const budget = take(listing => listing.costType === "discount" && lowestPrice(listing) <= 10, 4);
+  const weekend = take((listing) => listing.costType === "free" && overlapsWindow(listing, currentWeekend), 4);
+  const budget = take((listing) => listing.costType === "discount" && minimumPriceFor(listing) <= 10, 4);
   return [
     { key: "good", items: good },
     { key: "worth", items: worth },
@@ -353,26 +244,11 @@ function homeSections(listings) {
   ].filter(section => section.items.length > 0);
 }
 
-function sectionTemplate(section, startIndex) {
-  const icon = { good: "✦", worth: "🔥", weekend: "☀", budget: "$", more: "+", results: "✦" }[section.key];
-  const sectionName = section.key[0].toUpperCase() + section.key.slice(1);
-  const titleKey = section.key === "good" && state.scope === "all" ? "sectionGoodAll" : `section${sectionName}`;
-  const descKey = section.key === "good" && state.scope === "all" ? "sectionGoodAllDesc" : `section${sectionName}Desc`;
-  return `
-    <section class="listing-section" aria-labelledby="section-${section.key}">
-      <div class="listing-section-head">
-        <div><span class="section-symbol" aria-hidden="true">${icon}</span><h2 id="section-${section.key}">${escapeHtml(t(titleKey))}</h2></div>
-        <p>${escapeHtml(t(descKey))}</p>
-      </div>
-      <div class="listing-grid">${section.items.map((listing, index) => cardTemplate(listing, startIndex + index)).join("")}</div>
-    </section>`;
-}
-
 function renderFeed() {
   const listings = sortedListings();
   let startIndex = 0;
   elements.feed.innerHTML = homeSections(listings).map(section => {
-    const markup = sectionTemplate(section, startIndex);
+    const markup = templates.sectionTemplate(section, startIndex);
     startIndex += section.items.length;
     return markup;
   }).join("");
@@ -441,7 +317,7 @@ function updateLocationUI() {
 
 function renderCityGrid() {
   elements.cityGrid.innerHTML = CITY_PRESETS.map(city => {
-    const count = LISTINGS.filter(listing => listing.city === city.name).length;
+    const count = discoveryIndex().cityCounts.get(city.name) || 0;
     const active = state.scope === "city" && city.name === state.location.name;
     return `
       <button class="city-button ${active ? "active" : ""}" data-city="${escapeHtml(city.name)}" type="button" aria-pressed="${active}" aria-label="${escapeHtml(t("cityButtonLabel", { city: city.name, count }))}" ${count === 0 ? "disabled" : ""}>
@@ -453,7 +329,7 @@ function renderCityGrid() {
 function renderNearbyCities() {
   const nearby = CITY_PRESETS
     .filter(city => state.scope === "all" || city.name !== state.location.name)
-    .map(city => ({ ...city, distance: distanceMiles(state.location, city), count: LISTINGS.filter(item => item.city === city.name).length }))
+    .map(city => ({ ...city, distance: distanceMiles(state.location, city), count: discoveryIndex().cityCounts.get(city.name) || 0 }))
     .filter(city => city.count > 0)
     .sort((a, b) => state.scope === "all" ? b.count - a.count || a.name.localeCompare(b.name) : a.distance - b.distance)
     .slice(0, 5);
@@ -468,8 +344,8 @@ function renderNearbyCities() {
 }
 
 function persistArea() {
-  localStorage.setItem("nearfree-scope", state.scope);
-  if (state.scope !== "all") localStorage.setItem("nearfree-location", JSON.stringify(state.location.name));
+  storage.write("nearfree-scope", state.scope);
+  if (state.scope !== "all") storage.writeJson("nearfree-location", state.location.name);
 }
 
 function selectAllDfw() {
@@ -549,105 +425,20 @@ function similarListings(listing) {
     .slice(0, 3);
 }
 
-function similarTemplate(listing) {
-  return `
-    <button class="similar-card" data-similar-id="${listing.id}" type="button">
-      <img src="${escapeHtml(listing.image)}" alt="" loading="lazy" />
-      <span class="similar-copy">
-        <small>${escapeHtml(compactCost(listing))} · ${escapeHtml(getTimeStatus(listing))}</small>
-        <strong>${escapeHtml(listing.title)}</strong>
-        <span>${escapeHtml(listing.city)} · ${escapeHtml(formatDistance(listing.nearbyDistance))}</span>
-      </span>
-      <span aria-hidden="true">→</span>
-    </button>`;
-}
-
-function detailTemplate(listing) {
-  const distance = formatDistance(distanceMiles(state.location, listing));
-  const similar = similarListings(listing);
-  const highlights = listing.highlights || [];
-  const practicalTips = listing.practicalTips || [];
-  return `
-    <section class="detail-photo">
-      <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" />
-    </section>
-    <div class="detail-decision">
-      <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>
-      <h2 id="detailTitle" aria-label="${escapeHtml(listing.title)}">${detailTitleContent(listing)}</h2>
-      <p class="detail-overview">${escapeHtml(listing.summary)}</p>
-      <div class="detail-primary-facts">
-        <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><strong>${escapeHtml(listing.dateLabel)}</strong></p>
-        <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)}</span></p>
-        ${state.scope === "all" ? "" : `<p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M5 17l2-7h10l2 7M8 17v2M16 17v2"/></svg><strong>${escapeHtml(t("approxDistance", { distance }))}</strong></p>`}
-      </div>
-      <div class="detail-action-row">
-        <a href="${mapUrl(listing)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("directions"))}</a>
-        <a class="official-action" href="${escapeHtml(listing.actionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("officialSite"))} ↗</a>
-      </div>
-    </div>
-    <section class="detail-section highlights-section">
-      <h3>${escapeHtml(t("highlights"))}</h3>
-      <div class="detail-highlight-list">
-        ${highlights.map((highlight, index) => `
-          <article class="detail-highlight">
-            <span class="detail-highlight-mark">${String(index + 1).padStart(2, "0")}</span>
-            <p>${escapeHtml(highlight)}</p>
-          </article>`).join("")}
-      </div>
-    </section>
-    <section class="detail-section visit-section">
-      <h3>${escapeHtml(t("planVisit"))}</h3>
-      <div class="visit-fact-grid">
-        <article class="visit-fact">
-          <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V7Z"/><path d="M12 7v12"/></svg></span>
-          <div><span>${escapeHtml(t("dealCost"))}</span><strong>${escapeHtml(listing.cost)}</strong></div>
-        </article>
-        <article class="visit-fact">
-          <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 11 15l4.8-6"/></svg></span>
-          <div><span>${escapeHtml(t("entryDetails"))}</span><strong>${escapeHtml(listing.reservation)}</strong></div>
-        </article>
-      </div>
-      ${practicalTips.length ? `
-        <section class="practical-tips" aria-labelledby="practicalTipsTitle">
-          <h4 id="practicalTipsTitle">${escapeHtml(t("practicalTips"))}</h4>
-          <ul class="practical-tip-list">
-            ${practicalTips.map(tip => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
-          </ul>
-        </section>` : ""}
-      <aside class="before-callout">
-        <span class="before-callout-mark" aria-hidden="true">!</span>
-        <div><h4>${escapeHtml(t("beforeGo"))}</h4><p>${escapeHtml(listing.finePrint)}</p></div>
-      </aside>
-    </section>
-    <section class="detail-section verification-section">
-      <div class="verification-title">
-        <span class="verified-seal">✓</span>
-        <div><h3>${escapeHtml(t("nearFreeVerified"))}</h3><p>${escapeHtml(verificationAge(listing.verifiedAt))}</p></div>
-      </div>
-      <div class="verification-grid" aria-label="${escapeHtml(t("verificationChecklist"))}">
-        <span>${escapeHtml(t("verifiedPrice"))}<b>✓</b></span>
-        <span>${escapeHtml(t("verifiedDate"))}<b>✓</b></span>
-        <span>${escapeHtml(t("verifiedLocation"))}<b>✓</b></span>
-        <span>${escapeHtml(t("verifiedConditions"))}<b>✓</b></span>
-      </div>
-      <details class="detail-sources">
-        <summary>${escapeHtml(t("sourcesChecked", { count: listing.sources.length }))}<span>›</span></summary>
-        <div class="detail-source-list">
-          ${listing.sources.map((source, index) => `
-            <a class="source-item" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
-              <span class="source-index">0${index + 1}</span>
-              <span class="source-copy"><strong>${escapeHtml(source.name)} · ${escapeHtml(source.official ? t("official") : t("supporting"))}</strong><small>${escapeHtml(source.note)}</small></span>
-              <span>↗</span>
-            </a>`).join("")}
-        </div>
-      </details>
-    </section>
-    ${similar.length ? `
-      <section class="detail-section similar-section">
-        <h3>${escapeHtml(t("similarNearby"))}</h3>
-        <div class="similar-list">${similar.map(similarTemplate).join("")}</div>
-      </section>` : ""}`;
-}
+const templates = createListingTemplates({
+  compactCost,
+  displayCost,
+  escapeHtml,
+  formatDistance,
+  getTimeStatus,
+  isAllDfw: () => state.scope === "all",
+  isSaved: (id) => state.saved.has(id),
+  mapUrl,
+  similarListings,
+  t,
+  verificationAge,
+  distanceFromSelected: (listing) => distanceMiles(state.location, listing)
+});
 
 function updateDetailControls(listing = null) {
   const hasListing = Boolean(listing);
@@ -663,38 +454,21 @@ function updateDetailControls(listing = null) {
 }
 
 function openDetails(id) {
-  const listing = LISTINGS.find(item => item.id === id);
+  const listing = sourceListing(id);
   if (!listing) return;
   updateDetailControls(listing);
-  elements.detailContent.innerHTML = detailTemplate(translatedListing(listing));
+  elements.detailContent.innerHTML = templates.detailTemplate(translatedListing(listing));
   openDialog(elements.detailDialog);
+  const url = new URL(window.location.href);
+  if (url.searchParams.get("listing") !== id) {
+    url.searchParams.set("listing", id);
+    history.pushState({ listing: id }, "", url);
+  }
 }
 
 function openMethodology() {
   updateDetailControls();
-  elements.detailContent.innerHTML = `
-    <section class="detail-hero methodology-hero">
-      <div class="detail-hero-copy">
-        <span class="price-badge">${escapeHtml(t("methodologyBadge"))}</span>
-        <h2 id="detailTitle">${escapeHtml(t("methodologyTitle"))}</h2>
-      </div>
-    </section>
-    <div class="detail-body">
-      <div class="detail-facts">
-        <div class="detail-fact"><small>${escapeHtml(t("dataDate"))}</small><strong>${RESEARCH_NOTE.verifiedAt}</strong></div>
-        <div class="detail-fact"><small>${escapeHtml(t("minimumSources"))}</small><strong>${escapeHtml(t("twoPerListing"))}</strong></div>
-        <div class="detail-fact"><small>${escapeHtml(t("preferredSources"))}</small><strong>${escapeHtml(t("officialPages"))}</strong></div>
-        <div class="detail-fact"><small>${escapeHtml(t("checkedFields"))}</small><strong>${escapeHtml(t("fieldsValue"))}</strong></div>
-      </div>
-      <p class="detail-summary">${escapeHtml(t("methodology"))}</p>
-      <div class="condition-box"><strong>${escapeHtml(t("liveChangesTitle"))}</strong><p>${escapeHtml(t("disclaimer"))}</p></div>
-      <section class="sources-panel">
-        <div class="source-head"><h3>${escapeHtml(t("cardShows"))}</h3><span>${escapeHtml(t("transparencyLabel"))}</span></div>
-        <div class="source-item"><span class="source-index">01</span><span class="source-copy"><strong>${escapeHtml(t("accurateTerms"))}</strong><small>${escapeHtml(t("accurateTermsDesc"))}</small></span></div>
-        <div class="source-item"><span class="source-index">02</span><span class="source-copy"><strong>${escapeHtml(t("directLinks"))}</strong><small>${escapeHtml(t("directLinksDesc"))}</small></span></div>
-        <div class="source-item"><span class="source-index">03</span><span class="source-copy"><strong>${escapeHtml(t("visualsSeparated"))}</strong><small>${escapeHtml(t("visualsSeparatedDesc"))}</small></span></div>
-      </section>
-    </div>`;
+  elements.detailContent.innerHTML = templates.methodologyTemplate(RESEARCH_NOTE);
   openDialog(elements.detailDialog);
 }
 
@@ -705,8 +479,15 @@ function resetDetailScroll() {
   });
 }
 
+function clearListingRoute() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has("listing")) return;
+  url.searchParams.delete("listing");
+  history.replaceState({}, "", url);
+}
+
 function openDialog(dialog) {
-  closeDialogs();
+  closeDialogs({ clearRoute: false });
   elements.modalBackdrop.hidden = false;
   if (typeof dialog.showModal === "function") dialog.showModal();
   else dialog.setAttribute("open", "");
@@ -714,13 +495,14 @@ function openDialog(dialog) {
   document.body.classList.add("modal-open");
 }
 
-function closeDialogs() {
+function closeDialogs({ clearRoute = true } = {}) {
   [elements.locationDialog, elements.detailDialog, elements.sortDialog].forEach(dialog => {
     if (dialog?.open) dialog.close();
     else dialog?.removeAttribute("open");
   });
   elements.modalBackdrop.hidden = true;
   document.body.classList.remove("modal-open");
+  if (clearRoute) clearListingRoute();
 }
 
 function toggleSave(id) {
@@ -731,49 +513,27 @@ function toggleSave(id) {
     state.saved.add(id);
     showToast(t("saveAdded"));
   }
-  localStorage.setItem("nearfree-saved", JSON.stringify([...state.saved]));
+  storage.writeJson("nearfree-saved", [...state.saved]);
   renderFeed();
 }
 
 async function shareListing(listing) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("listing", listing.id);
   const shareData = {
     title: `${listing.title} | NearFree DFW`,
     text: `${displayCost(listing)} · ${listing.dateLabel}\n${listing.venue}, ${listing.city}\n${listing.actionUrl}`,
-    url: listing.actionUrl
+    url: url.href
   };
   try {
     if (navigator.share) await navigator.share(shareData);
     else {
-      await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}`);
+      await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
       showToast(t("linkCopied"));
     }
   } catch (error) {
     if (error?.name !== "AbortError") showToast(t("shareFailed"));
   }
-}
-
-function icsDate(dateString) {
-  return new Date(dateString).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-}
-
-function downloadCalendar(listing) {
-  if (!listing.end) return;
-  const content = [
-    "BEGIN:VCALENDAR", "VERSION:2.0", `PRODID:-//NearFree DFW//${state.locale.toUpperCase()}`, "BEGIN:VEVENT",
-    `UID:${listing.id}@nearfree.local`, `DTSTAMP:${icsDate(new Date().toISOString())}`,
-    `DTSTART:${icsDate(listing.start)}`, `DTEND:${icsDate(listing.end)}`,
-    `SUMMARY:${listing.title.replaceAll(",", "\\,")}`,
-    `LOCATION:${`${listing.venue}, ${listing.address}`.replaceAll(",", "\\,")}`,
-    `DESCRIPTION:${`${listing.summary} | ${t("calendarDescription")}: ${listing.actionUrl}`.replaceAll(",", "\\,").replaceAll("\n", "\\n")}`,
-    `URL:${listing.actionUrl}`, "END:VEVENT", "END:VCALENDAR"
-  ].join("\r\n");
-  const url = URL.createObjectURL(new Blob([content], { type: "text/calendar;charset=utf-8" }));
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = `${listing.id}.ics`;
-  anchor.click();
-  URL.revokeObjectURL(url);
-  showToast(t("calendarMade"));
 }
 
 function showToast(message) {
@@ -805,7 +565,7 @@ function resetFilters() {
 function setLocale(locale) {
   if (!["en", "ko"].includes(locale)) return;
   state.locale = locale;
-  localStorage.setItem("nearfree-locale", locale);
+  storage.write("nearfree-locale", locale);
   applyStaticTranslations();
   renderCityGrid();
   updateLocationUI();
@@ -864,34 +624,29 @@ function bindEvents() {
     const target = event.target.closest("[data-action]");
     if (!target) return;
     const card = target.closest(".listing-card");
-    const sourceListing = LISTINGS.find(item => item.id === card?.dataset.id);
-    if (!sourceListing) return;
-    const listing = translatedListing(sourceListing);
+    const original = sourceListing(card?.dataset.id);
+    if (!original) return;
+    const listing = translatedListing(original);
     const action = target.dataset.action;
     if (action === "details") openDetails(listing.id);
     if (action === "save") toggleSave(listing.id);
-    if (action === "share") shareListing(listing);
-    if (action === "calendar") downloadCalendar(listing);
   });
   elements.detailContent.addEventListener("click", event => {
     const similar = event.target.closest("[data-similar-id]");
     if (similar) {
-      const sourceListing = LISTINGS.find(item => item.id === similar.dataset.similarId);
-      if (!sourceListing) return;
-      updateDetailControls(sourceListing);
-      elements.detailContent.innerHTML = detailTemplate(translatedListing(sourceListing));
+      openDetails(similar.dataset.similarId);
       elements.detailScrollArea.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
   elements.detailSave.addEventListener("click", () => {
-    const sourceListing = LISTINGS.find(item => item.id === elements.detailSave.dataset.id);
-    if (!sourceListing) return;
-    toggleSave(sourceListing.id);
-    updateDetailControls(sourceListing);
+    const listing = sourceListing(elements.detailSave.dataset.id);
+    if (!listing) return;
+    toggleSave(listing.id);
+    updateDetailControls(listing);
   });
   elements.detailShare.addEventListener("click", () => {
-    const sourceListing = LISTINGS.find(item => item.id === elements.detailShare.dataset.id);
-    if (sourceListing) shareListing(translatedListing(sourceListing));
+    const listing = sourceListing(elements.detailShare.dataset.id);
+    if (listing) shareListing(translatedListing(listing));
   });
   elements.cityGrid.addEventListener("click", event => {
     const button = event.target.closest("[data-city]");
@@ -926,6 +681,17 @@ function bindEvents() {
   [elements.locationDialog, elements.detailDialog, elements.sortDialog].forEach(dialog => {
     dialog.addEventListener("cancel", event => { event.preventDefault(); closeDialogs(); });
   });
+  window.addEventListener("popstate", () => {
+    const id = new URL(window.location.href).searchParams.get("listing");
+    if (id && sourceListing(id)) {
+      const listing = sourceListing(id);
+      updateDetailControls(listing);
+      elements.detailContent.innerHTML = templates.detailTemplate(translatedListing(listing));
+      openDialog(elements.detailDialog);
+    } else {
+      closeDialogs({ clearRoute: false });
+    }
+  });
 }
 
 function init() {
@@ -934,6 +700,15 @@ function init() {
   updateLocationUI();
   bindEvents();
   renderFeed();
+  const initialListingId = new URL(window.location.href).searchParams.get("listing");
+  if (initialListingId && sourceListing(initialListingId)) {
+    const listing = sourceListing(initialListingId);
+    updateDetailControls(listing);
+    elements.detailContent.innerHTML = templates.detailTemplate(translatedListing(listing));
+    openDialog(elements.detailDialog);
+  } else if (initialListingId) {
+    clearListingRoute();
+  }
 }
 
 init();

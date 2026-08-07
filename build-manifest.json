@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "files": {
-    "discovery": "discovery.8729b9e2a76d.js",
+    "discovery": "discovery.8226cf223dc3.js",
     "browserStorage": "browser-storage.05ba53c5f819.js",
-    "listingTemplates": "listing-templates.f9af763c770a.js",
-    "data": "data.52eab6b09a3a.js",
-    "listingLocales": "listing-locales.5df451b8a39e.js",
-    "locales": "locales.683cd2c87ef5.js",
-    "app": "app.4c1120bad870.js",
-    "styles": "styles.b0125e34276c.css"
+    "listingTemplates": "listing-templates.b56390781bf4.js",
+    "data": "data.db03d5729418.js",
+    "listingLocales": "listing-locales.8393d1d592c7.js",
+    "locales": "locales.081a9e71332d.js",
+    "app": "app.3d3be42a5595.js",
+    "styles": "styles.8b74511ab8c4.css"
   }
 }

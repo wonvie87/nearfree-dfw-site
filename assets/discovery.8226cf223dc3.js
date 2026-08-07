@@ -116,12 +116,16 @@ export function buildSearchText(listing, original = listing) {
     listing.summary,
     listing.cost,
     listing.finePrint,
+    listing.eligibility?.detail,
+    listing.booking?.detail,
     ...(listing.highlights || []),
     ...(listing.tags || []),
     original.title,
     original.summary,
     original.cost,
     original.finePrint,
+    original.eligibility?.detail,
+    original.booking?.detail,
     ...(original.highlights || []),
     ...(original.tags || [])
   ].join(" ").toLocaleLowerCase();

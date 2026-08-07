@@ -1,5 +1,5 @@
-import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.52eab6b09a3a.js";
-import { UI, localizeListing } from "./locales.683cd2c87ef5.js";
+import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.db03d5729418.js";
+import { UI, localizeListing } from "./locales.081a9e71332d.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -10,9 +10,9 @@ import {
   matchesIntent,
   overlapsWindow,
   weekendWindow
-} from "./discovery.8729b9e2a76d.js";
+} from "./discovery.8226cf223dc3.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
-import { createListingTemplates } from "./listing-templates.f9af763c770a.js";
+import { createListingTemplates } from "./listing-templates.b56390781bf4.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -151,7 +151,7 @@ function getTimeStatus(listing) {
   const diff = calendarDayDifference(now, start);
   if (diff <= 7) return t("daysAway", { count: diff });
   if (diff <= 31) return t("weeksAway", { count: Math.ceil(diff / 7) });
-  return listing.kicker.split("·")[0].trim();
+  return String(listing.kicker || listing.dateLabel).split("·")[0].trim();
 }
 
 function listingMatches(record, now) {

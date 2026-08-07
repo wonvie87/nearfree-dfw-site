@@ -29,6 +29,18 @@ export function createListingTemplates(context) {
     return `<span class="detail-title-base">${escapeHtml(base)}</span>${benefit}`;
   }
 
+  function imageOrPlaceholder(listing, className, loading = "lazy", alt = listing.imageAlt || "") {
+    return listing.image
+      ? `<img src="${escapeHtml(listing.image)}" alt="${escapeHtml(alt)}" loading="${loading}" />`
+      : `<span class="${className}" aria-hidden="true"><span>NearFree</span></span>`;
+  }
+
+  function conditionalBadge(listing) {
+    return listing.eligibility?.mode === "conditional"
+      ? `<span class="listing-condition-badge">${escapeHtml(t("conditionalEligibility"))}</span>`
+      : "";
+  }
+
   function cardTemplate(listing, index) {
     const saved = isSaved(listing.id);
     const placeMeta = isAllDfw()
@@ -38,10 +50,11 @@ export function createListingTemplates(context) {
       <article class="listing-card" data-id="${listing.id}">
         <div class="listing-media">
           <button class="listing-media-open" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
-            <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" loading="${index < 4 ? "eager" : "lazy"}" />
+            ${imageOrPlaceholder(listing, "listing-media-placeholder", index < 4 ? "eager" : "lazy")}
             <span class="listing-media-shade"></span>
           </button>
           <span class="listing-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(compactCost(listing))}</span>
+          ${conditionalBadge(listing)}
           <button class="listing-save ${saved ? "saved" : ""}" data-action="save" type="button" aria-label="${escapeHtml(saved ? t("unsave") : t("save"))}">
             <svg viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
           </button>
@@ -84,7 +97,7 @@ export function createListingTemplates(context) {
   function similarTemplate(listing) {
     return `
       <button class="similar-card" data-similar-id="${listing.id}" type="button">
-        <img src="${escapeHtml(listing.image)}" alt="" loading="lazy" />
+        ${imageOrPlaceholder(listing, "similar-media-placeholder", "lazy", "")}
         <span class="similar-copy">
           <small>${escapeHtml(compactCost(listing))} · ${escapeHtml(getTimeStatus(listing))}</small>
           <strong>${escapeHtml(listing.title)}</strong>
@@ -99,12 +112,13 @@ export function createListingTemplates(context) {
     const similar = similarListings(listing);
     const highlights = listing.highlights || [];
     const practicalTips = listing.practicalTips || [];
+    const bookingDetail = listing.booking?.detail || listing.reservation;
+    const eligibilityDetail = listing.eligibility?.mode === "conditional" ? listing.eligibility.detail : "";
     return `
-      <section class="detail-photo">
-        <img src="${escapeHtml(listing.image)}" alt="${escapeHtml(listing.imageAlt)}" />
-      </section>
+      ${listing.image ? `<section class="detail-photo">${imageOrPlaceholder(listing, "detail-media-placeholder", "eager")}</section>` : ""}
       <div class="detail-decision">
         <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>
+        ${conditionalBadge(listing)}
         <h2 id="detailTitle" aria-label="${escapeHtml(listing.title)}">${detailTitleContent(listing)}</h2>
         <p class="detail-overview">${escapeHtml(listing.summary)}</p>
         <div class="detail-primary-facts">
@@ -117,7 +131,7 @@ export function createListingTemplates(context) {
           <a class="official-action" href="${escapeHtml(listing.actionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("officialSite"))} ↗</a>
         </div>
       </div>
-      <section class="detail-section highlights-section">
+      ${highlights.length ? `<section class="detail-section highlights-section">
         <h3>${escapeHtml(t("highlights"))}</h3>
         <div class="detail-highlight-list">
           ${highlights.map((highlight, index) => `
@@ -126,7 +140,7 @@ export function createListingTemplates(context) {
               <p>${escapeHtml(highlight)}</p>
             </article>`).join("")}
         </div>
-      </section>
+      </section>` : ""}
       <section class="detail-section visit-section">
         <h3>${escapeHtml(t("planVisit"))}</h3>
         <div class="visit-fact-grid">
@@ -134,10 +148,14 @@ export function createListingTemplates(context) {
             <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V7Z"/><path d="M12 7v12"/></svg></span>
             <div><span>${escapeHtml(t("dealCost"))}</span><strong>${escapeHtml(listing.cost)}</strong></div>
           </article>
-          <article class="visit-fact">
+          ${bookingDetail ? `<article class="visit-fact">
             <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 11 15l4.8-6"/></svg></span>
-            <div><span>${escapeHtml(t("entryDetails"))}</span><strong>${escapeHtml(listing.reservation)}</strong></div>
-          </article>
+            <div><span>${escapeHtml(t("entryDetails"))}</span><strong>${escapeHtml(bookingDetail)}</strong></div>
+          </article>` : ""}
+          ${eligibilityDetail ? `<article class="visit-fact eligibility-fact">
+            <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20c.8-4 3.1-6 7-6s6.2 2 7 6"/></svg></span>
+            <div><span>${escapeHtml(t("eligibilityDetails"))}</span><strong>${escapeHtml(eligibilityDetail)}</strong></div>
+          </article>` : ""}
         </div>
         ${practicalTips.length ? `
           <section class="practical-tips" aria-labelledby="practicalTipsTitle">
@@ -146,10 +164,10 @@ export function createListingTemplates(context) {
               ${practicalTips.map(tip => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
             </ul>
           </section>` : ""}
-        <aside class="before-callout">
+        ${listing.finePrint ? `<aside class="before-callout">
           <span class="before-callout-mark" aria-hidden="true">!</span>
           <div><h4>${escapeHtml(t("beforeGo"))}</h4><p>${escapeHtml(listing.finePrint)}</p></div>
-        </aside>
+        </aside>` : ""}
       </section>
       <section class="detail-section verification-section">
         <div class="verification-title">
@@ -192,7 +210,7 @@ export function createListingTemplates(context) {
       <div class="detail-body">
         <div class="detail-facts">
           <div class="detail-fact"><small>${escapeHtml(t("dataDate"))}</small><strong>${escapeHtml(researchNote.verifiedAt)}</strong></div>
-          <div class="detail-fact"><small>${escapeHtml(t("minimumSources"))}</small><strong>${escapeHtml(t("twoPerListing"))}</strong></div>
+          <div class="detail-fact"><small>${escapeHtml(t("minimumSources"))}</small><strong>${escapeHtml(t("officialFirst"))}</strong></div>
           <div class="detail-fact"><small>${escapeHtml(t("preferredSources"))}</small><strong>${escapeHtml(t("officialPages"))}</strong></div>
           <div class="detail-fact"><small>${escapeHtml(t("checkedFields"))}</small><strong>${escapeHtml(t("fieldsValue"))}</strong></div>
         </div>

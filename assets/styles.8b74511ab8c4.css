@@ -549,7 +549,34 @@ html[lang="ko"] :is(.detail-summary, .condition-box p, .method-card p) { line-he
 .listing-media-open { position: absolute; inset: 0; width: 100%; padding: 0; overflow: hidden; border: 0; background: #39423d; cursor: pointer; }
 .listing-media-open img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
 .listing-card:hover .listing-media-open img { transform: scale(1.025); }
+.listing-media-placeholder,
+.similar-media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(209,255,81,.72), transparent 24%),
+    radial-gradient(circle at 82% 72%, rgba(129,211,255,.48), transparent 30%),
+    linear-gradient(135deg, #24352d, #566f61);
+  color: white;
+}
+.listing-media-placeholder > span,
+.similar-media-placeholder > span { font-size: 13px; font-weight: 850; letter-spacing: .04em; }
 .listing-media-shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,15,12,.38), transparent 42%); }
+.listing-condition-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-left: 8px;
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: #eef0ff;
+  color: #3d4185;
+  font-size: 11px;
+  font-weight: 800;
+}
+.listing-media > .listing-condition-badge { position: absolute; z-index: 3; top: 13px; left: 13px; margin: 0; box-shadow: 0 4px 14px rgba(0,0,0,.14); }
 .listing-price {
   position: absolute;
   z-index: 2;
@@ -860,6 +887,7 @@ html[lang="ko"] :is(.detail-summary, .condition-box p, .method-card p) { line-he
 .similar-card { width: 100%; display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; align-items: center; gap: 11px; padding: 7px; border: 1px solid #dfddd6; border-radius: 14px; background: white; text-align: left; cursor: pointer; }
 .similar-card:hover { border-color: #aaada7; }
 .similar-card img { width: 76px; height: 65px; object-fit: cover; border-radius: 10px; }
+.similar-media-placeholder { width: 76px; height: 65px; border-radius: 10px; }
 .similar-copy { min-width: 0; display: grid; gap: 3px; }
 .similar-copy small { color: #a63d29; font-size: 11px; font-weight: 800; text-transform: uppercase; }
 .similar-copy strong { overflow: hidden; font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }

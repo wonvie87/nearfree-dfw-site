@@ -1,5 +1,5 @@
-import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.c18610427761.js";
-import { UI, localizeListing } from "./locales.9b131d1f5c4b.js";
+import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
+import { UI, localizeListing } from "./locales.32ba288c5526.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -10,9 +10,9 @@ import {
   matchesIntent,
   overlapsWindow,
   weekendWindow
-} from "./discovery.8226cf223dc3.js";
+} from "./discovery.121bc0c1385c.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
-import { createListingTemplates } from "./listing-templates.b56390781bf4.js";
+import { createListingTemplates } from "./listing-templates.747d2edec748.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -444,7 +444,11 @@ function updateDetailControls(listing = null) {
   const hasListing = Boolean(listing);
   elements.detailSave.hidden = !hasListing;
   elements.detailShare.hidden = !hasListing;
-  if (!listing) return;
+  if (!listing) {
+    delete elements.detailSave.dataset.id;
+    delete elements.detailShare.dataset.id;
+    return;
+  }
   const saved = state.saved.has(listing.id);
   elements.detailSave.dataset.id = listing.id;
   elements.detailShare.dataset.id = listing.id;
@@ -453,11 +457,18 @@ function updateDetailControls(listing = null) {
   elements.detailShare.setAttribute("aria-label", t("share"));
 }
 
+function renderListingDetail(listing) {
+  const localized = translatedListing(listing);
+  updateDetailControls(listing);
+  elements.detailContent.innerHTML = templates.detailTemplate(localized);
+  document.title = `${localized.title} | NearFree DFW`;
+  $("meta[name='description']").content = localized.overview || localized.summary;
+}
+
 function openDetails(id) {
   const listing = sourceListing(id);
   if (!listing) return;
-  updateDetailControls(listing);
-  elements.detailContent.innerHTML = templates.detailTemplate(translatedListing(listing));
+  renderListingDetail(listing);
   openDialog(elements.detailDialog);
   const url = new URL(window.location.href);
   if (url.searchParams.get("listing") !== id) {
@@ -469,6 +480,8 @@ function openDetails(id) {
 function openMethodology() {
   updateDetailControls();
   elements.detailContent.innerHTML = templates.methodologyTemplate(RESEARCH_NOTE);
+  document.title = `${t("methodologyTitle")} | NearFree DFW`;
+  $("meta[name='description']").content = t("methodology");
   openDialog(elements.detailDialog);
 }
 
@@ -496,6 +509,7 @@ function openDialog(dialog) {
 }
 
 function closeDialogs({ clearRoute = true } = {}) {
+  const closedDetail = Boolean(elements.detailDialog?.open);
   [elements.locationDialog, elements.detailDialog, elements.sortDialog].forEach(dialog => {
     if (dialog?.open) dialog.close();
     else dialog?.removeAttribute("open");
@@ -503,6 +517,7 @@ function closeDialogs({ clearRoute = true } = {}) {
   elements.modalBackdrop.hidden = true;
   document.body.classList.remove("modal-open");
   if (clearRoute) clearListingRoute();
+  if (closedDetail && clearRoute) applyStaticTranslations();
 }
 
 function toggleSave(id) {
@@ -685,8 +700,7 @@ function bindEvents() {
     const id = new URL(window.location.href).searchParams.get("listing");
     if (id && sourceListing(id)) {
       const listing = sourceListing(id);
-      updateDetailControls(listing);
-      elements.detailContent.innerHTML = templates.detailTemplate(translatedListing(listing));
+      renderListingDetail(listing);
       openDialog(elements.detailDialog);
     } else {
       closeDialogs({ clearRoute: false });
@@ -703,8 +717,7 @@ function init() {
   const initialListingId = new URL(window.location.href).searchParams.get("listing");
   if (initialListingId && sourceListing(initialListingId)) {
     const listing = sourceListing(initialListingId);
-    updateDetailControls(listing);
-    elements.detailContent.innerHTML = templates.detailTemplate(translatedListing(listing));
+    renderListingDetail(listing);
     openDialog(elements.detailDialog);
   } else if (initialListingId) {
     clearListingRoute();

@@ -21,6 +21,15 @@ export const LISTING_EN = {
     "reservation": "Free ticket required · reserve ahead or obtain on site",
     "actionLabel": "Check the official free date",
     "imageAlt": "An editorial image of a family making art in an open studio inside a contemporary museum",
+    "cardHook": "See exhibitions, join Open Studio, and take a collection tour—all free for the day.",
+    "overview": "DMA's September free Sunday includes exhibition admission, Open Studio from noon-4 PM, and a 2 PM Collection Highlights Tour at no cost.",
+    "description": [
+      "Current exhibitions are free to visit from 11 AM to 5 PM. Open Studio runs from noon to 4 PM, adding a hands-on activity to a gallery visit.",
+      "A Collection Highlights Tour begins at 2 PM. Visitors can choose from exhibitions, art making, and a guided tour during the same free-admission day."
+    ],
+    "practicalTips": [
+      "Reserve a free admission ticket online or obtain one on site."
+    ],
     "titleBase": "DMA FREE First Sundays: Access for All",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
@@ -49,6 +58,14 @@ export const LISTING_EN = {
     "reservation": "No advance admission ticket or registration listed · walk in",
     "actionLabel": "Check official festival updates",
     "imageAlt": "An editorial image of a family enjoying crafts and a live performance at an outdoor culture festival",
+    "cardHook": "Explore international food, performances, and crafts at a festival with free entry.",
+    "overview": "Carrollton Culture Fest brings international food, live performances, globally inspired craft vendors, and children's crafts to Trinity Mills Station Esplanade.",
+    "description": [
+      "Trinity Mills Station Esplanade becomes a cultural festival space from 3 to 9 PM. Visitors can watch live performances and browse globally inspired craft vendors and children's craft activities."
+    ],
+    "practicalTips": [
+      "No advance admission ticket or registration is listed; enter on site."
+    ],
     "titleBase": "Carrollton Culture Fest",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
@@ -76,6 +93,14 @@ export const LISTING_EN = {
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check official festival details",
     "imageAlt": "An editorial image of an artist and family viewing handmade work at a fall park art festival",
+    "cardHook": "Browse juried art and the children's ArtStop across two days with free festival entry.",
+    "overview": "The two-day fall festival at Cottonwood Park brings together juried artists, a food court, and the children's ArtStop area.",
+    "description": [
+      "The festival runs 10 AM-7 PM Saturday and 10 AM-5 PM Sunday. Cottonwood Park brings juried art, a food court, and the children's activity area together in one visit."
+    ],
+    "practicalTips": [
+      "Festival admission does not require an advance reservation."
+    ],
     "titleBase": "Cottonwood Art Festival",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
@@ -104,6 +129,14 @@ export const LISTING_EN = {
     "reservation": "No advance admission reservation listed · walk in or pay at the gate",
     "actionLabel": "Check official entry terms",
     "imageAlt": "An editorial image of children enjoying crafts and trick-or-treat activities at a fall lakeside park",
+    "cardHook": "Enjoy hay rides, games, trick-or-treat booths, and costume contests at no activity charge.",
+    "overview": "Stewart Creek Park hosts hay rides, games, trick-or-treat booths, crafts, and age-group costume contests, with event activities free to join.",
+    "description": [
+      "From 3 to 7 PM, Stewart Creek Park hosts hay rides, games, crafts, and trick-or-treat booths. Costume contests are divided by age, from ages 0-3 through 13 and older."
+    ],
+    "practicalTips": [
+      "Annual park pass holders receive free vehicle entry."
+    ],
     "titleBase": "Family Fright Fest",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
@@ -131,6 +164,14 @@ export const LISTING_EN = {
     "reservation": "No advance admission reservation listed · walk in",
     "actionLabel": "Check the official festival schedule",
     "imageAlt": "An editorial image of a family enjoying live music and vendors at an evening downtown street festival",
+    "cardHook": "Enjoy three days of live music and a kid zone with free admission and event parking.",
+    "overview": "Grand Prairie's three-day downtown festival brings live music, regional bands, a kid zone, and vendors to the City Hall campus.",
+    "description": [
+      "The downtown festival runs from Friday evening through Sunday evening around the Grand Prairie City Hall campus. Regional bands, live music, a kid zone, and vendors fill the schedule across all three days."
+    ],
+    "practicalTips": [
+      "Event parking is listed as free."
+    ],
     "titleBase": "Main Street Fest",
     "sourceNotes": [
       "Confirmed core date, location, price and access terms on the official page",
@@ -159,6 +200,14 @@ export const LISTING_EN = {
     "reservation": "No event registration required",
     "actionLabel": "Check official discount terms",
     "imageAlt": "An editorial image of a family exploring activity stations inside a modern recreation center",
+    "cardHook": "Explore the recreation center for free and save 30% on Fall class registration.",
+    "overview": "Allen's free Rec Center Leap Day evening lets visitors explore the facility and receive 30% off Fall class sign-ups in arts, music, preschool programs, archery, dance, martial arts, fitness, and more.",
+    "description": [
+      "From 6 to 8 PM, visitors can explore the center and learn about arts, music, preschool, archery, dance, martial arts, and fitness classes. Event attendees receive 30% off Fall class sign-ups."
+    ],
+    "practicalTips": [
+      "The event does not require advance registration."
+    ],
     "titleBase": "Pass & Play Expo",
     "titleBenefit": "30% Off Fall Classes",
     "sourceNotes": [
@@ -175,6 +224,19 @@ export const LISTING_EN = {
     "finePrint": "Limit one coupon per customer and one redemption every 180 days; businesses may change or decline copied coupons, so confirm before visiting.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of two visitors skating together at an indoor roller rink",
+    "cardHook": "Choose between a BOGO skate session and 10% off an in-store purchase.",
+    "overview": "The official visitor coupon offers either a BOGO skate session or 10% off an in-store purchase.",
+    "description": [
+      "The official visitor coupon is valid through December 31, 2026. Use it for a buy-one-get-one skate session or choose 10% off an in-store purchase instead."
+    ],
+    "highlights": [
+      "Buy one skate session and receive the second free",
+      "Choose 10% off an in-store purchase instead",
+      "One coupon per customer every 180 days"
+    ],
+    "practicalTips": [
+      "Confirm that the location is still accepting the coupon before visiting."
+    ],
     "titleBase": "Action Park Grand Prairie",
     "titleBenefit": "BOGO skate session",
     "eligibility": {
@@ -199,6 +261,19 @@ export const LISTING_EN = {
     "finePrint": "Tour groups larger than 10 and some special events or exhibitions have separate terms.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of visitors exploring a museum gallery about African American history and culture",
+    "cardHook": "Explore the African American Museum in Fair Park with free general admission.",
+    "overview": "Individual visitors can explore this Fair Park museum with free general admission.",
+    "description": [
+      "General visiting hours are Tuesday-Friday from 11 AM to 5 PM and Saturday from 10 AM to 5 PM. Individual visitors enter free, and general admission does not require a reservation."
+    ],
+    "highlights": [
+      "Free general admission for individual visitors",
+      "Open Tuesday-Friday 11 AM-5 PM and Saturday 10 AM-5 PM",
+      "No reservation required for general admission"
+    ],
+    "practicalTips": [
+      "General admission is available without a reservation."
+    ],
     "titleBase": "African American Museum Dallas",
     "titleBenefit": "Free general admission",
     "eligibility": {
@@ -224,6 +299,17 @@ export const LISTING_EN = {
     "finePrint": "A facility does not participate when the first falls on its closure day or a city holiday; normal facility rules still apply.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a family entering a modern community recreation center",
+    "cardHook": "Visit participating Allen recreation centers with no entry fee on the first of each month.",
+    "overview": "Visit participating Allen recreation centers for free on the first day of each month.",
+    "description": [
+      "Participating facilities offer free entry on the first day of each month through December 1, 2026. A facility does not participate when that date falls on a closure or city holiday, and normal age and access rules still apply."
+    ],
+    "highlights": [
+      "Free entry at participating facilities on the first of each month",
+      "Benefit continues through December 1, 2026",
+      "Normal facility age and access rules remain in effect"
+    ],
+    "practicalTips": [],
     "titleBase": "Allen Leap Days",
     "titleBenefit": "Free entry on the first of each month",
     "eligibility": {
@@ -248,6 +334,19 @@ export const LISTING_EN = {
     "finePrint": "Rates, exclusions, first-visit terms, and stacking rules vary by business; check the official participant list.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a conference attendee showing a badge at a local business counter",
+    "cardHook": "Use a conference badge for discounts, BOGO items, and selected freebies around Allen.",
+    "overview": "Show a conference badge for participant-specific savings across Allen, including discounts, BOGO items, and selected freebies.",
+    "description": [
+      "Participating restaurants and stores offer different benefits, including 10-20% discounts, BOGO items, dollar discounts, and selected freebies. Show a valid conference badge and follow each business's exclusions."
+    ],
+    "highlights": [
+      "A valid conference badge must be shown",
+      "Offers include 10-20% discounts, BOGO items, and freebies",
+      "Exclusions and combination limits vary by business"
+    ],
+    "practicalTips": [
+      "Check the participating-business list for the exact terms before visiting."
+    ],
     "titleBase": "Allen Show Your Badge Program",
     "titleBenefit": "Discounts and selected freebies",
     "eligibility": {
@@ -272,6 +371,19 @@ export const LISTING_EN = {
     "finePrint": "No membership is required; walk-ins are welcome as space allows, but advance phone registration is encouraged.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of guests enjoying live music on an outdoor restaurant patio at dusk",
+    "cardHook": "Hear local musicians free on Friday evenings with no club membership required.",
+    "overview": "Hear local musicians at Home Plate on Friday evenings with no cover charge.",
+    "description": [
+      "Remaining performances run Fridays from August 14 through September 11, from 6 to 8 PM at Home Plate. The public can attend without golf-club membership, and there is no cover charge."
+    ],
+    "highlights": [
+      "Remaining Friday performances run 6-8 PM",
+      "Free with no cover charge",
+      "Open to the public with no golf-club membership required"
+    ],
+    "practicalTips": [
+      "Walk-ins are accepted as space allows, but advance registration by phone is encouraged."
+    ],
     "titleBase": "Arlington Summer Music Series",
     "titleBenefit": "Free Friday live music",
     "eligibility": {
@@ -297,6 +409,17 @@ export const LISTING_EN = {
     "finePrint": "Bring proof of current address if it differs from the ID; nonresident cards cost $40 per year.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a resident receiving a library card after identity and address verification",
+    "cardHook": "Carrollton and Farmers Branch residents can get a free card after ID and address checks.",
+    "overview": "Carrollton and Farmers Branch residents can receive a free library card after identity and address verification.",
+    "description": [
+      "Apply with a current government photo ID that confirms identity and address. Additional address documentation is needed when the ID shows an old address, and minors apply with a parent or legal guardian."
+    ],
+    "highlights": [
+      "Free for Carrollton and Farmers Branch residents",
+      "Government photo ID and address proof when needed",
+      "Minors apply with a parent or legal guardian"
+    ],
+    "practicalTips": [],
     "titleBase": "Carrollton Public Library Card",
     "titleBenefit": "Free for eligible residents",
     "eligibility": {
@@ -323,6 +446,19 @@ export const LISTING_EN = {
     "finePrint": "WIC participants need valid ID, and payment must be made with a non-EBT method.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a family presenting an eligibility card at a botanical-garden entrance",
+    "cardHook": "SNAP EBT and WIC households can visit the Dallas Arboretum for $3 each, up to six people.",
+    "overview": "Eligible SNAP EBT or WIC households can receive $3 daytime admission for up to six people.",
+    "description": [
+      "Eligible households can buy daytime general admission for up to six people at $3 per person. Present a SNAP EBT card or confirm WIC eligibility with valid ID, then pay on site using a non-EBT method."
+    ],
+    "highlights": [
+      "$3 daytime admission for up to six people",
+      "SNAP EBT card or WIC eligibility required",
+      "No advance registration; pay on site with a non-EBT method"
+    ],
+    "practicalTips": [
+      "Purchase the benefit admission on site without advance registration."
+    ],
     "titleBase": "Dallas Arboretum Museums for All",
     "titleBenefit": "$3 per person",
     "eligibility": {
@@ -350,6 +486,17 @@ export const LISTING_EN = {
     "finePrint": "The eligibility badge is not a fare pass; riders must still buy the applicable reduced fare or pass.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a senior and student preparing to board transit with reduced-fare eligibility",
+    "cardHook": "Seniors, riders with disabilities, Medicare users, and students ages 6-18 can apply for reduced DCTA fares.",
+    "overview": "Eligible seniors, riders with disabilities, Medicare recipients, and students age 6-18 can apply for reduced DCTA fares.",
+    "description": [
+      "Eligible riders first obtain a Reduced Fare Eligible badge. The badge is not a ticket, so riders still buy the reduced fare or pass for the service they use; prices vary by service."
+    ],
+    "highlights": [
+      "For riders 65+, riders with disabilities, Medicare users, and students 6-18",
+      "Reduced Fare Eligible badge application required",
+      "Purchase the service's reduced fare or pass separately"
+    ],
+    "practicalTips": [],
     "titleBase": "DCTA Reduced Fares",
     "titleBenefit": "Discounts for seniors, disability, Medicare and students",
     "eligibility": {
@@ -377,6 +524,19 @@ export const LISTING_EN = {
     "finePrint": "Bring applicable eligibility documentation and photo ID for the visit.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a family exploring a green botanical-garden path together",
+    "cardHook": "SNAP, WIC, and Medicaid households receive free admission for two adults and children under 15.",
+    "overview": "Eligible SNAP, WIC, or Medicaid households receive free general admission for two adults and household children under 15.",
+    "description": [
+      "Access to Nature provides free general admission for two adults and household children under age 15. Present SNAP, WIC, or Medicaid eligibility documentation and photo ID on site."
+    ],
+    "highlights": [
+      "Free for two adults and household children under 15",
+      "Available to SNAP, WIC, and Medicaid households",
+      "Eligibility documentation and photo ID checked on site"
+    ],
+    "practicalTips": [
+      "Bring eligibility documentation and a photo ID to the garden."
+    ],
     "titleBase": "Fort Worth Botanic Garden Access to Nature",
     "titleBenefit": "Free household general admission",
     "eligibility": {
@@ -404,6 +564,17 @@ export const LISTING_EN = {
     "finePrint": "Admission is free; food and beverages are sold separately.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of visitors enjoying traditional games and live music at an outdoor Oktoberfest",
+    "cardHook": "Enter free for a full day of live music, traditional games, and German food culture.",
+    "overview": "Spend the day at The Star with live music, traditional games, and German food culture.",
+    "description": [
+      "The festival runs Saturday, October 3, from 11 AM to 9 PM at The Star. Live music, traditional games, and German food culture fill the day, with no festival admission charge."
+    ],
+    "highlights": [
+      "October 3 from 11 AM-9 PM",
+      "Live music and traditional games",
+      "Free festival admission; food and drinks cost extra"
+    ],
+    "practicalTips": [],
     "titleBase": "7th Annual Frisco Oktoberfest",
     "eligibility": {
       "mode": "general",
@@ -427,6 +598,17 @@ export const LISTING_EN = {
     "finePrint": "Wine experiences, carnival games, food, and some add-on activities may cost extra.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of visitors exploring booths and entertainment at a grape-themed street festival",
+    "cardHook": "Enter GrapeFest free all day Thursday, from 11 AM to 10 PM.",
+    "overview": "GrapeFest offers complimentary admission all day Thursday in the Historic Main Street festival district.",
+    "description": [
+      "Historic Main Street's festival district offers complimentary admission all day Thursday, September 17. The benefit covers Thursday festival entry, while wine experiences, carnival games, and other add-ons may cost extra."
+    ],
+    "highlights": [
+      "Complimentary admission all day Thursday, September 17",
+      "Open 11 AM-10 PM",
+      "Historic Main Street festival district"
+    ],
+    "practicalTips": [],
     "titleBase": "40th Annual GrapeFest Thursday",
     "titleBenefit": "Complimentary admission all day",
     "eligibility": {
@@ -451,6 +633,19 @@ export const LISTING_EN = {
     "finePrint": "The offer is not available online; present the EBT card at the front desk.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a visitor presenting an EBT card at a natural-science museum front desk",
+    "cardHook": "Present an EBT card on site for $5 admission per person, up to four people.",
+    "overview": "Present an EBT card at the front desk for $5 admission per person for up to four people.",
+    "description": [
+      "During regular admission hours, show a valid EBT card at the front desk for $5 admission for the cardholder and companions, up to four people total. The benefit is not available online."
+    ],
+    "highlights": [
+      "$5 per person for up to four people",
+      "Present an EBT card at the front desk",
+      "Not available for online purchases"
+    ],
+    "practicalTips": [
+      "Purchase the benefit admission at the front desk."
+    ],
     "titleBase": "Heard Museum Museums for All",
     "titleBenefit": "$5 each for up to 4",
     "eligibility": {
@@ -475,6 +670,17 @@ export const LISTING_EN = {
     "finePrint": "Outdoor shows begin at 9 PM; check the official page for same-day changes.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a crowd enjoying a tribute-band concert in an outdoor plaza on a summer night",
+    "cardHook": "Hear tribute bands free at 9 PM on Saturday nights in the outdoor plaza.",
+    "overview": "Enjoy free tribute-band performances on Saturday nights at the outdoor Toyota Music Factory Plaza through August.",
+    "description": [
+      "Performances begin at 9 PM each Saturday through August 29 at the outdoor Toyota Music Factory Plaza. The tribute-band concerts have no admission charge."
+    ],
+    "highlights": [
+      "Runs Saturdays through August 29",
+      "Each performance begins at 9 PM",
+      "Free admission at the outdoor plaza"
+    ],
+    "practicalTips": [],
     "titleBase": "A Tribute to Summer Concert Series",
     "titleBenefit": "Free Saturday-night concerts",
     "eligibility": {
@@ -499,6 +705,19 @@ export const LISTING_EN = {
     "finePrint": "One-time dine-in use at The Colony location; limit one coupon per visit and table, and it cannot be combined with other offers.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a customer presenting a printed coupon and receiving boba tea with toppings",
+    "cardHook": "Buy a boba tea and use the printed coupon and code for up to two free toppings.",
+    "overview": "Present the printed coupon and code THECOLONY to receive up to two free toppings with a boba tea purchase.",
+    "description": [
+      "Buy a boba tea at The Colony location and present the printed coupon with code THECOLONY to receive up to two free toppings. The offer is for one dine-in use, with one coupon per visit and table."
+    ],
+    "highlights": [
+      "Up to two free toppings with a boba tea purchase",
+      "Printed coupon and code THECOLONY required",
+      "Dine-in at The Colony; one coupon per visit and table"
+    ],
+    "practicalTips": [
+      "Print the coupon and present it with code THECOLONY."
+    ],
     "titleBase": "Juice Box The Colony",
     "titleBenefit": "Up to 2 free boba toppings",
     "eligibility": {
@@ -523,6 +742,17 @@ export const LISTING_EN = {
     "finePrint": "Saturday and Sunday hours differ.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of visitors exploring historic buildings in a small downtown heritage park",
+    "cardHook": "Explore historic buildings and Arlington heritage downtown with no admission charge.",
+    "overview": "Explore historic buildings and local heritage in Downtown Arlington with free admission.",
+    "description": [
+      "The park is open Saturday from 10 AM to 2 PM and Sunday from 1 to 4 PM. Visitors can explore its historic buildings and local heritage for free, and donations are accepted."
+    ],
+    "highlights": [
+      "Free admission to historic buildings and local heritage",
+      "Saturday 10 AM-2 PM",
+      "Sunday 1-4 PM; donations accepted"
+    ],
+    "practicalTips": [],
     "titleBase": "Knapp Heritage Park",
     "titleBenefit": "Free admission",
     "eligibility": {
@@ -547,6 +777,19 @@ export const LISTING_EN = {
     "finePrint": "On-site grass parking is $10; free parking and shuttle service run from Lewisville City Hall. Pets are not allowed on shuttles.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of spectators enjoying horsemanship and cultural performances in an outdoor arena",
+    "cardHook": "Enjoy horsemanship, live music, wrestling, and cultural performances with free admission.",
+    "overview": "Enjoy free admission to horsemanship, live music, wrestling, and cultural performances inspired by a traditional charreada.",
+    "description": [
+      "The event runs Sunday, September 6, from 4 to 10:30 PM at Bill Weaver Arena. Horsemanship inspired by a traditional charreada is joined by live music, wrestling, and cultural performances."
+    ],
+    "highlights": [
+      "September 6 from 4-10:30 PM",
+      "Horsemanship, live music, wrestling, and cultural performances",
+      "Free event admission"
+    ],
+    "practicalTips": [
+      "Free parking and a shuttle are available from Lewisville City Hall."
+    ],
     "titleBase": "Fiesta Charra 2026",
     "eligibility": {
       "mode": "general",
@@ -570,6 +813,17 @@ export const LISTING_EN = {
     "finePrint": "Texas residents outside Lewisville must apply in person, and minors have age-specific guardian requirements.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a Texas resident completing an application and receiving a library card",
+    "cardHook": "Texas residents can receive a free Lewisville library card after ID and address verification.",
+    "overview": "Texas residents can receive a free Lewisville Public Library card after identity and current-address verification.",
+    "description": [
+      "Apply with a government photo ID and proof of current address when needed. Lewisville adults may apply online, while other Texas residents must visit the library in person."
+    ],
+    "highlights": [
+      "Free library card for Texas residents",
+      "Government photo ID and address proof when needed",
+      "Texas residents outside Lewisville apply in person"
+    ],
+    "practicalTips": [],
     "titleBase": "Lewisville Public Library Card",
     "titleBenefit": "Free for Texas residents",
     "eligibility": {
@@ -596,6 +850,17 @@ export const LISTING_EN = {
     "finePrint": "Check the official city calendar for weather-related changes.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of families trick-or-treating along an autumn park trail with children's activities",
+    "cardHook": "Follow a 1.2-mile park trail for free trick-or-treating and children's activities.",
+    "overview": "Families can follow the 1.2-mile Towne Lake trail for trick-or-treating and children's activities.",
+    "description": [
+      "The event runs Saturday, October 17, from 3 to 6 PM at Towne Lake Park. Families move along a 1.2-mile trail for trick-or-treating and children's activities."
+    ],
+    "highlights": [
+      "October 17 from 3-6 PM",
+      "A 1.2-mile trail through Towne Lake Park",
+      "Free trick-or-treating and children's activities"
+    ],
+    "practicalTips": [],
     "titleBase": "McKinney Trick or Treat Trail",
     "eligibility": {
       "mode": "general",
@@ -619,6 +884,17 @@ export const LISTING_EN = {
     "finePrint": "Free admission applies on Fridays; check the official page for same-day operating updates.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of visitors viewing contemporary art in a spacious museum gallery",
+    "cardHook": "See permanent and special exhibitions free on Fridays from 10 AM to 8 PM.",
+    "overview": "Friday admission is free and includes the museum's permanent and special exhibitions.",
+    "description": [
+      "Admission to the Modern Art Museum of Fort Worth is free every Friday. The Friday benefit runs from 10 AM to 8 PM and includes permanent and special exhibitions."
+    ],
+    "highlights": [
+      "Free admission every Friday",
+      "Friday hours are 10 AM-8 PM",
+      "Permanent and special exhibitions included"
+    ],
+    "practicalTips": [],
     "titleBase": "Modern Art Museum of Fort Worth",
     "titleBenefit": "Free admission Fridays",
     "eligibility": {
@@ -643,6 +919,19 @@ export const LISTING_EN = {
     "finePrint": "Offer terms vary by participating business, and pass registration is required.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of a visitor checking in with a mobile pass at a Plano restaurant",
+    "cardHook": "Use a free mobile pass for participating Plano perks, discounts, and check-in rewards.",
+    "overview": "Use the free mobile pass to discover participating Plano restaurants and attractions, with participant-specific perks and check-in rewards.",
+    "description": [
+      "From March 2 through September 30, 2026, the pass shows participating-business discounts, perks, and check-in rewards. Register free and receive it by text or email; no separate app is required."
+    ],
+    "highlights": [
+      "Free mobile pass through September 30, 2026",
+      "Participant-specific perks, discounts, and check-in rewards",
+      "Delivered by text or email with no app required"
+    ],
+    "practicalTips": [
+      "Receive the pass by text or email and use it without installing an app."
+    ],
     "titleBase": "2026 Plano Dine & Discover Pass",
     "titleBenefit": "Free mobile pass",
     "eligibility": {
@@ -668,6 +957,19 @@ export const LISTING_EN = {
     "finePrint": "Shoe rental is not included; classic lanes are subject to availability, and the Rose Room is excluded.",
     "actionLabel": "Check official details",
     "imageAlt": "An editorial image of children enjoying games together on classic indoor bowling lanes",
+    "cardHook": "Registered children 15 and under receive two free classic-lane games each day.",
+    "overview": "Registered children 15 and under receive two free classic-lane games each day during published redemption hours.",
+    "description": [
+      "From March 23 through September 11, each registered child receives two free games per day during published redemption hours. The offer is for classic lanes, is subject to availability, and does not include shoe rental."
+    ],
+    "highlights": [
+      "Two free games daily for registered children 15 and under",
+      "Published redemption hours from March 23-September 11",
+      "Classic lanes only; shoe rental is separate"
+    ],
+    "practicalTips": [
+      "Complete Kids Bowl Free registration before redeeming the games."
+    ],
     "titleBase": "Strikz Kids Bowl Free",
     "titleBenefit": "2 free games daily for kids",
     "eligibility": {

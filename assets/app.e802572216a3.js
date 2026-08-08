@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.32ba288c5526.js";
+import { UI, localizeListing } from "./locales.d15012d271ef.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -12,7 +12,7 @@ import {
   weekendWindow
 } from "./discovery.121bc0c1385c.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
-import { createListingTemplates } from "./listing-templates.747d2edec748.js";
+import { createListingTemplates } from "./listing-templates.1e79254026cd.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -22,6 +22,7 @@ const storedLocationValue = storage.readJson("nearfree-location");
 const storedSaved = storage.readJson("nearfree-saved");
 const storedLocale = storage.read("nearfree-locale");
 const storedScope = storage.read("nearfree-scope");
+const storedRadarValue = storage.readJson("nearfree-radar-preview");
 const storedLocationName = typeof storedLocationValue === "string"
   ? storedLocationValue
   : storedLocationValue?.name;
@@ -29,6 +30,16 @@ const storedLocation = CITY_PRESETS.find(city => city.name === storedLocationNam
 const hasValidStoredScope = storedScope === "all"
   || (Boolean(storedLocation) && ["city", "nearby"].includes(storedScope));
 const initialScope = hasValidStoredScope ? storedScope : storedLocation ? "nearby" : "all";
+const radarCityName = CITY_PRESETS.some(city => city.name === storedRadarValue?.city)
+  ? storedRadarValue.city
+  : storedLocation?.name || CITY_PRESETS[0].name;
+const radarRadius = [10, 20, 35].includes(Number(storedRadarValue?.radius))
+  ? Number(storedRadarValue.radius)
+  : 20;
+const radarInterestKeys = new Set(["family", "culture", "food", "active"]);
+const storedRadarInterests = Array.isArray(storedRadarValue?.interests)
+  ? storedRadarValue.interests.filter(interest => radarInterestKeys.has(interest))
+  : [];
 
 // Older versions stored precise coordinates. Normalize them to a city name on load.
 if (storedLocationValue !== null && storedLocation) {
@@ -43,7 +54,13 @@ const state = {
   search: "",
   saved: new Set(Array.isArray(storedSaved) ? storedSaved : []),
   savedOnly: false,
-  locale: ["en", "ko"].includes(storedLocale) ? storedLocale : "en"
+  locale: ["en", "ko"].includes(storedLocale) ? storedLocale : "en",
+  radar: {
+    city: radarCityName,
+    radius: radarRadius,
+    interests: new Set(storedRadarInterests),
+    saved: Boolean(storedRadarValue)
+  }
 };
 
 const elements = {
@@ -74,11 +91,31 @@ const elements = {
   sortLabel: $("#sortLabel"),
   toast: $("#toast"),
   languageSelect: $("#languageSelect"),
-  updatedLabel: $("#updatedLabel")
+  updatedLabel: $("#updatedLabel"),
+  radarAlerts: $("#radarAlerts"),
+  radarLastChecked: $("#radarLastChecked"),
+  radarAvailableCount: $("#radarAvailableCount"),
+  radarNewCount: $("#radarNewCount"),
+  radarEndingCount: $("#radarEndingCount"),
+  radarCityCount: $("#radarCityCount"),
+  radarCitySelect: $("#radarCitySelect"),
+  radarRadiusSelect: $("#radarRadiusSelect"),
+  radarMatchCount: $("#radarMatchCount"),
+  radarFreeCount: $("#radarFreeCount"),
+  radarEventCount: $("#radarEventCount"),
+  radarPreviewArea: $("#radarPreviewArea"),
+  radarMatches: $("#radarMatches"),
+  radarPreviewStatus: $("#radarPreviewStatus")
 };
 
 let toastTimer;
 const discoveryIndexes = new Map();
+const RADAR_INTEREST_CATEGORIES = Object.freeze({
+  family: ["family"],
+  culture: ["arts", "culture", "concert", "festival", "library"],
+  food: ["food", "local-deals"],
+  active: ["fitness", "recreation", "transit"]
+});
 
 function escapeHtml(value = "") {
   return String(value)
@@ -129,8 +166,141 @@ function applyStaticTranslations() {
   $$('[data-i18n-placeholder]').forEach(node => { node.setAttribute("placeholder", t(node.dataset.i18nPlaceholder)); });
   $$('[data-i18n-alt]').forEach(node => { node.setAttribute("alt", t(node.dataset.i18nAlt)); });
   elements.updatedLabel.textContent = t("updated", { date: formatVerifiedDate(RESEARCH_NOTE.verifiedAt) });
+  elements.radarLastChecked.textContent = t("updated", { date: formatVerifiedDate(RESEARCH_NOTE.verifiedAt) });
   elements.languageSelect.value = state.locale;
   elements.sortLabel.textContent = t({ distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[state.sort]);
+}
+
+function isCurrentListing(listing, now = new Date()) {
+  return !listing.end || new Date(listing.end) >= now;
+}
+
+function isRecentlyChecked(listing, now = new Date()) {
+  const checked = new Date(String(listing.verifiedAt).includes("T") ? listing.verifiedAt : `${listing.verifiedAt}T00:00:00Z`);
+  return Number.isFinite(checked.getTime()) && now - checked <= 7 * 86_400_000;
+}
+
+function endsWithin(listing, days, now = new Date()) {
+  if (!listing.end) return false;
+  const remaining = new Date(listing.end) - now;
+  return remaining >= 0 && remaining <= days * 86_400_000;
+}
+
+function radarSignal(listing, now = new Date()) {
+  if (endsWithin(listing, 30, now)) return { key: "radarEndingSignal", className: "signal-ending" };
+  if (listing.kind === "event") return { key: "radarUpcomingSignal", className: "signal-upcoming" };
+  if (isRecentlyChecked(listing, now)) return { key: "radarNewSignal", className: "signal-new" };
+  return { key: "radarAvailableSignal", className: "signal-available" };
+}
+
+function renderRadarMetrics() {
+  const now = new Date();
+  const current = LISTINGS.filter(listing => isCurrentListing(listing, now));
+  elements.radarAvailableCount.textContent = current.length;
+  elements.radarNewCount.textContent = current.filter(listing => isRecentlyChecked(listing, now)).length;
+  elements.radarEndingCount.textContent = current.filter(listing => endsWithin(listing, 30, now)).length;
+  elements.radarCityCount.textContent = new Set(current.map(listing => listing.city)).size;
+}
+
+function renderRadarAlerts() {
+  const now = new Date();
+  const classRank = { "signal-ending": 0, "signal-upcoming": 1, "signal-new": 2, "signal-available": 3 };
+  const candidates = LISTINGS
+    .filter(listing => isCurrentListing(listing, now))
+    .map(listing => ({ listing: translatedListing(listing), signal: radarSignal(listing, now) }))
+    .sort((a, b) => classRank[a.signal.className] - classRank[b.signal.className]
+      || new Date(a.listing.start) - new Date(b.listing.start));
+  const alerts = [];
+  for (const className of Object.keys(classRank)) {
+    const candidate = candidates.find(item => item.signal.className === className && !alerts.includes(item));
+    if (candidate) alerts.push(candidate);
+    if (alerts.length === 3) break;
+  }
+  for (const candidate of candidates) {
+    if (!alerts.includes(candidate)) alerts.push(candidate);
+    if (alerts.length === 3) break;
+  }
+
+  elements.radarAlerts.innerHTML = alerts.map(({ listing, signal }, index) => `
+    <button class="radar-alert-card ${index === 0 ? "radar-alert-featured" : "radar-alert-compact"} ${signal.className}" data-radar-listing="${escapeHtml(listing.id)}" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
+      <span class="radar-alert-media">
+        ${listing.image
+          ? `<img src="${escapeHtml(listing.image)}" alt="" loading="${index === 0 ? "eager" : "lazy"}" />`
+          : `<span class="radar-alert-placeholder" aria-hidden="true">NearFree</span>`}
+      </span>
+      <span class="radar-alert-overlay" aria-hidden="true"></span>
+      <span class="radar-alert-content">
+        <span class="radar-alert-signal">${escapeHtml(t(signal.key))}</span>
+        <strong>${escapeHtml(listing.title)}</strong>
+        <small>${escapeHtml(displayCost(listing))} · ${escapeHtml(listing.city)} · ${escapeHtml(listing.dateLabel)}</small>
+      </span>
+      <span class="radar-alert-arrow" aria-hidden="true">↗</span>
+    </button>`).join("");
+}
+
+function renderRadarCityOptions() {
+  elements.radarCitySelect.innerHTML = CITY_PRESETS.map(city => `
+    <option value="${escapeHtml(city.name)}" ${city.name === state.radar.city ? "selected" : ""}>${escapeHtml(city.name)}</option>`).join("");
+  elements.radarRadiusSelect.value = String(state.radar.radius);
+}
+
+function currentRadarMatches() {
+  const now = new Date();
+  const city = CITY_PRESETS.find(item => item.name === state.radar.city) || CITY_PRESETS[0];
+  const categories = new Set([...state.radar.interests].flatMap(interest => RADAR_INTEREST_CATEGORIES[interest] || []));
+  return LISTINGS
+    .filter(listing => isCurrentListing(listing, now))
+    .map(listing => ({ listing: translatedListing(listing), distance: distanceMiles(city, listing) }))
+    .filter(({ listing, distance }) => distance <= state.radar.radius
+      && (categories.size === 0 || categories.has(listing.category)))
+    .sort((a, b) => a.distance - b.distance || Number(a.listing.kind !== "event") - Number(b.listing.kind !== "event") || new Date(a.listing.start) - new Date(b.listing.start));
+}
+
+function renderRadarPreview() {
+  const matches = currentRadarMatches();
+  const now = new Date();
+  elements.radarMatchCount.textContent = matches.length;
+  elements.radarFreeCount.textContent = matches.filter(({ listing }) => listing.costType === "free").length;
+  elements.radarEventCount.textContent = matches.filter(({ listing }) => listing.kind === "event").length;
+  elements.radarPreviewArea.textContent = `${state.radar.city} · ${formatDistance(state.radar.radius)}`;
+  elements.radarPreviewStatus.textContent = t(state.radar.saved ? "previewSaved" : "previewNotSubscribed");
+  $$("[data-radar-interest]").forEach(button => {
+    const active = state.radar.interests.has(button.dataset.radarInterest);
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  elements.radarMatches.innerHTML = matches.length ? matches.slice(0, 3).map(({ listing, distance }) => {
+    const signal = radarSignal(listing, now);
+    return `
+      <button class="radar-match-item" data-radar-listing="${escapeHtml(listing.id)}" type="button">
+        <span class="radar-match-signal ${signal.className}">${escapeHtml(t(signal.key))}</span>
+        <strong>${escapeHtml(listing.title)}</strong>
+        <small>${escapeHtml(displayCost(listing))} · ${escapeHtml(formatDistance(distance))} · ${escapeHtml(listing.dateLabel)}</small>
+        <span aria-hidden="true">→</span>
+      </button>`;
+  }).join("") : `<p class="radar-empty-match">${escapeHtml(t("radarEmptyMatches"))}</p>`;
+}
+
+function renderRadarExperience() {
+  renderRadarMetrics();
+  renderRadarAlerts();
+  renderRadarPreview();
+}
+
+function scrollToRadarPreview() {
+  $("#radarPreview").scrollIntoView({ behavior: "smooth", block: "start" });
+  requestAnimationFrame(() => elements.radarCitySelect.focus({ preventScroll: true }));
+}
+
+function saveRadarPreview() {
+  storage.writeJson("nearfree-radar-preview", {
+    city: state.radar.city,
+    radius: state.radar.radius,
+    interests: [...state.radar.interests]
+  });
+  state.radar.saved = true;
+  elements.radarPreviewStatus.textContent = t("previewSaved");
+  showToast(t("previewSaved"));
 }
 
 function formatDistance(miles) {
@@ -364,9 +534,13 @@ function selectCity(name) {
   if (!city) return;
   state.location = city;
   state.scope = "city";
+  state.radar.city = city.name;
+  state.radar.saved = false;
   persistArea();
   updateLocationUI();
   renderFeed();
+  renderRadarCityOptions();
+  renderRadarPreview();
   closeDialogs();
   showToast(t("citySelected", { city: city.label || city.name }));
 }
@@ -392,10 +566,14 @@ function useCurrentLocation() {
     state.location = { name: nearest.name, isCurrent: true, ...exact };
     state.scope = "nearby";
     state.sort = "distance";
+    state.radar.city = nearest.name;
+    state.radar.saved = false;
     persistArea();
     applyStaticTranslations();
     updateLocationUI();
     renderFeed();
+    renderRadarCityOptions();
+    renderRadarPreview();
     button.disabled = false;
     elements.locationStatus.textContent = t("located");
     setTimeout(closeDialogs, 600);
@@ -585,6 +763,8 @@ function setLocale(locale) {
   renderCityGrid();
   updateLocationUI();
   renderFeed();
+  renderRadarCityOptions();
+  renderRadarExperience();
 }
 
 function bindEvents() {
@@ -596,6 +776,33 @@ function bindEvents() {
   $("#detectLocation").addEventListener("click", useCurrentLocation);
 
   $("#mobileExplore").addEventListener("click", focusSearch);
+  [$("#topRadarCta"), $("#heroRadarCta"), $("#pricingRadarCta"), $("#mobileRadar")]
+    .forEach(button => button.addEventListener("click", scrollToRadarPreview));
+  elements.radarCitySelect.addEventListener("change", event => {
+    state.radar.city = event.target.value;
+    state.radar.saved = false;
+    renderRadarPreview();
+  });
+  elements.radarRadiusSelect.addEventListener("change", event => {
+    state.radar.radius = Number(event.target.value);
+    state.radar.saved = false;
+    renderRadarPreview();
+  });
+  $("#radarPreviewForm").addEventListener("submit", event => event.preventDefault());
+  $(".radar-interest-list").addEventListener("click", event => {
+    const button = event.target.closest("[data-radar-interest]");
+    if (!button) return;
+    const interest = button.dataset.radarInterest;
+    if (state.radar.interests.has(interest)) state.radar.interests.delete(interest);
+    else state.radar.interests.add(interest);
+    state.radar.saved = false;
+    renderRadarPreview();
+  });
+  $("#radarPreviewSave").addEventListener("click", saveRadarPreview);
+  [elements.radarAlerts, elements.radarMatches].forEach(container => container.addEventListener("click", event => {
+    const target = event.target.closest("[data-radar-listing]");
+    if (target) openDetails(target.dataset.radarListing);
+  }));
   elements.searchInput.addEventListener("input", event => {
     state.search = event.target.value.trim();
     elements.searchClear.hidden = !state.search;
@@ -688,7 +895,6 @@ function bindEvents() {
 
   $("#methodButton").addEventListener("click", openMethodology);
   $("#railMethodButton").addEventListener("click", openMethodology);
-  $("#mobileInfo").addEventListener("click", openMethodology);
   $("#clearAllFilters").addEventListener("click", resetFilters);
   $("#emptyReset").addEventListener("click", resetFilters);
   elements.modalBackdrop.addEventListener("click", closeDialogs);
@@ -711,9 +917,11 @@ function bindEvents() {
 function init() {
   applyStaticTranslations();
   renderCityGrid();
+  renderRadarCityOptions();
   updateLocationUI();
   bindEvents();
   renderFeed();
+  renderRadarExperience();
   const initialListingId = new URL(window.location.href).searchParams.get("listing");
   if (initialListingId && sourceListing(initialListingId)) {
     const listing = sourceListing(initialListingId);

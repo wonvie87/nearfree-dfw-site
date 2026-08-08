@@ -56,6 +56,7 @@ export function createListingTemplates(context) {
     transit: "tone-transit"
   });
   const categoryKeys = new Set(Object.keys(categoryToneClasses));
+  const cardLayoutClasses = new Set(["card-standard", "card-featured", "card-spotlight", "card-event", "card-value"]);
 
   function categoryKey(listing) {
     return categoryKeys.has(listing.category) ? listing.category : "community";
@@ -83,15 +84,16 @@ export function createListingTemplates(context) {
     return key ? t(key) : "";
   }
 
-  function cardTemplate(listing, index) {
+  function cardTemplate(listing, index, layoutClass = "card-standard") {
     const saved = isSaved(listing.id);
     const booking = bookingLabel(listing);
     const tone = categoryToneClass(listing);
+    const layout = cardLayoutClasses.has(layoutClass) ? layoutClass : "card-standard";
     const placeMeta = isAllDfw()
       ? listing.city
       : `${listing.city} · ${formatDistance(listing.distance)}`;
     return `
-      <article class="listing-card listing-${listing.kind} ${tone}" data-id="${listing.id}">
+      <article class="listing-card ${layout} listing-${listing.kind} ${tone}" data-id="${listing.id}">
         <div class="listing-media">
           <button class="listing-media-open" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
             ${imageOrPlaceholder(listing, "listing-media-placeholder", index < 4 ? "eager" : "lazy")}
@@ -139,7 +141,16 @@ export function createListingTemplates(context) {
           <div><span class="section-symbol" aria-hidden="true">${icon}</span><h2 id="section-${section.key}">${escapeHtml(t(titleKey))}</h2></div>
           <p>${escapeHtml(t(descKey))}</p>
         </div>
-        <div class="listing-grid">${section.items.map((listing, index) => cardTemplate(listing, startIndex + index)).join("")}</div>
+        <div class="listing-grid" data-section="${escapeHtml(section.key)}">${section.items.map((listing, index) => {
+          const layoutClass = section.key === "good"
+            ? (index === 0 ? "card-featured" : "card-spotlight")
+            : section.key === "worth"
+              ? "card-event"
+              : section.key === "budget"
+                ? "card-value"
+                : "card-standard";
+          return cardTemplate(listing, startIndex + index, layoutClass);
+        }).join("")}</div>
       </section>`;
   }
 

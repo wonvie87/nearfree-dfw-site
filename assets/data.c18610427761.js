@@ -582,12 +582,37 @@ export const LISTINGS = [
     "category": "local-deals",
     "attributes": [],
     "actionUrl": "https://www.visitgrandprairietx.com/Deals",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "a4fca583b6fa1d0fd1f53a5e68f9e820d90d8d7e71e11d40aa2b2649a025e0a2",
+      "assetHash": "324dd102b3767327551aa0038eb823961fc8e125917fdcbf30e9fbd5dab267de",
+      "brief": {
+        "venueArchetype": "a lively but unbranded indoor roller rink with a polished floor and soft perimeter lights",
+        "primaryActivity": "two visitors enjoying a roller-skating session together",
+        "heroElement": "two pairs of skaters gliding side by side through a gentle turn",
+        "audience": "a small mixed-age group of recreational skaters",
+        "time": "early evening",
+        "season": "late summer",
+        "composition": "low eye-level wide scene following the curve of the rink with the paired skaters centered",
+        "lighting": "warm practical rink lighting with soft colored reflections on the floor",
+        "palette": "charcoal, warm amber, muted violet, teal, and natural denim",
+        "avoid": [
+          "readable coupons",
+          "logos",
+          "competitive speed skating",
+          "an empty rink"
+        ]
+      }
+    },
+    "image": "assets/listings/action-park-grand-prairie-bogo-skate-a4fca583b6fa.webp",
     "title": "액션 파크 그랜드 프레리 — 스케이트 세션 1+1",
     "dateLabel": "2026년 12월 31일까지",
     "cost": "스케이트 1+1 또는 매장 구매 10% 할인",
     "summary": "공식 방문자 쿠폰으로 스케이트 세션 1+1 또는 매장 구매 10% 할인 중 하나를 선택할 수 있습니다.",
     "finePrint": "고객당 쿠폰 1장, 180일마다 1회 사용이며 매장이 쿠폰을 변경하거나 거절할 수 있어 방문 전 확인이 필요합니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "실내 롤러스케이트장에서 두 사람이 함께 스케이트를 즐기는 모습을 표현한 서비스용 이미지",
     "titleBase": "액션 파크 그랜드 프레리",
     "titleBenefit": "스케이트 세션 1+1",
     "eligibility": {
@@ -624,12 +649,37 @@ export const LISTINGS = [
     "category": "culture",
     "attributes": [],
     "actionUrl": "https://aamdallas.org/plan-your-visit/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "33230c137d670804bb8bfef6e90c70728d827bc3ec3ac1af160f70d92047dfe3",
+      "assetHash": "ba3318f78f9e05c2e0a7f0e49cca143b8208766693d33cbe2c27fd8b2d33452a",
+      "brief": {
+        "venueArchetype": "a dignified cultural-history museum gallery with archival-style displays and sculptural forms",
+        "primaryActivity": "individual visitors thoughtfully exploring African American history and cultural exhibits",
+        "heroElement": "an adult and teenager pausing together before a layered artifact display",
+        "audience": "a few independent museum visitors",
+        "time": "early afternoon",
+        "season": "late summer",
+        "composition": "quiet eye-level medium-wide gallery view with the visitors in profile and deep exhibit layers",
+        "lighting": "controlled museum spot lighting with soft ambient daylight",
+        "palette": "deep indigo, warm walnut, bronze, cream, and muted red",
+        "avoid": [
+          "recognizable artworks",
+          "readable exhibit text",
+          "exact museum architecture",
+          "crowded tour groups"
+        ]
+      }
+    },
+    "image": "assets/listings/african-american-museum-dallas-free-admission-33230c137d67.webp",
     "title": "아프리칸 아메리칸 뮤지엄 댈러스 — 일반 입장 무료",
     "dateLabel": "상시 · 화–금 오전 11시–오후 5시, 토 오전 10시–오후 5시",
     "cost": "일반 입장 무료",
     "summary": "댈러스 페어 파크의 박물관을 일반 방문객은 무료로 관람할 수 있습니다.",
     "finePrint": "10명을 초과하는 단체 투어와 일부 특별 행사·전시는 별도 조건이 적용됩니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "박물관 관람객이 아프리카계 미국인의 역사와 문화를 다룬 전시를 살펴보는 모습을 표현한 서비스용 이미지",
     "titleBase": "아프리칸 아메리칸 뮤지엄 댈러스",
     "titleBenefit": "일반 입장 무료",
     "eligibility": {
@@ -667,12 +717,37 @@ export const LISTINGS = [
     "category": "recreation",
     "attributes": [],
     "actionUrl": "https://events.allentx.gov/allentx/260128874",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "926245ef28e6fba41c3c4a7a566d0c157ab6aabdfefa443cae6295e5bb2386cf",
+      "assetHash": "62a10aaf10882a7c02f19bacb9b158791375bf9eab336f3c53d7c0300096c9ed",
+      "brief": {
+        "venueArchetype": "a bright multi-use community recreation center atrium with glimpses of gym and pool activity zones",
+        "primaryActivity": "a family arriving for a free day of recreation-center access",
+        "heroElement": "a parent and two children stepping through the open atrium toward the activity areas",
+        "audience": "families and general community visitors",
+        "time": "mid-morning",
+        "season": "an ordinary first day of the month",
+        "composition": "high-corner wide view with the arriving family moving diagonally through the spacious atrium",
+        "lighting": "crisp skylight with cool reflected pool light and warm wood accents",
+        "palette": "aqua, pale maple, white, sunflower yellow, and navy",
+        "avoid": [
+          "event booths",
+          "conference staging",
+          "exact facility architecture",
+          "readable signs"
+        ]
+      }
+    },
+    "image": "assets/listings/allen-leap-days-2026-926245ef28e6.webp",
     "title": "앨런 Leap Days — 매월 1일 참여 시설 입장 무료",
     "dateLabel": "2026년 12월까지 · 매월 1일",
     "cost": "참여 레크리에이션 센터 입장 무료",
     "summary": "매월 1일 앨런의 참여 레크리에이션 센터를 무료로 이용할 수 있습니다.",
     "finePrint": "첫날이 시설 휴관일이나 시 공휴일이면 참여하지 않으며 시설별 연령·이용 규정은 유지됩니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "가족이 현대적인 커뮤니티 레크리에이션 센터에 들어서는 모습을 표현한 서비스용 이미지",
     "titleBase": "앨런 Leap Days",
     "titleBenefit": "매월 1일 참여 시설 입장 무료",
     "eligibility": {
@@ -709,12 +784,37 @@ export const LISTINGS = [
     "category": "local-deals",
     "attributes": [],
     "actionUrl": "https://visitallentexas.com/show-your-badge/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "a5bcfca1a765a903957c182bf490d4c881922629edfb2ec4331dae1318d67ae3",
+      "assetHash": "4efc973a47bcf6ebe62b301fd9733bfbdef89ea9fc207fe409e8763205d11cea",
+      "brief": {
+        "venueArchetype": "a welcoming independent cafe and shop counter in a North Texas commercial district",
+        "primaryActivity": "a conference attendee showing an unbranded event badge to receive a participating-business offer",
+        "heroElement": "the attendee holding up a plain badge while a cashier gestures toward the purchase",
+        "audience": "one adult visitor and a local business employee",
+        "time": "late morning",
+        "season": "year-round",
+        "composition": "intimate over-the-counter three-quarter view with the badge and friendly exchange as the focal point",
+        "lighting": "soft storefront daylight with warm pendant-light accents",
+        "palette": "terracotta, cream, sage, espresso brown, and cobalt",
+        "avoid": [
+          "readable badge text",
+          "company logos",
+          "specific discount numbers",
+          "hotel convention halls"
+        ]
+      }
+    },
+    "image": "assets/listings/allen-show-your-badge-discounts-a5bcfca1a765.webp",
     "title": "앨런 Show Your Badge Program — 참여 매장 할인·무료 품목",
     "dateLabel": "상시 · 참여 매장별 조건 적용",
     "cost": "10–20% 할인, 1+1, 무료 품목 등",
     "summary": "컨퍼런스 배지를 제시하면 앨런의 여러 참여 식당·상점에서 할인, 1+1, 무료 품목 등 각기 다른 혜택을 받을 수 있습니다.",
     "finePrint": "매장마다 할인율, 제외 품목, 첫 방문 조건과 중복 제한이 다르므로 공식 목록에서 해당 매장 조건을 확인하세요.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "컨퍼런스 참가자가 지역 매장에서 명찰을 보여주고 혜택을 받는 모습을 표현한 서비스용 이미지",
     "titleBase": "앨런 Show Your Badge Program",
     "titleBenefit": "참여 매장 할인·무료 품목",
     "eligibility": {
@@ -751,12 +851,37 @@ export const LISTINGS = [
     "category": "concert",
     "attributes": [],
     "actionUrl": "https://www.arlingtontx.gov/Community-Calendar/Parks-Recreation-Culture-Events/Summer-Music-Series",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "4d42576d05842d83b13724825c34ba52c5ec27bd318fc26af6cba9370ae3678d",
+      "assetHash": "9d7cf6e67fd202095acbe14a32d4751abc350fb3d75a0dfd9e7fa5b4a1d98ef8",
+      "brief": {
+        "venueArchetype": "an open-air restaurant patio beside a green public golf-course landscape",
+        "primaryActivity": "local musicians performing for walk-in dinner guests with no cover charge",
+        "heroElement": "an acoustic guitarist and vocalist performing beside relaxed patio tables",
+        "audience": "a modest seated crowd of adult and family diners",
+        "time": "Friday at sunset",
+        "season": "late summer",
+        "composition": "eye-level panoramic patio view with the musicians on one third and tables leading across the scene",
+        "lighting": "golden-hour backlight shifting into warm string-light glow",
+        "palette": "summer green, honey gold, brick red, sky blue, and charcoal",
+        "avoid": [
+          "exact restaurant architecture",
+          "golf branding",
+          "large concert stage",
+          "readable menus"
+        ]
+      }
+    },
+    "image": "assets/listings/arlington-summer-music-series-2026-4d42576d0584.webp",
     "title": "알링턴 Summer Music Series — 금요일 라이브 음악 무료",
     "dateLabel": "8월 14일–9월 11일 금요일 · 오후 6시–8시",
     "cost": "커버 차지 없음",
     "summary": "Home Plate에서 금요일 저녁 지역 뮤지션의 라이브 공연을 커버 차지 없이 즐길 수 있습니다.",
     "finePrint": "회원권은 필요 없고 현장 입장도 가능하지만 좌석이 한정되어 전화 사전 등록을 권장합니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "초저녁 야외 레스토랑 파티오에서 관객이 라이브 음악을 즐기는 모습을 표현한 서비스용 이미지",
     "titleBase": "알링턴 Summer Music Series",
     "titleBenefit": "금요일 라이브 음악 무료",
     "eligibility": {
@@ -794,12 +919,37 @@ export const LISTINGS = [
     "category": "library",
     "attributes": [],
     "actionUrl": "https://www.cityofcarrollton.com/departments/departments-g-p/library/cards-account/library-cards",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "7ab5558a2d58aab1a1ee8c9cae0c6fcf2907886c0c6aefad8a974da9688007a6",
+      "assetHash": "c9994bcc23a7166fde4bacfe47dae8956f6a0675ce87923d00b5f1a51f0cf089",
+      "brief": {
+        "venueArchetype": "a contemporary public-library service desk with bookshelves and a calm civic interior",
+        "primaryActivity": "an eligible resident completing identity and address verification for a free library card",
+        "heroElement": "a librarian passing a plain new card across the desk beside closed identification documents",
+        "audience": "one adult resident and one library staff member",
+        "time": "weekday afternoon",
+        "season": "year-round",
+        "composition": "close eye-level counter scene focused on the card handoff with softly receding shelves",
+        "lighting": "even window daylight and neutral library task lighting",
+        "palette": "pale oak, dusty blue, cream, burgundy, and soft gray",
+        "avoid": [
+          "readable personal information",
+          "branded card designs",
+          "children applying alone",
+          "exact branch architecture"
+        ]
+      }
+    },
+    "image": "assets/listings/carrollton-library-card-free-7ab5558a2d58.webp",
     "title": "캐럴턴 공공도서관 카드 — 해당 지역 거주자 무료",
     "dateLabel": "상시 · 도서관 카드 신청",
     "cost": "Carrollton·Farmers Branch 거주자 무료",
     "summary": "Carrollton과 Farmers Branch 거주자는 신분과 주소를 확인해 도서관 카드를 무료로 발급받을 수 있습니다.",
     "finePrint": "현재 주소가 신분증과 다르면 추가 주소 증빙이 필요하며 비거주자 카드는 연 $40입니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "도서관 서비스 데스크에서 주민이 신분과 주소를 확인하고 카드를 받는 모습을 표현한 서비스용 이미지",
     "titleBase": "캐럴턴 공공도서관 카드",
     "titleBenefit": "해당 지역 거주자 무료",
     "eligibility": {
@@ -838,12 +988,37 @@ export const LISTINGS = [
     "category": "access",
     "attributes": [],
     "actionUrl": "https://www.dallasarboretum.org/museums-for-all/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "458743c1ede0ff7a38cd848bb3e9005d36ebe27b7a0074fb26fceb2552e1c459",
+      "assetHash": "86b845a973f8f26bcc92ede7689aea46e2de36215dd741c50e98960a981f059d",
+      "brief": {
+        "venueArchetype": "a generic botanical-garden welcome gate opening toward richly planted daytime paths",
+        "primaryActivity": "an eligible household purchasing reduced-price daytime admission on site",
+        "heroElement": "an adult presenting a plain benefits card at a small outdoor welcome counter while family waits nearby",
+        "audience": "a family group of four and one garden attendant",
+        "time": "bright morning",
+        "season": "late summer",
+        "composition": "medium-wide side view balancing the card exchange in front with a flower-lined path beyond",
+        "lighting": "clear diffused daylight under a shaded entry canopy",
+        "palette": "leaf green, coral blossom, limestone, sky blue, and natural linen",
+        "avoid": [
+          "exact garden entrance",
+          "readable card text",
+          "ticket prices in image",
+          "formal event decor"
+        ]
+      }
+    },
+    "image": "assets/listings/dallas-arboretum-museums-for-all-458743c1ede0.webp",
     "title": "댈러스 아보리텀 Museums for All — 1인 $3",
     "dateLabel": "상시 · 주간 입장",
     "cost": "1인 $3 · 최대 6명",
     "summary": "SNAP EBT 카드 또는 WIC 자격을 확인하면 최대 6명이 1인 $3에 주간 입장할 수 있습니다.",
     "finePrint": "WIC 이용자는 유효한 신분증이 필요하며 결제는 EBT가 아닌 수단으로 해야 합니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "식물원 입구에서 가족이 이용 자격 카드를 제시하고 입장하는 모습을 표현한 서비스용 이미지",
     "titleBase": "댈러스 아보리텀 Museums for All",
     "titleBenefit": "1인 $3",
     "eligibility": {
@@ -883,12 +1058,37 @@ export const LISTINGS = [
     "category": "transit",
     "attributes": [],
     "actionUrl": "https://www.dcta.net/fares-passes/reduced-fares-discount-programs/Reduced-Fares",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "41af3f8a293622894f4718bd67c46ed4bceba96aa1d47c5a25dea7296d119165",
+      "assetHash": "e2a99d13d5b01c1156285e626ab70f27ff5af5beb22098750c317e36fb7d6541",
+      "brief": {
+        "venueArchetype": "an unbranded North Texas bus transfer platform with a modern low-floor bus",
+        "primaryActivity": "eligible riders using reduced-fare credentials before purchasing or validating transit fares",
+        "heroElement": "a senior rider and teenage student holding plain eligibility cards near the open bus door",
+        "audience": "a small mix of transit riders including a senior and student",
+        "time": "weekday morning",
+        "season": "year-round",
+        "composition": "street-level diagonal view along the bus doorway with the two riders prominent in the foreground",
+        "lighting": "clean overcast daylight with subtle reflections on transit glass",
+        "palette": "steel blue, silver, marigold, denim, and concrete gray",
+        "avoid": [
+          "transit agency logos",
+          "readable passes",
+          "fare amounts",
+          "crowded commuter crush"
+        ]
+      }
+    },
+    "image": "assets/listings/dcta-reduced-fares-41af3f8a2936.webp",
     "title": "DCTA Reduced Fares — 고령자·장애인·Medicare·학생 할인",
     "dateLabel": "상시 · 서비스별 할인 운임",
     "cost": "자격 대상 할인 운임",
     "summary": "65세 이상, 장애인, Medicare 이용자와 6–18세 학생은 자격 배지를 발급받아 DCTA 할인 운임을 이용할 수 있습니다.",
     "finePrint": "자격 배지는 승차권이 아니므로 서비스별 할인 운임 또는 패스를 별도로 구매해야 합니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "고령자와 학생 승객이 대중교통 승차 전 할인 자격을 확인하는 모습을 표현한 서비스용 이미지",
     "titleBase": "DCTA Reduced Fares",
     "titleBenefit": "고령자·장애인·Medicare·학생 할인",
     "eligibility": {
@@ -928,12 +1128,37 @@ export const LISTINGS = [
     "category": "access",
     "attributes": [],
     "actionUrl": "https://fwbg.org/plan-a-visit/accessibility/access-to-nature/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "8a93104bfdcd950ef574c397f7590939e7ae0b7779d79376e71b32681d598f99",
+      "assetHash": "9792aced02fe9397820f9a4d9a9e516ef23201b72698f72985ac4afe68f068bc",
+      "brief": {
+        "venueArchetype": "an expansive public botanical garden with layered native plantings and a gently curving path",
+        "primaryActivity": "an eligible household enjoying general garden admission together",
+        "heroElement": "two adults and young children discovering a cluster of colorful plants beside the path",
+        "audience": "one household with children under fifteen",
+        "time": "late morning",
+        "season": "early autumn transition",
+        "composition": "wide ground-level garden scene with the family small but clear along an S-curving path",
+        "lighting": "soft sun filtered through mature trees with natural leaf shadows",
+        "palette": "fern green, lavender, rust, warm stone, and pale sky",
+        "avoid": [
+          "admission desk",
+          "eligibility cards",
+          "exact garden landmarks",
+          "formal portrait posing"
+        ]
+      }
+    },
+    "image": "assets/listings/fort-worth-botanic-garden-access-to-nature-8a93104bfdcd.webp",
     "title": "포트워스 보태닉 가든 Access to Nature — 가족 일반 입장 무료",
     "dateLabel": "상시 · 공식 운영시간 적용",
     "cost": "성인 2명과 15세 미만 자녀 무료",
     "summary": "SNAP·WIC·Medicaid 가구는 성인 2명과 같은 가구의 15세 미만 자녀가 일반 입장을 무료로 이용할 수 있습니다.",
     "finePrint": "현장에서 해당 자격 증빙과 사진이 있는 신분증을 준비하세요.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "가족이 식물원의 푸른 산책로와 정원을 함께 둘러보는 모습을 표현한 서비스용 이미지",
     "titleBase": "포트워스 보태닉 가든 Access to Nature",
     "titleBenefit": "가족 일반 입장 무료",
     "eligibility": {
@@ -973,12 +1198,37 @@ export const LISTINGS = [
     "category": "festival",
     "attributes": [],
     "actionUrl": "https://www.visitfrisco.com/events/frisco-oktoberfest/6398",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "2b6c39ad6aaabab59e78debcde0e5a2f1cd3797fbe51ea0bb949125bcbc7ccdb",
+      "assetHash": "763b0d21196288f4c6060b9f18360fec9e1ffef4fe5fc438b8ecfb27f4cb8cc9",
+      "brief": {
+        "venueArchetype": "a spacious North Texas outdoor festival plaza decorated with generic Bavarian-inspired colors",
+        "primaryActivity": "visitors enjoying live music, traditional games, and German food culture",
+        "heroElement": "friends cheering a playful stein-holding contest while a small brass band performs nearby",
+        "audience": "a lively mixed-age daytime festival crowd",
+        "time": "Saturday afternoon",
+        "season": "early October",
+        "composition": "energetic eye-level wide shot with the game in front and musicians layered in the middle distance",
+        "lighting": "clear autumn daylight with crisp colorful shadows",
+        "palette": "cobalt, white, mustard, chestnut, evergreen, and warm red",
+        "avoid": [
+          "sports-team branding",
+          "exact plaza architecture",
+          "readable banners",
+          "intoxication"
+        ]
+      }
+    },
+    "image": "assets/listings/frisco-oktoberfest-2026-2b6c39ad6aaa.webp",
     "title": "제7회 Frisco Oktoberfest",
     "dateLabel": "10월 3일 토요일 · 오전 11시–오후 9시",
     "cost": "입장 무료",
     "summary": "The Star에서 라이브 음악, 전통 게임과 독일식 음식 문화를 즐기는 하루 축제가 열립니다.",
     "finePrint": "입장은 무료이며 음식과 음료는 별도 구매입니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "야외 옥토버페스트에서 방문객이 전통 게임과 라이브 음악을 즐기는 모습을 표현한 서비스용 이미지",
     "titleBase": "제7회 Frisco Oktoberfest",
     "eligibility": {
       "mode": "general",
@@ -1014,12 +1264,37 @@ export const LISTINGS = [
     "category": "festival",
     "attributes": [],
     "actionUrl": "https://www.grapevinetexasusa.com/grapefest/general-information/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "3d2f9b446b1f63c90a0c1b690062ae12cbe3cd5d20b08a3927bf6f2910930cd1",
+      "assetHash": "aae9dd0057e1ab2797307c15c050876a1117d62a50b3f67c6f5b8fb42e748ff1",
+      "brief": {
+        "venueArchetype": "a welcoming historic-style downtown festival street with grape-harvest decorations and vendor tents",
+        "primaryActivity": "general visitors exploring the festival district during complimentary Thursday admission",
+        "heroElement": "a group of friends walking beneath clusters of purple grape-inspired decorations toward market booths",
+        "audience": "an all-ages daytime and early-evening festival crowd",
+        "time": "Thursday late afternoon",
+        "season": "mid-September",
+        "composition": "long street-level perspective with visitors entering from the foreground and booths receding centrally",
+        "lighting": "warm late-afternoon sun with soft shade under tents",
+        "palette": "grape purple, sage, cream canvas, copper, and dusty rose",
+        "avoid": [
+          "exact Main Street storefronts",
+          "readable festival signage",
+          "prominent alcohol consumption",
+          "carnival close-up"
+        ]
+      }
+    },
+    "image": "assets/listings/grapefest-free-thursday-2026-3d2f9b446b1f.webp",
     "title": "제40회 GrapeFest 목요일 — 하루 종일 입장 무료",
     "dateLabel": "9월 17일 목요일 · 오전 11시–오후 10시",
     "cost": "목요일 일반 입장 무료",
     "summary": "GrapeFest 첫날인 목요일에는 히스토릭 메인 스트리트 축제 구역에 하루 종일 무료로 입장할 수 있습니다.",
     "finePrint": "와인 체험, 카니발 게임, 음식과 일부 부가 프로그램은 별도 요금이 있을 수 있습니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "포도 장식이 있는 거리 축제에서 방문객이 부스와 공연을 즐기는 모습을 표현한 서비스용 이미지",
     "titleBase": "제40회 GrapeFest 목요일",
     "titleBenefit": "하루 종일 입장 무료",
     "eligibility": {
@@ -1056,12 +1331,37 @@ export const LISTINGS = [
     "category": "culture",
     "attributes": [],
     "actionUrl": "https://www.heardmuseum.org/rules-faqs/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "4d96ff3e58a4d3fd5aa6ae2f233102ed34f6b6d9c4094694d0e28f19a6eee275",
+      "assetHash": "8c400daa8e0ff51ad6a5c4ce32e18966449ddef8e20aa6920b4e6835d9957623",
+      "brief": {
+        "venueArchetype": "a rustic-modern natural-science museum welcome desk with subtle wildlife and trail cues",
+        "primaryActivity": "an EBT cardholder purchasing reduced admission at the front desk for a small group",
+        "heroElement": "a hand presenting a plain benefits card while a child looks toward a nearby nature display",
+        "audience": "one adult cardholder with two accompanying visitors",
+        "time": "midday",
+        "season": "late summer",
+        "composition": "close three-quarter desk view with the card exchange sharp and the nature exhibit softly behind",
+        "lighting": "warm interior daylight with a cool glimpse of an outdoor trail",
+        "palette": "cedar brown, moss green, sandstone, muted turquoise, and cream",
+        "avoid": [
+          "readable card details",
+          "exact museum exhibits",
+          "online purchase screens",
+          "full outdoor family scene"
+        ]
+      }
+    },
+    "image": "assets/listings/heard-museum-museums-for-all-5-4d96ff3e58a4.webp",
     "title": "허드 뮤지엄 Museums for All — 최대 4명 1인 $5",
     "dateLabel": "상시 · 현장 매표",
     "cost": "최대 4명 1인 $5",
     "summary": "EBT 카드를 현장 데스크에 제시하면 최대 4명이 1인 $5에 입장할 수 있습니다.",
     "finePrint": "온라인 구매에는 적용되지 않으며 현장에서 EBT 카드를 제시해야 합니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "자연과학박물관 안내 데스크에서 방문객이 EBT 카드를 제시하는 모습을 표현한 서비스용 이미지",
     "titleBase": "허드 뮤지엄 Museums for All",
     "titleBenefit": "최대 4명 1인 $5",
     "eligibility": {
@@ -1098,12 +1398,37 @@ export const LISTINGS = [
     "category": "concert",
     "attributes": [],
     "actionUrl": "https://www.irvingtexas.com/event/a-tribute-to-summer%253A-free-concert-series/40380/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "9825a22b02a790788d27c34004fde51212906940457f7cad53089029f35a496b",
+      "assetHash": "c2184cee37b7fe105e989fdeab79303a7e709c1ff21576ea84a7821f906b6925",
+      "brief": {
+        "venueArchetype": "a modern open-air entertainment plaza with a modest concert stage and broad gathering space",
+        "primaryActivity": "the public enjoying a free Saturday-night tribute-band performance",
+        "heroElement": "a silhouetted guitarist and vocalist performing under stage lights for a relaxed standing crowd",
+        "audience": "an adult and family outdoor concert audience",
+        "time": "Saturday at 9 PM",
+        "season": "August",
+        "composition": "wide crowd-level night view framed by raised hands at the edges and the band centered in depth",
+        "lighting": "deep blue night with magenta and amber stage beams",
+        "palette": "midnight blue, magenta, amber, black, and electric cyan",
+        "avoid": [
+          "recognizable performers",
+          "band logos",
+          "exact venue architecture",
+          "daytime picnic atmosphere"
+        ]
+      }
+    },
+    "image": "assets/listings/irving-tribute-to-summer-2026-9825a22b02a7.webp",
     "title": "A Tribute to Summer 콘서트 시리즈 — 토요일 밤 무료 공연",
     "dateLabel": "8월 29일까지 매주 토요일 · 오후 9시 시작",
     "cost": "입장 무료",
     "summary": "8월 토요일 밤마다 Toyota Music Factory 야외 플라자에서 트리뷰트 밴드 공연을 무료로 즐길 수 있습니다.",
     "finePrint": "야외 공연이며 각 공연은 오후 9시에 시작합니다. 당일 변경 사항은 공식 페이지에서 확인하세요.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "여름밤 야외 광장에서 관객이 트리뷰트 밴드 공연을 즐기는 모습을 표현한 서비스용 이미지",
     "titleBase": "A Tribute to Summer 콘서트 시리즈",
     "titleBenefit": "토요일 밤 무료 공연",
     "eligibility": {
@@ -1140,12 +1465,37 @@ export const LISTINGS = [
     "category": "food",
     "attributes": [],
     "actionUrl": "https://www.visitthecolonytx.com/DocumentCenter/View/9000/Juice_Box_digital-2026?bidId=",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "9d8bc1e26d1619e8b0bd1d1c4b165c884ebf0a79df99ccf422c416f558aa8474",
+      "assetHash": "2fff84885e998ccd8708dd0d110afdbaf42d4ddb8be6d4faa188528a6d0f176e",
+      "brief": {
+        "venueArchetype": "a bright contemporary boba-tea counter with colorful ingredient containers and no branding",
+        "primaryActivity": "a dine-in customer presenting a printed coupon while purchasing boba tea with two toppings",
+        "heroElement": "a clear unbranded tea cup with two contrasting toppings being handed across the counter beside a folded coupon",
+        "audience": "one customer and one drink-shop employee",
+        "time": "afternoon",
+        "season": "late summer",
+        "composition": "tight counter-height product-and-hands view with the cup centered and the coupon secondary",
+        "lighting": "bright softbox-like shop lighting with clean translucent highlights",
+        "palette": "taro lilac, mango yellow, milk tea tan, black tapioca, and mint",
+        "avoid": [
+          "readable coupon code",
+          "shop logos",
+          "more than two featured toppings",
+          "sealed delivery order"
+        ]
+      }
+    },
+    "image": "assets/listings/juice-box-the-colony-free-toppings-2026-9d8bc1e26d16.webp",
     "title": "주스 박스 더 콜로니 — 보바 토핑 최대 2개 무료",
     "dateLabel": "2026년 12월 31일까지",
     "cost": "보바티 구매 시 토핑 최대 2개 무료",
     "summary": "인쇄 쿠폰과 코드 THECOLONY를 제시하면 보바티 구매 시 토핑을 최대 2개 무료로 받을 수 있습니다.",
     "finePrint": "더 콜로니점 매장 식사 1회 한정, 방문·테이블당 쿠폰 1장만 가능하며 다른 혜택과 중복할 수 없습니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "버블티 매장에서 인쇄 쿠폰을 제시하고 토핑을 추가한 음료를 받는 모습을 표현한 서비스용 이미지",
     "titleBase": "주스 박스 더 콜로니",
     "titleBenefit": "보바 토핑 최대 2개 무료",
     "eligibility": {
@@ -1182,12 +1532,37 @@ export const LISTINGS = [
     "category": "culture",
     "attributes": [],
     "actionUrl": "https://www.arlingtontx.gov/News-Articles/2026/March/Knapp-Heritage-Park-Preserving-the-Past-in-Downtown-Arlington",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "16a908c4f6ca64f04984205f492fa4242e28f733b5cd9cd2b1f6b40f7831e610",
+      "assetHash": "2066b8461ee4c16831cad011f20724b41eb8ad7cf25ed7b7b48b09df80bc27c7",
+      "brief": {
+        "venueArchetype": "a compact downtown heritage park with generic preserved wooden and brick buildings",
+        "primaryActivity": "visitors freely exploring local history and historic structures",
+        "heroElement": "an adult and child walking between two restored period buildings while studying architectural details",
+        "audience": "a few quiet weekend visitors",
+        "time": "Saturday late morning",
+        "season": "early autumn",
+        "composition": "slightly low wide courtyard view using the historic rooflines to frame the walking pair",
+        "lighting": "soft clear daylight with textured shadows on aged wood and brick",
+        "palette": "weathered red, faded white, prairie grass, oak green, and denim blue",
+        "avoid": [
+          "exact historic buildings",
+          "costumed reenactors",
+          "readable plaques",
+          "large museum interior"
+        ]
+      }
+    },
+    "image": "assets/listings/knapp-heritage-park-free-admission-16a908c4f6ca.webp",
     "title": "냅 헤리티지 파크 — 입장 무료",
     "dateLabel": "토 오전 10시–오후 2시 · 일 오후 1시–4시",
     "cost": "무료 · 기부 가능",
     "summary": "다운타운 알링턴의 역사 건물과 지역 유산을 무료로 둘러볼 수 있습니다.",
     "finePrint": "운영시간은 토요일과 일요일에 다릅니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "방문객이 도심 속 역사 공원의 오래된 건물들을 둘러보는 모습을 표현한 서비스용 이미지",
     "titleBase": "냅 헤리티지 파크",
     "titleBenefit": "입장 무료",
     "eligibility": {
@@ -1224,12 +1599,37 @@ export const LISTINGS = [
     "category": "festival",
     "attributes": [],
     "actionUrl": "https://www.cityoflewisville.com/city-hall/city-departments/community-engagement/special-events-festivals/fiesta-charra",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "fde7175ca9a5096770f357fd9ebe7bd3aebd4254067f6492264034cdc841f751",
+      "assetHash": "d38487cd8d72e6454bdf4fb65db27c146742e1a91fe11af9a69aaceb74ae8abf",
+      "brief": {
+        "venueArchetype": "an open-air community arena prepared for a traditional charreada-inspired cultural celebration",
+        "primaryActivity": "visitors watching horsemanship alongside live music and cultural performances",
+        "heroElement": "a skilled rider guiding a horse through a controlled arena turn as musicians wait at the rail",
+        "audience": "a broad family crowd seated around the arena",
+        "time": "Sunday near sunset",
+        "season": "Labor Day weekend",
+        "composition": "dynamic wide arena view with the horse and rider crossing the foreground and spectators wrapping behind",
+        "lighting": "golden sunset dust with warm practical lights beginning to glow",
+        "palette": "saddle brown, marigold, deep red, turquoise, and sunset peach",
+        "avoid": [
+          "unsafe horse handling",
+          "exact arena architecture",
+          "readable sponsor signs",
+          "rodeo branding"
+        ]
+      }
+    },
+    "image": "assets/listings/lewisville-fiesta-charra-2026-fde7175ca9a5.webp",
     "title": "Fiesta Charra 2026",
     "dateLabel": "9월 6일 일요일 · 오후 4시–10시 30분",
     "cost": "입장 무료",
     "summary": "전통 차레아다에서 영감을 받은 승마 공연, 라이브 음악, 레슬링과 문화 공연을 무료로 즐길 수 있습니다.",
     "finePrint": "현장 잔디 주차는 $10이며 Lewisville City Hall의 무료 주차·셔틀을 이용할 수 있습니다. 반려동물은 셔틀에 탈 수 없습니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "야외 아레나에서 기마 공연과 문화 행사를 즐기는 관객의 모습을 표현한 서비스용 이미지",
     "titleBase": "Fiesta Charra 2026",
     "eligibility": {
       "mode": "general",
@@ -1265,12 +1665,37 @@ export const LISTINGS = [
     "category": "library",
     "attributes": [],
     "actionUrl": "https://library.cityoflewisville.com/about/library-accounts/library-card-privileges",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "fbd71aefb45d0ec2a1f832bb197ae1d5d18ce5438d7fd22c20f13e99a17d4c51",
+      "assetHash": "43c0c0b4a1f72b7a06613629bdd5a2a592fb474cef24dd7647bfbf4becff27cd",
+      "brief": {
+        "venueArchetype": "a spacious public library registration table beside tall shelves and a bright reading area",
+        "primaryActivity": "a Texas resident applying in person for a free library card",
+        "heroElement": "an adult reviewing a simple application folder while a staff member places a plain card beside it",
+        "audience": "one adult applicant and one library employee",
+        "time": "early evening",
+        "season": "year-round",
+        "composition": "overhead-oblique tabletop view with hands, application folder, and card arranged against deep shelf perspective",
+        "lighting": "cool window light balanced by warm reading lamps",
+        "palette": "navy, warm brass, cherry wood, paper white, and muted green",
+        "avoid": [
+          "readable application text",
+          "personal data",
+          "same close counter handoff composition",
+          "branded library card"
+        ]
+      }
+    },
+    "image": "assets/listings/lewisville-library-card-free-texas-fbd71aefb45d.webp",
     "title": "루이스빌 공공도서관 카드 — 텍사스 거주자 무료",
     "dateLabel": "상시 · 도서관 카드 신청",
     "cost": "텍사스 거주자 무료",
     "summary": "텍사스 거주자는 신분과 현재 주소를 확인해 루이스빌 공공도서관 카드를 무료로 발급받을 수 있습니다.",
     "finePrint": "Lewisville 외 텍사스 거주자는 직접 방문해 신청해야 하며 미성년자는 연령별 보호자 조건이 적용됩니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "텍사스 주민이 도서관에서 신청서를 확인하고 새 카드를 받는 모습을 표현한 서비스용 이미지",
     "titleBase": "루이스빌 공공도서관 카드",
     "titleBenefit": "텍사스 거주자 무료",
     "eligibility": {
@@ -1309,12 +1734,37 @@ export const LISTINGS = [
     "category": "family",
     "attributes": [],
     "actionUrl": "https://www.mckinneytexas.org/calendar.aspx?EID=35353",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "389dd8faff7d202e62672f90aec201bdc19e56be2323c96c42010b8e280ffc87",
+      "assetHash": "77785e8d21e76af1076327b85176d31d6965294a6a92cb7ddfcf5cb8bb021321",
+      "brief": {
+        "venueArchetype": "a winding lakeside community-park trail lined with small daytime trick-or-treat activity stations",
+        "primaryActivity": "families following the long trail for trick-or-treating and children's activities",
+        "heroElement": "costumed children carrying small treat buckets toward the next volunteer station along the path",
+        "audience": "families with young children and community volunteers",
+        "time": "Saturday mid-afternoon",
+        "season": "mid-October",
+        "composition": "long-lens landscape view compressing the winding trail, colorful stations, and walking families",
+        "lighting": "gentle autumn afternoon sun filtered through trees",
+        "palette": "pumpkin orange, lake blue, leaf gold, plum, and soft green",
+        "avoid": [
+          "nighttime carnival",
+          "frightening horror",
+          "exact park landmarks",
+          "crowded single plaza"
+        ]
+      }
+    },
+    "image": "assets/listings/mckinney-trick-or-treat-trail-2026-389dd8faff7d.webp",
     "title": "맥키니 Trick or Treat Trail",
     "dateLabel": "10월 17일 토요일 · 오후 3시–6시",
     "cost": "무료",
     "summary": "Towne Lake Park의 1.2마일 트레일을 따라 가족과 함께 트릭 오어 트릿과 어린이 활동을 즐길 수 있습니다.",
     "finePrint": "날씨에 따른 변경 여부는 공식 시 캘린더에서 확인하세요.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "가을 공원 산책로에서 가족들이 트릭 오어 트리트와 어린이 활동을 즐기는 모습을 표현한 서비스용 이미지",
     "titleBase": "맥키니 Trick or Treat Trail",
     "eligibility": {
       "mode": "general",
@@ -1350,12 +1800,37 @@ export const LISTINGS = [
     "category": "culture",
     "attributes": [],
     "actionUrl": "https://www.themodern.org/visit/hours-and-admission",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "9f6ffa4fd8f2e7733d8e184dac8f33748b5468f4674db72fc03c74774af4cfef",
+      "assetHash": "37b51571d8f54fdfb358b948688156e80d1818e606a97964a92c3daa9c2b4afb",
+      "brief": {
+        "venueArchetype": "a serene large-scale contemporary-art gallery with broad walls and a sculptural bench",
+        "primaryActivity": "Friday visitors exploring permanent and special exhibitions with free admission",
+        "heroElement": "two visitors seated on a long bench considering a generic abstract installation across the gallery",
+        "audience": "a sparse group of independent adult museum visitors",
+        "time": "Friday late afternoon",
+        "season": "year-round",
+        "composition": "architectural ultra-wide view with the seated pair low in frame and large negative gallery space above",
+        "lighting": "cool diffuse ceiling light with a narrow wash of late-afternoon sun",
+        "palette": "concrete gray, white, black, rust orange, and muted ultramarine",
+        "avoid": [
+          "recognizable artworks",
+          "exact museum architecture",
+          "hands-on art tables",
+          "crowded family program"
+        ]
+      }
+    },
+    "image": "assets/listings/modern-fort-worth-free-fridays-9f6ffa4fd8f2.webp",
     "title": "포트워스 모던 아트 뮤지엄 — 금요일 입장 무료",
     "dateLabel": "매주 금요일 · 오전 10시–오후 8시",
     "cost": "금요일 무료",
     "summary": "금요일에는 상설전과 특별전 등을 무료 입장으로 관람할 수 있습니다.",
     "finePrint": "무료 입장은 금요일에 적용됩니다. 방문 전 공식 페이지에서 당일 운영 정보를 확인하세요.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "현대미술관의 넓은 전시실에서 방문객이 작품을 감상하는 모습을 표현한 서비스용 이미지",
     "titleBase": "포트워스 모던 아트 뮤지엄",
     "titleBenefit": "금요일 입장 무료",
     "eligibility": {
@@ -1392,12 +1867,37 @@ export const LISTINGS = [
     "category": "local-deals",
     "attributes": [],
     "actionUrl": "https://www.visitplano.com/dineanddiscover/",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "1a6767a473da5b9020f71e4c245d474ac28099ce87e6ebfc81112ddd69b2e823",
+      "assetHash": "0882a640fa8fe4d1b8d2cf9a4ffb70735839c0400a9cd92f567110ef20f0d182",
+      "brief": {
+        "venueArchetype": "a casual independent restaurant table in a lively North Texas mixed-use district",
+        "primaryActivity": "a visitor using a free mobile discovery pass to check in before enjoying a participating location",
+        "heroElement": "a hand holding a phone with an abstract unreadable pass screen above a table set for a local meal",
+        "audience": "two adult friends exploring participating restaurants and attractions",
+        "time": "weekend brunch",
+        "season": "late summer",
+        "composition": "top-down three-quarter table scene with the phone central and the friends partially visible at opposite edges",
+        "lighting": "bright window light with crisp food and tabletop texture",
+        "palette": "tomato red, avocado green, warm ceramic, sky blue, and charcoal",
+        "avoid": [
+          "readable app text",
+          "restaurant logos",
+          "specific reward claims",
+          "phone-only product shot"
+        ]
+      }
+    },
+    "image": "assets/listings/plano-dine-discover-pass-2026-1a6767a473da.webp",
     "title": "2026 플래이노 Dine & Discover Pass — 모바일 패스 무료",
     "dateLabel": "2026년 9월 30일까지",
     "cost": "패스 무료 · 참여 혜택은 업체별 상이",
     "summary": "무료 모바일 패스로 플래이노의 참여 식당과 명소를 둘러보고 업체별 할인·혜택과 체크인 보상을 확인할 수 있습니다.",
     "finePrint": "혜택 내용은 참여 업체마다 다르며 패스 등록이 필요합니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "플레이노의 식당에서 방문객이 휴대전화의 모바일 패스로 체크인하는 모습을 표현한 서비스용 이미지",
     "titleBase": "2026 플래이노 Dine & Discover Pass",
     "titleBenefit": "모바일 패스 무료",
     "eligibility": {
@@ -1435,12 +1935,37 @@ export const LISTINGS = [
     "category": "family",
     "attributes": [],
     "actionUrl": "https://strikz.com/kids-bowl-free",
+    "visual": {
+      "type": "generated-editorial",
+      "promptVersion": 1,
+      "key": "0256aa1480bbf2b2b48ebbe5d5d7b52f3f478ca40a1980d68ce14d17b28d2901",
+      "assetHash": "57dbe2367df7098a2dbe2f18cf0c3a8177cd47230d23985ee821e699f4ea91d7",
+      "brief": {
+        "venueArchetype": "a clean unbranded family bowling center with classic lanes and ball returns",
+        "primaryActivity": "registered children enjoying their included daily classic-lane bowling games",
+        "heroElement": "a child releasing a bowling ball while two other children cheer from the approach seating",
+        "audience": "a small group of children age fifteen and under with a supervising adult",
+        "time": "weekday afternoon",
+        "season": "summer program season",
+        "composition": "low lane-level view following the rolling ball toward pins with cheering children sharp at the side",
+        "lighting": "bright family-center ceiling light with subtle lane reflections",
+        "palette": "royal blue, cherry red, maple wood, white, and lime accents",
+        "avoid": [
+          "venue logos",
+          "shoe rental claims",
+          "cosmic bowling darkness",
+          "professional competition"
+        ]
+      }
+    },
+    "image": "assets/listings/strikz-kids-bowl-free-2026-0256aa1480bb.webp",
     "title": "스트릭즈 Kids Bowl Free — 어린이 매일 2게임 무료",
     "dateLabel": "2026년 9월 11일까지 · 요일별 이용시간 적용",
     "cost": "등록 어린이 2게임 무료 · 신발 별도",
     "summary": "15세 이하 등록 어린이는 공개된 이용시간에 클래식 레인 볼링 2게임을 매일 무료로 이용할 수 있습니다.",
     "finePrint": "신발 대여는 포함되지 않으며 클래식 레인만 가능하고 이용 가능 여부에 따릅니다. Rose Room은 제외됩니다.",
     "actionLabel": "공식 정보 확인",
+    "imageAlt": "어린이들이 실내 클래식 볼링 레인에서 함께 게임을 즐기는 모습을 표현한 서비스용 이미지",
     "titleBase": "스트릭즈 Kids Bowl Free",
     "titleBenefit": "어린이 매일 2게임 무료",
     "eligibility": {

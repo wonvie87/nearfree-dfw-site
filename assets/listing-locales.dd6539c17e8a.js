@@ -174,6 +174,7 @@ export const LISTING_EN = {
     "summary": "The official visitor coupon offers either a BOGO skate session or 10% off an in-store purchase.",
     "finePrint": "Limit one coupon per customer and one redemption every 180 days; businesses may change or decline copied coupons, so confirm before visiting.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of two visitors skating together at an indoor roller rink",
     "titleBase": "Action Park Grand Prairie",
     "titleBenefit": "BOGO skate session",
     "eligibility": {
@@ -197,6 +198,7 @@ export const LISTING_EN = {
     "summary": "Individual visitors can explore this Fair Park museum with free general admission.",
     "finePrint": "Tour groups larger than 10 and some special events or exhibitions have separate terms.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of visitors exploring a museum gallery about African American history and culture",
     "titleBase": "African American Museum Dallas",
     "titleBenefit": "Free general admission",
     "eligibility": {
@@ -221,6 +223,7 @@ export const LISTING_EN = {
     "summary": "Visit participating Allen recreation centers for free on the first day of each month.",
     "finePrint": "A facility does not participate when the first falls on its closure day or a city holiday; normal facility rules still apply.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a family entering a modern community recreation center",
     "titleBase": "Allen Leap Days",
     "titleBenefit": "Free entry on the first of each month",
     "eligibility": {
@@ -244,6 +247,7 @@ export const LISTING_EN = {
     "summary": "Show a conference badge for participant-specific savings across Allen, including discounts, BOGO items, and selected freebies.",
     "finePrint": "Rates, exclusions, first-visit terms, and stacking rules vary by business; check the official participant list.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a conference attendee showing a badge at a local business counter",
     "titleBase": "Allen Show Your Badge Program",
     "titleBenefit": "Discounts and selected freebies",
     "eligibility": {
@@ -267,6 +271,7 @@ export const LISTING_EN = {
     "summary": "Hear local musicians at Home Plate on Friday evenings with no cover charge.",
     "finePrint": "No membership is required; walk-ins are welcome as space allows, but advance phone registration is encouraged.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of guests enjoying live music on an outdoor restaurant patio at dusk",
     "titleBase": "Arlington Summer Music Series",
     "titleBenefit": "Free Friday live music",
     "eligibility": {
@@ -291,6 +296,7 @@ export const LISTING_EN = {
     "summary": "Carrollton and Farmers Branch residents can receive a free library card after identity and address verification.",
     "finePrint": "Bring proof of current address if it differs from the ID; nonresident cards cost $40 per year.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a resident receiving a library card after identity and address verification",
     "titleBase": "Carrollton Public Library Card",
     "titleBenefit": "Free for eligible residents",
     "eligibility": {
@@ -316,6 +322,7 @@ export const LISTING_EN = {
     "summary": "Eligible SNAP EBT or WIC households can receive $3 daytime admission for up to six people.",
     "finePrint": "WIC participants need valid ID, and payment must be made with a non-EBT method.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a family presenting an eligibility card at a botanical-garden entrance",
     "titleBase": "Dallas Arboretum Museums for All",
     "titleBenefit": "$3 per person",
     "eligibility": {
@@ -342,6 +349,7 @@ export const LISTING_EN = {
     "summary": "Eligible seniors, riders with disabilities, Medicare recipients, and students age 6-18 can apply for reduced DCTA fares.",
     "finePrint": "The eligibility badge is not a fare pass; riders must still buy the applicable reduced fare or pass.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a senior and student preparing to board transit with reduced-fare eligibility",
     "titleBase": "DCTA Reduced Fares",
     "titleBenefit": "Discounts for seniors, disability, Medicare and students",
     "eligibility": {
@@ -368,6 +376,7 @@ export const LISTING_EN = {
     "summary": "Eligible SNAP, WIC, or Medicaid households receive free general admission for two adults and household children under 15.",
     "finePrint": "Bring applicable eligibility documentation and photo ID for the visit.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a family exploring a green botanical-garden path together",
     "titleBase": "Fort Worth Botanic Garden Access to Nature",
     "titleBenefit": "Free household general admission",
     "eligibility": {
@@ -394,6 +403,7 @@ export const LISTING_EN = {
     "summary": "Spend the day at The Star with live music, traditional games, and German food culture.",
     "finePrint": "Admission is free; food and beverages are sold separately.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of visitors enjoying traditional games and live music at an outdoor Oktoberfest",
     "titleBase": "7th Annual Frisco Oktoberfest",
     "eligibility": {
       "mode": "general",
@@ -416,6 +426,7 @@ export const LISTING_EN = {
     "summary": "GrapeFest offers complimentary admission all day Thursday in the Historic Main Street festival district.",
     "finePrint": "Wine experiences, carnival games, food, and some add-on activities may cost extra.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of visitors exploring booths and entertainment at a grape-themed street festival",
     "titleBase": "40th Annual GrapeFest Thursday",
     "titleBenefit": "Complimentary admission all day",
     "eligibility": {
@@ -439,6 +450,7 @@ export const LISTING_EN = {
     "summary": "Present an EBT card at the front desk for $5 admission per person for up to four people.",
     "finePrint": "The offer is not available online; present the EBT card at the front desk.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a visitor presenting an EBT card at a natural-science museum front desk",
     "titleBase": "Heard Museum Museums for All",
     "titleBenefit": "$5 each for up to 4",
     "eligibility": {
@@ -462,6 +474,7 @@ export const LISTING_EN = {
     "summary": "Enjoy free tribute-band performances on Saturday nights at the outdoor Toyota Music Factory Plaza through August.",
     "finePrint": "Outdoor shows begin at 9 PM; check the official page for same-day changes.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a crowd enjoying a tribute-band concert in an outdoor plaza on a summer night",
     "titleBase": "A Tribute to Summer Concert Series",
     "titleBenefit": "Free Saturday-night concerts",
     "eligibility": {
@@ -485,6 +498,7 @@ export const LISTING_EN = {
     "summary": "Present the printed coupon and code THECOLONY to receive up to two free toppings with a boba tea purchase.",
     "finePrint": "One-time dine-in use at The Colony location; limit one coupon per visit and table, and it cannot be combined with other offers.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a customer presenting a printed coupon and receiving boba tea with toppings",
     "titleBase": "Juice Box The Colony",
     "titleBenefit": "Up to 2 free boba toppings",
     "eligibility": {
@@ -508,6 +522,7 @@ export const LISTING_EN = {
     "summary": "Explore historic buildings and local heritage in Downtown Arlington with free admission.",
     "finePrint": "Saturday and Sunday hours differ.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of visitors exploring historic buildings in a small downtown heritage park",
     "titleBase": "Knapp Heritage Park",
     "titleBenefit": "Free admission",
     "eligibility": {
@@ -531,6 +546,7 @@ export const LISTING_EN = {
     "summary": "Enjoy free admission to horsemanship, live music, wrestling, and cultural performances inspired by a traditional charreada.",
     "finePrint": "On-site grass parking is $10; free parking and shuttle service run from Lewisville City Hall. Pets are not allowed on shuttles.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of spectators enjoying horsemanship and cultural performances in an outdoor arena",
     "titleBase": "Fiesta Charra 2026",
     "eligibility": {
       "mode": "general",
@@ -553,6 +569,7 @@ export const LISTING_EN = {
     "summary": "Texas residents can receive a free Lewisville Public Library card after identity and current-address verification.",
     "finePrint": "Texas residents outside Lewisville must apply in person, and minors have age-specific guardian requirements.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a Texas resident completing an application and receiving a library card",
     "titleBase": "Lewisville Public Library Card",
     "titleBenefit": "Free for Texas residents",
     "eligibility": {
@@ -578,6 +595,7 @@ export const LISTING_EN = {
     "summary": "Families can follow the 1.2-mile Towne Lake trail for trick-or-treating and children's activities.",
     "finePrint": "Check the official city calendar for weather-related changes.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of families trick-or-treating along an autumn park trail with children's activities",
     "titleBase": "McKinney Trick or Treat Trail",
     "eligibility": {
       "mode": "general",
@@ -600,6 +618,7 @@ export const LISTING_EN = {
     "summary": "Friday admission is free and includes the museum's permanent and special exhibitions.",
     "finePrint": "Free admission applies on Fridays; check the official page for same-day operating updates.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of visitors viewing contemporary art in a spacious museum gallery",
     "titleBase": "Modern Art Museum of Fort Worth",
     "titleBenefit": "Free admission Fridays",
     "eligibility": {
@@ -623,6 +642,7 @@ export const LISTING_EN = {
     "summary": "Use the free mobile pass to discover participating Plano restaurants and attractions, with participant-specific perks and check-in rewards.",
     "finePrint": "Offer terms vary by participating business, and pass registration is required.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of a visitor checking in with a mobile pass at a Plano restaurant",
     "titleBase": "2026 Plano Dine & Discover Pass",
     "titleBenefit": "Free mobile pass",
     "eligibility": {
@@ -647,6 +667,7 @@ export const LISTING_EN = {
     "summary": "Registered children 15 and under receive two free classic-lane games each day during published redemption hours.",
     "finePrint": "Shoe rental is not included; classic lanes are subject to availability, and the Rose Room is excluded.",
     "actionLabel": "Check official details",
+    "imageAlt": "An editorial image of children enjoying games together on classic indoor bowling lanes",
     "titleBase": "Strikz Kids Bowl Free",
     "titleBenefit": "2 free games daily for kids",
     "eligibility": {

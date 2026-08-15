@@ -11,11 +11,11 @@
     <meta name="theme-color" content="#f6f6f3" />
     <meta
       name="description"
-      content="Preview a personalized NearFree Radar using your DFW city, travel radius and interests."
+      content="Preview NearFree Radar matches using your DFW area, travel radius and interests before personalized member monitoring launches."
     />
     <title>Preview your NearFree Radar</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/styles.dca483b149e1.css" />
+    <link rel="stylesheet" href="assets/styles.bcb2ef4f2b48.css" />
   </head>
   <body
     data-page="radar"
@@ -105,14 +105,16 @@
         <div>
           <span class="radar-kicker"
             ><span class="radar-status-dot" aria-hidden="true"></span
-            ><span data-i18n="radarPageKicker">YOUR LOCAL WATCHLIST</span></span
+            ><span data-i18n="radarPageKicker"
+              >YOUR PERSONALIZED LOCAL RADAR</span
+            ></span
           >
           <h1 id="radarPageTitle" data-i18n="radarPageTitle">
-            Set it once. Let NearFree keep looking.
+            Choose your area and what should match.
           </h1>
           <p data-i18n="radarPageDesc">
-            Start with the catalog already live today. Your preview stays on
-            this device until secure accounts and notifications launch.
+            Preview matches from the public catalog today. Household and
+            eligibility settings will arrive with secure member accounts.
           </p>
           <div class="page-hero-actions">
             <button type="button" data-scroll-radar>
@@ -124,11 +126,12 @@
         <aside>
           <span data-i18n="radarPromiseLabel">RADAR PROMISE</span
           ><strong data-i18n="radarPromiseTitle"
-            >Fewer alerts. Better reasons to open them.</strong
+            >Your settings determine what Radar monitors.</strong
           >
           <p data-i18n="radarPromiseDesc">
-            Matching starts with distance and interests, then prioritizes new,
-            upcoming and ending-soon finds.
+            Area, radius and interests power this preview. Future member
+            settings can also reflect household and eligibility details you
+            choose to provide.
           </p>
         </aside>
       </section>
@@ -250,11 +253,11 @@
           </header>
           <div class="radar-preview-summary">
             <span
-              ><strong id="radarFreeCount">0</strong
-              ><small data-i18n="freeMatches">free</small></span
+              ><strong id="radarBenefitCount">0</strong
+              ><small data-i18n="benefitMatches">ongoing benefits</small></span
             ><span
               ><strong id="radarEventCount">0</strong
-              ><small data-i18n="eventMatches">dated events</small></span
+              ><small data-i18n="eventMatches">scheduled events</small></span
             >
           </div>
           <div class="radar-match-list" id="radarMatches"></div>
@@ -285,18 +288,18 @@
           </article>
           <article>
             <span>02</span>
-            <h3 data-i18n="radarBenefitAlertTitle">Useful alerts</h3>
+            <h3 data-i18n="radarBenefitAlertTitle">Matching-event alerts</h3>
             <p data-i18n="radarBenefitAlertDesc">
-              Choose weekly matches plus urgent new and ending-soon
-              notifications.
+              Choose when to hear about newly found, scheduled or changed
+              events and benefits that match your settings.
             </p>
           </article>
           <article>
             <span>03</span>
             <h3 data-i18n="radarBenefitControlTitle">Preference control</h3>
             <p data-i18n="radarBenefitControlDesc">
-              Manage area, radius, interests and notification frequency from one
-              account.
+              Manage area, radius, household, eligibility, interests and
+              notification frequency from one account.
             </p>
           </article>
         </div>
@@ -544,6 +547,6 @@
       >
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="assets/app.00c5a4aeb195.js"></script>
+    <script type="module" src="assets/app.4abd870f8bc1.js"></script>
   </body>
 </html>

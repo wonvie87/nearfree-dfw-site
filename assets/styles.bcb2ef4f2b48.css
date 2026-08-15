@@ -1231,6 +1231,7 @@ button, input, select { font: inherit; }
 .radar-match-item:hover strong { color: var(--blue); }
 .radar-match-signal { padding: 4px 6px; border-radius: 5px; background: #e8e9ff; color: var(--blue); }
 .radar-match-signal.signal-ending { background: #fff0ea; color: #c64c39; }
+.radar-match-signal.signal-happening { background: var(--trust-soft); color: var(--trust); }
 
 .how-section { padding-top: 116px; }
 .how-section .section-kicker { color: var(--blue); }
@@ -1395,7 +1396,6 @@ button, input, select { font: inherit; }
 .page-main { min-height: calc(100vh - 74px); }
 
 .landing-hero-copy { position: absolute; z-index: 2; top: 58%; left: 4.3%; width: min(620px, 56%); }
-.landing-hero-kicker, .landing-hero-desc { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 .landing-hero-actions { display: flex; align-items: center; gap: 13px; }
 .hero-primary, .hero-secondary {
   min-height: 50px;
@@ -1408,6 +1408,7 @@ button, input, select { font: inherit; }
   font-size: 13px;
   font-weight: 850;
   text-decoration: none;
+  cursor: pointer;
 }
 .hero-primary { background: var(--blue); color: white; box-shadow: 0 12px 26px rgba(89,91,255,.22); }
 .hero-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(89,91,255,.28); }
@@ -1589,11 +1590,7 @@ html[lang="ko"] :is(.home-section-heading h2, .home-promise h2, .home-membership
 @media (max-width: 860px) {
   .marketing-main, .page-main { padding-top: 0; }
   .landing-hero-copy { top: auto; right: 18px; bottom: 18px; left: 18px; width: auto; padding: 24px; border: 1px solid rgba(255,255,255,.6); border-radius: 22px 22px 22px 7px; background: rgba(255,253,248,.91); box-shadow: 0 18px 50px rgba(31,31,60,.16); backdrop-filter: blur(14px); }
-  .landing-hero-kicker, .landing-hero-desc, .landing-hero-title { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
-  .landing-hero-kicker { color: var(--blue); font-size: 9px; font-weight: 900; letter-spacing: .1em; }
-  .landing-hero-title { display: block; margin: 9px 0 8px; font-size: clamp(31px, 7vw, 48px); line-height: 1.02; letter-spacing: -.05em; text-wrap: balance; }
-  .landing-hero-desc { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
-  .landing-hero-actions { margin-top: 18px; }
+  .landing-hero-actions { margin-top: 0; }
   .home-choices, .home-promise, .home-membership, .radar-benefits, .radar-join-band, .verification-page, .trust-facts, .transparency-band, .plans-section, .pricing-principles, .pricing-faq, .pricing-cta-band, .page-hero, .explore-shell, .how-page-steps { width: calc(100% - 36px); }
   .home-choice-grid { grid-template-columns: 1fr; }
   .home-choice-featured { grid-column: auto; }
@@ -2056,10 +2053,7 @@ body {
     box-shadow: none;
     backdrop-filter: none;
   }
-  .landing-hero-kicker { color: var(--blue); }
-  .landing-hero-title { margin-top: 8px; font-size: clamp(30px, 7vw, 42px); line-height: 1.06; }
-  .landing-hero-desc { max-width: 580px; font-size: 14px; line-height: 1.6; }
-  .landing-hero-actions { margin-top: 20px; }
+  .landing-hero-actions { margin-top: 0; }
 
   .page-hero {
     width: calc(100% - 28px);
@@ -2103,7 +2097,6 @@ body {
   .marketing-main .radar-metrics strong { font-size: 22px; }
   .landing-hero { margin: 10px 10px 0; }
   .landing-hero-copy { padding: 22px 20px 20px; }
-  .landing-hero-title { font-size: clamp(29px, 9vw, 36px); }
   .landing-hero-actions { align-items: stretch; flex-direction: column; gap: 8px; }
   .hero-primary, .hero-secondary { min-height: 48px; }
 

@@ -97,6 +97,20 @@ export function overlapsWindow(listing, window) {
   return start < window.end && end >= window.start;
 }
 
+export function isRecentlyVerified(
+  listing,
+  now = new Date(),
+  days = 30,
+) {
+  const verifiedAt = new Date(listing.verifiedAt);
+  const elapsed = now - verifiedAt;
+  return (
+    Number.isFinite(verifiedAt.getTime()) &&
+    elapsed >= 0 &&
+    elapsed <= days * 86_400_000
+  );
+}
+
 export function distanceMiles(left, right) {
   const radians = (degrees) => degrees * Math.PI / 180;
   const earthRadius = 3958.8;
@@ -146,6 +160,9 @@ export function lowestPrice(listing, searchText) {
 
 export function matchesIntent(listing, intent, context) {
   const { now = new Date(), searchText, minimumPrice, timeZone = DFW_TIME_ZONE } = context;
+  if (intent === "events") return listing.kind === "event";
+  if (intent === "benefits") return listing.kind === "benefit";
+  if (intent === "recent") return isRecentlyVerified(listing, now);
   if (intent === "today") return overlapsWindow(listing, dayWindow(now, 0, timeZone));
   if (intent === "tomorrow") return overlapsWindow(listing, dayWindow(now, 1, timeZone));
   if (intent === "weekend") return overlapsWindow(listing, weekendWindow(now, timeZone));

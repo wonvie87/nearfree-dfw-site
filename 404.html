@@ -11,11 +11,11 @@
     <meta name="theme-color" content="#f6f6f3" />
     <meta
       name="description"
-      content="NearFree finds and verifies free and near-free benefits across DFW, then helps you decide what is worth your time."
+      content="NearFree finds and verifies local events and ongoing benefits across DFW, with personalized monitoring planned for members."
     />
-    <title>NearFree — DFW benefits, found and checked for you.</title>
+    <title>NearFree — Local events and benefits, all in one place.</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/styles.dca483b149e1.css" />
+    <link rel="stylesheet" href="assets/styles.bcb2ef4f2b48.css" />
   </head>
   <body
     data-page="home"
@@ -112,9 +112,6 @@
           fetchpriority="high"
         />
         <div class="landing-hero-copy">
-          <span class="landing-hero-kicker" data-i18n="homeHeroKicker"
-            >DFW, WITHOUT THE ENDLESS SEARCH</span
-          >
           <h1
             class="landing-hero-title"
             id="radarHeroTitle"
@@ -122,19 +119,17 @@
           >
             All your local benefits, in one place.
           </h1>
-          <p class="landing-hero-desc" data-i18n="homeHeroDesc">
-            Browse every verified find for free, or let Radar keep watch for the
-            ones that fit you.
-          </p>
           <div class="landing-hero-actions">
             <a class="hero-primary" href="explore.html"
-              ><span data-i18n="exploreFree">Explore free finds</span
+              ><span data-i18n="exploreNow">Explore now</span
               ><span aria-hidden="true">→</span></a
-            ><a
+            ><button
               class="hero-secondary"
-              href="radar.html"
-              data-i18n="previewYourRadar"
-              >Preview your Radar</a
+              type="button"
+              data-account-cta
+              data-account-intent="membership"
+              data-i18n="joinMembership"
+              >Join membership</button
             >
           </div>
         </div>
@@ -170,60 +165,61 @@
       >
         <header class="home-section-heading">
           <span class="section-kicker" data-i18n="homeChoicesKicker"
-            >CHOOSE YOUR PATH</span
+            >WHAT NEARFREE TRACKS</span
           >
           <h2 id="homeChoicesTitle" data-i18n="homeChoicesTitle">
-            What would help right now?
+            Happening now, coming up, and always available.
           </h2>
           <p data-i18n="homeChoicesDesc">
-            NearFree keeps discovery, personalization and trust separate so each
-            task stays simple.
+            Browse the complete public catalog by status. Price and eligibility
+            stay available as filters and full details.
           </p>
         </header>
         <div class="home-choice-grid">
-          <a class="home-choice-card home-choice-featured" href="explore.html"
-            ><img
-              src="assets/listings/dma-free-sunday-8118b1fb320c.webp"
-              alt=""
-              loading="lazy"
-            /><span class="home-choice-shade" aria-hidden="true"></span
-            ><span class="home-choice-copy"
-              ><small data-i18n="homeExploreEyebrow">BROWSE NOW</small
-              ><strong data-i18n="homeExploreTitle"
-                >Find something free or under $10</strong
-              ><span data-i18n="homeExploreDesc"
-                >Search by city, time, price and who is coming with you.</span
-              ><i aria-hidden="true">→</i></span
-            ></a
-          >
-          <a class="home-choice-card" href="radar.html"
+          <a
+            class="home-choice-card home-choice-featured"
+            href="explore.html?view=events"
             ><img
               src="assets/listings/denton-jazz-fest-ebd368db7857.webp"
               alt=""
               loading="lazy"
             /><span class="home-choice-shade" aria-hidden="true"></span
             ><span class="home-choice-copy"
-              ><small data-i18n="homeRadarEyebrow">PERSONALIZE</small
-              ><strong data-i18n="homeRadarTitle"
-                >Tell Radar what is worth watching</strong
-              ><span data-i18n="homeRadarDesc"
-                >Choose a city, travel radius and interests before
-                joining.</span
+              ><small data-i18n="homeEventsEyebrow">SCHEDULED EVENTS</small
+              ><strong data-i18n="homeEventsTitle"
+                >See what is happening now and what is coming up</strong
+              ><span data-i18n="homeEventsDesc"
+                >Browse verified events by date and location.</span
               ><i aria-hidden="true">→</i></span
             ></a
           >
-          <a class="home-choice-card" href="how-it-works.html"
+          <a class="home-choice-card" href="explore.html?view=benefits"
             ><img
               src="assets/listings/carrollton-library-card-free-7ab5558a2d58.webp"
               alt=""
               loading="lazy"
             /><span class="home-choice-shade" aria-hidden="true"></span
             ><span class="home-choice-copy"
-              ><small data-i18n="homeTrustEyebrow">CHECK THE WORK</small
-              ><strong data-i18n="homeTrustTitle"
-                >See why every published find is trusted</strong
-              ><span data-i18n="homeTrustDesc"
-                >Read the official-first, two-pass verification standard.</span
+              ><small data-i18n="homeBenefitsEyebrow">ONGOING BENEFITS</small
+              ><strong data-i18n="homeBenefitsTitle"
+                >Find benefits you can use beyond a single date</strong
+              ><span data-i18n="homeBenefitsDesc"
+                >See programs, passes and recurring local access.</span
+              ><i aria-hidden="true">→</i></span
+            ></a
+          >
+          <a class="home-choice-card" href="radar.html"
+            ><img
+              src="assets/listings/dma-free-sunday-8118b1fb320c.webp"
+              alt=""
+              loading="lazy"
+            /><span class="home-choice-shade" aria-hidden="true"></span
+            ><span class="home-choice-copy"
+              ><small data-i18n="homeRadarEyebrow">PERSONALIZED RADAR</small
+              ><strong data-i18n="homeRadarTitle"
+                >Set what NearFree should monitor for you</strong
+              ><span data-i18n="homeRadarDesc"
+                >Preview matches using your area, radius and interests.</span
               ><i aria-hidden="true">→</i></span
             ></a
           >
@@ -280,9 +276,9 @@
             Browse for free. Pay only when you want us to keep watching.
           </h2>
           <p data-i18n="homeMembershipDesc">
-            The public catalog stays open. Radar adds personalized monitoring,
-            saved-find change checks and timely alerts when the backend
-            launches.
+            The public catalog stays open. When accounts launch, Radar will use
+            the area, household details and interests you choose to monitor
+            matching events and benefits.
           </p>
           <div class="home-membership-actions">
             <a href="pricing.html" class="hero-primary"
@@ -473,6 +469,6 @@
       >
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="assets/app.00c5a4aeb195.js"></script>
+    <script type="module" src="assets/app.4abd870f8bc1.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.093589d1ed7a.js";
+import { UI, localizeListing } from "./locales.a4bf8deafa2b.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -7,12 +7,12 @@ import {
   dayWindow,
   DFW_TIME_ZONE,
   distanceMiles,
+  isRecentlyVerified,
   matchesIntent,
   overlapsWindow,
-  weekendWindow,
-} from "./discovery.121bc0c1385c.js";
+} from "./discovery.a64bc67323b8.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
-import { createListingTemplates } from "./listing-templates.a4c864365309.js";
+import { createListingTemplates } from "./listing-templates.fec61dded639.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -23,6 +23,11 @@ const storedSaved = storage.readJson("nearfree-saved");
 const storedLocale = storage.read("nearfree-locale");
 const storedScope = storage.read("nearfree-scope");
 const storedRadarValue = storage.readJson("nearfree-radar-preview");
+const initialUrl = new URL(window.location.href);
+const requestedView = initialUrl.searchParams.get("view");
+const initialIntents = new Set(
+  ["events", "benefits"].includes(requestedView) ? [requestedView] : [],
+);
 const storedLocationName =
   typeof storedLocationValue === "string"
     ? storedLocationValue
@@ -60,11 +65,11 @@ if (storedLocationValue !== null && storedLocation) {
 const state = {
   location: storedLocation || CITY_PRESETS[0],
   scope: initialScope,
-  intents: new Set(),
+  intents: initialIntents,
   sort: initialScope === "all" ? "soon" : "distance",
   search: "",
   saved: new Set(Array.isArray(storedSaved) ? storedSaved : []),
-  savedOnly: new URL(window.location.href).searchParams.get("saved") === "1",
+  savedOnly: initialUrl.searchParams.get("saved") === "1",
   locale: ["en", "ko"].includes(storedLocale) ? storedLocale : "en",
   radar: {
     city: radarCityName,
@@ -113,7 +118,7 @@ const elements = {
   radarCitySelect: $("#radarCitySelect"),
   radarRadiusSelect: $("#radarRadiusSelect"),
   radarMatchCount: $("#radarMatchCount"),
-  radarFreeCount: $("#radarFreeCount"),
+  radarBenefitCount: $("#radarBenefitCount"),
   radarEventCount: $("#radarEventCount"),
   radarPreviewArea: $("#radarPreviewArea"),
   radarMatches: $("#radarMatches"),
@@ -221,13 +226,12 @@ function isCurrentListing(listing, now = new Date()) {
   return !listing.end || new Date(listing.end) >= now;
 }
 
-function isRecentlyChecked(listing, now = new Date()) {
-  const checked = new Date(
-    String(listing.verifiedAt).includes("T")
-      ? listing.verifiedAt
-      : `${listing.verifiedAt}T00:00:00Z`,
+function isHappeningNow(listing, now = new Date()) {
+  return (
+    listing.kind === "event" &&
+    new Date(listing.start) <= now &&
+    (!listing.end || new Date(listing.end) >= now)
   );
-  return Number.isFinite(checked.getTime()) && now - checked <= 7 * 86_400_000;
 }
 
 function endsWithin(listing, days, now = new Date()) {
@@ -237,11 +241,15 @@ function endsWithin(listing, days, now = new Date()) {
 }
 
 function radarSignal(listing, now = new Date()) {
+  if (listing.kind === "event") {
+    if (isHappeningNow(listing, now)) {
+      return { key: "radarHappeningSignal", className: "signal-happening" };
+    }
+    return { key: "radarUpcomingSignal", className: "signal-upcoming" };
+  }
   if (endsWithin(listing, 30, now))
     return { key: "radarEndingSignal", className: "signal-ending" };
-  if (listing.kind === "event")
-    return { key: "radarUpcomingSignal", className: "signal-upcoming" };
-  if (isRecentlyChecked(listing, now))
+  if (isRecentlyVerified(listing, now))
     return { key: "radarNewSignal", className: "signal-new" };
   return { key: "radarAvailableSignal", className: "signal-available" };
 }
@@ -252,7 +260,7 @@ function renderRadarMetrics() {
   const current = LISTINGS.filter((listing) => isCurrentListing(listing, now));
   elements.radarAvailableCount.textContent = current.length;
   elements.radarNewCount.textContent = current.filter((listing) =>
-    isRecentlyChecked(listing, now),
+    isRecentlyVerified(listing, now),
   ).length;
   elements.radarEndingCount.textContent = current.filter((listing) =>
     endsWithin(listing, 30, now),
@@ -305,8 +313,8 @@ function renderRadarPreview() {
   const matches = currentRadarMatches();
   const now = new Date();
   elements.radarMatchCount.textContent = matches.length;
-  elements.radarFreeCount.textContent = matches.filter(
-    ({ listing }) => listing.costType === "free",
+  elements.radarBenefitCount.textContent = matches.filter(
+    ({ listing }) => listing.kind === "benefit",
   ).length;
   elements.radarEventCount.textContent = matches.filter(
     ({ listing }) => listing.kind === "event",
@@ -480,7 +488,7 @@ function verificationAge(value) {
   return t("verifiedOn", { date: formatVerifiedDate(value) });
 }
 
-function homeSections(listings) {
+function catalogSections(listings, now = new Date()) {
   const filteredMode =
     state.scope === "city" ||
     state.savedOnly ||
@@ -489,10 +497,6 @@ function homeSections(listings) {
   if (filteredMode) return [{ key: "results", items: listings }];
 
   const pool = [...listings];
-  const currentWeekend = weekendWindow(new Date());
-  const minimumPriceFor = (listing) =>
-    discoveryIndex().recordById.get(listing.id)?.minimumPrice ??
-    Number.POSITIVE_INFINITY;
   const take = (predicate, limit) => {
     const selected = [];
     for (let index = 0; index < pool.length && selected.length < limit; ) {
@@ -502,23 +506,25 @@ function homeSections(listings) {
     return selected;
   };
 
-  const good = take(() => true, 4);
-  const worth = take((listing) => listing.kind === "event", 4);
-  const weekend = take(
-    (listing) =>
-      listing.costType === "free" && overlapsWindow(listing, currentWeekend),
+  const happening = take(
+    (listing) => isHappeningNow(listing, now),
     4,
   );
-  const budget = take(
+  const upcoming = take(
     (listing) =>
-      listing.costType === "discount" && minimumPriceFor(listing) <= 10,
+      listing.kind === "event" && new Date(listing.start) > now,
     4,
   );
+  const ongoing = take(
+    (listing) => listing.kind === "benefit" && new Date(listing.start) <= now,
+    4,
+  );
+  const recent = take((listing) => isRecentlyVerified(listing, now), 4);
   return [
-    { key: "good", items: good },
-    { key: "worth", items: worth },
-    { key: "weekend", items: weekend },
-    { key: "budget", items: budget },
+    { key: "happening", items: happening },
+    { key: "upcoming", items: upcoming },
+    { key: "ongoing", items: ongoing },
+    { key: "recent", items: recent },
     { key: "more", items: pool },
   ].filter((section) => section.items.length > 0);
 }
@@ -527,7 +533,7 @@ function renderFeed() {
   if (!elements.feed) return;
   const listings = sortedListings();
   let startIndex = 0;
-  elements.feed.innerHTML = homeSections(listings)
+  elements.feed.innerHTML = catalogSections(listings)
     .map((section) => {
       const markup = templates.sectionTemplate(section, startIndex);
       startIndex += section.items.length;
@@ -602,6 +608,16 @@ function updateIntentUI() {
   }
 }
 
+function syncCatalogViewQuery() {
+  const url = new URL(window.location.href);
+  const view = ["events", "benefits"].find((intent) =>
+    state.intents.has(intent),
+  );
+  if (view) url.searchParams.set("view", view);
+  else url.searchParams.delete("view");
+  history.replaceState(history.state, "", url);
+}
+
 function toggleIntentFilter(chip) {
   const intent = chip.dataset.intent;
   const group = chip.dataset.intentGroup || chip.dataset.clearGroup;
@@ -610,6 +626,7 @@ function toggleIntentFilter(chip) {
   );
   if (intent && chip.getAttribute("aria-pressed") !== "true")
     state.intents.add(intent);
+  syncCatalogViewQuery();
   renderFeed();
 }
 
@@ -628,6 +645,7 @@ function removeActiveFilter(key) {
   } else if (key.startsWith("intent:")) {
     state.intents.delete(key.slice("intent:".length));
   }
+  syncCatalogViewQuery();
   renderFeed();
 }
 
@@ -1022,6 +1040,7 @@ function resetFilters() {
   state.intents.clear();
   state.search = "";
   state.savedOnly = false;
+  syncCatalogViewQuery();
   persistArea();
   elements.searchInput.value = "";
   elements.searchClear.hidden = true;

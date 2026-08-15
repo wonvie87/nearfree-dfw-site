@@ -137,14 +137,8 @@ export function createListingTemplates(context) {
 
   function sectionTemplate(section, startIndex) {
     const sectionName = section.key[0].toUpperCase() + section.key.slice(1);
-    const titleKey =
-      section.key === "good" && isAllDfw()
-        ? "sectionGoodAll"
-        : `section${sectionName}`;
-    const descKey =
-      section.key === "good" && isAllDfw()
-        ? "sectionGoodAllDesc"
-        : `section${sectionName}Desc`;
+    const titleKey = `section${sectionName}`;
+    const descKey = `${titleKey}Desc`;
     return `
       <section class="listing-section" aria-labelledby="section-${section.key}">
         <div class="listing-section-head">

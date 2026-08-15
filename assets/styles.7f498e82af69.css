@@ -1785,6 +1785,7 @@ body {
 .listing-card,
 .listing-card:nth-child(4n + 1),
 .listing-card:nth-child(4n + 4) {
+  --card-stagger: 0px;
   width: 100%;
   margin-top: 0;
   justify-self: stretch;
@@ -1792,8 +1793,13 @@ body {
   border-radius: 18px;
   background: var(--card);
   box-shadow: 0 5px 18px rgba(25, 26, 32, .045);
+  transform: translateY(var(--card-stagger));
 }
-.listing-card:hover { transform: translateY(-3px); border-color: #b9b8db; box-shadow: 0 15px 34px rgba(35, 34, 59, .10); }
+.listing-card:nth-child(even) {
+  --card-stagger: 24px;
+  margin-top: 0;
+}
+.listing-card:hover { transform: translateY(calc(var(--card-stagger) - 3px)); border-color: #b9b8db; box-shadow: 0 15px 34px rgba(35, 34, 59, .10); }
 .listing-media,
 .listing-card:nth-child(odd) .listing-media { aspect-ratio: 3 / 2; background: #e8e8e4; }
 .listing-save { width: 44px; height: 44px; background: rgba(28, 29, 46, .74); }
@@ -2342,6 +2348,7 @@ body {
   .listing-section-head .listing-section-heading-copy p { display: none; }
   .listing-section-month .listing-section-head p { display: block; }
   .listing-grid { gap: 26px; }
+  .listing-card:nth-child(even) { --card-stagger: 0px; }
 }
 
 @media (max-width: 680px) {

@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.7903c29c9541.js";
+import { UI, localizeListing } from "./locales.bc1beaf34f77.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -10,7 +10,7 @@ import {
   isRecentlyVerified,
   matchesIntent,
   overlapsWindow,
-} from "./discovery.a64bc67323b8.js";
+} from "./discovery.0a90b89aa3ef.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
 import { createListingTemplates } from "./listing-templates.2ac12e42e131.js";
 
@@ -585,10 +585,34 @@ function catalogSections(listings, now = new Date()) {
 
   const events = listings.filter((listing) => listing.kind === "event");
   const benefits = listings.filter((listing) => listing.kind === "benefit");
-  const happening = events.filter((listing) => isHappeningNow(listing, now));
+  const recent = listings
+    .filter((listing) => isRecentlyVerified(listing, now))
+    .sort(
+      (left, right) =>
+        new Date(right.verifiedAt) - new Date(left.verifiedAt),
+    );
+  const recentIds = new Set(recent.map((listing) => listing.id));
+  const remainingEvents = events.filter(
+    (listing) => !recentIds.has(listing.id),
+  );
+  const remainingBenefits = benefits.filter(
+    (listing) => !recentIds.has(listing.id),
+  );
+  const happening = remainingEvents.filter((listing) =>
+    isHappeningNow(listing, now),
+  );
   const happeningIds = new Set(happening.map((listing) => listing.id));
-  const upcoming = events.filter((listing) => !happeningIds.has(listing.id));
+  const upcoming = remainingEvents.filter(
+    (listing) => !happeningIds.has(listing.id),
+  );
   return [
+    recent.length
+      ? {
+          key: "recent",
+          items: recent.slice(0, 6),
+          total: recent.length,
+        }
+      : null,
     happening.length
       ? {
           key: "happening",
@@ -605,10 +629,10 @@ function catalogSections(listings, now = new Date()) {
           catalogView: "events",
         }
       : null,
-    benefits.length
+    remainingBenefits.length
       ? {
           key: "ongoing",
-          items: benefits.slice(0, 6),
+          items: remainingBenefits.slice(0, 6),
           total: benefits.length,
           catalogView: "benefits",
         }
@@ -711,9 +735,8 @@ function updateCatalogViewUI() {
       }[state.catalogView],
     );
   }
-  $("#quickIntentChips")?.toggleAttribute(
-    "hidden",
-    state.catalogView === "benefits",
+  $$("[data-quick-event-filter]").forEach((filter) =>
+    filter.toggleAttribute("hidden", state.catalogView === "benefits"),
   );
   $("#whenFilterGroup")?.toggleAttribute(
     "hidden",

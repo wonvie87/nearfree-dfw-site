@@ -100,7 +100,7 @@ export function overlapsWindow(listing, window) {
 export function isRecentlyVerified(
   listing,
   now = new Date(),
-  days = 30,
+  days = 7,
 ) {
   const verifiedAt = new Date(listing.verifiedAt);
   const elapsed = now - verifiedAt;

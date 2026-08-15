@@ -6,6 +6,7 @@ export function createListingTemplates(context) {
     formatDistance,
     getTimeStatus,
     isAllDfw,
+    isEndingSoon,
     isSaved,
     mapUrl,
     similarListings,
@@ -36,6 +37,16 @@ export function createListingTemplates(context) {
     return listing.eligibility?.mode === "conditional"
       ? `<span class="listing-condition-badge">${escapeHtml(t("conditionalEligibility"))}</span>`
       : "";
+  }
+
+  function compactConditionBadge(listing) {
+    if (listing.eligibility?.mode === "conditional") {
+      return `<span class="listing-card-condition">${escapeHtml(t("conditionalEligibility"))}</span>`;
+    }
+    if (listing.booking?.mode === "required") {
+      return `<span class="listing-card-condition">${escapeHtml(t("reservationRequiredShort"))}</span>`;
+    }
+    return "";
   }
 
   const categoryToneClasses = Object.freeze({
@@ -106,6 +117,13 @@ export function createListingTemplates(context) {
     const costLabel = t(
       listing.costType === "free" ? "valueFreeLabel" : "dealLabel",
     );
+    const place = isAllDfw()
+      ? listing.city
+      : [
+          listing.city,
+          formatDistance(context.distanceFromSelected(listing)),
+        ].join(" · ");
+    const dateClass = isEndingSoon(listing) ? " is-urgent" : "";
     return `
       <article class="listing-card listing-${listing.kind} ${tone}" data-id="${listing.id}">
         <div class="listing-media">
@@ -116,20 +134,21 @@ export function createListingTemplates(context) {
             <svg viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
           </button>
         </div>
-        <div class="listing-body">
+        <button class="listing-body" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
           <div class="listing-card-meta">
-            ${dateTime ? `<time class="listing-card-date" datetime="${escapeHtml(dateTime)}">${escapeHtml(cardDate)}</time>` : `<span class="listing-card-date">${escapeHtml(cardDate)}</span>`}
+            ${dateTime ? `<time class="listing-card-date${dateClass}" datetime="${escapeHtml(dateTime)}">${escapeHtml(cardDate)}</time>` : `<span class="listing-card-date${dateClass}">${escapeHtml(cardDate)}</span>`}
             <div class="listing-card-tags">
-              <span>${escapeHtml(categoryLabel(listing))}</span>
               <span class="listing-cost-tag ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(costLabel)}</span>
             </div>
           </div>
-          <button class="listing-title" data-action="details" type="button" aria-label="${escapeHtml(listing.title)}">
+          <span class="listing-title">
             <span>${escapeHtml(listing.title)}</span>
             <span class="listing-open-arrow" aria-hidden="true">↗</span>
-          </button>
-          <p class="listing-card-hook">${escapeHtml(listing.cardHook || listing.summary)}</p>
-        </div>
+          </span>
+          <span class="listing-card-place">${escapeHtml(place)}</span>
+          <span class="listing-card-hook">${escapeHtml(listing.cardHook || listing.summary)}</span>
+          ${compactConditionBadge(listing)}
+        </button>
       </article>`;
   }
 

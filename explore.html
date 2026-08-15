@@ -15,7 +15,7 @@
     />
     <title>Explore verified DFW benefits | NearFree</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/styles.db419855ddd4.css" />
+    <link rel="stylesheet" href="assets/styles.f37c1c561291.css" />
   </head>
   <body
     data-page="explore"
@@ -175,13 +175,101 @@
                 ×
               </button>
             </div>
-            <div
-              class="intent-scroll"
-              id="intentChips"
-              role="group"
-              aria-label="Quick discovery filters"
-              data-i18n-aria="intentAria"
+            <div class="quick-filter-bar">
+              <div
+                class="quick-intents"
+                id="quickIntentChips"
+                role="group"
+                aria-label="Popular filters"
+                data-i18n-aria="quickFiltersAria"
+              >
+                <button
+                  class="quick-intent"
+                  data-intent="today"
+                  data-intent-group="when"
+                  data-i18n="intentToday"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Today</button
+                ><button
+                  class="quick-intent"
+                  data-intent="weekend"
+                  data-intent-group="when"
+                  data-i18n="intentWeekend"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  This weekend</button
+                ><button
+                  class="quick-intent value-intent"
+                  data-intent="free"
+                  data-intent-group="price"
+                  data-i18n="intentFree"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Free</button
+                ><button
+                  class="quick-intent"
+                  data-intent="kids"
+                  data-intent-group="audience"
+                  data-i18n="intentKids"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Kids
+                </button>
+              </div>
+              <button
+                class="all-filters-button"
+                id="allFiltersButton"
+                type="button"
+                aria-haspopup="dialog"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 7h16M7 12h10M10 17h4" />
+                </svg>
+                <span data-i18n="allFilters">All filters</span>
+                <strong id="filterCount" hidden>0</strong>
+              </button>
+            </div>
+            <dialog
+              class="sheet filter-sheet"
+              id="filterDialog"
+              aria-labelledby="filterDialogTitle"
+              aria-describedby="filterDialogDesc"
             >
+              <div class="sheet-handle" aria-hidden="true"></div>
+              <div class="filter-sheet-head">
+                <div>
+                  <span class="section-kicker" data-i18n="filterKicker"
+                    >DISCOVER</span
+                  >
+                  <h2 id="filterDialogTitle" data-i18n="filtersTitle">
+                    Filter finds
+                  </h2>
+                  <p id="filterDialogDesc" data-i18n="filtersDesc">
+                    Choose only what matters right now.
+                  </p>
+                </div>
+                <button
+                  class="sheet-close"
+                  type="button"
+                  data-close
+                  aria-label="Close"
+                  data-i18n-aria="close"
+                >
+                  ×
+                </button>
+              </div>
+              <div
+                class="intent-scroll"
+                id="intentChips"
+                role="group"
+                aria-label="Quick discovery filters"
+                data-i18n-aria="intentAria"
+              >
               <div
                 class="intent-group"
                 role="group"
@@ -388,8 +476,30 @@
                   Festivals
                 </button>
               </div>
-            </div>
+              </div>
+              <button class="filter-apply" id="filterApply" type="button">
+                <span data-i18n="showResults">Show results</span>
+                <strong id="filterResultCount">0</strong>
+              </button>
+            </dialog>
           </section>
+          <a class="feed-trust-strip" href="how-it-works.html#verification">
+            <span class="feed-trust-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m12 3 7 3v5c0 4.8-2.9 8.2-7 10-4.1-1.8-7-5.2-7-10V6z" />
+                <path d="m8.5 12 2.2 2.2 4.8-5" />
+              </svg>
+            </span>
+            <span>
+              <strong data-i18n="verifiedFeedTitle"
+                >Every find checked twice</strong
+              >
+              <small data-i18n="verifiedFeedDesc"
+                >Official sources first, then a separate conflict check.</small
+              >
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
           <div class="results-toolbar" id="resultsToolbar">
             <div class="results-count">
               <strong
@@ -409,7 +519,7 @@
             </button>
           </div>
           <div class="active-notice" id="activeNotice" hidden>
-            <span id="activeNoticeText"></span
+            <div class="active-filter-list" id="activeNoticeText"></div
             ><button
               id="clearAllFilters"
               type="button"
@@ -727,6 +837,6 @@
       >
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="assets/app.ad4897028f40.js"></script>
+    <script type="module" src="assets/app.b86d89b22f4f.js"></script>
   </body>
 </html>

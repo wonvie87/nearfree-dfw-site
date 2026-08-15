@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.5371805da3e4.js";
+import { UI, localizeListing } from "./locales.23165225e6d2.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -12,7 +12,7 @@ import {
   weekendWindow,
 } from "./discovery.121bc0c1385c.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
-import { createListingTemplates } from "./listing-templates.e98c8be5dcfa.js";
+import { createListingTemplates } from "./listing-templates.5243ba5359f5.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -93,6 +93,9 @@ const elements = {
   detailSave: $("#detailSave"),
   detailShare: $("#detailShare"),
   sortDialog: $("#sortDialog"),
+  filterDialog: $("#filterDialog"),
+  filterResultCount: $("#filterResultCount"),
+  filterCount: $("#filterCount"),
   modalBackdrop: $("#modalBackdrop"),
   searchInput: $("#searchInput"),
   searchClear: $("#searchClear"),
@@ -121,6 +124,7 @@ const elements = {
 };
 
 let toastTimer;
+let detailOriginScrollY = null;
 const discoveryIndexes = new Map();
 const RADAR_INTEREST_CATEGORIES = Object.freeze({
   family: ["family"],
@@ -531,6 +535,8 @@ function renderFeed() {
     })
     .join("");
   elements.resultCount.textContent = listings.length;
+  if (elements.filterResultCount)
+    elements.filterResultCount.textContent = listings.length;
   elements.emptyState.hidden = listings.length > 0;
   elements.feed.hidden = listings.length === 0;
   updateActiveNotice();
@@ -543,25 +549,42 @@ function updateActiveNotice() {
   if (!elements.activeNotice || !elements.activeNoticeText) return;
   const notices = [];
   if (state.scope === "city")
-    notices.push(
-      t("cityOnly", { city: state.location.label || state.location.name }),
-    );
+    notices.push({
+      key: "scope",
+      label: t("cityOnly", {
+        city: state.location.label || state.location.name,
+      }),
+    });
   if (state.scope === "nearby")
-    notices.push(
-      t("sortedNear", { city: state.location.label || state.location.name }),
-    );
-  if (state.savedOnly) notices.push(t("savedOnly"));
-  if (state.search) notices.push(t("searchResults", { query: state.search }));
+    notices.push({
+      key: "scope",
+      label: t("sortedNear", {
+        city: state.location.label || state.location.name,
+      }),
+    });
+  if (state.savedOnly)
+    notices.push({ key: "saved", label: t("savedOnly") });
+  if (state.search)
+    notices.push({
+      key: "search",
+      label: t("searchResults", { query: state.search }),
+    });
   state.intents.forEach((intent) => {
-    const chip = $(`.intent-chip[data-intent="${intent}"]`);
-    if (chip) notices.push(chip.textContent.trim());
+    const chip = $(`[data-intent="${intent}"]`);
+    if (chip)
+      notices.push({ key: `intent:${intent}`, label: chip.textContent.trim() });
   });
   elements.activeNotice.hidden = notices.length === 0;
-  elements.activeNoticeText.textContent = notices.join(" · ");
+  elements.activeNoticeText.innerHTML = notices
+    .map(
+      ({ key, label }) =>
+        `<button type="button" data-remove-filter="${escapeHtml(key)}" aria-label="${escapeHtml(t("removeFilter", { filter: label }))}"><span>${escapeHtml(label)}</span><span aria-hidden="true">×</span></button>`,
+    )
+    .join("");
 }
 
 function updateIntentUI() {
-  $$(".intent-chip").forEach((chip) => {
+  $$(".intent-chip, .quick-intent").forEach((chip) => {
     const group = chip.dataset.clearGroup;
     const active = chip.dataset.intent
       ? state.intents.has(chip.dataset.intent)
@@ -573,6 +596,39 @@ function updateIntentUI() {
     chip.classList.toggle("active", active);
     chip.setAttribute("aria-pressed", String(active));
   });
+  if (elements.filterCount) {
+    elements.filterCount.textContent = state.intents.size;
+    elements.filterCount.hidden = state.intents.size === 0;
+  }
+}
+
+function toggleIntentFilter(chip) {
+  const intent = chip.dataset.intent;
+  const group = chip.dataset.intentGroup || chip.dataset.clearGroup;
+  $$(`[data-intent-group="${group}"]`).forEach((item) =>
+    state.intents.delete(item.dataset.intent),
+  );
+  if (intent && chip.getAttribute("aria-pressed") !== "true")
+    state.intents.add(intent);
+  renderFeed();
+}
+
+function removeActiveFilter(key) {
+  if (key === "scope") {
+    state.scope = "all";
+    if (state.sort === "distance") state.sort = "soon";
+    persistArea();
+    updateLocationUI();
+  } else if (key === "saved") {
+    state.savedOnly = false;
+  } else if (key === "search") {
+    state.search = "";
+    if (elements.searchInput) elements.searchInput.value = "";
+    if (elements.searchClear) elements.searchClear.hidden = true;
+  } else if (key.startsWith("intent:")) {
+    state.intents.delete(key.slice("intent:".length));
+  }
+  renderFeed();
 }
 
 function updateSavedCount() {
@@ -774,6 +830,7 @@ const templates = createListingTemplates({
   formatDistance,
   getTimeStatus,
   isAllDfw: () => state.scope === "all",
+  isEndingSoon: (listing) => endsWithin(listing, 30),
   isSaved: (id) => state.saved.has(id),
   mapUrl,
   similarListings,
@@ -820,12 +877,20 @@ function openDetails(id) {
     window.location.href = `explore.html?listing=${encodeURIComponent(id)}`;
     return;
   }
+  const wasOpen = Boolean(elements.detailDialog.open);
+  if (!wasOpen) detailOriginScrollY = window.scrollY;
   renderListingDetail(listing);
   openDialog(elements.detailDialog);
   const url = new URL(window.location.href);
   if (url.searchParams.get("listing") !== id) {
     url.searchParams.set("listing", id);
-    history.pushState({ listing: id }, "", url);
+    const routeState = {
+      ...(history.state || {}),
+      listing: id,
+      nearfreeDetail: true,
+    };
+    if (wasOpen) history.replaceState(routeState, "", url);
+    else history.pushState(routeState, "", url);
   }
 }
 
@@ -841,7 +906,17 @@ function clearListingRoute() {
   const url = new URL(window.location.href);
   if (!url.searchParams.has("listing")) return;
   url.searchParams.delete("listing");
-  history.replaceState({}, "", url);
+  const routeState = { ...(history.state || {}) };
+  delete routeState.listing;
+  delete routeState.nearfreeDetail;
+  history.replaceState(routeState, "", url);
+}
+
+function restoreDetailOrigin() {
+  if (detailOriginScrollY === null) return;
+  const targetScrollY = detailOriginScrollY;
+  detailOriginScrollY = null;
+  requestAnimationFrame(() => window.scrollTo({ top: targetScrollY }));
 }
 
 function openDialog(dialog) {
@@ -860,6 +935,7 @@ function closeDialogs({ clearRoute = true } = {}) {
     elements.locationDialog,
     elements.detailDialog,
     elements.sortDialog,
+    elements.filterDialog,
     elements.accountDialog,
   ].forEach((dialog) => {
     if (dialog?.open) dialog.close();
@@ -869,6 +945,22 @@ function closeDialogs({ clearRoute = true } = {}) {
   document.body.classList.remove("modal-open");
   if (clearRoute) clearListingRoute();
   if (closedDetail && clearRoute) applyStaticTranslations();
+}
+
+function requestCloseDialogs() {
+  const url = new URL(window.location.href);
+  if (elements.detailDialog?.open && url.searchParams.has("listing")) {
+    if (history.state?.nearfreeDetail) {
+      history.back();
+      return;
+    }
+    clearListingRoute();
+    closeDialogs({ clearRoute: false });
+    applyStaticTranslations();
+    restoreDetailOrigin();
+    return;
+  }
+  closeDialogs();
 }
 
 function toggleSave(id) {
@@ -1022,18 +1114,18 @@ function bindEvents() {
     elements.searchInput.focus();
   });
 
-  $("#intentChips")?.addEventListener("click", (event) => {
-    const chip = event.target.closest(".intent-chip");
-    if (!chip) return;
-    const intent = chip.dataset.intent;
-    const group = chip.dataset.intentGroup || chip.dataset.clearGroup;
-    $$(`[data-intent-group="${group}"]`).forEach((item) =>
-      state.intents.delete(item.dataset.intent),
+  [$("#intentChips"), $("#quickIntentChips")]
+    .filter(Boolean)
+    .forEach((container) =>
+      container.addEventListener("click", (event) => {
+        const chip = event.target.closest(".intent-chip, .quick-intent");
+        if (chip) toggleIntentFilter(chip);
+      }),
     );
-    if (intent && chip.getAttribute("aria-pressed") !== "true")
-      state.intents.add(intent);
-    renderFeed();
-  });
+  $("#allFiltersButton")?.addEventListener("click", () =>
+    openDialog(elements.filterDialog),
+  );
+  $("#filterApply")?.addEventListener("click", closeDialogs);
 
   $("#sortButton")?.addEventListener("click", () => {
     $$("[data-sort]", elements.sortDialog).forEach((button) => {
@@ -1113,27 +1205,32 @@ function bindEvents() {
   $("#mobileSaved")?.addEventListener("click", toggleSavedOnly);
 
   $("#clearAllFilters")?.addEventListener("click", resetFilters);
+  elements.activeNotice?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-remove-filter]");
+    if (button) removeActiveFilter(button.dataset.removeFilter);
+  });
   $("#emptyReset")?.addEventListener("click", resetFilters);
   $$("[data-account-cta]").forEach((button) =>
     button.addEventListener("click", () =>
       openAccountNotice(button.dataset.accountIntent),
     ),
   );
-  elements.modalBackdrop?.addEventListener("click", closeDialogs);
+  elements.modalBackdrop?.addEventListener("click", requestCloseDialogs);
   $$("[data-close]").forEach((button) =>
-    button.addEventListener("click", closeDialogs),
+    button.addEventListener("click", requestCloseDialogs),
   );
   [
     elements.locationDialog,
     elements.detailDialog,
     elements.sortDialog,
+    elements.filterDialog,
     elements.accountDialog,
   ]
     .filter(Boolean)
     .forEach((dialog) => {
       dialog.addEventListener("cancel", (event) => {
         event.preventDefault();
-        closeDialogs();
+        requestCloseDialogs();
       });
     });
   window.addEventListener("popstate", () => {
@@ -1144,6 +1241,8 @@ function bindEvents() {
       openDialog(elements.detailDialog);
     } else {
       closeDialogs({ clearRoute: false });
+      applyStaticTranslations();
+      restoreDetailOrigin();
     }
   });
 }
@@ -1170,6 +1269,15 @@ function init() {
     sourceListing(initialListingId)
   ) {
     const listing = sourceListing(initialListingId);
+    history.replaceState(
+      {
+        ...(history.state || {}),
+        listing: initialListingId,
+        nearfreeDetail: false,
+      },
+      "",
+      window.location.href,
+    );
     renderListingDetail(listing);
     openDialog(elements.detailDialog);
   } else if (initialListingId) {

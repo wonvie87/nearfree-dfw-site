@@ -1,7 +1,6 @@
 export function createListingTemplates(context) {
   const {
     compactCost,
-    displayCost,
     escapeHtml,
     formatDistance,
     getTimeStatus,
@@ -26,12 +25,6 @@ export function createListingTemplates(context) {
     return listing.image
       ? `<img src="${escapeHtml(listing.image)}" alt="${escapeHtml(alt)}" loading="${loading}" />`
       : `<span class="${className}" aria-hidden="true"><span>NearFree</span></span>`;
-  }
-
-  function conditionalBadge(listing) {
-    return listing.eligibility?.mode === "conditional"
-      ? `<span class="listing-condition-badge">${escapeHtml(t("conditionalEligibility"))}</span>`
-      : "";
   }
 
   const categoryToneClasses = Object.freeze({
@@ -162,11 +155,58 @@ export function createListingTemplates(context) {
       </button>`;
   }
 
+  function expectationTemplate(description) {
+    if (description.length === 1) {
+      return `<p class="detail-expectation-summary">${escapeHtml(description[0])}</p>`;
+    }
+
+    return `<div class="detail-expectation-list">
+      ${description
+        .map(
+          (paragraph, index) => `
+        <article class="detail-expectation">
+          <span class="detail-expectation-mark">${String(index + 1).padStart(2, "0")}</span>
+          <p>${escapeHtml(paragraph)}</p>
+        </article>`,
+        )
+        .join("")}
+    </div>`;
+  }
+
+  function usefulDetailsTemplate(listing, practicalTips) {
+    if (!practicalTips.length && !listing.finePrint) return "";
+
+    return `
+      <section class="detail-section useful-section">
+        <span class="detail-section-kicker">${escapeHtml(t("usefulKicker"))}</span>
+        <h3>${escapeHtml(t("usefulToKnow"))}</h3>
+        ${
+          practicalTips.length
+            ? `<section class="practical-tips" aria-labelledby="practicalTipsTitle">
+          <h4 id="practicalTipsTitle">${escapeHtml(t("practicalTips"))}</h4>
+          <ul class="practical-tip-list">
+            ${practicalTips.map((tip) => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
+          </ul>
+        </section>`
+            : ""
+        }
+        ${
+          listing.finePrint
+            ? `<aside class="before-callout">
+          <span class="before-callout-mark" aria-hidden="true">!</span>
+          <div><h4>${escapeHtml(t("beforeGo"))}</h4><p>${escapeHtml(listing.finePrint)}</p></div>
+        </aside>`
+            : ""
+        }
+      </section>`;
+  }
+
   function detailTemplate(listing) {
     const distance = formatDistance(context.distanceFromSelected(listing));
     const similar = similarListings(listing);
     const description = listing.description || [];
     const practicalTips = listing.practicalTips || [];
+    const hasUsefulDetails = practicalTips.length > 0 || Boolean(listing.finePrint);
     const bookingDetail = listing.booking?.detail || listing.reservation;
     const eligibilityDetail = listing.eligibility?.detail || "";
     const tone = categoryToneClass(listing);
@@ -176,10 +216,6 @@ export function createListingTemplates(context) {
           ${listing.image ? `<figure class="detail-photo">${imageOrPlaceholder(listing, "detail-media-placeholder", "eager")}<figcaption>${escapeHtml(t("editorialVisual"))}</figcaption></figure>` : ""}
           <section class="detail-decision">
             <div class="detail-eyebrow"><span>${escapeHtml(categoryLabel(listing))}</span><span>${escapeHtml(kindLabel(listing))}</span></div>
-            <div class="detail-price-row">
-              <span class="detail-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(displayCost(listing))}</span>
-              ${conditionalBadge(listing)}
-            </div>
             <h2 id="detailTitle" aria-label="${escapeHtml(listing.title)}">${detailTitleContent(listing)}</h2>
             <p class="detail-overview">${escapeHtml(listing.overview || listing.summary)}</p>
             <div class="detail-primary-facts">
@@ -193,24 +229,14 @@ export function createListingTemplates(context) {
             </div>
           </section>
         </div>
-        <div class="detail-content-grid">
+        <div class="detail-content-grid${hasUsefulDetails ? " has-useful-details" : ""}">
           <main class="detail-story">
             ${
               description.length
                 ? `<section class="detail-section experience-section">
               <span class="detail-section-kicker">${escapeHtml(t("experienceKicker"))}</span>
               <h3>${escapeHtml(t("whatToExpect"))}</h3>
-              <div class="detail-expectation-list">
-                ${description
-                  .map(
-                    (paragraph, index) => `
-                  <article class="detail-expectation">
-                    <span class="detail-expectation-mark">${String(index + 1).padStart(2, "0")}</span>
-                    <p>${escapeHtml(paragraph)}</p>
-                  </article>`,
-                  )
-                  .join("")}
-              </div>
+              ${expectationTemplate(description)}
             </section>`
                 : ""
             }
@@ -245,55 +271,37 @@ export function createListingTemplates(context) {
                   <div><span>${escapeHtml(t("addressLabel"))}</span><strong>${escapeHtml(listing.address)}</strong></div>
                 </article>
               </div>
-              ${
-                practicalTips.length
-                  ? `
-                <section class="practical-tips" aria-labelledby="practicalTipsTitle">
-                  <h4 id="practicalTipsTitle">${escapeHtml(t("practicalTips"))}</h4>
-                  <ul class="practical-tip-list">
-                    ${practicalTips.map((tip) => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
-                  </ul>
-                </section>`
-                  : ""
-              }
-              ${
-                listing.finePrint
-                  ? `<aside class="before-callout">
-                <span class="before-callout-mark" aria-hidden="true">!</span>
-                <div><h4>${escapeHtml(t("beforeGo"))}</h4><p>${escapeHtml(listing.finePrint)}</p></div>
-              </aside>`
-                  : ""
-              }
-            </section>
-            <section class="detail-section verification-section">
-              <div class="verification-title">
-                <span class="verified-seal">✓</span>
-                <div><h3>${escapeHtml(t("nearFreeVerified"))}</h3><p>${escapeHtml(verificationAge(listing.verifiedAt))}</p></div>
-              </div>
-              <div class="verification-grid" aria-label="${escapeHtml(t("verificationChecklist"))}">
-                <span>${escapeHtml(t("verifiedPrice"))}<b>✓</b></span>
-                <span>${escapeHtml(t("verifiedDate"))}<b>✓</b></span>
-                <span>${escapeHtml(t("verifiedLocation"))}<b>✓</b></span>
-                <span>${escapeHtml(t("verifiedConditions"))}<b>✓</b></span>
-              </div>
-              <details class="detail-sources">
-                <summary>${escapeHtml(t("sourcesChecked", { count: listing.sources.length }))}<span>›</span></summary>
-                <div class="detail-source-list">
-                  ${listing.sources
-                    .map(
-                      (source, index) => `
-                    <a class="source-item" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
-                      <span class="source-index">0${index + 1}</span>
-                      <span class="source-copy"><strong>${escapeHtml(source.name)} · ${escapeHtml(source.official ? t("official") : t("supporting"))}</strong><small>${escapeHtml(source.note)}</small></span>
-                      <span>↗</span>
-                    </a>`,
-                    )
-                    .join("")}
-                </div>
-              </details>
             </section>
           </aside>
+          ${usefulDetailsTemplate(listing, practicalTips)}
         </div>
+        <section class="detail-section verification-section">
+          <div class="verification-title">
+            <span class="verified-seal">✓</span>
+            <div><h3>${escapeHtml(t("nearFreeVerified"))}</h3><p>${escapeHtml(verificationAge(listing.verifiedAt))}</p></div>
+          </div>
+          <div class="verification-grid" aria-label="${escapeHtml(t("verificationChecklist"))}">
+            <span>${escapeHtml(t("verifiedPrice"))}<b>✓</b></span>
+            <span>${escapeHtml(t("verifiedDate"))}<b>✓</b></span>
+            <span>${escapeHtml(t("verifiedLocation"))}<b>✓</b></span>
+            <span>${escapeHtml(t("verifiedConditions"))}<b>✓</b></span>
+          </div>
+          <details class="detail-sources">
+            <summary>${escapeHtml(t("sourcesChecked", { count: listing.sources.length }))}<span>›</span></summary>
+            <div class="detail-source-list">
+              ${listing.sources
+                .map(
+                  (source, index) => `
+                <a class="source-item" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
+                  <span class="source-index">0${index + 1}</span>
+                  <span class="source-copy"><strong>${escapeHtml(source.name)} · ${escapeHtml(source.official ? t("official") : t("supporting"))}</strong><small>${escapeHtml(source.note)}</small></span>
+                  <span>↗</span>
+                </a>`,
+                )
+                .join("")}
+            </div>
+          </details>
+        </section>
         ${
           similar.length
             ? `

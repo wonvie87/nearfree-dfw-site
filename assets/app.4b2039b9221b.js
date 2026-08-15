@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.f9e5f1ed7f58.js";
+import { UI, localizeListing } from "./locales.e94ec02966b1.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -12,7 +12,7 @@ import {
   overlapsWindow,
 } from "./discovery.d93910c29cef.js";
 import { createBrowserStorage } from "./browser-storage.aba7afe3e62a.js";
-import { createListingTemplates } from "./listing-templates.b3a5c014b5b6.js";
+import { createListingTemplates } from "./listing-templates.3966152ef472.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -965,7 +965,6 @@ function similarListings(listing) {
 
 const templates = createListingTemplates({
   compactCost,
-  displayCost,
   escapeHtml,
   formatDistance,
   getTimeStatus,

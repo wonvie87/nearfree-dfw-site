@@ -39,16 +39,6 @@ export function createListingTemplates(context) {
       : "";
   }
 
-  function compactConditionBadge(listing) {
-    if (listing.eligibility?.mode === "conditional") {
-      return `<span class="listing-card-condition">${escapeHtml(t("conditionalEligibility"))}</span>`;
-    }
-    if (listing.booking?.mode === "required") {
-      return `<span class="listing-card-condition">${escapeHtml(t("reservationRequiredShort"))}</span>`;
-    }
-    return "";
-  }
-
   const categoryToneClasses = Object.freeze({
     access: "tone-access",
     arts: "tone-arts",
@@ -114,9 +104,6 @@ export function createListingTemplates(context) {
     const dateTime = String(
       listing.kind === "benefit" ? listing.end || "" : listing.start || "",
     ).slice(0, 10);
-    const costLabel = t(
-      listing.costType === "free" ? "valueFreeLabel" : "dealLabel",
-    );
     const place = isAllDfw()
       ? listing.city
       : [
@@ -137,17 +124,13 @@ export function createListingTemplates(context) {
         <button class="listing-body" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
           <div class="listing-card-meta">
             ${dateTime ? `<time class="listing-card-date${dateClass}" datetime="${escapeHtml(dateTime)}">${escapeHtml(cardDate)}</time>` : `<span class="listing-card-date${dateClass}">${escapeHtml(cardDate)}</span>`}
-            <div class="listing-card-tags">
-              <span class="listing-cost-tag ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(costLabel)}</span>
-            </div>
+            <span class="listing-card-location">${escapeHtml(place)}</span>
           </div>
           <span class="listing-title">
             <span>${escapeHtml(listing.title)}</span>
             <span class="listing-open-arrow" aria-hidden="true">↗</span>
           </span>
-          <span class="listing-card-place">${escapeHtml(place)}</span>
           <span class="listing-card-hook">${escapeHtml(listing.cardHook || listing.summary)}</span>
-          ${compactConditionBadge(listing)}
         </button>
       </article>`;
   }

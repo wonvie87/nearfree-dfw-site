@@ -596,22 +596,16 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) { line-height: 1.8; text-
   font-variant-numeric: tabular-nums;
   letter-spacing: .08em;
 }
-.listing-card-tags { min-width: 0; display: flex; justify-content: flex-end; gap: 6px; }
-.listing-card-tags > span {
+.listing-card-location {
+  min-width: 0;
   overflow: hidden;
-  padding: 5px 7px;
-  border-radius: 7px;
-  background: var(--listing-soft);
-  color: #40424e;
-  font-size: 9px;
-  font-weight: 850;
-  line-height: 1;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
   text-overflow: ellipsis;
-  text-transform: uppercase;
   white-space: nowrap;
 }
-.listing-card-tags .listing-cost-tag { background: var(--acid); color: var(--ink); }
-.listing-card-tags .listing-cost-tag.discount { background: #ffcfbb; }
 .listing-title {
   width: 100%;
   margin: 14px 0 0;
@@ -945,7 +939,6 @@ html[lang="ko"] :is(
 ) { letter-spacing: -.02em; }
 
 html[lang="ko"] :is(
-  .listing-card-tags > span,
   .visit-fact div > span,
   .similar-copy small
 ) {
@@ -1674,7 +1667,6 @@ html[lang="ko"] :is(.home-section-heading h2, .home-promise h2, .home-membership
   --value: #dff25f;
   --value-soft: #f3f8d8;
   --urgent: #c4513e;
-  --urgent-soft: #fff0ec;
   --trust: #267b88;
   --trust-soft: #e8f5f5;
   --blue: var(--brand);
@@ -1820,34 +1812,12 @@ body {
 }
 .listing-card-date { color: var(--brand-strong); font-size: 12px; letter-spacing: .045em; }
 .listing-card-date.is-urgent { color: var(--urgent); }
-.listing-card-tags > span { background: #f0f0ed; color: #55575d; }
-.listing-card-tags .listing-cost-tag { background: var(--value); color: var(--ink); }
-.listing-card-tags .listing-cost-tag.discount { background: var(--brand-soft); color: var(--brand-strong); }
+.listing-card-location { color: var(--muted); font-size: 12px; }
 .listing-title { margin-top: 13px; font-size: 22px; line-height: 1.27; letter-spacing: -.6px; }
 .listing-open-arrow { border-color: #d7d7d1; color: #666870; }
 .listing-title:hover .listing-open-arrow,
 .listing-card:hover .listing-open-arrow { border-color: var(--blue); color: var(--blue); }
-.listing-card-place {
-  margin-top: 8px;
-  display: block;
-  color: var(--brand-strong);
-  font-size: 12px;
-  font-weight: 750;
-}
 .listing-card-hook { margin-top: 5px; color: var(--muted); font-size: 13px; line-height: 1.45; }
-.listing-card-condition {
-  width: max-content;
-  margin-top: 10px;
-  display: block;
-  padding: 5px 8px;
-  border-radius: 7px;
-  background: var(--urgent-soft);
-  color: #984333;
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-}
 
 .quick-filter-bar {
   margin-top: 13px;

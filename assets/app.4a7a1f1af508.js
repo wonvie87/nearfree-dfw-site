@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.d15012d271ef.js";
+import { UI, localizeListing } from "./locales.0736f1265c09.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -92,8 +92,6 @@ const elements = {
   toast: $("#toast"),
   languageSelect: $("#languageSelect"),
   updatedLabel: $("#updatedLabel"),
-  radarAlerts: $("#radarAlerts"),
-  radarLastChecked: $("#radarLastChecked"),
   radarAvailableCount: $("#radarAvailableCount"),
   radarNewCount: $("#radarNewCount"),
   radarEndingCount: $("#radarEndingCount"),
@@ -166,7 +164,6 @@ function applyStaticTranslations() {
   $$('[data-i18n-placeholder]').forEach(node => { node.setAttribute("placeholder", t(node.dataset.i18nPlaceholder)); });
   $$('[data-i18n-alt]').forEach(node => { node.setAttribute("alt", t(node.dataset.i18nAlt)); });
   elements.updatedLabel.textContent = t("updated", { date: formatVerifiedDate(RESEARCH_NOTE.verifiedAt) });
-  elements.radarLastChecked.textContent = t("updated", { date: formatVerifiedDate(RESEARCH_NOTE.verifiedAt) });
   elements.languageSelect.value = state.locale;
   elements.sortLabel.textContent = t({ distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[state.sort]);
 }
@@ -200,42 +197,6 @@ function renderRadarMetrics() {
   elements.radarNewCount.textContent = current.filter(listing => isRecentlyChecked(listing, now)).length;
   elements.radarEndingCount.textContent = current.filter(listing => endsWithin(listing, 30, now)).length;
   elements.radarCityCount.textContent = new Set(current.map(listing => listing.city)).size;
-}
-
-function renderRadarAlerts() {
-  const now = new Date();
-  const classRank = { "signal-ending": 0, "signal-upcoming": 1, "signal-new": 2, "signal-available": 3 };
-  const candidates = LISTINGS
-    .filter(listing => isCurrentListing(listing, now))
-    .map(listing => ({ listing: translatedListing(listing), signal: radarSignal(listing, now) }))
-    .sort((a, b) => classRank[a.signal.className] - classRank[b.signal.className]
-      || new Date(a.listing.start) - new Date(b.listing.start));
-  const alerts = [];
-  for (const className of Object.keys(classRank)) {
-    const candidate = candidates.find(item => item.signal.className === className && !alerts.includes(item));
-    if (candidate) alerts.push(candidate);
-    if (alerts.length === 3) break;
-  }
-  for (const candidate of candidates) {
-    if (!alerts.includes(candidate)) alerts.push(candidate);
-    if (alerts.length === 3) break;
-  }
-
-  elements.radarAlerts.innerHTML = alerts.map(({ listing, signal }, index) => `
-    <button class="radar-alert-card ${index === 0 ? "radar-alert-featured" : "radar-alert-compact"} ${signal.className}" data-radar-listing="${escapeHtml(listing.id)}" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
-      <span class="radar-alert-media">
-        ${listing.image
-          ? `<img src="${escapeHtml(listing.image)}" alt="" loading="${index === 0 ? "eager" : "lazy"}" />`
-          : `<span class="radar-alert-placeholder" aria-hidden="true">NearFree</span>`}
-      </span>
-      <span class="radar-alert-overlay" aria-hidden="true"></span>
-      <span class="radar-alert-content">
-        <span class="radar-alert-signal">${escapeHtml(t(signal.key))}</span>
-        <strong>${escapeHtml(listing.title)}</strong>
-        <small>${escapeHtml(displayCost(listing))} · ${escapeHtml(listing.city)} · ${escapeHtml(listing.dateLabel)}</small>
-      </span>
-      <span class="radar-alert-arrow" aria-hidden="true">↗</span>
-    </button>`).join("");
 }
 
 function renderRadarCityOptions() {
@@ -283,7 +244,6 @@ function renderRadarPreview() {
 
 function renderRadarExperience() {
   renderRadarMetrics();
-  renderRadarAlerts();
   renderRadarPreview();
 }
 
@@ -776,7 +736,7 @@ function bindEvents() {
   $("#detectLocation").addEventListener("click", useCurrentLocation);
 
   $("#mobileExplore").addEventListener("click", focusSearch);
-  [$("#topRadarCta"), $("#heroRadarCta"), $("#pricingRadarCta"), $("#mobileRadar")]
+  [$("#topRadarCta"), $("#pricingRadarCta"), $("#mobileRadar")]
     .forEach(button => button.addEventListener("click", scrollToRadarPreview));
   elements.radarCitySelect.addEventListener("change", event => {
     state.radar.city = event.target.value;
@@ -799,10 +759,10 @@ function bindEvents() {
     renderRadarPreview();
   });
   $("#radarPreviewSave").addEventListener("click", saveRadarPreview);
-  [elements.radarAlerts, elements.radarMatches].forEach(container => container.addEventListener("click", event => {
+  elements.radarMatches.addEventListener("click", event => {
     const target = event.target.closest("[data-radar-listing]");
     if (target) openDetails(target.dataset.radarListing);
-  }));
+  });
   elements.searchInput.addEventListener("input", event => {
     state.search = event.target.value.trim();
     elements.searchClear.hidden = !state.search;

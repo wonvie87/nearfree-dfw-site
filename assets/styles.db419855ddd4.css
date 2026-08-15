@@ -1683,8 +1683,9 @@ body { background: var(--paper); }
   background: rgba(255, 255, 255, .94);
   box-shadow: none;
 }
-.brand-mark { background: var(--ink); transform: none; }
+.brand-mark { background: var(--blue); transform: none; }
 .brand-mark i, .brand-mark i:nth-child(2) { background: white; }
+.brand-copy strong { color: var(--blue); }
 .brand-dot { color: var(--blue); }
 .desktop-nav { padding: 0; border: 0; background: transparent; }
 .desktop-nav a.active { background: #f0f0ed; color: var(--ink); box-shadow: none; }

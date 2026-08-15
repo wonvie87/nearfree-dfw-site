@@ -3,12 +3,12 @@
   "files": {
     "discovery": "discovery.a64bc67323b8.js",
     "browserStorage": "browser-storage.05ba53c5f819.js",
-    "listingTemplates": "listing-templates.fec61dded639.js",
+    "listingTemplates": "listing-templates.2ac12e42e131.js",
     "data": "data.9880fdf73d13.js",
     "listingLocales": "listing-locales.94ff27769a98.js",
-    "locales": "locales.a4bf8deafa2b.js",
-    "app": "app.4abd870f8bc1.js",
-    "styles": "styles.bcb2ef4f2b48.css"
+    "locales": "locales.7903c29c9541.js",
+    "app": "app.c8e51bbd87f5.js",
+    "styles": "styles.1d427fdc68d6.css"
   },
   "pages": [
     "index.html",

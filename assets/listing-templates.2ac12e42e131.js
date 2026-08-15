@@ -139,11 +139,24 @@ export function createListingTemplates(context) {
     const sectionName = section.key[0].toUpperCase() + section.key.slice(1);
     const titleKey = `section${sectionName}`;
     const descKey = `${titleKey}Desc`;
+    const title = section.title || t(titleKey);
+    const description = section.description ?? t(descKey);
+    const hasMore =
+      section.catalogView && section.total > section.items.length;
+    const variantClass =
+      section.variant === "month" ? " listing-section-month" : "";
     return `
-      <section class="listing-section" aria-labelledby="section-${section.key}">
+      <section class="listing-section${variantClass}" aria-labelledby="section-${escapeHtml(section.key)}">
         <div class="listing-section-head">
-          <div><h2 id="section-${section.key}">${escapeHtml(t(titleKey))}</h2></div>
-          <p>${escapeHtml(t(descKey))}</p>
+          <div class="listing-section-heading-copy">
+            <h2 id="section-${escapeHtml(section.key)}">${escapeHtml(title)}</h2>
+            ${description ? `<p>${escapeHtml(description)}</p>` : ""}
+          </div>
+          ${
+            hasMore
+              ? `<button class="listing-section-link" data-catalog-view="${escapeHtml(section.catalogView)}" type="button" aria-label="${escapeHtml(t("viewAllSection", { section: title, count: section.total }))}">${escapeHtml(t("viewAllCount", { count: section.total }))}<span aria-hidden="true">→</span></button>`
+              : ""
+          }
         </div>
         <div class="listing-grid" data-section="${escapeHtml(section.key)}">${section.items.map((listing, index) => cardTemplate(listing, startIndex + index)).join("")}</div>
       </section>`;

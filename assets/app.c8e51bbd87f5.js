@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.a4bf8deafa2b.js";
+import { UI, localizeListing } from "./locales.7903c29c9541.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -12,7 +12,7 @@ import {
   overlapsWindow,
 } from "./discovery.a64bc67323b8.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
-import { createListingTemplates } from "./listing-templates.fec61dded639.js";
+import { createListingTemplates } from "./listing-templates.2ac12e42e131.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -25,9 +25,16 @@ const storedScope = storage.read("nearfree-scope");
 const storedRadarValue = storage.readJson("nearfree-radar-preview");
 const initialUrl = new URL(window.location.href);
 const requestedView = initialUrl.searchParams.get("view");
-const initialIntents = new Set(
-  ["events", "benefits"].includes(requestedView) ? [requestedView] : [],
-);
+const CATALOG_VIEWS = new Set(["all", "events", "benefits"]);
+const EVENT_TIME_INTENTS = new Set([
+  "today",
+  "tonight",
+  "tomorrow",
+  "weekend",
+]);
+const initialCatalogView = CATALOG_VIEWS.has(requestedView)
+  ? requestedView
+  : "all";
 const storedLocationName =
   typeof storedLocationValue === "string"
     ? storedLocationValue
@@ -65,8 +72,14 @@ if (storedLocationValue !== null && storedLocation) {
 const state = {
   location: storedLocation || CITY_PRESETS[0],
   scope: initialScope,
-  intents: initialIntents,
-  sort: initialScope === "all" ? "soon" : "distance",
+  catalogView: initialCatalogView,
+  intents: new Set(),
+  sort:
+    initialCatalogView === "benefits"
+      ? initialScope === "all"
+        ? "city"
+        : "distance"
+      : "soon",
   search: "",
   saved: new Set(Array.isArray(storedSaved) ? storedSaved : []),
   savedOnly: initialUrl.searchParams.get("saved") === "1",
@@ -101,6 +114,7 @@ const elements = {
   filterDialog: $("#filterDialog"),
   filterResultCount: $("#filterResultCount"),
   filterCount: $("#filterCount"),
+  resultTypeLabel: $("#resultTypeLabel"),
   modalBackdrop: $("#modalBackdrop"),
   searchInput: $("#searchInput"),
   searchClear: $("#searchClear"),
@@ -214,12 +228,21 @@ function applyStaticTranslations() {
       date: formatVerifiedDate(RESEARCH_NOTE.verifiedAt),
     });
   if (elements.languageSelect) elements.languageSelect.value = state.locale;
+  updateSortLabel();
+}
+
+function sortTranslationKey(sort = state.sort) {
+  return {
+    city: "sortCity",
+    distance: "sortDistance",
+    soon: "sortSoon",
+    verified: "sortVerified",
+  }[sort];
+}
+
+function updateSortLabel() {
   if (elements.sortLabel)
-    elements.sortLabel.textContent = t(
-      { distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[
-        state.sort
-      ],
-    );
+    elements.sortLabel.textContent = t(sortTranslationKey());
 }
 
 function isCurrentListing(listing, now = new Date()) {
@@ -399,6 +422,9 @@ function getTimeStatus(listing) {
 function listingMatches(record, now) {
   const { listing, searchText, minimumPrice } = record;
   if (state.savedOnly && !state.saved.has(listing.id)) return false;
+  if (state.catalogView === "events" && listing.kind !== "event") return false;
+  if (state.catalogView === "benefits" && listing.kind !== "benefit")
+    return false;
   if (state.scope === "city" && listing.city !== state.location.name)
     return false;
   if (
@@ -424,26 +450,34 @@ function sortedListings() {
       distance: distanceMiles(state.location, listing),
     }));
 
-  if (
-    state.sort === "soon" ||
-    (state.scope === "all" && state.sort === "distance")
-  ) {
+  const byCityAndTitle = (a, b) =>
+    a.city.localeCompare(b.city, state.locale) ||
+    a.title.localeCompare(b.title, state.locale);
+
+  if (state.sort === "soon") {
     results.sort((a, b) => {
       const aRank = a.kind === "event" ? 0 : 1;
       const bRank = b.kind === "event" ? 0 : 1;
       const fallback =
         state.scope === "all"
-          ? a.city.localeCompare(b.city)
+          ? byCityAndTitle(a, b)
           : a.distance - b.distance;
-      return aRank - bRank || new Date(a.start) - new Date(b.start) || fallback;
+      if (aRank !== bRank) return aRank - bRank;
+      if (a.kind === "event")
+        return new Date(a.start) - new Date(b.start) || fallback;
+      return fallback || a.title.localeCompare(b.title, state.locale);
     });
   } else if (state.sort === "verified") {
     results.sort(
       (a, b) =>
-        b.sources.length - a.sources.length ||
+        new Date(b.verifiedAt) - new Date(a.verifiedAt) ||
         (state.scope === "all"
-          ? new Date(a.start) - new Date(b.start)
+          ? byCityAndTitle(a, b)
           : a.distance - b.distance),
+    );
+  } else if (state.sort === "city") {
+    results.sort(
+      (a, b) => byCityAndTitle(a, b) || new Date(a.start) - new Date(b.start),
     );
   } else {
     results.sort(
@@ -488,45 +522,98 @@ function verificationAge(value) {
   return t("verifiedOn", { date: formatVerifiedDate(value) });
 }
 
+function monthKey(value) {
+  return String(value).slice(0, 7);
+}
+
+function formatCatalogMonth(key) {
+  const [year, month] = key.split("-").map(Number);
+  return new Intl.DateTimeFormat(
+    state.locale === "ko" ? "ko-KR" : "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      timeZone: "UTC",
+    },
+  ).format(new Date(Date.UTC(year, month - 1, 1)));
+}
+
+function eventCatalogSections(listings, now) {
+  const events = listings.filter((listing) => listing.kind === "event");
+  const happening = events.filter((listing) => isHappeningNow(listing, now));
+  const scheduled = events.filter((listing) => !isHappeningNow(listing, now));
+  const grouped = new Map();
+  for (const listing of scheduled) {
+    const key = monthKey(listing.start);
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key).push(listing);
+  }
+  return [
+    happening.length
+      ? { key: "happening", items: happening, total: happening.length }
+      : null,
+    ...[...grouped.entries()]
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, items]) => ({
+        key: `month-${key}`,
+        title: formatCatalogMonth(key),
+        description: t("sectionEventCount", { count: items.length }),
+        items,
+        total: items.length,
+        variant: "month",
+      })),
+  ].filter(Boolean);
+}
+
 function catalogSections(listings, now = new Date()) {
   const filteredMode =
-    state.scope === "city" ||
-    state.savedOnly ||
-    Boolean(state.search) ||
-    state.intents.size > 0;
-  if (filteredMode) return [{ key: "results", items: listings }];
+    state.savedOnly || Boolean(state.search) || state.intents.size > 0;
+  if (filteredMode && state.catalogView === "all")
+    return [{ key: "results", items: listings, total: listings.length }];
 
-  const pool = [...listings];
-  const take = (predicate, limit) => {
-    const selected = [];
-    for (let index = 0; index < pool.length && selected.length < limit; ) {
-      if (predicate(pool[index])) selected.push(...pool.splice(index, 1));
-      else index += 1;
-    }
-    return selected;
-  };
+  if (state.catalogView === "events")
+    return eventCatalogSections(listings, now);
 
-  const happening = take(
-    (listing) => isHappeningNow(listing, now),
-    4,
-  );
-  const upcoming = take(
-    (listing) =>
-      listing.kind === "event" && new Date(listing.start) > now,
-    4,
-  );
-  const ongoing = take(
-    (listing) => listing.kind === "benefit" && new Date(listing.start) <= now,
-    4,
-  );
-  const recent = take((listing) => isRecentlyVerified(listing, now), 4);
+  if (state.catalogView === "benefits")
+    return [
+      {
+        key: "ongoing",
+        items: listings.filter((listing) => listing.kind === "benefit"),
+        total: listings.length,
+      },
+    ];
+
+  const events = listings.filter((listing) => listing.kind === "event");
+  const benefits = listings.filter((listing) => listing.kind === "benefit");
+  const happening = events.filter((listing) => isHappeningNow(listing, now));
+  const happeningIds = new Set(happening.map((listing) => listing.id));
+  const upcoming = events.filter((listing) => !happeningIds.has(listing.id));
   return [
-    { key: "happening", items: happening },
-    { key: "upcoming", items: upcoming },
-    { key: "ongoing", items: ongoing },
-    { key: "recent", items: recent },
-    { key: "more", items: pool },
-  ].filter((section) => section.items.length > 0);
+    happening.length
+      ? {
+          key: "happening",
+          items: happening.slice(0, 2),
+          total: happening.length,
+          catalogView: "events",
+        }
+      : null,
+    upcoming.length
+      ? {
+          key: "upcoming",
+          items: upcoming.slice(0, 6),
+          total: events.length,
+          catalogView: "events",
+        }
+      : null,
+    benefits.length
+      ? {
+          key: "ongoing",
+          items: benefits.slice(0, 6),
+          total: benefits.length,
+          catalogView: "benefits",
+        }
+      : null,
+  ].filter(Boolean);
 }
 
 function renderFeed() {
@@ -545,6 +632,7 @@ function renderFeed() {
     elements.filterResultCount.textContent = listings.length;
   elements.emptyState.hidden = listings.length > 0;
   elements.feed.hidden = listings.length === 0;
+  updateCatalogViewUI();
   updateActiveNotice();
   updateIntentUI();
   updateSavedCount();
@@ -608,14 +696,62 @@ function updateIntentUI() {
   }
 }
 
+function updateCatalogViewUI() {
+  $$(".catalog-view-option[data-catalog-view]").forEach((button) => {
+    const active = button.dataset.catalogView === state.catalogView;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  if (elements.resultTypeLabel) {
+    elements.resultTypeLabel.textContent = t(
+      {
+        all: "resultsSuffix",
+        benefits: "resultsBenefitsSuffix",
+        events: "resultsEventsSuffix",
+      }[state.catalogView],
+    );
+  }
+  $("#quickIntentChips")?.toggleAttribute(
+    "hidden",
+    state.catalogView === "benefits",
+  );
+  $("#whenFilterGroup")?.toggleAttribute(
+    "hidden",
+    state.catalogView === "benefits",
+  );
+}
+
 function syncCatalogViewQuery() {
   const url = new URL(window.location.href);
-  const view = ["events", "benefits"].find((intent) =>
-    state.intents.has(intent),
-  );
-  if (view) url.searchParams.set("view", view);
+  if (state.catalogView !== "all")
+    url.searchParams.set("view", state.catalogView);
   else url.searchParams.delete("view");
   history.replaceState(history.state, "", url);
+}
+
+function defaultSortForCatalogView(view = state.catalogView) {
+  if (view === "benefits")
+    return state.scope === "all" ? "city" : "distance";
+  return "soon";
+}
+
+function setCatalogView(view, { moveFocus = false } = {}) {
+  if (!CATALOG_VIEWS.has(view) || view === state.catalogView) return;
+  state.catalogView = view;
+  if (view === "benefits")
+    EVENT_TIME_INTENTS.forEach((intent) => state.intents.delete(intent));
+  state.sort = defaultSortForCatalogView(view);
+  syncCatalogViewQuery();
+  updateSortLabel();
+  renderFeed();
+  if (moveFocus) {
+    $("#resultsToolbar")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    requestAnimationFrame(() =>
+      $(`.catalog-view-option[data-catalog-view="${view}"]`)?.focus({
+        preventScroll: true,
+      }),
+    );
+  }
 }
 
 function toggleIntentFilter(chip) {
@@ -626,14 +762,15 @@ function toggleIntentFilter(chip) {
   );
   if (intent && chip.getAttribute("aria-pressed") !== "true")
     state.intents.add(intent);
-  syncCatalogViewQuery();
   renderFeed();
 }
 
 function removeActiveFilter(key) {
   if (key === "scope") {
     state.scope = "all";
-    if (state.sort === "distance") state.sort = "soon";
+    if (state.sort === "distance")
+      state.sort = defaultSortForCatalogView();
+    updateSortLabel();
     persistArea();
     updateLocationUI();
   } else if (key === "saved") {
@@ -645,7 +782,6 @@ function removeActiveFilter(key) {
   } else if (key.startsWith("intent:")) {
     state.intents.delete(key.slice("intent:".length));
   }
-  syncCatalogViewQuery();
   renderFeed();
 }
 
@@ -745,7 +881,7 @@ function persistArea() {
 
 function selectAllDfw() {
   state.scope = "all";
-  if (state.sort === "distance") state.sort = "soon";
+  if (state.sort === "distance") state.sort = defaultSortForCatalogView();
   persistArea();
   applyStaticTranslations();
   updateLocationUI();
@@ -759,9 +895,11 @@ function selectCity(name) {
   if (!city) return;
   state.location = city;
   state.scope = "city";
+  if (state.catalogView === "benefits") state.sort = "distance";
   state.radar.city = city.name;
   state.radar.saved = false;
   persistArea();
+  updateSortLabel();
   updateLocationUI();
   renderFeed();
   renderRadarCityOptions();
@@ -1036,7 +1174,8 @@ function focusSearch() {
 function resetFilters() {
   if (!elements.searchInput) return;
   state.scope = "all";
-  if (state.sort === "distance") state.sort = "soon";
+  state.catalogView = "all";
+  state.sort = defaultSortForCatalogView("all");
   state.intents.clear();
   state.search = "";
   state.savedOnly = false;
@@ -1141,6 +1280,10 @@ function bindEvents() {
         if (chip) toggleIntentFilter(chip);
       }),
     );
+  $("#catalogViewSwitcher")?.addEventListener("click", (event) => {
+    const option = event.target.closest(".catalog-view-option");
+    if (option) setCatalogView(option.dataset.catalogView);
+  });
   $("#allFiltersButton")?.addEventListener("click", () =>
     openDialog(elements.filterDialog),
   );
@@ -1149,7 +1292,8 @@ function bindEvents() {
   $("#sortButton")?.addEventListener("click", () => {
     $$("[data-sort]", elements.sortDialog).forEach((button) => {
       button.disabled =
-        button.dataset.sort === "distance" && state.scope === "all";
+        (button.dataset.sort === "distance" && state.scope === "all") ||
+        (button.dataset.sort === "soon" && state.catalogView === "benefits");
       button.classList.toggle("active", button.dataset.sort === state.sort);
     });
     openDialog(elements.sortDialog);
@@ -1158,16 +1302,17 @@ function bindEvents() {
     const button = event.target.closest("[data-sort]");
     if (!button) return;
     state.sort = button.dataset.sort;
-    elements.sortLabel.textContent = t(
-      { distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[
-        state.sort
-      ],
-    );
+    updateSortLabel();
     closeDialogs();
     renderFeed();
   });
 
   elements.feed?.addEventListener("click", (event) => {
+    const catalogLink = event.target.closest("[data-catalog-view]");
+    if (catalogLink) {
+      setCatalogView(catalogLink.dataset.catalogView, { moveFocus: true });
+      return;
+    }
     const target = event.target.closest("[data-action]");
     if (!target) return;
     const card = target.closest(".listing-card");

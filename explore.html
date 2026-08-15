@@ -15,7 +15,7 @@
     />
     <title>Explore verified DFW benefits | NearFree</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/styles.bcb2ef4f2b48.css" />
+    <link rel="stylesheet" href="assets/styles.1d427fdc68d6.css" />
   </head>
   <body
     data-page="explore"
@@ -175,64 +175,72 @@
                 ×
               </button>
             </div>
-            <div class="quick-filter-bar">
+            <div class="catalog-control-row">
               <div
-                class="quick-intents"
-                id="quickIntentChips"
+                class="catalog-view-switcher"
+                id="catalogViewSwitcher"
                 role="group"
-                aria-label="Popular filters"
-                data-i18n-aria="quickFiltersAria"
+                aria-label="Catalog view"
+                data-i18n-aria="catalogViewAria"
               >
                 <button
-                  class="quick-intent"
-                  data-intent="events"
-                  data-intent-group="format"
+                  class="catalog-view-option active"
+                  data-catalog-view="all"
+                  data-i18n="catalogViewAll"
+                  type="button"
+                  aria-pressed="true"
+                >
+                  All</button
+                ><button
+                  class="catalog-view-option"
+                  data-catalog-view="events"
                   data-i18n="intentEvents"
                   type="button"
                   aria-pressed="false"
                 >
-                  Events</button
+                  Scheduled events</button
                 ><button
-                  class="quick-intent"
-                  data-intent="benefits"
-                  data-intent-group="format"
+                  class="catalog-view-option"
+                  data-catalog-view="benefits"
                   data-i18n="intentBenefits"
                   type="button"
                   aria-pressed="false"
                 >
-                  Ongoing benefits</button
-                ><button
-                  class="quick-intent"
-                  data-intent="today"
-                  data-intent-group="when"
-                  data-i18n="intentToday"
-                  type="button"
-                  aria-pressed="false"
-                >
-                  Today</button
-                ><button
-                  class="quick-intent"
-                  data-intent="recent"
-                  data-intent-group="freshness"
-                  data-i18n="intentRecentlyVerified"
-                  type="button"
-                  aria-pressed="false"
-                >
-                  Recently verified
+                  Ongoing benefits
                 </button>
               </div>
-              <button
-                class="all-filters-button"
-                id="allFiltersButton"
-                type="button"
-                aria-haspopup="dialog"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M4 7h16M7 12h10M10 17h4" />
-                </svg>
-                <span data-i18n="allFilters">All filters</span>
-                <strong id="filterCount" hidden>0</strong>
-              </button>
+              <div class="quick-filter-bar">
+                <div
+                  class="quick-intents"
+                  id="quickIntentChips"
+                  role="group"
+                  aria-label="Popular filters"
+                  data-i18n-aria="quickFiltersAria"
+                >
+                  <button
+                    class="quick-intent"
+                    data-intent="today"
+                    data-intent-group="when"
+                    data-i18n="intentToday"
+                    type="button"
+                    aria-pressed="false"
+                  >
+                    Today
+                  </button>
+                </div>
+                <button
+                  class="all-filters-button"
+                  id="allFiltersButton"
+                  type="button"
+                  aria-haspopup="dialog"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16M7 12h10M10 17h4" />
+                  </svg>
+                  <span data-i18n="allFilters">All filters</span>
+                  <strong id="filterCount" hidden>0</strong>
+                </button>
+              </div>
             </div>
             <dialog
               class="sheet filter-sheet"
@@ -272,44 +280,7 @@
               >
               <div
                 class="intent-group"
-                role="group"
-                aria-labelledby="formatFilterLabel"
-              >
-                <span
-                  class="intent-group-label"
-                  id="formatFilterLabel"
-                  data-i18n="filterFormat"
-                  >Listing format</span
-                ><button
-                  class="intent-chip intent-default active"
-                  data-clear-group="format"
-                  data-i18n="filterAnyFormat"
-                  type="button"
-                  aria-pressed="true"
-                >
-                  All listings</button
-                ><button
-                  class="intent-chip"
-                  data-intent="events"
-                  data-intent-group="format"
-                  data-i18n="intentEvents"
-                  type="button"
-                  aria-pressed="false"
-                >
-                  Scheduled events</button
-                ><button
-                  class="intent-chip"
-                  data-intent="benefits"
-                  data-intent-group="format"
-                  data-i18n="intentBenefits"
-                  type="button"
-                  aria-pressed="false"
-                >
-                  Ongoing benefits
-                </button>
-              </div>
-              <div
-                class="intent-group"
+                id="whenFilterGroup"
                 role="group"
                 aria-labelledby="whenFilterLabel"
               >
@@ -550,40 +521,47 @@
               </button>
             </dialog>
           </section>
-          <a class="feed-trust-strip" href="how-it-works.html#verification">
-            <span class="feed-trust-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m12 3 7 3v5c0 4.8-2.9 8.2-7 10-4.1-1.8-7-5.2-7-10V6z" />
-                <path d="m8.5 12 2.2 2.2 4.8-5" />
-              </svg>
-            </span>
-            <span>
-              <strong data-i18n="verifiedFeedTitle"
-                >Every find checked twice</strong
-              >
-              <small data-i18n="verifiedFeedDesc"
-                >Official sources first, then a separate conflict check.</small
-              >
-            </span>
-            <span aria-hidden="true">→</span>
-          </a>
           <div class="results-toolbar" id="resultsToolbar">
             <div class="results-count">
               <strong
                 ><span id="resultCount">0</span>
-                <span data-i18n="resultsSuffix">verified finds</span></strong
+                <span id="resultTypeLabel" data-i18n="resultsSuffix"
+                  >events and benefits</span
+                ></strong
               ><small id="updatedLabel">Updated Jul 25, 2026</small>
             </div>
-            <button
-              class="sort-button"
-              id="sortButton"
-              type="button"
-              aria-haspopup="menu"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 7h12M4 7h.01M12 12h8M4 12h4M16 17h4M4 17h8" /></svg
-              ><span id="sortLabel">Happening soon</span>
-            </button>
+            <div class="results-actions">
+              <a
+                class="feed-trust-strip"
+                href="how-it-works.html#verification"
+              >
+                <span class="feed-trust-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m12 3 7 3v5c0 4.8-2.9 8.2-7 10-4.1-1.8-7-5.2-7-10V6z" />
+                    <path d="m8.5 12 2.2 2.2 4.8-5" />
+                  </svg>
+                </span>
+                <span>
+                  <strong data-i18n="verifiedFeedTitle"
+                    >Every find checked twice</strong
+                  >
+                  <small data-i18n="verifiedFeedDesc"
+                    >Official sources first, then a separate conflict
+                    check.</small
+                  >
+                </span>
+              </a>
+              <button
+                class="sort-button"
+                id="sortButton"
+                type="button"
+                aria-haspopup="menu"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 7h12M4 7h.01M12 12h8M4 12h4M16 17h4M4 17h8" /></svg
+                ><span id="sortLabel">Happening soon</span>
+              </button>
+            </div>
           </div>
           <div class="active-notice" id="activeNotice" hidden>
             <div class="active-filter-list" id="activeNoticeText"></div
@@ -853,7 +831,12 @@
         </button>
       </div>
       <div class="sort-options">
-        <button data-sort="distance" type="button">
+        <button data-sort="city" type="button">
+          <span data-i18n="sortCity">City A–Z</span
+          ><small data-i18n="sortCityDesc"
+            >Browse the DFW catalog city by city</small
+          ><i></i></button
+        ><button data-sort="distance" type="button">
           <span data-i18n="sortDistance">Nearest first</span
           ><small data-i18n="sortDistanceDesc"
             >Shortest distance from your selected location</small
@@ -863,9 +846,9 @@
           ><small data-i18n="sortSoonDesc">Upcoming events first</small
           ><i></i></button
         ><button data-sort="verified" type="button">
-          <span data-i18n="sortVerified">Most sourced</span
+          <span data-i18n="sortVerified">Recently verified</span
           ><small data-i18n="sortVerifiedDesc"
-            >Listings with more cross-check sources first</small
+            >Most recently checked or refreshed first</small
           ><i></i>
         </button>
       </div>
@@ -904,6 +887,6 @@
       >
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="assets/app.4abd870f8bc1.js"></script>
+    <script type="module" src="assets/app.c8e51bbd87f5.js"></script>
   </body>
 </html>

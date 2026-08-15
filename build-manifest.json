@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "files": {
-    "discovery": "discovery.0a90b89aa3ef.js",
+    "discovery": "discovery.bdb6b1a0dfd4.js",
     "browserStorage": "browser-storage.05ba53c5f819.js",
     "listingTemplates": "listing-templates.2ac12e42e131.js",
     "data": "data.9880fdf73d13.js",
     "listingLocales": "listing-locales.94ff27769a98.js",
-    "locales": "locales.bc1beaf34f77.js",
-    "app": "app.a57055d3731d.js",
-    "styles": "styles.7f498e82af69.css"
+    "locales": "locales.d0a4062b0e15.js",
+    "app": "app.aef1f1fe4e89.js",
+    "styles": "styles.38b09f993581.css"
   },
   "pages": [
     "index.html",

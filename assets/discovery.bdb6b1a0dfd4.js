@@ -162,7 +162,6 @@ export function matchesIntent(listing, intent, context) {
   const { now = new Date(), searchText, minimumPrice, timeZone = DFW_TIME_ZONE } = context;
   if (intent === "events") return listing.kind === "event";
   if (intent === "benefits") return listing.kind === "benefit";
-  if (intent === "recent") return isRecentlyVerified(listing, now);
   if (intent === "today") return overlapsWindow(listing, dayWindow(now, 0, timeZone));
   if (intent === "tomorrow") return overlapsWindow(listing, dayWindow(now, 1, timeZone));
   if (intent === "weekend") return overlapsWindow(listing, weekendWindow(now, timeZone));

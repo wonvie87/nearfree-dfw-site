@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.bc1beaf34f77.js";
+import { UI, localizeListing } from "./locales.d0a4062b0e15.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -10,7 +10,7 @@ import {
   isRecentlyVerified,
   matchesIntent,
   overlapsWindow,
-} from "./discovery.0a90b89aa3ef.js";
+} from "./discovery.bdb6b1a0dfd4.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
 import { createListingTemplates } from "./listing-templates.2ac12e42e131.js";
 
@@ -25,7 +25,7 @@ const storedScope = storage.read("nearfree-scope");
 const storedRadarValue = storage.readJson("nearfree-radar-preview");
 const initialUrl = new URL(window.location.href);
 const requestedView = initialUrl.searchParams.get("view");
-const CATALOG_VIEWS = new Set(["all", "events", "benefits"]);
+const CATALOG_VIEWS = new Set(["all", "events", "benefits", "recent"]);
 const EVENT_TIME_INTENTS = new Set([
   "today",
   "tonight",
@@ -35,6 +35,13 @@ const EVENT_TIME_INTENTS = new Set([
 const initialCatalogView = CATALOG_VIEWS.has(requestedView)
   ? requestedView
   : "all";
+
+function catalogViewDefaultSort(view, scope) {
+  if (view === "benefits") return scope === "all" ? "city" : "distance";
+  if (view === "recent") return "verified";
+  return "soon";
+}
+
 const storedLocationName =
   typeof storedLocationValue === "string"
     ? storedLocationValue
@@ -74,12 +81,7 @@ const state = {
   scope: initialScope,
   catalogView: initialCatalogView,
   intents: new Set(),
-  sort:
-    initialCatalogView === "benefits"
-      ? initialScope === "all"
-        ? "city"
-        : "distance"
-      : "soon",
+  sort: catalogViewDefaultSort(initialCatalogView, initialScope),
   search: "",
   saved: new Set(Array.isArray(storedSaved) ? storedSaved : []),
   savedOnly: initialUrl.searchParams.get("saved") === "1",
@@ -425,6 +427,8 @@ function listingMatches(record, now) {
   if (state.catalogView === "events" && listing.kind !== "event") return false;
   if (state.catalogView === "benefits" && listing.kind !== "benefit")
     return false;
+  if (state.catalogView === "recent" && !isRecentlyVerified(listing, now))
+    return false;
   if (state.scope === "city" && listing.city !== state.location.name)
     return false;
   if (
@@ -583,6 +587,9 @@ function catalogSections(listings, now = new Date()) {
       },
     ];
 
+  if (state.catalogView === "recent")
+    return [{ key: "recent", items: listings, total: listings.length }];
+
   const events = listings.filter((listing) => listing.kind === "event");
   const benefits = listings.filter((listing) => listing.kind === "benefit");
   const recent = listings
@@ -732,6 +739,7 @@ function updateCatalogViewUI() {
         all: "resultsSuffix",
         benefits: "resultsBenefitsSuffix",
         events: "resultsEventsSuffix",
+        recent: "resultsRecentSuffix",
       }[state.catalogView],
     );
   }
@@ -753,9 +761,7 @@ function syncCatalogViewQuery() {
 }
 
 function defaultSortForCatalogView(view = state.catalogView) {
-  if (view === "benefits")
-    return state.scope === "all" ? "city" : "distance";
-  return "soon";
+  return catalogViewDefaultSort(view, state.scope);
 }
 
 function setCatalogView(view, { moveFocus = false } = {}) {

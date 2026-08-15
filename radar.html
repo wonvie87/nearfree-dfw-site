@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f3e9" />
+    <meta
+      name="description"
+      content="Preview a personalized NearFree Radar using your DFW city, travel radius and interests."
+    />
+    <title>Preview your NearFree Radar</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.91a22b48f2fd.css" />
+  </head>
+  <body
+    data-page="radar"
+    data-title-key="radarMetaTitle"
+    data-description-key="radarMetaDescription"
+  >
+    <a class="skip-link" href="#radarPreview" data-i18n="skipRadar"
+      >Skip to Radar setup</a
+    >
+    <header class="topbar">
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="NearFree home"
+        data-i18n-aria="brandHome"
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span
+        ><span class="brand-copy"
+          ><strong>NearFree<span class="brand-dot">.</span></strong></span
+        ></a
+      >
+      <nav
+        class="desktop-nav"
+        aria-label="Primary navigation"
+        data-i18n-aria="primaryNavigation"
+      >
+        <a href="explore.html" data-i18n="explore">Explore</a
+        ><a
+          class="active"
+          href="radar.html"
+          aria-current="page"
+          data-i18n="radarNav"
+          >Radar</a
+        ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+        ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+      </nav>
+      <div class="top-actions">
+        <button
+          class="location-pill"
+          id="locationButton"
+          type="button"
+          aria-haspopup="dialog"
+        >
+          <span class="location-pulse" aria-hidden="true"></span
+          ><span class="location-copy"
+            ><small id="locationModeLabel">Browse area</small
+            ><strong id="locationName">All DFW</strong></span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m7 10 5 5 5-5" />
+          </svg></button
+        ><label class="language-control"
+          ><span class="sr-only" data-i18n="language">Language</span
+          ><select id="languageSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="ko">한국어</option>
+          </select></label
+        ><a
+          class="icon-button saved-trigger"
+          id="savedButton"
+          href="explore.html?saved=1"
+          aria-label="View saved finds"
+          data-i18n-aria="savedView"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+            /></svg
+          ><span class="saved-count" id="savedCount" hidden>0</span></a
+        ><button
+          class="account-trigger"
+          type="button"
+          data-account-cta
+          data-account-intent="signin"
+          data-i18n="signIn"
+        >
+          Sign in</button
+        ><a class="top-radar-cta" href="pricing.html"
+          ><span class="radar-status-dot" aria-hidden="true"></span
+          ><span data-i18n="seePlans">See plans</span></a
+        >
+      </div>
+    </header>
+
+    <main class="site-main page-main radar-page-main">
+      <section
+        class="page-hero radar-page-hero"
+        aria-labelledby="radarPageTitle"
+      >
+        <div>
+          <span class="radar-kicker"
+            ><span class="radar-status-dot" aria-hidden="true"></span
+            ><span data-i18n="radarPageKicker">YOUR LOCAL WATCHLIST</span></span
+          >
+          <h1 id="radarPageTitle" data-i18n="radarPageTitle">
+            Set it once. Let NearFree keep looking.
+          </h1>
+          <p data-i18n="radarPageDesc">
+            Start with the catalog already live today. Your preview stays on
+            this device until secure accounts and notifications launch.
+          </p>
+          <div class="page-hero-actions">
+            <button type="button" data-scroll-radar>
+              <span data-i18n="buildPreview">Build my preview</span
+              ><span aria-hidden="true">↓</span></button
+            ><a href="pricing.html" data-i18n="seePlans">See plans</a>
+          </div>
+        </div>
+        <aside>
+          <span data-i18n="radarPromiseLabel">RADAR PROMISE</span
+          ><strong data-i18n="radarPromiseTitle"
+            >Fewer alerts. Better reasons to open them.</strong
+          >
+          <p data-i18n="radarPromiseDesc">
+            Matching starts with distance and interests, then prioritizes new,
+            upcoming and ending-soon finds.
+          </p>
+        </aside>
+      </section>
+
+      <section
+        class="radar-metrics"
+        aria-label="Current catalog activity"
+        data-i18n-aria="radarMetricsAria"
+      >
+        <article>
+          <strong id="radarAvailableCount">0</strong
+          ><span data-i18n="activeFindsMetric">active verified finds</span>
+        </article>
+        <article>
+          <strong id="radarNewCount">0</strong
+          ><span data-i18n="newlyCheckedMetric">newly checked</span>
+        </article>
+        <article>
+          <strong id="radarEndingCount">0</strong
+          ><span data-i18n="endingSoonMetric">ending within 30 days</span>
+        </article>
+        <article>
+          <strong id="radarCityCount">0</strong
+          ><span data-i18n="citiesCoveredMetric">DFW cities covered</span>
+        </article>
+      </section>
+
+      <section
+        class="radar-preview radar-page-preview"
+        id="radarPreview"
+        aria-labelledby="radarPreviewTitle"
+      >
+        <div class="radar-preview-controls">
+          <span class="radar-kicker"
+            ><span class="radar-status-dot" aria-hidden="true"></span
+            ><span data-i18n="previewKicker">TRY YOUR RADAR</span></span
+          >
+          <h2 id="radarPreviewTitle" data-i18n="previewTitle">
+            See what NearFree would watch for you.
+          </h2>
+          <p data-i18n="previewDesc">
+            This preview uses the verified catalog already live on NearFree. No
+            account or precise address is required.
+          </p>
+          <form id="radarPreviewForm">
+            <div class="radar-field-row">
+              <label
+                ><span data-i18n="startingCity">Starting city</span
+                ><select id="radarCitySelect"></select></label
+              ><label
+                ><span data-i18n="travelRadius">Travel radius</span
+                ><select id="radarRadiusSelect">
+                  <option value="10">10 mi</option>
+                  <option value="20" selected>20 mi</option>
+                  <option value="35">35 mi</option>
+                </select></label
+              >
+            </div>
+            <fieldset class="radar-interest-fieldset">
+              <legend data-i18n="interestedIn">I am interested in</legend>
+              <div class="radar-interest-list">
+                <button
+                  type="button"
+                  data-radar-interest="family"
+                  aria-pressed="false"
+                  data-i18n="radarInterestFamily"
+                >
+                  Family</button
+                ><button
+                  type="button"
+                  data-radar-interest="culture"
+                  aria-pressed="false"
+                  data-i18n="radarInterestCulture"
+                >
+                  Arts &amp; culture</button
+                ><button
+                  type="button"
+                  data-radar-interest="food"
+                  aria-pressed="false"
+                  data-i18n="radarInterestFood"
+                >
+                  Food &amp; local savings</button
+                ><button
+                  type="button"
+                  data-radar-interest="active"
+                  aria-pressed="false"
+                  data-i18n="radarInterestActive"
+                >
+                  Outdoors &amp; active
+                </button>
+              </div>
+            </fieldset>
+            <button
+              class="save-radar-button"
+              id="radarPreviewSave"
+              type="button"
+            >
+              <span data-i18n="saveRadarPreview">Save this Radar preview</span
+              ><span aria-hidden="true">→</span>
+            </button>
+            <p
+              class="radar-preview-note"
+              id="radarPreviewStatus"
+              aria-live="polite"
+              data-i18n="previewNotSubscribed"
+            >
+              Saved previews stay on this device. Email and instant alerts are
+              not active yet.
+            </p>
+          </form>
+        </div>
+        <aside class="radar-preview-results" aria-live="polite">
+          <header>
+            <div>
+              <span data-i18n="yourMatches">Your current matches</span
+              ><strong id="radarMatchCount">0</strong>
+            </div>
+            <span id="radarPreviewArea">Plano · 20 mi</span>
+          </header>
+          <div class="radar-preview-summary">
+            <span
+              ><strong id="radarFreeCount">0</strong
+              ><small data-i18n="freeMatches">free</small></span
+            ><span
+              ><strong id="radarEventCount">0</strong
+              ><small data-i18n="eventMatches">dated events</small></span
+            >
+          </div>
+          <div class="radar-match-list" id="radarMatches"></div>
+        </aside>
+      </section>
+
+      <section class="radar-benefits" aria-labelledby="radarBenefitsTitle">
+        <header class="home-section-heading">
+          <span class="section-kicker" data-i18n="radarBenefitsKicker"
+            >BUILT FOR REPEAT DISCOVERY</span
+          >
+          <h2 id="radarBenefitsTitle" data-i18n="radarBenefitsTitle">
+            An account should remember the work you already did.
+          </h2>
+          <p data-i18n="radarBenefitsDesc">
+            When the backend launches, sign-in will exist for continuity and
+            control—not to lock the public catalog.
+          </p>
+        </header>
+        <div class="radar-benefit-grid">
+          <article>
+            <span>01</span>
+            <h3 data-i18n="radarBenefitSaveTitle">Synced saves</h3>
+            <p data-i18n="radarBenefitSaveDesc">
+              Keep your shortlist across devices and see when a saved condition
+              changes.
+            </p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3 data-i18n="radarBenefitAlertTitle">Useful alerts</h3>
+            <p data-i18n="radarBenefitAlertDesc">
+              Choose weekly matches plus urgent new and ending-soon
+              notifications.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3 data-i18n="radarBenefitControlTitle">Preference control</h3>
+            <p data-i18n="radarBenefitControlDesc">
+              Manage area, radius, interests and notification frequency from one
+              account.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="radar-join-band">
+        <div>
+          <span class="section-kicker" data-i18n="nextRelease"
+            >NEXT RELEASE</span
+          >
+          <h2 data-i18n="radarJoinTitle">Ready when accounts are.</h2>
+          <p data-i18n="radarJoinDesc">
+            Preview and save your settings now. Secure sign-in, billing and
+            delivery controls will arrive together.
+          </p>
+        </div>
+        <div>
+          <a href="pricing.html" data-i18n="comparePlans">Compare plans</a
+          ><button
+            type="button"
+            data-account-cta
+            data-account-intent="membership"
+            data-i18n="joinRadar"
+          >
+            Join Radar
+          </button>
+        </div>
+      </section>
+      <footer class="site-footer">
+        <a
+          class="brand footer-brand"
+          href="index.html"
+          aria-label="NearFree home"
+          data-i18n-aria="brandHome"
+          ><span class="brand-mark" aria-hidden="true"
+            ><i></i><i></i><i></i></span
+          ><span class="brand-copy"
+            ><strong>NearFree<span class="brand-dot">.</span></strong></span
+          ></a
+        >
+        <p data-i18n="footerPromise">
+          DFW benefits, found and checked for you.
+        </p>
+        <nav aria-label="Footer navigation" data-i18n-aria="footerNavigation">
+          <a href="explore.html" data-i18n="explore">Explore</a
+          ><a href="radar.html" data-i18n="radarNav">Radar</a
+          ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+          ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+        </nav>
+      </footer>
+    </main>
+
+    <nav
+      class="mobile-nav"
+      aria-label="Mobile menu"
+      data-i18n-aria="mobileMenu"
+    >
+      <a href="index.html" aria-label="Home" data-i18n-aria="home"
+        ><svg viewBox="0 0 24 24">
+          <path d="m3 11 9-7 9 7v9H6v-9" />
+          <path d="M10 20v-6h4v6" /></svg
+        ><span data-i18n="home">Home</span></a
+      ><a href="explore.html" aria-label="Explore" data-i18n-aria="explore"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" /></svg
+        ><span data-i18n="explore">Explore</span></a
+      ><a
+        class="mobile-radar-button active"
+        href="radar.html"
+        aria-current="page"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M12 12 18 6" /></svg
+        ><span data-i18n="radarNav">Radar</span></a
+      ><a id="mobileSaved" href="explore.html?saved=1"
+        ><svg viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          /></svg
+        ><span data-i18n="saved">Saved</span></a
+      >
+    </nav>
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+    <dialog
+      class="sheet location-sheet"
+      id="locationDialog"
+      aria-labelledby="locationTitle"
+    >
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <div>
+          <span class="section-kicker" data-i18n="locationKicker"
+            >YOUR AREA</span
+          >
+          <h2 id="locationTitle" data-i18n="locationTitle">
+            Where should we start?
+          </h2>
+        </div>
+        <button
+          class="modal-close"
+          data-close
+          type="button"
+          aria-label="Close"
+          data-i18n-aria="close"
+        >
+          ×
+        </button>
+      </div>
+      <button
+        class="all-dfw-option"
+        id="allDfwOption"
+        type="button"
+        data-scope="all"
+        aria-pressed="true"
+      >
+        <span class="all-dfw-icon" aria-hidden="true">DFW</span
+        ><span
+          ><strong data-i18n="allDfw">All DFW</strong
+          ><small data-i18n="allDfwDesc"
+            >See every verified find across the metroplex</small
+          ></span
+        ><span class="area-check" aria-hidden="true">✓</span></button
+      ><button class="detect-location" id="detectLocation" type="button">
+        <span class="detect-icon"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+            <circle cx="12" cy="12" r="7" /></svg></span
+        ><span
+          ><strong data-i18n="currentLocation">Use current location</strong
+          ><small data-i18n="locationPermission"
+            >Browser location permission required</small
+          ></span
+        ><span class="arrow">→</span>
+      </button>
+      <p class="location-status" id="locationStatus" role="status"></p>
+      <div class="city-grid-head">
+        <span data-i18n="chooseCity">Or show one city</span
+        ><small data-i18n="cityCountHint"
+          >Cities with active finds are available</small
+        >
+      </div>
+      <div class="city-grid" id="cityGrid"></div>
+      <p class="privacy-note">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 11V8a5 5 0 0 1 10 0v3" />
+          <rect x="5" y="11" width="14" height="10" rx="2" /></svg
+        ><span data-i18n="privacy"
+          >Your location is used only for distance and is never sent to a
+          server.</span
+        >
+      </p>
+    </dialog>
+    <dialog
+      class="detail-modal"
+      id="detailDialog"
+      aria-labelledby="detailTitle"
+    >
+      <header class="detail-dialog-bar">
+        <button
+          class="detail-back-button"
+          data-close
+          type="button"
+          aria-label="Back"
+          data-i18n-aria="back"
+        >
+          <span aria-hidden="true">←</span><span data-i18n="back">Back</span>
+        </button>
+        <div class="detail-dialog-actions">
+          <button
+            class="detail-toolbar-button"
+            id="detailSave"
+            type="button"
+            aria-label="Save"
+            data-i18n-aria="save"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+              />
+            </svg></button
+          ><button
+            class="detail-toolbar-button"
+            id="detailShare"
+            type="button"
+            aria-label="Share"
+            data-i18n-aria="share"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 16V3M7 8l5-5 5 5" />
+              <path d="M5 12v8h14v-8" />
+            </svg></button
+          ><button
+            class="detail-close-button"
+            data-close
+            type="button"
+            aria-label="Close"
+            data-i18n-aria="close"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m7 7 10 10M17 7 7 17" />
+            </svg>
+          </button>
+        </div>
+      </header>
+      <div class="detail-scroll-area" id="detailScrollArea">
+        <div id="detailContent"></div>
+      </div>
+    </dialog>
+    <dialog
+      class="account-dialog"
+      id="accountDialog"
+      aria-labelledby="accountDialogTitle"
+    >
+      <button
+        class="account-dialog-close"
+        data-close
+        type="button"
+        aria-label="Close"
+        data-i18n-aria="close"
+      >
+        ×</button
+      ><span class="account-dialog-icon" aria-hidden="true">N.</span
+      ><span class="section-kicker" data-i18n="accountPreviewKicker"
+        >ACCOUNT PREVIEW</span
+      >
+      <h2 id="accountDialogTitle">Accounts are coming next.</h2>
+      <p id="accountDialogDesc">
+        Sign-in will launch with secure backend sync for saved finds, Radar
+        preferences and notification controls.
+      </p>
+      <div class="account-dialog-actions">
+        <a href="explore.html" data-i18n="keepExploring">Keep exploring</a
+        ><a href="radar.html" data-i18n="previewYourRadar"
+          >Preview your Radar</a
+        >
+      </div>
+      <small data-i18n="noDataCollected"
+        >No email, password or payment information is collected on this
+        version.</small
+      >
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="assets/app.f7367d40167c.js"></script>
+  </body>
+</html>

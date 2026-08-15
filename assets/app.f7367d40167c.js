@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.0736f1265c09.js";
+import { UI, localizeListing } from "./locales.f12fa837655e.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -9,7 +9,7 @@ import {
   distanceMiles,
   matchesIntent,
   overlapsWindow,
-  weekendWindow
+  weekendWindow,
 } from "./discovery.121bc0c1385c.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
 import { createListingTemplates } from "./listing-templates.1e79254026cd.js";
@@ -23,14 +23,23 @@ const storedSaved = storage.readJson("nearfree-saved");
 const storedLocale = storage.read("nearfree-locale");
 const storedScope = storage.read("nearfree-scope");
 const storedRadarValue = storage.readJson("nearfree-radar-preview");
-const storedLocationName = typeof storedLocationValue === "string"
-  ? storedLocationValue
-  : storedLocationValue?.name;
-const storedLocation = CITY_PRESETS.find(city => city.name === storedLocationName) || null;
-const hasValidStoredScope = storedScope === "all"
-  || (Boolean(storedLocation) && ["city", "nearby"].includes(storedScope));
-const initialScope = hasValidStoredScope ? storedScope : storedLocation ? "nearby" : "all";
-const radarCityName = CITY_PRESETS.some(city => city.name === storedRadarValue?.city)
+const storedLocationName =
+  typeof storedLocationValue === "string"
+    ? storedLocationValue
+    : storedLocationValue?.name;
+const storedLocation =
+  CITY_PRESETS.find((city) => city.name === storedLocationName) || null;
+const hasValidStoredScope =
+  storedScope === "all" ||
+  (Boolean(storedLocation) && ["city", "nearby"].includes(storedScope));
+const initialScope = hasValidStoredScope
+  ? storedScope
+  : storedLocation
+    ? "nearby"
+    : "all";
+const radarCityName = CITY_PRESETS.some(
+  (city) => city.name === storedRadarValue?.city,
+)
   ? storedRadarValue.city
   : storedLocation?.name || CITY_PRESETS[0].name;
 const radarRadius = [10, 20, 35].includes(Number(storedRadarValue?.radius))
@@ -38,7 +47,9 @@ const radarRadius = [10, 20, 35].includes(Number(storedRadarValue?.radius))
   : 20;
 const radarInterestKeys = new Set(["family", "culture", "food", "active"]);
 const storedRadarInterests = Array.isArray(storedRadarValue?.interests)
-  ? storedRadarValue.interests.filter(interest => radarInterestKeys.has(interest))
+  ? storedRadarValue.interests.filter((interest) =>
+      radarInterestKeys.has(interest),
+    )
   : [];
 
 // Older versions stored precise coordinates. Normalize them to a city name on load.
@@ -53,14 +64,14 @@ const state = {
   sort: initialScope === "all" ? "soon" : "distance",
   search: "",
   saved: new Set(Array.isArray(storedSaved) ? storedSaved : []),
-  savedOnly: false,
+  savedOnly: new URL(window.location.href).searchParams.get("saved") === "1",
   locale: ["en", "ko"].includes(storedLocale) ? storedLocale : "en",
   radar: {
     city: radarCityName,
     radius: radarRadius,
     interests: new Set(storedRadarInterests),
-    saved: Boolean(storedRadarValue)
-  }
+    saved: Boolean(storedRadarValue),
+  },
 };
 
 const elements = {
@@ -103,7 +114,10 @@ const elements = {
   radarEventCount: $("#radarEventCount"),
   radarPreviewArea: $("#radarPreviewArea"),
   radarMatches: $("#radarMatches"),
-  radarPreviewStatus: $("#radarPreviewStatus")
+  radarPreviewStatus: $("#radarPreviewStatus"),
+  accountDialog: $("#accountDialog"),
+  accountDialogTitle: $("#accountDialogTitle"),
+  accountDialogDesc: $("#accountDialogDesc"),
 };
 
 let toastTimer;
@@ -112,7 +126,7 @@ const RADAR_INTEREST_CATEGORIES = Object.freeze({
   family: ["family"],
   culture: ["arts", "culture", "concert", "festival", "library"],
   food: ["food", "local-deals"],
-  active: ["fitness", "recreation", "transit"]
+  active: ["fitness", "recreation", "transit"],
 });
 
 function escapeHtml(value = "") {
@@ -128,7 +142,7 @@ function t(key, variables = {}) {
   const template = UI[state.locale][key] ?? UI.en[key] ?? key;
   return Object.entries(variables).reduce(
     (result, [name, value]) => result.replaceAll(`{${name}}`, String(value)),
-    template
+    template,
   );
 }
 
@@ -139,7 +153,12 @@ function translatedListing(listing) {
 function discoveryIndex() {
   if (!discoveryIndexes.has(state.locale)) {
     const locale = state.locale;
-    discoveryIndexes.set(locale, createDiscoveryIndex(LISTINGS, (listing) => localizeListing(listing, locale)));
+    discoveryIndexes.set(
+      locale,
+      createDiscoveryIndex(LISTINGS, (listing) =>
+        localizeListing(listing, locale),
+      ),
+    );
   }
   return discoveryIndexes.get(state.locale);
 }
@@ -151,21 +170,47 @@ function sourceListing(id) {
 function formatVerifiedDate(value) {
   const locale = state.locale === "ko" ? "ko-KR" : "en-US";
   const timeZone = String(value).includes("T") ? DFW_TIME_ZONE : "UTC";
-  return new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone })
-    .format(new Date(String(value).includes("T") ? value : `${value}T00:00:00Z`));
+  return new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone,
+  }).format(
+    new Date(String(value).includes("T") ? value : `${value}T00:00:00Z`),
+  );
 }
 
 function applyStaticTranslations() {
   document.documentElement.lang = state.locale;
-  document.title = t("metaTitle");
-  $("meta[name='description']").content = t("metaDescription");
-  $$('[data-i18n]').forEach(node => { node.textContent = t(node.dataset.i18n); });
-  $$('[data-i18n-aria]').forEach(node => { node.setAttribute("aria-label", t(node.dataset.i18nAria)); });
-  $$('[data-i18n-placeholder]').forEach(node => { node.setAttribute("placeholder", t(node.dataset.i18nPlaceholder)); });
-  $$('[data-i18n-alt]').forEach(node => { node.setAttribute("alt", t(node.dataset.i18nAlt)); });
-  elements.updatedLabel.textContent = t("updated", { date: formatVerifiedDate(RESEARCH_NOTE.verifiedAt) });
-  elements.languageSelect.value = state.locale;
-  elements.sortLabel.textContent = t({ distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[state.sort]);
+  document.title = t(document.body.dataset.titleKey || "metaTitle");
+  const metaDescription = $("meta[name='description']");
+  if (metaDescription)
+    metaDescription.content = t(
+      document.body.dataset.descriptionKey || "metaDescription",
+    );
+  $$("[data-i18n]").forEach((node) => {
+    node.textContent = t(node.dataset.i18n);
+  });
+  $$("[data-i18n-aria]").forEach((node) => {
+    node.setAttribute("aria-label", t(node.dataset.i18nAria));
+  });
+  $$("[data-i18n-placeholder]").forEach((node) => {
+    node.setAttribute("placeholder", t(node.dataset.i18nPlaceholder));
+  });
+  $$("[data-i18n-alt]").forEach((node) => {
+    node.setAttribute("alt", t(node.dataset.i18nAlt));
+  });
+  if (elements.updatedLabel)
+    elements.updatedLabel.textContent = t("updated", {
+      date: formatVerifiedDate(RESEARCH_NOTE.verifiedAt),
+    });
+  if (elements.languageSelect) elements.languageSelect.value = state.locale;
+  if (elements.sortLabel)
+    elements.sortLabel.textContent = t(
+      { distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[
+        state.sort
+      ],
+    );
 }
 
 function isCurrentListing(listing, now = new Date()) {
@@ -173,7 +218,11 @@ function isCurrentListing(listing, now = new Date()) {
 }
 
 function isRecentlyChecked(listing, now = new Date()) {
-  const checked = new Date(String(listing.verifiedAt).includes("T") ? listing.verifiedAt : `${listing.verifiedAt}T00:00:00Z`);
+  const checked = new Date(
+    String(listing.verifiedAt).includes("T")
+      ? listing.verifiedAt
+      : `${listing.verifiedAt}T00:00:00Z`,
+  );
   return Number.isFinite(checked.getTime()) && now - checked <= 7 * 86_400_000;
 }
 
@@ -184,62 +233,104 @@ function endsWithin(listing, days, now = new Date()) {
 }
 
 function radarSignal(listing, now = new Date()) {
-  if (endsWithin(listing, 30, now)) return { key: "radarEndingSignal", className: "signal-ending" };
-  if (listing.kind === "event") return { key: "radarUpcomingSignal", className: "signal-upcoming" };
-  if (isRecentlyChecked(listing, now)) return { key: "radarNewSignal", className: "signal-new" };
+  if (endsWithin(listing, 30, now))
+    return { key: "radarEndingSignal", className: "signal-ending" };
+  if (listing.kind === "event")
+    return { key: "radarUpcomingSignal", className: "signal-upcoming" };
+  if (isRecentlyChecked(listing, now))
+    return { key: "radarNewSignal", className: "signal-new" };
   return { key: "radarAvailableSignal", className: "signal-available" };
 }
 
 function renderRadarMetrics() {
+  if (!elements.radarAvailableCount) return;
   const now = new Date();
-  const current = LISTINGS.filter(listing => isCurrentListing(listing, now));
+  const current = LISTINGS.filter((listing) => isCurrentListing(listing, now));
   elements.radarAvailableCount.textContent = current.length;
-  elements.radarNewCount.textContent = current.filter(listing => isRecentlyChecked(listing, now)).length;
-  elements.radarEndingCount.textContent = current.filter(listing => endsWithin(listing, 30, now)).length;
-  elements.radarCityCount.textContent = new Set(current.map(listing => listing.city)).size;
+  elements.radarNewCount.textContent = current.filter((listing) =>
+    isRecentlyChecked(listing, now),
+  ).length;
+  elements.radarEndingCount.textContent = current.filter((listing) =>
+    endsWithin(listing, 30, now),
+  ).length;
+  elements.radarCityCount.textContent = new Set(
+    current.map((listing) => listing.city),
+  ).size;
 }
 
 function renderRadarCityOptions() {
-  elements.radarCitySelect.innerHTML = CITY_PRESETS.map(city => `
-    <option value="${escapeHtml(city.name)}" ${city.name === state.radar.city ? "selected" : ""}>${escapeHtml(city.name)}</option>`).join("");
+  if (!elements.radarCitySelect || !elements.radarRadiusSelect) return;
+  elements.radarCitySelect.innerHTML = CITY_PRESETS.map(
+    (city) => `
+    <option value="${escapeHtml(city.name)}" ${city.name === state.radar.city ? "selected" : ""}>${escapeHtml(city.name)}</option>`,
+  ).join("");
   elements.radarRadiusSelect.value = String(state.radar.radius);
 }
 
 function currentRadarMatches() {
   const now = new Date();
-  const city = CITY_PRESETS.find(item => item.name === state.radar.city) || CITY_PRESETS[0];
-  const categories = new Set([...state.radar.interests].flatMap(interest => RADAR_INTEREST_CATEGORIES[interest] || []));
-  return LISTINGS
-    .filter(listing => isCurrentListing(listing, now))
-    .map(listing => ({ listing: translatedListing(listing), distance: distanceMiles(city, listing) }))
-    .filter(({ listing, distance }) => distance <= state.radar.radius
-      && (categories.size === 0 || categories.has(listing.category)))
-    .sort((a, b) => a.distance - b.distance || Number(a.listing.kind !== "event") - Number(b.listing.kind !== "event") || new Date(a.listing.start) - new Date(b.listing.start));
+  const city =
+    CITY_PRESETS.find((item) => item.name === state.radar.city) ||
+    CITY_PRESETS[0];
+  const categories = new Set(
+    [...state.radar.interests].flatMap(
+      (interest) => RADAR_INTEREST_CATEGORIES[interest] || [],
+    ),
+  );
+  return LISTINGS.filter((listing) => isCurrentListing(listing, now))
+    .map((listing) => ({
+      listing: translatedListing(listing),
+      distance: distanceMiles(city, listing),
+    }))
+    .filter(
+      ({ listing, distance }) =>
+        distance <= state.radar.radius &&
+        (categories.size === 0 || categories.has(listing.category)),
+    )
+    .sort(
+      (a, b) =>
+        a.distance - b.distance ||
+        Number(a.listing.kind !== "event") -
+          Number(b.listing.kind !== "event") ||
+        new Date(a.listing.start) - new Date(b.listing.start),
+    );
 }
 
 function renderRadarPreview() {
+  if (!elements.radarMatches) return;
   const matches = currentRadarMatches();
   const now = new Date();
   elements.radarMatchCount.textContent = matches.length;
-  elements.radarFreeCount.textContent = matches.filter(({ listing }) => listing.costType === "free").length;
-  elements.radarEventCount.textContent = matches.filter(({ listing }) => listing.kind === "event").length;
+  elements.radarFreeCount.textContent = matches.filter(
+    ({ listing }) => listing.costType === "free",
+  ).length;
+  elements.radarEventCount.textContent = matches.filter(
+    ({ listing }) => listing.kind === "event",
+  ).length;
   elements.radarPreviewArea.textContent = `${state.radar.city} · ${formatDistance(state.radar.radius)}`;
-  elements.radarPreviewStatus.textContent = t(state.radar.saved ? "previewSaved" : "previewNotSubscribed");
-  $$("[data-radar-interest]").forEach(button => {
+  elements.radarPreviewStatus.textContent = t(
+    state.radar.saved ? "previewSaved" : "previewNotSubscribed",
+  );
+  $$("[data-radar-interest]").forEach((button) => {
     const active = state.radar.interests.has(button.dataset.radarInterest);
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", String(active));
   });
-  elements.radarMatches.innerHTML = matches.length ? matches.slice(0, 3).map(({ listing, distance }) => {
-    const signal = radarSignal(listing, now);
-    return `
+  elements.radarMatches.innerHTML = matches.length
+    ? matches
+        .slice(0, 3)
+        .map(({ listing, distance }) => {
+          const signal = radarSignal(listing, now);
+          return `
       <button class="radar-match-item" data-radar-listing="${escapeHtml(listing.id)}" type="button">
         <span class="radar-match-signal ${signal.className}">${escapeHtml(t(signal.key))}</span>
         <strong>${escapeHtml(listing.title)}</strong>
         <small>${escapeHtml(displayCost(listing))} · ${escapeHtml(formatDistance(distance))} · ${escapeHtml(listing.dateLabel)}</small>
         <span aria-hidden="true">→</span>
       </button>`;
-  }).join("") : `<p class="radar-empty-match">${escapeHtml(t("radarEmptyMatches"))}</p>`;
+        })
+        .join("")
+    : `<p class="radar-empty-match">${escapeHtml(t("radarEmptyMatches"))}</p>`;
 }
 
 function renderRadarExperience() {
@@ -248,15 +339,22 @@ function renderRadarExperience() {
 }
 
 function scrollToRadarPreview() {
-  $("#radarPreview").scrollIntoView({ behavior: "smooth", block: "start" });
-  requestAnimationFrame(() => elements.radarCitySelect.focus({ preventScroll: true }));
+  const radarPreview = $("#radarPreview");
+  if (!radarPreview) {
+    window.location.href = "radar.html";
+    return;
+  }
+  radarPreview.scrollIntoView({ behavior: "smooth", block: "start" });
+  requestAnimationFrame(() =>
+    elements.radarCitySelect?.focus({ preventScroll: true }),
+  );
 }
 
 function saveRadarPreview() {
   storage.writeJson("nearfree-radar-preview", {
     city: state.radar.city,
     radius: state.radar.radius,
-    interests: [...state.radar.interests]
+    interests: [...state.radar.interests],
   });
   state.radar.saved = true;
   elements.radarPreviewStatus.textContent = t("previewSaved");
@@ -264,7 +362,7 @@ function saveRadarPreview() {
 }
 
 function formatDistance(miles) {
-  if (miles < .3) return t("within");
+  if (miles < 0.3) return t("within");
   if (miles < 10) return t("distanceMiles", { distance: miles.toFixed(1) });
   return t("distanceMiles", { distance: Math.round(miles) });
 }
@@ -281,39 +379,65 @@ function getTimeStatus(listing) {
   const diff = calendarDayDifference(now, start);
   if (diff <= 7) return t("daysAway", { count: diff });
   if (diff <= 31) return t("weeksAway", { count: Math.ceil(diff / 7) });
-  return String(listing.kicker || listing.dateLabel).split("·")[0].trim();
+  return String(listing.kicker || listing.dateLabel)
+    .split("·")[0]
+    .trim();
 }
 
 function listingMatches(record, now) {
   const { listing, searchText, minimumPrice } = record;
   if (state.savedOnly && !state.saved.has(listing.id)) return false;
-  if (state.scope === "city" && listing.city !== state.location.name) return false;
-  if (![...state.intents].every((intent) => matchesIntent(listing, intent, { now, searchText, minimumPrice }))) return false;
+  if (state.scope === "city" && listing.city !== state.location.name)
+    return false;
+  if (
+    ![...state.intents].every((intent) =>
+      matchesIntent(listing, intent, { now, searchText, minimumPrice }),
+    )
+  )
+    return false;
 
   if (state.search) {
-    if (!searchText.includes(state.search.toLocaleLowerCase(state.locale))) return false;
+    if (!searchText.includes(state.search.toLocaleLowerCase(state.locale)))
+      return false;
   }
   return true;
 }
 
 function sortedListings() {
   const now = new Date();
-  const results = discoveryIndex().records
-    .filter((record) => listingMatches(record, now))
-    .map(({ listing }) => ({ ...listing, distance: distanceMiles(state.location, listing) }));
+  const results = discoveryIndex()
+    .records.filter((record) => listingMatches(record, now))
+    .map(({ listing }) => ({
+      ...listing,
+      distance: distanceMiles(state.location, listing),
+    }));
 
-  if (state.sort === "soon" || (state.scope === "all" && state.sort === "distance")) {
+  if (
+    state.sort === "soon" ||
+    (state.scope === "all" && state.sort === "distance")
+  ) {
     results.sort((a, b) => {
       const aRank = a.kind === "event" ? 0 : 1;
       const bRank = b.kind === "event" ? 0 : 1;
-      const fallback = state.scope === "all" ? a.city.localeCompare(b.city) : a.distance - b.distance;
+      const fallback =
+        state.scope === "all"
+          ? a.city.localeCompare(b.city)
+          : a.distance - b.distance;
       return aRank - bRank || new Date(a.start) - new Date(b.start) || fallback;
     });
   } else if (state.sort === "verified") {
-    results.sort((a, b) => b.sources.length - a.sources.length
-      || (state.scope === "all" ? new Date(a.start) - new Date(b.start) : a.distance - b.distance));
+    results.sort(
+      (a, b) =>
+        b.sources.length - a.sources.length ||
+        (state.scope === "all"
+          ? new Date(a.start) - new Date(b.start)
+          : a.distance - b.distance),
+    );
   } else {
-    results.sort((a, b) => a.distance - b.distance || new Date(a.start) - new Date(b.start));
+    results.sort(
+      (a, b) =>
+        a.distance - b.distance || new Date(a.start) - new Date(b.start),
+    );
   }
   return results;
 }
@@ -335,26 +459,39 @@ function verificationAge(value) {
   if (hasTime) {
     const hours = Math.floor((today - checked) / 3_600_000);
     if (hours >= 0 && hours < 1) return t("verifiedRecently");
-    if (hours >= 1 && hours < 24) return t("verifiedHoursAgo", { count: hours });
+    if (hours >= 1 && hours < 24)
+      return t("verifiedHoursAgo", { count: hours });
   }
-  const checkedKey = hasTime ? dateKeyInTimeZone(checked) : String(value).slice(0, 10);
+  const checkedKey = hasTime
+    ? dateKeyInTimeZone(checked)
+    : String(value).slice(0, 10);
   const todayKey = dateKeyInTimeZone(today);
-  const days = Math.round((Date.parse(`${todayKey}T00:00:00Z`) - Date.parse(`${checkedKey}T00:00:00Z`)) / 86400000);
+  const days = Math.round(
+    (Date.parse(`${todayKey}T00:00:00Z`) -
+      Date.parse(`${checkedKey}T00:00:00Z`)) /
+      86400000,
+  );
   if (days <= 0) return t("verifiedToday");
   if (days === 1) return t("verifiedYesterday");
   return t("verifiedOn", { date: formatVerifiedDate(value) });
 }
 
 function homeSections(listings) {
-  const filteredMode = state.scope === "city" || state.savedOnly || Boolean(state.search) || state.intents.size > 0;
+  const filteredMode =
+    state.scope === "city" ||
+    state.savedOnly ||
+    Boolean(state.search) ||
+    state.intents.size > 0;
   if (filteredMode) return [{ key: "results", items: listings }];
 
   const pool = [...listings];
   const currentWeekend = weekendWindow(new Date());
-  const minimumPriceFor = (listing) => discoveryIndex().recordById.get(listing.id)?.minimumPrice ?? Number.POSITIVE_INFINITY;
+  const minimumPriceFor = (listing) =>
+    discoveryIndex().recordById.get(listing.id)?.minimumPrice ??
+    Number.POSITIVE_INFINITY;
   const take = (predicate, limit) => {
     const selected = [];
-    for (let index = 0; index < pool.length && selected.length < limit;) {
+    for (let index = 0; index < pool.length && selected.length < limit; ) {
       if (predicate(pool[index])) selected.push(...pool.splice(index, 1));
       else index += 1;
     }
@@ -362,26 +499,37 @@ function homeSections(listings) {
   };
 
   const good = take(() => true, 4);
-  const worth = take(listing => listing.kind === "event", 4);
-  const weekend = take((listing) => listing.costType === "free" && overlapsWindow(listing, currentWeekend), 4);
-  const budget = take((listing) => listing.costType === "discount" && minimumPriceFor(listing) <= 10, 4);
+  const worth = take((listing) => listing.kind === "event", 4);
+  const weekend = take(
+    (listing) =>
+      listing.costType === "free" && overlapsWindow(listing, currentWeekend),
+    4,
+  );
+  const budget = take(
+    (listing) =>
+      listing.costType === "discount" && minimumPriceFor(listing) <= 10,
+    4,
+  );
   return [
     { key: "good", items: good },
     { key: "worth", items: worth },
     { key: "weekend", items: weekend },
     { key: "budget", items: budget },
-    { key: "more", items: pool }
-  ].filter(section => section.items.length > 0);
+    { key: "more", items: pool },
+  ].filter((section) => section.items.length > 0);
 }
 
 function renderFeed() {
+  if (!elements.feed) return;
   const listings = sortedListings();
   let startIndex = 0;
-  elements.feed.innerHTML = homeSections(listings).map(section => {
-    const markup = templates.sectionTemplate(section, startIndex);
-    startIndex += section.items.length;
-    return markup;
-  }).join("");
+  elements.feed.innerHTML = homeSections(listings)
+    .map((section) => {
+      const markup = templates.sectionTemplate(section, startIndex);
+      startIndex += section.items.length;
+      return markup;
+    })
+    .join("");
   elements.resultCount.textContent = listings.length;
   elements.emptyState.hidden = listings.length > 0;
   elements.feed.hidden = listings.length === 0;
@@ -392,12 +540,19 @@ function renderFeed() {
 }
 
 function updateActiveNotice() {
+  if (!elements.activeNotice || !elements.activeNoticeText) return;
   const notices = [];
-  if (state.scope === "city") notices.push(t("cityOnly", { city: state.location.label || state.location.name }));
-  if (state.scope === "nearby") notices.push(t("sortedNear", { city: state.location.label || state.location.name }));
+  if (state.scope === "city")
+    notices.push(
+      t("cityOnly", { city: state.location.label || state.location.name }),
+    );
+  if (state.scope === "nearby")
+    notices.push(
+      t("sortedNear", { city: state.location.label || state.location.name }),
+    );
   if (state.savedOnly) notices.push(t("savedOnly"));
   if (state.search) notices.push(t("searchResults", { query: state.search }));
-  state.intents.forEach(intent => {
+  state.intents.forEach((intent) => {
     const chip = $(`.intent-chip[data-intent="${intent}"]`);
     if (chip) notices.push(chip.textContent.trim());
   });
@@ -406,47 +561,66 @@ function updateActiveNotice() {
 }
 
 function updateIntentUI() {
-  $$(".intent-chip").forEach(chip => {
+  $$(".intent-chip").forEach((chip) => {
     const group = chip.dataset.clearGroup;
     const active = chip.dataset.intent
       ? state.intents.has(chip.dataset.intent)
-      : group ? !$$(`[data-intent-group="${group}"]`).some(item => state.intents.has(item.dataset.intent)) : false;
+      : group
+        ? !$$(`[data-intent-group="${group}"]`).some((item) =>
+            state.intents.has(item.dataset.intent),
+          )
+        : false;
     chip.classList.toggle("active", active);
     chip.setAttribute("aria-pressed", String(active));
   });
 }
 
 function updateSavedCount() {
+  if (!elements.savedCount) return;
   const count = state.saved.size;
   elements.savedCount.textContent = count;
   elements.savedCount.hidden = count === 0;
 }
 
 function updateLocationUI() {
+  if (!elements.locationName) return;
   if (state.scope === "all") {
-    elements.locationModeLabel.textContent = t("browseArea");
+    if (elements.locationModeLabel)
+      elements.locationModeLabel.textContent = t("browseArea");
     elements.locationName.textContent = t("allDfw");
-    elements.homeLocationName.textContent = t("allDfw");
+    if (elements.homeLocationName)
+      elements.homeLocationName.textContent = t("allDfw");
   } else {
-    const isPreset = CITY_PRESETS.some(city => city.lat === state.location.lat && city.lng === state.location.lng);
+    const isPreset = CITY_PRESETS.some(
+      (city) =>
+        city.lat === state.location.lat && city.lng === state.location.lng,
+    );
     const label = isPreset
-      ? (state.location.label || state.location.name)
+      ? state.location.label || state.location.name
       : t("currentNear", { city: state.location.name });
-    elements.locationModeLabel.textContent = state.scope === "city" ? t("cityFilter") : t("nearby");
+    if (elements.locationModeLabel)
+      elements.locationModeLabel.textContent =
+        state.scope === "city" ? t("cityFilter") : t("nearby");
     elements.locationName.textContent = label;
-    elements.homeLocationName.textContent = label;
+    if (elements.homeLocationName)
+      elements.homeLocationName.textContent = label;
   }
-  elements.allDfwOption.classList.toggle("active", state.scope === "all");
-  elements.allDfwOption.setAttribute("aria-pressed", String(state.scope === "all"));
-  $$(".city-button", elements.cityGrid).forEach(button => {
-    const active = state.scope === "city" && button.dataset.city === state.location.name;
+  elements.allDfwOption?.classList.toggle("active", state.scope === "all");
+  elements.allDfwOption?.setAttribute(
+    "aria-pressed",
+    String(state.scope === "all"),
+  );
+  $$(".city-button", elements.cityGrid || document).forEach((button) => {
+    const active =
+      state.scope === "city" && button.dataset.city === state.location.name;
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", String(active));
   });
 }
 
 function renderCityGrid() {
-  elements.cityGrid.innerHTML = CITY_PRESETS.map(city => {
+  if (!elements.cityGrid) return;
+  elements.cityGrid.innerHTML = CITY_PRESETS.map((city) => {
     const count = discoveryIndex().cityCounts.get(city.name) || 0;
     const active = state.scope === "city" && city.name === state.location.name;
     return `
@@ -457,25 +631,42 @@ function renderCityGrid() {
 }
 
 function renderNearbyCities() {
-  const nearby = CITY_PRESETS
-    .filter(city => state.scope === "all" || city.name !== state.location.name)
-    .map(city => ({ ...city, distance: distanceMiles(state.location, city), count: discoveryIndex().cityCounts.get(city.name) || 0 }))
-    .filter(city => city.count > 0)
-    .sort((a, b) => state.scope === "all" ? b.count - a.count || a.name.localeCompare(b.name) : a.distance - b.distance)
+  if (!elements.nearbyCities || !elements.nearbyCitiesTitle) return;
+  const nearby = CITY_PRESETS.filter(
+    (city) => state.scope === "all" || city.name !== state.location.name,
+  )
+    .map((city) => ({
+      ...city,
+      distance: distanceMiles(state.location, city),
+      count: discoveryIndex().cityCounts.get(city.name) || 0,
+    }))
+    .filter((city) => city.count > 0)
+    .sort((a, b) =>
+      state.scope === "all"
+        ? b.count - a.count || a.name.localeCompare(b.name)
+        : a.distance - b.distance,
+    )
     .slice(0, 5);
 
-  elements.nearbyCitiesTitle.textContent = t(state.scope === "all" ? "browseCities" : "nearbyCities");
-  elements.nearbyCities.innerHTML = nearby.map(city => `
+  elements.nearbyCitiesTitle.textContent = t(
+    state.scope === "all" ? "browseCities" : "nearbyCities",
+  );
+  elements.nearbyCities.innerHTML = nearby
+    .map(
+      (city) => `
     <button class="nearby-city" data-city="${escapeHtml(city.name)}" type="button">
       <span><strong>${escapeHtml(city.name)}</strong><small>${state.scope === "all" ? "" : `${escapeHtml(formatDistance(city.distance))} · `}${escapeHtml(t("benefitsCount", { count: city.count }))}</small></span>
       <span>${escapeHtml(t("view"))}</span>
     </button>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 function persistArea() {
   storage.write("nearfree-scope", state.scope);
-  if (state.scope !== "all") storage.writeJson("nearfree-location", state.location.name);
+  if (state.scope !== "all")
+    storage.writeJson("nearfree-location", state.location.name);
 }
 
 function selectAllDfw() {
@@ -490,7 +681,7 @@ function selectAllDfw() {
 }
 
 function selectCity(name) {
-  const city = CITY_PRESETS.find(item => item.name === name);
+  const city = CITY_PRESETS.find((item) => item.name === name);
   if (!city) return;
   state.location = city;
   state.scope = "city";
@@ -506,9 +697,10 @@ function selectCity(name) {
 }
 
 function nearestCity(location) {
-  return CITY_PRESETS
-    .map(city => ({ ...city, distance: distanceMiles(location, city) }))
-    .sort((a, b) => a.distance - b.distance)[0];
+  return CITY_PRESETS.map((city) => ({
+    ...city,
+    distance: distanceMiles(location, city),
+  })).sort((a, b) => a.distance - b.distance)[0];
 }
 
 function useCurrentLocation() {
@@ -520,29 +712,37 @@ function useCurrentLocation() {
   const button = $("#detectLocation");
   button.disabled = true;
   elements.locationStatus.textContent = t("locating");
-  navigator.geolocation.getCurrentPosition(position => {
-    const exact = { lat: position.coords.latitude, lng: position.coords.longitude };
-    const nearest = nearestCity(exact);
-    state.location = { name: nearest.name, isCurrent: true, ...exact };
-    state.scope = "nearby";
-    state.sort = "distance";
-    state.radar.city = nearest.name;
-    state.radar.saved = false;
-    persistArea();
-    applyStaticTranslations();
-    updateLocationUI();
-    renderFeed();
-    renderRadarCityOptions();
-    renderRadarPreview();
-    button.disabled = false;
-    elements.locationStatus.textContent = t("located");
-    setTimeout(closeDialogs, 600);
-    showToast(t("locationSorted"));
-  }, error => {
-    button.disabled = false;
-    const message = error.code === 1 ? t("locationDenied") : t("locationFailed");
-    elements.locationStatus.textContent = message;
-  }, { enableHighAccuracy: false, timeout: 9000, maximumAge: 300000 });
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const exact = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      const nearest = nearestCity(exact);
+      state.location = { name: nearest.name, isCurrent: true, ...exact };
+      state.scope = "nearby";
+      state.sort = "distance";
+      state.radar.city = nearest.name;
+      state.radar.saved = false;
+      persistArea();
+      applyStaticTranslations();
+      updateLocationUI();
+      renderFeed();
+      renderRadarCityOptions();
+      renderRadarPreview();
+      button.disabled = false;
+      elements.locationStatus.textContent = t("located");
+      setTimeout(closeDialogs, 600);
+      showToast(t("locationSorted"));
+    },
+    (error) => {
+      button.disabled = false;
+      const message =
+        error.code === 1 ? t("locationDenied") : t("locationFailed");
+      elements.locationStatus.textContent = message;
+    },
+    { enableHighAccuracy: false, timeout: 9000, maximumAge: 300000 },
+  );
 }
 
 function mapUrl(listing) {
@@ -550,16 +750,20 @@ function mapUrl(listing) {
 }
 
 function similarListings(listing) {
-  return LISTINGS
-    .filter(item => item.id !== listing.id)
-    .map(item => {
+  return LISTINGS.filter((item) => item.id !== listing.id)
+    .map((item) => {
       const translated = translatedListing(item);
       const nearbyDistance = distanceMiles(listing, item);
       const categoryRank = item.category === listing.category ? 0 : 1;
       const costRank = item.costType === listing.costType ? 0 : 1;
       return { ...translated, nearbyDistance, categoryRank, costRank };
     })
-    .sort((a, b) => a.categoryRank - b.categoryRank || a.costRank - b.costRank || a.nearbyDistance - b.nearbyDistance)
+    .sort(
+      (a, b) =>
+        a.categoryRank - b.categoryRank ||
+        a.costRank - b.costRank ||
+        a.nearbyDistance - b.nearbyDistance,
+    )
     .slice(0, 3);
 }
 
@@ -575,10 +779,11 @@ const templates = createListingTemplates({
   similarListings,
   t,
   verificationAge,
-  distanceFromSelected: (listing) => distanceMiles(state.location, listing)
+  distanceFromSelected: (listing) => distanceMiles(state.location, listing),
 });
 
 function updateDetailControls(listing = null) {
+  if (!elements.detailSave || !elements.detailShare) return;
   const hasListing = Boolean(listing);
   elements.detailSave.hidden = !hasListing;
   elements.detailShare.hidden = !hasListing;
@@ -591,21 +796,30 @@ function updateDetailControls(listing = null) {
   elements.detailSave.dataset.id = listing.id;
   elements.detailShare.dataset.id = listing.id;
   elements.detailSave.classList.toggle("saved", saved);
-  elements.detailSave.setAttribute("aria-label", saved ? t("unsave") : t("save"));
+  elements.detailSave.setAttribute(
+    "aria-label",
+    saved ? t("unsave") : t("save"),
+  );
   elements.detailShare.setAttribute("aria-label", t("share"));
 }
 
 function renderListingDetail(listing) {
+  if (!elements.detailContent) return;
   const localized = translatedListing(listing);
   updateDetailControls(listing);
   elements.detailContent.innerHTML = templates.detailTemplate(localized);
   document.title = `${localized.title} | NearFree DFW`;
-  $("meta[name='description']").content = localized.overview || localized.summary;
+  $("meta[name='description']").content =
+    localized.overview || localized.summary;
 }
 
 function openDetails(id) {
   const listing = sourceListing(id);
   if (!listing) return;
+  if (!elements.detailDialog) {
+    window.location.href = `explore.html?listing=${encodeURIComponent(id)}`;
+    return;
+  }
   renderListingDetail(listing);
   openDialog(elements.detailDialog);
   const url = new URL(window.location.href);
@@ -615,15 +829,8 @@ function openDetails(id) {
   }
 }
 
-function openMethodology() {
-  updateDetailControls();
-  elements.detailContent.innerHTML = templates.methodologyTemplate(RESEARCH_NOTE);
-  document.title = `${t("methodologyTitle")} | NearFree DFW`;
-  $("meta[name='description']").content = t("methodology");
-  openDialog(elements.detailDialog);
-}
-
 function resetDetailScroll() {
+  if (!elements.detailScrollArea) return;
   elements.detailScrollArea.scrollTop = 0;
   requestAnimationFrame(() => {
     elements.detailScrollArea.scrollTop = 0;
@@ -638,8 +845,9 @@ function clearListingRoute() {
 }
 
 function openDialog(dialog) {
+  if (!dialog) return;
   closeDialogs({ clearRoute: false });
-  elements.modalBackdrop.hidden = false;
+  if (elements.modalBackdrop) elements.modalBackdrop.hidden = false;
   if (typeof dialog.showModal === "function") dialog.showModal();
   else dialog.setAttribute("open", "");
   if (dialog === elements.detailDialog) resetDetailScroll();
@@ -648,11 +856,16 @@ function openDialog(dialog) {
 
 function closeDialogs({ clearRoute = true } = {}) {
   const closedDetail = Boolean(elements.detailDialog?.open);
-  [elements.locationDialog, elements.detailDialog, elements.sortDialog].forEach(dialog => {
+  [
+    elements.locationDialog,
+    elements.detailDialog,
+    elements.sortDialog,
+    elements.accountDialog,
+  ].forEach((dialog) => {
     if (dialog?.open) dialog.close();
     else dialog?.removeAttribute("open");
   });
-  elements.modalBackdrop.hidden = true;
+  if (elements.modalBackdrop) elements.modalBackdrop.hidden = true;
   document.body.classList.remove("modal-open");
   if (clearRoute) clearListingRoute();
   if (closedDetail && clearRoute) applyStaticTranslations();
@@ -668,6 +881,7 @@ function toggleSave(id) {
   }
   storage.writeJson("nearfree-saved", [...state.saved]);
   renderFeed();
+  updateSavedCount();
 }
 
 async function shareListing(listing) {
@@ -676,12 +890,14 @@ async function shareListing(listing) {
   const shareData = {
     title: `${listing.title} | NearFree DFW`,
     text: `${displayCost(listing)} · ${listing.dateLabel}\n${listing.venue}, ${listing.city}\n${listing.actionUrl}`,
-    url: url.href
+    url: url.href,
   };
   try {
     if (navigator.share) await navigator.share(shareData);
     else {
-      await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
+      await navigator.clipboard.writeText(
+        `${shareData.title}\n${shareData.text}\n${shareData.url}`,
+      );
       showToast(t("linkCopied"));
     }
   } catch (error) {
@@ -690,6 +906,7 @@ async function shareListing(listing) {
 }
 
 function showToast(message) {
+  if (!elements.toast) return;
   clearTimeout(toastTimer);
   elements.toast.textContent = message;
   elements.toast.classList.add("show");
@@ -697,11 +914,17 @@ function showToast(message) {
 }
 
 function focusSearch() {
-  $("#discoveryPanel").scrollIntoView({ behavior: "smooth", block: "start" });
-  requestAnimationFrame(() => elements.searchInput.focus());
+  const discoveryPanel = $("#discoveryPanel");
+  if (!discoveryPanel) {
+    window.location.href = "explore.html";
+    return;
+  }
+  discoveryPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  requestAnimationFrame(() => elements.searchInput?.focus());
 }
 
 function resetFilters() {
+  if (!elements.searchInput) return;
   state.scope = "all";
   if (state.sort === "distance") state.sort = "soon";
   state.intents.clear();
@@ -727,48 +950,71 @@ function setLocale(locale) {
   renderRadarExperience();
 }
 
-function bindEvents() {
-  elements.languageSelect.addEventListener("change", event => setLocale(event.target.value));
-  $("#locationButton").addEventListener("click", () => openDialog(elements.locationDialog));
-  $("#homeLocationButton").addEventListener("click", () => openDialog(elements.locationDialog));
-  $("#allCitiesButton").addEventListener("click", () => openDialog(elements.locationDialog));
-  elements.allDfwOption.addEventListener("click", selectAllDfw);
-  $("#detectLocation").addEventListener("click", useCurrentLocation);
+function openAccountNotice(intent = "signin") {
+  if (!elements.accountDialog) return;
+  const isMembership = intent === "membership";
+  elements.accountDialogTitle.textContent = t(
+    isMembership ? "membershipComingTitle" : "accountComingTitle",
+  );
+  elements.accountDialogDesc.textContent = t(
+    isMembership ? "membershipComingDesc" : "accountComingDesc",
+  );
+  openDialog(elements.accountDialog);
+}
 
-  $("#mobileExplore").addEventListener("click", focusSearch);
-  [$("#topRadarCta"), $("#pricingRadarCta"), $("#mobileRadar")]
-    .forEach(button => button.addEventListener("click", scrollToRadarPreview));
-  elements.radarCitySelect.addEventListener("change", event => {
+function bindEvents() {
+  elements.languageSelect?.addEventListener("change", (event) =>
+    setLocale(event.target.value),
+  );
+  $("#locationButton")?.addEventListener("click", () =>
+    openDialog(elements.locationDialog),
+  );
+  $("#homeLocationButton")?.addEventListener("click", () =>
+    openDialog(elements.locationDialog),
+  );
+  $("#allCitiesButton")?.addEventListener("click", () =>
+    openDialog(elements.locationDialog),
+  );
+  elements.allDfwOption?.addEventListener("click", selectAllDfw);
+  $("#detectLocation")?.addEventListener("click", useCurrentLocation);
+
+  $$("[data-scroll-radar]").forEach((button) =>
+    button.addEventListener("click", scrollToRadarPreview),
+  );
+  elements.radarCitySelect?.addEventListener("change", (event) => {
     state.radar.city = event.target.value;
     state.radar.saved = false;
     renderRadarPreview();
   });
-  elements.radarRadiusSelect.addEventListener("change", event => {
+  elements.radarRadiusSelect?.addEventListener("change", (event) => {
     state.radar.radius = Number(event.target.value);
     state.radar.saved = false;
     renderRadarPreview();
   });
-  $("#radarPreviewForm").addEventListener("submit", event => event.preventDefault());
-  $(".radar-interest-list").addEventListener("click", event => {
+  $("#radarPreviewForm")?.addEventListener("submit", (event) =>
+    event.preventDefault(),
+  );
+  $(".radar-interest-list")?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-radar-interest]");
     if (!button) return;
     const interest = button.dataset.radarInterest;
-    if (state.radar.interests.has(interest)) state.radar.interests.delete(interest);
+    if (state.radar.interests.has(interest))
+      state.radar.interests.delete(interest);
     else state.radar.interests.add(interest);
     state.radar.saved = false;
     renderRadarPreview();
   });
-  $("#radarPreviewSave").addEventListener("click", saveRadarPreview);
-  elements.radarMatches.addEventListener("click", event => {
+  $("#radarPreviewSave")?.addEventListener("click", saveRadarPreview);
+  elements.radarMatches?.addEventListener("click", (event) => {
     const target = event.target.closest("[data-radar-listing]");
     if (target) openDetails(target.dataset.radarListing);
   });
-  elements.searchInput.addEventListener("input", event => {
+  elements.searchInput?.addEventListener("input", (event) => {
     state.search = event.target.value.trim();
     elements.searchClear.hidden = !state.search;
     renderFeed();
   });
-  elements.searchClear.addEventListener("click", () => {
+  elements.searchClear?.addEventListener("click", () => {
     state.search = "";
     elements.searchInput.value = "";
     elements.searchClear.hidden = true;
@@ -776,33 +1022,41 @@ function bindEvents() {
     elements.searchInput.focus();
   });
 
-  $("#intentChips").addEventListener("click", event => {
+  $("#intentChips")?.addEventListener("click", (event) => {
     const chip = event.target.closest(".intent-chip");
     if (!chip) return;
     const intent = chip.dataset.intent;
     const group = chip.dataset.intentGroup || chip.dataset.clearGroup;
-    $$(`[data-intent-group="${group}"]`).forEach(item => state.intents.delete(item.dataset.intent));
-    if (intent && chip.getAttribute("aria-pressed") !== "true") state.intents.add(intent);
+    $$(`[data-intent-group="${group}"]`).forEach((item) =>
+      state.intents.delete(item.dataset.intent),
+    );
+    if (intent && chip.getAttribute("aria-pressed") !== "true")
+      state.intents.add(intent);
     renderFeed();
   });
 
-  $("#sortButton").addEventListener("click", () => {
-    $$("[data-sort]", elements.sortDialog).forEach(button => {
-      button.disabled = button.dataset.sort === "distance" && state.scope === "all";
+  $("#sortButton")?.addEventListener("click", () => {
+    $$("[data-sort]", elements.sortDialog).forEach((button) => {
+      button.disabled =
+        button.dataset.sort === "distance" && state.scope === "all";
       button.classList.toggle("active", button.dataset.sort === state.sort);
     });
     openDialog(elements.sortDialog);
   });
-  elements.sortDialog.addEventListener("click", event => {
+  elements.sortDialog?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-sort]");
     if (!button) return;
     state.sort = button.dataset.sort;
-    elements.sortLabel.textContent = t({ distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[state.sort]);
+    elements.sortLabel.textContent = t(
+      { distance: "sortDistance", soon: "sortSoon", verified: "sortVerified" }[
+        state.sort
+      ],
+    );
     closeDialogs();
     renderFeed();
   });
 
-  elements.feed.addEventListener("click", event => {
+  elements.feed?.addEventListener("click", (event) => {
     const target = event.target.closest("[data-action]");
     if (!target) return;
     const card = target.closest(".listing-card");
@@ -813,33 +1067,35 @@ function bindEvents() {
     if (action === "details") openDetails(listing.id);
     if (action === "save") toggleSave(listing.id);
   });
-  elements.detailContent.addEventListener("click", event => {
+  elements.detailContent?.addEventListener("click", (event) => {
     const similar = event.target.closest("[data-similar-id]");
     if (similar) {
       openDetails(similar.dataset.similarId);
-      elements.detailScrollArea.scrollTo({ top: 0, behavior: "smooth" });
+      elements.detailScrollArea?.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
-  elements.detailSave.addEventListener("click", () => {
+  elements.detailSave?.addEventListener("click", () => {
     const listing = sourceListing(elements.detailSave.dataset.id);
     if (!listing) return;
     toggleSave(listing.id);
     updateDetailControls(listing);
   });
-  elements.detailShare.addEventListener("click", () => {
+  elements.detailShare?.addEventListener("click", () => {
     const listing = sourceListing(elements.detailShare.dataset.id);
     if (listing) shareListing(translatedListing(listing));
   });
-  elements.cityGrid.addEventListener("click", event => {
+  elements.cityGrid?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-city]");
     if (button) selectCity(button.dataset.city);
   });
-  elements.nearbyCities.addEventListener("click", event => {
+  elements.nearbyCities?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-city]");
     if (button) selectCity(button.dataset.city);
   });
 
-  const toggleSavedOnly = () => {
+  const toggleSavedOnly = (event) => {
+    if (!elements.feed) return;
+    event?.preventDefault();
     if (state.saved.size === 0) {
       state.savedOnly = false;
       showToast(t("noSaved"));
@@ -847,21 +1103,39 @@ function bindEvents() {
     }
     state.savedOnly = !state.savedOnly;
     renderFeed();
-    $("#resultsToolbar").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("#resultsToolbar")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
     showToast(state.savedOnly ? t("savedShown") : t("allShown"));
   };
-  $("#savedButton").addEventListener("click", toggleSavedOnly);
-  $("#mobileSaved").addEventListener("click", toggleSavedOnly);
+  $("#savedButton")?.addEventListener("click", toggleSavedOnly);
+  $("#mobileSaved")?.addEventListener("click", toggleSavedOnly);
 
-  $("#methodButton").addEventListener("click", openMethodology);
-  $("#railMethodButton").addEventListener("click", openMethodology);
-  $("#clearAllFilters").addEventListener("click", resetFilters);
-  $("#emptyReset").addEventListener("click", resetFilters);
-  elements.modalBackdrop.addEventListener("click", closeDialogs);
-  $$('[data-close]').forEach(button => button.addEventListener("click", closeDialogs));
-  [elements.locationDialog, elements.detailDialog, elements.sortDialog].forEach(dialog => {
-    dialog.addEventListener("cancel", event => { event.preventDefault(); closeDialogs(); });
-  });
+  $("#clearAllFilters")?.addEventListener("click", resetFilters);
+  $("#emptyReset")?.addEventListener("click", resetFilters);
+  $$("[data-account-cta]").forEach((button) =>
+    button.addEventListener("click", () =>
+      openAccountNotice(button.dataset.accountIntent),
+    ),
+  );
+  elements.modalBackdrop?.addEventListener("click", closeDialogs);
+  $$("[data-close]").forEach((button) =>
+    button.addEventListener("click", closeDialogs),
+  );
+  [
+    elements.locationDialog,
+    elements.detailDialog,
+    elements.sortDialog,
+    elements.accountDialog,
+  ]
+    .filter(Boolean)
+    .forEach((dialog) => {
+      dialog.addEventListener("cancel", (event) => {
+        event.preventDefault();
+        closeDialogs();
+      });
+    });
   window.addEventListener("popstate", () => {
     const id = new URL(window.location.href).searchParams.get("listing");
     if (id && sourceListing(id)) {
@@ -879,11 +1153,22 @@ function init() {
   renderCityGrid();
   renderRadarCityOptions();
   updateLocationUI();
+  updateSavedCount();
   bindEvents();
   renderFeed();
   renderRadarExperience();
-  const initialListingId = new URL(window.location.href).searchParams.get("listing");
-  if (initialListingId && sourceListing(initialListingId)) {
+  if (state.savedOnly && state.saved.size === 0) {
+    state.savedOnly = false;
+    showToast(t("noSaved"));
+  }
+  const initialListingId = new URL(window.location.href).searchParams.get(
+    "listing",
+  );
+  if (
+    elements.detailDialog &&
+    initialListingId &&
+    sourceListing(initialListingId)
+  ) {
     const listing = sourceListing(initialListingId);
     renderListingDetail(listing);
     openDialog(elements.detailDialog);

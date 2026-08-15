@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f3e9" />
+    <meta
+      name="description"
+      content="Learn how NearFree discovers, verifies and matches DFW benefits using official sources and two-pass checks."
+    />
+    <title>How NearFree works and verifies benefits</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.91a22b48f2fd.css" />
+  </head>
+  <body
+    data-page="how"
+    data-title-key="howMetaTitle"
+    data-description-key="howMetaDescription"
+  >
+    <a class="skip-link" href="#howSteps" data-i18n="skipHow"
+      >Skip to how it works</a
+    >
+    <header class="topbar">
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="NearFree home"
+        data-i18n-aria="brandHome"
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span
+        ><span class="brand-copy"
+          ><strong>NearFree<span class="brand-dot">.</span></strong></span
+        ></a
+      >
+      <nav
+        class="desktop-nav"
+        aria-label="Primary navigation"
+        data-i18n-aria="primaryNavigation"
+      >
+        <a href="explore.html" data-i18n="explore">Explore</a
+        ><a href="radar.html" data-i18n="radarNav">Radar</a
+        ><a
+          class="active"
+          href="how-it-works.html"
+          aria-current="page"
+          data-i18n="howItWorksNav"
+          >How it works</a
+        ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+      </nav>
+      <div class="top-actions">
+        <button
+          class="location-pill"
+          id="locationButton"
+          type="button"
+          aria-haspopup="dialog"
+        >
+          <span class="location-pulse" aria-hidden="true"></span
+          ><span class="location-copy"
+            ><small id="locationModeLabel">Browse area</small
+            ><strong id="locationName">All DFW</strong></span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m7 10 5 5 5-5" />
+          </svg></button
+        ><label class="language-control"
+          ><span class="sr-only" data-i18n="language">Language</span
+          ><select id="languageSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="ko">한국어</option>
+          </select></label
+        ><a
+          class="icon-button saved-trigger"
+          id="savedButton"
+          href="explore.html?saved=1"
+          aria-label="View saved finds"
+          data-i18n-aria="savedView"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+            /></svg
+          ><span class="saved-count" id="savedCount" hidden>0</span></a
+        ><button
+          class="account-trigger"
+          type="button"
+          data-account-cta
+          data-account-intent="signin"
+          data-i18n="signIn"
+        >
+          Sign in</button
+        ><a class="top-radar-cta" href="radar.html"
+          ><span class="radar-status-dot" aria-hidden="true"></span
+          ><span data-i18n="turnOnRadar">Build my Radar</span></a
+        >
+      </div>
+    </header>
+
+    <main class="site-main page-main how-page-main">
+      <section class="page-hero how-page-hero" aria-labelledby="howPageTitle">
+        <div>
+          <span class="section-kicker" data-i18n="howKicker"
+            >ALWAYS WORKING</span
+          >
+          <h1 id="howPageTitle" data-i18n="howPageTitle">
+            We do the repetitive searching. You keep the final say.
+          </h1>
+          <p data-i18n="howPageDesc">
+            NearFree is a discovery and verification layer. We do not replace
+            the organizer, hide public terms or ask you to trust a score without
+            sources.
+          </p>
+        </div>
+        <aside>
+          <span>02×</span
+          ><strong data-i18n="twiceChecked">Checked in two passes</strong>
+          <p data-i18n="howHeroAside">
+            One pass confirms the offer. A second, separate pass looks for
+            cancellations, changes and price conflicts.
+          </p>
+        </aside>
+      </section>
+
+      <section
+        class="how-section how-page-steps"
+        id="howSteps"
+        aria-labelledby="howTitle"
+      >
+        <div class="section-intro">
+          <span class="section-kicker" data-i18n="howFlowKicker"
+            >FROM AREA TO MATCH</span
+          >
+          <h2 id="howTitle" data-i18n="howTitle">
+            A local benefit radar, not another newsletter.
+          </h2>
+          <p data-i18n="howDesc">
+            Set your area once. NearFree does the repetitive searching and tells
+            you what is actually worth opening.
+          </p>
+        </div>
+        <div class="how-grid">
+          <article>
+            <span>01</span>
+            <div>
+              <h3 data-i18n="howAreaTitle">Set your area</h3>
+              <p data-i18n="howAreaDesc">
+                Choose a starting city and how far you are willing to go.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <h3 data-i18n="howMonitorTitle">We monitor</h3>
+              <p data-i18n="howMonitorDesc">
+                We look across official city, venue and institution sources.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <h3 data-i18n="howVerifyTitle">We verify</h3>
+              <p data-i18n="howVerifyDesc">
+                Price, date, location, eligibility and booking terms are
+                checked.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>04</span>
+            <div>
+              <h3 data-i18n="howMatchTitle">You get matched</h3>
+              <p data-i18n="howMatchDesc">
+                Useful nearby finds rise above everything that does not fit.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="verification-page"
+        id="verification"
+        aria-labelledby="verificationPageTitle"
+      >
+        <header class="home-section-heading">
+          <span class="section-kicker" data-i18n="verificationPageKicker"
+            >THE PUBLICATION GATE</span
+          >
+          <h2 id="verificationPageTitle" data-i18n="verificationPageTitle">
+            Found once. Checked twice. Published only when the details agree.
+          </h2>
+          <p data-i18n="verificationPageDesc">
+            Every core fact must be supported. Missing conditions and
+            conflicting information stop publication instead of becoming a vague
+            disclaimer.
+          </p>
+        </header>
+        <div class="verification-pass-grid">
+          <article>
+            <span class="pass-number">01</span>
+            <div>
+              <small data-i18n="firstPassLabel">FIRST PASS</small>
+              <h3 data-i18n="firstPassTitle">Confirm the official offer</h3>
+              <p data-i18n="firstPassDesc">
+                We inspect the organizer, venue, city or institution page and
+                record the exact price, dates, address, eligibility and action
+                link.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span class="pass-number">02</span>
+            <div>
+              <small data-i18n="secondPassLabel">SECOND PASS</small>
+              <h3 data-i18n="secondPassTitle">
+                Search for reasons it may be wrong
+              </h3>
+              <p data-i18n="secondPassDesc">
+                A separate search checks cancellations, schedule changes, price
+                conflicts, expired years and restrictions missing from the first
+                page.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="trust-facts" aria-labelledby="trustFactsTitle">
+        <div>
+          <span class="section-kicker" data-i18n="whatWeCheckKicker"
+            >WHAT WE CHECK</span
+          >
+          <h2 id="trustFactsTitle" data-i18n="whatWeCheckTitle">
+            The facts that decide whether you can actually use it.
+          </h2>
+        </div>
+        <div class="trust-fact-grid">
+          <article>
+            <span>01</span>
+            <h3 data-i18n="checkPriceTitle">Real price</h3>
+            <p data-i18n="checkPriceDesc">
+              Fees, required purchases and who qualifies for the stated price.
+            </p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3 data-i18n="checkTimeTitle">Valid time</h3>
+            <p data-i18n="checkTimeDesc">
+              The current year, exact date window, recurring schedule and
+              expiration.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3 data-i18n="checkPlaceTitle">Usable place</h3>
+            <p data-i18n="checkPlaceDesc">
+              Participating location, address and whether the offer is online or
+              in person.
+            </p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3 data-i18n="checkAccessTitle">Access conditions</h3>
+            <p data-i18n="checkAccessDesc">
+              Reservation, membership, ID, age, residency and benefit-program
+              requirements.
+            </p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3 data-i18n="checkActionTitle">Working next step</h3>
+            <p data-i18n="checkActionDesc">
+              The exact official page a person needs to verify, reserve or
+              attend.
+            </p>
+          </article>
+          <article>
+            <span>06</span>
+            <h3 data-i18n="checkConflictTitle">No unresolved conflict</h3>
+            <p data-i18n="checkConflictDesc">
+              Contradictory dates, prices or terms send a find back for review.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="transparency-band">
+        <div>
+          <span class="section-kicker" data-i18n="transparencyLabel"
+            >TRANSPARENCY NOTE</span
+          >
+          <h2 data-i18n="transparencyTitle">
+            If we cannot verify it, you will not see it presented as verified.
+          </h2>
+          <p data-i18n="transparencyPageDesc">
+            Search snippets, social posts, copied aggregators and memory are
+            leads—not evidence. The listing detail shows sources and the date
+            checked so you can make your own decision.
+          </p>
+        </div>
+        <a href="explore.html"
+          ><span data-i18n="inspectListings">Inspect the live listings</span
+          ><span aria-hidden="true">→</span></a
+        >
+      </section>
+      <footer class="site-footer">
+        <a
+          class="brand footer-brand"
+          href="index.html"
+          aria-label="NearFree home"
+          data-i18n-aria="brandHome"
+          ><span class="brand-mark" aria-hidden="true"
+            ><i></i><i></i><i></i></span
+          ><span class="brand-copy"
+            ><strong>NearFree<span class="brand-dot">.</span></strong></span
+          ></a
+        >
+        <p data-i18n="footerPromise">
+          DFW benefits, found and checked for you.
+        </p>
+        <nav aria-label="Footer navigation" data-i18n-aria="footerNavigation">
+          <a href="explore.html" data-i18n="explore">Explore</a
+          ><a href="radar.html" data-i18n="radarNav">Radar</a
+          ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+          ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+        </nav>
+      </footer>
+    </main>
+
+    <nav
+      class="mobile-nav"
+      aria-label="Mobile menu"
+      data-i18n-aria="mobileMenu"
+    >
+      <a href="index.html" aria-label="Home" data-i18n-aria="home"
+        ><svg viewBox="0 0 24 24">
+          <path d="m3 11 9-7 9 7v9H6v-9" />
+          <path d="M10 20v-6h4v6" /></svg
+        ><span data-i18n="home">Home</span></a
+      ><a href="explore.html" aria-label="Explore" data-i18n-aria="explore"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" /></svg
+        ><span data-i18n="explore">Explore</span></a
+      ><a class="mobile-radar-button" href="radar.html"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M12 12 18 6" /></svg
+        ><span data-i18n="radarNav">Radar</span></a
+      ><a id="mobileSaved" href="explore.html?saved=1"
+        ><svg viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          /></svg
+        ><span data-i18n="saved">Saved</span></a
+      >
+    </nav>
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+    <dialog
+      class="sheet location-sheet"
+      id="locationDialog"
+      aria-labelledby="locationTitle"
+    >
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <div>
+          <span class="section-kicker" data-i18n="locationKicker"
+            >YOUR AREA</span
+          >
+          <h2 id="locationTitle" data-i18n="locationTitle">
+            Where should we start?
+          </h2>
+        </div>
+        <button
+          class="modal-close"
+          data-close
+          type="button"
+          aria-label="Close"
+          data-i18n-aria="close"
+        >
+          ×
+        </button>
+      </div>
+      <button
+        class="all-dfw-option"
+        id="allDfwOption"
+        type="button"
+        data-scope="all"
+        aria-pressed="true"
+      >
+        <span class="all-dfw-icon" aria-hidden="true">DFW</span
+        ><span
+          ><strong data-i18n="allDfw">All DFW</strong
+          ><small data-i18n="allDfwDesc"
+            >See every verified find across the metroplex</small
+          ></span
+        ><span class="area-check" aria-hidden="true">✓</span></button
+      ><button class="detect-location" id="detectLocation" type="button">
+        <span class="detect-icon"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+            <circle cx="12" cy="12" r="7" /></svg></span
+        ><span
+          ><strong data-i18n="currentLocation">Use current location</strong
+          ><small data-i18n="locationPermission"
+            >Browser location permission required</small
+          ></span
+        ><span class="arrow">→</span>
+      </button>
+      <p class="location-status" id="locationStatus" role="status"></p>
+      <div class="city-grid-head">
+        <span data-i18n="chooseCity">Or show one city</span
+        ><small data-i18n="cityCountHint"
+          >Cities with active finds are available</small
+        >
+      </div>
+      <div class="city-grid" id="cityGrid"></div>
+      <p class="privacy-note">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 11V8a5 5 0 0 1 10 0v3" />
+          <rect x="5" y="11" width="14" height="10" rx="2" /></svg
+        ><span data-i18n="privacy"
+          >Your location is used only for distance and is never sent to a
+          server.</span
+        >
+      </p>
+    </dialog>
+    <dialog
+      class="account-dialog"
+      id="accountDialog"
+      aria-labelledby="accountDialogTitle"
+    >
+      <button
+        class="account-dialog-close"
+        data-close
+        type="button"
+        aria-label="Close"
+        data-i18n-aria="close"
+      >
+        ×</button
+      ><span class="account-dialog-icon" aria-hidden="true">N.</span
+      ><span class="section-kicker" data-i18n="accountPreviewKicker"
+        >ACCOUNT PREVIEW</span
+      >
+      <h2 id="accountDialogTitle">Accounts are coming next.</h2>
+      <p id="accountDialogDesc">
+        Sign-in will launch with secure backend sync for saved finds, Radar
+        preferences and notification controls.
+      </p>
+      <div class="account-dialog-actions">
+        <a href="explore.html" data-i18n="keepExploring">Keep exploring</a
+        ><a href="radar.html" data-i18n="previewYourRadar"
+          >Preview your Radar</a
+        >
+      </div>
+      <small data-i18n="noDataCollected"
+        >No email, password or payment information is collected on this
+        version.</small
+      >
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="assets/app.f7367d40167c.js"></script>
+  </body>
+</html>

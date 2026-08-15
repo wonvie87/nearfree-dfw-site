@@ -6,8 +6,15 @@
     "listingTemplates": "listing-templates.1e79254026cd.js",
     "data": "data.9880fdf73d13.js",
     "listingLocales": "listing-locales.94ff27769a98.js",
-    "locales": "locales.0736f1265c09.js",
-    "app": "app.4a7a1f1af508.js",
-    "styles": "styles.243e5899d980.css"
-  }
+    "locales": "locales.f12fa837655e.js",
+    "app": "app.f7367d40167c.js",
+    "styles": "styles.91a22b48f2fd.css"
+  },
+  "pages": [
+    "index.html",
+    "explore.html",
+    "radar.html",
+    "how-it-works.html",
+    "pricing.html"
+  ]
 }

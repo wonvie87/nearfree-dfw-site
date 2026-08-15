@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f3e9" />
+    <meta
+      name="description"
+      content="Explore verified free and near-free benefits across Dallas–Fort Worth by city, date, price and interest."
+    />
+    <title>Explore verified DFW benefits | NearFree</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.91a22b48f2fd.css" />
+  </head>
+  <body
+    data-page="explore"
+    data-title-key="exploreMetaTitle"
+    data-description-key="exploreMetaDescription"
+  >
+    <a class="skip-link" href="#discoveryPanel" data-i18n="skip"
+      >Skip to the discovery feed</a
+    >
+    <header class="topbar">
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="NearFree home"
+        data-i18n-aria="brandHome"
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span
+        ><span class="brand-copy"
+          ><strong>NearFree<span class="brand-dot">.</span></strong></span
+        ></a
+      >
+      <nav
+        class="desktop-nav"
+        aria-label="Primary navigation"
+        data-i18n-aria="primaryNavigation"
+      >
+        <a
+          class="active"
+          href="explore.html"
+          aria-current="page"
+          data-i18n="explore"
+          >Explore</a
+        ><a href="radar.html" data-i18n="radarNav">Radar</a
+        ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+        ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+      </nav>
+      <div class="top-actions">
+        <button
+          class="location-pill"
+          id="locationButton"
+          type="button"
+          aria-haspopup="dialog"
+        >
+          <span class="location-pulse" aria-hidden="true"></span
+          ><span class="location-copy"
+            ><small id="locationModeLabel">Browse area</small
+            ><strong id="locationName">All DFW</strong></span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m7 10 5 5 5-5" />
+          </svg>
+        </button>
+        <label class="language-control"
+          ><span class="sr-only" data-i18n="language">Language</span
+          ><select id="languageSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="ko">한국어</option>
+          </select></label
+        >
+        <a
+          class="icon-button saved-trigger"
+          id="savedButton"
+          href="explore.html?saved=1"
+          aria-label="View saved finds"
+          data-i18n-aria="savedView"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+            /></svg
+          ><span class="saved-count" id="savedCount" hidden>0</span></a
+        >
+        <button
+          class="account-trigger"
+          type="button"
+          data-account-cta
+          data-account-intent="signin"
+          data-i18n="signIn"
+        >
+          Sign in</button
+        ><a class="top-radar-cta" href="radar.html"
+          ><span class="radar-status-dot" aria-hidden="true"></span
+          ><span data-i18n="turnOnRadar">Build my Radar</span></a
+        >
+      </div>
+    </header>
+
+    <main class="site-main page-main">
+      <section
+        class="page-hero explore-page-hero"
+        aria-labelledby="exploreTitle"
+      >
+        <div>
+          <span class="section-kicker" data-i18n="exploreKicker"
+            >EXPLORE IT YOURSELF</span
+          >
+          <h1 id="exploreTitle" data-i18n="explorePageTitle">
+            Every verified find, ready to browse.
+          </h1>
+          <p data-i18n="explorePageDesc">
+            Search the complete public catalog for free. Start broad, then
+            narrow by where, when, price and who is coming.
+          </p>
+        </div>
+        <a href="radar.html"
+          ><span data-i18n="wantAlerts">Want NearFree to keep watch?</span
+          ><strong data-i18n="tryRadar">Try Radar →</strong></a
+        >
+      </section>
+
+      <section
+        class="page-shell explore-shell"
+        aria-label="Benefits feed"
+        data-i18n-aria="feedLabel"
+      >
+        <section class="home-main">
+          <section
+            class="discovery-panel"
+            id="discoveryPanel"
+            aria-labelledby="discoveryTitle"
+          >
+            <h2 class="sr-only" id="discoveryTitle" data-i18n="discoveryTitle">
+              Find something worth doing across DFW
+            </h2>
+            <button
+              class="home-location"
+              id="homeLocationButton"
+              type="button"
+              aria-haspopup="dialog"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z" />
+                <circle cx="12" cy="10" r="2" /></svg
+              ><strong id="homeLocationName">All DFW</strong
+              ><svg
+                class="location-chevron"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="m7 10 5 5 5-5" />
+              </svg>
+            </button>
+            <div class="search-box discovery-search">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5" />
+                <path d="m16 16 4 4" /></svg
+              ><input
+                id="searchInput"
+                type="search"
+                placeholder="What do you want to do?"
+                data-i18n-placeholder="searchPlaceholder"
+                autocomplete="off"
+              /><button
+                id="searchClear"
+                type="button"
+                aria-label="Clear search"
+                data-i18n-aria="clearSearch"
+                hidden
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="intent-scroll"
+              id="intentChips"
+              role="group"
+              aria-label="Quick discovery filters"
+              data-i18n-aria="intentAria"
+            >
+              <div
+                class="intent-group"
+                role="group"
+                aria-labelledby="whenFilterLabel"
+              >
+                <span
+                  class="intent-group-label"
+                  id="whenFilterLabel"
+                  data-i18n="filterWhen"
+                  >When</span
+                ><button
+                  class="intent-chip intent-default active"
+                  data-clear-group="when"
+                  data-i18n="filterAnyTime"
+                  type="button"
+                  aria-pressed="true"
+                >
+                  Any time</button
+                ><button
+                  class="intent-chip"
+                  data-intent="today"
+                  data-intent-group="when"
+                  data-i18n="intentToday"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Today</button
+                ><button
+                  class="intent-chip"
+                  data-intent="tonight"
+                  data-intent-group="when"
+                  data-i18n="intentTonight"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Tonight</button
+                ><button
+                  class="intent-chip"
+                  data-intent="tomorrow"
+                  data-intent-group="when"
+                  data-i18n="intentTomorrow"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Tomorrow</button
+                ><button
+                  class="intent-chip"
+                  data-intent="weekend"
+                  data-intent-group="when"
+                  data-i18n="intentWeekend"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  This weekend
+                </button>
+              </div>
+              <div
+                class="intent-group"
+                role="group"
+                aria-labelledby="priceFilterLabel"
+              >
+                <span
+                  class="intent-group-label"
+                  id="priceFilterLabel"
+                  data-i18n="filterPrice"
+                  >Price</span
+                ><button
+                  class="intent-chip intent-default active"
+                  data-clear-group="price"
+                  data-i18n="filterAnyPrice"
+                  type="button"
+                  aria-pressed="true"
+                >
+                  Any price</button
+                ><button
+                  class="intent-chip value-intent"
+                  data-intent="free"
+                  data-intent-group="price"
+                  data-i18n="intentFree"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Free</button
+                ><button
+                  class="intent-chip value-intent"
+                  data-intent="under5"
+                  data-intent-group="price"
+                  data-i18n="intentUnder5"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Under $5</button
+                ><button
+                  class="intent-chip value-intent"
+                  data-intent="under10"
+                  data-intent-group="price"
+                  data-i18n="intentUnder10"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Under $10
+                </button>
+              </div>
+              <div
+                class="intent-group"
+                role="group"
+                aria-labelledby="audienceFilterLabel"
+              >
+                <span
+                  class="intent-group-label"
+                  id="audienceFilterLabel"
+                  data-i18n="filterFor"
+                  >For</span
+                ><button
+                  class="intent-chip intent-default active"
+                  data-clear-group="audience"
+                  data-i18n="filterAnyone"
+                  type="button"
+                  aria-pressed="true"
+                >
+                  Anyone</button
+                ><button
+                  class="intent-chip"
+                  data-intent="kids"
+                  data-intent-group="audience"
+                  data-i18n="intentKids"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Kids</button
+                ><button
+                  class="intent-chip"
+                  data-intent="date"
+                  data-intent-group="audience"
+                  data-i18n="intentDate"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Date night
+                </button>
+              </div>
+              <div
+                class="intent-group"
+                role="group"
+                aria-labelledby="activityFilterLabel"
+              >
+                <span
+                  class="intent-group-label"
+                  id="activityFilterLabel"
+                  data-i18n="filterType"
+                  >Type</span
+                ><button
+                  class="intent-chip intent-default active"
+                  data-clear-group="activity"
+                  data-i18n="filterAnyType"
+                  type="button"
+                  aria-pressed="true"
+                >
+                  Any type</button
+                ><button
+                  class="intent-chip"
+                  data-intent="outdoor"
+                  data-intent-group="activity"
+                  data-i18n="intentOutdoor"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Outdoor</button
+                ><button
+                  class="intent-chip"
+                  data-intent="indoor"
+                  data-intent-group="activity"
+                  data-i18n="intentIndoor"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Indoor</button
+                ><button
+                  class="intent-chip"
+                  data-intent="food"
+                  data-intent-group="activity"
+                  data-i18n="intentFood"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Food</button
+                ><button
+                  class="intent-chip"
+                  data-intent="museums"
+                  data-intent-group="activity"
+                  data-i18n="intentMuseums"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Museums</button
+                ><button
+                  class="intent-chip"
+                  data-intent="festivals"
+                  data-intent-group="activity"
+                  data-i18n="intentFestivals"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  Festivals
+                </button>
+              </div>
+            </div>
+          </section>
+          <div class="results-toolbar" id="resultsToolbar">
+            <div class="results-count">
+              <strong
+                ><span id="resultCount">0</span>
+                <span data-i18n="resultsSuffix">verified finds</span></strong
+              ><small id="updatedLabel">Updated Jul 25, 2026</small>
+            </div>
+            <button
+              class="sort-button"
+              id="sortButton"
+              type="button"
+              aria-haspopup="menu"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 7h12M4 7h.01M12 12h8M4 12h4M16 17h4M4 17h8" /></svg
+              ><span id="sortLabel">Happening soon</span>
+            </button>
+          </div>
+          <div class="active-notice" id="activeNotice" hidden>
+            <span id="activeNoticeText"></span
+            ><button
+              id="clearAllFilters"
+              type="button"
+              data-i18n="clearFilters"
+            >
+              Reset
+            </button>
+          </div>
+          <div class="feed" id="feed" aria-live="polite"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <span>¯\_(ツ)_/¯</span>
+            <h3 data-i18n="emptyTitle">Nothing matches yet</h3>
+            <p data-i18n="emptyDesc">
+              Try another city or loosen your filters.
+            </p>
+            <button id="emptyReset" type="button" data-i18n="emptyReset">
+              View all finds
+            </button>
+          </div>
+        </section>
+        <aside
+          class="right-rail"
+          aria-label="City navigation and filters"
+          data-i18n-aria="nearbyRailAria"
+        >
+          <div class="nearby-card">
+            <span class="section-kicker" data-i18n="nearbyKicker"
+              >DFW CITIES</span
+            >
+            <h3 id="nearbyCitiesTitle" data-i18n="browseCities">
+              Browse by city
+            </h3>
+            <div class="nearby-list" id="nearbyCities"></div>
+            <button id="allCitiesButton" class="all-cities" type="button">
+              <span class="button-copy" data-i18n="allCities"
+                >View all DFW cities</span
+              >
+              <span>↗</span>
+            </button>
+          </div>
+          <div class="rail-verify">
+            <span class="trust-icon"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="m12 3 7 3v5c0 4.8-2.9 8.2-7 10-4.1-1.8-7-5.2-7-10V6z"
+                />
+                <path d="m8.5 12 2.2 2.2 4.8-5" /></svg></span
+            ><strong data-i18n="verifiedSources">Checked in 2 passes</strong>
+            <p data-i18n="railVerifyDesc">
+              Open any listing to see the exact sources and conditions.
+            </p>
+            <a
+              class="rail-method-link"
+              href="how-it-works.html#verification"
+              data-i18n="methodButton"
+              >See our verification standard</a
+            >
+          </div>
+        </aside>
+      </section>
+      <footer class="site-footer">
+        <a
+          class="brand footer-brand"
+          href="index.html"
+          aria-label="NearFree home"
+          data-i18n-aria="brandHome"
+          ><span class="brand-mark" aria-hidden="true"
+            ><i></i><i></i><i></i></span
+          ><span class="brand-copy"
+            ><strong>NearFree<span class="brand-dot">.</span></strong></span
+          ></a
+        >
+        <p data-i18n="footerPromise">
+          DFW benefits, found and checked for you.
+        </p>
+        <nav aria-label="Footer navigation" data-i18n-aria="footerNavigation">
+          <a href="explore.html" data-i18n="explore">Explore</a
+          ><a href="radar.html" data-i18n="radarNav">Radar</a
+          ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+          ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+        </nav>
+      </footer>
+    </main>
+
+    <nav
+      class="mobile-nav"
+      aria-label="Mobile menu"
+      data-i18n-aria="mobileMenu"
+    >
+      <a href="index.html" aria-label="Home" data-i18n-aria="home"
+        ><svg viewBox="0 0 24 24">
+          <path d="m3 11 9-7 9 7v9H6v-9" />
+          <path d="M10 20v-6h4v6" /></svg
+        ><span data-i18n="home">Home</span></a
+      ><a
+        class="active"
+        href="explore.html"
+        aria-current="page"
+        aria-label="Explore"
+        data-i18n-aria="explore"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" /></svg
+        ><span data-i18n="explore">Explore</span></a
+      ><a class="mobile-radar-button" href="radar.html"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M12 12 18 6" /></svg
+        ><span data-i18n="radarNav">Radar</span></a
+      ><a id="mobileSaved" href="explore.html?saved=1"
+        ><svg viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          /></svg
+        ><span data-i18n="saved">Saved</span></a
+      >
+    </nav>
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+    <dialog
+      class="sheet location-sheet"
+      id="locationDialog"
+      aria-labelledby="locationTitle"
+    >
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <div>
+          <span class="section-kicker" data-i18n="locationKicker"
+            >YOUR AREA</span
+          >
+          <h2 id="locationTitle" data-i18n="locationTitle">
+            Where should we start?
+          </h2>
+        </div>
+        <button
+          class="modal-close"
+          data-close
+          type="button"
+          aria-label="Close"
+          data-i18n-aria="close"
+        >
+          ×
+        </button>
+      </div>
+      <button
+        class="all-dfw-option"
+        id="allDfwOption"
+        type="button"
+        data-scope="all"
+        aria-pressed="true"
+      >
+        <span class="all-dfw-icon" aria-hidden="true">DFW</span
+        ><span
+          ><strong data-i18n="allDfw">All DFW</strong
+          ><small data-i18n="allDfwDesc"
+            >See every verified find across the metroplex</small
+          ></span
+        ><span class="area-check" aria-hidden="true">✓</span></button
+      ><button class="detect-location" id="detectLocation" type="button">
+        <span class="detect-icon"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+            <circle cx="12" cy="12" r="7" /></svg></span
+        ><span
+          ><strong data-i18n="currentLocation">Use current location</strong
+          ><small data-i18n="locationPermission"
+            >Browser location permission required</small
+          ></span
+        ><span class="arrow">→</span>
+      </button>
+      <p class="location-status" id="locationStatus" role="status"></p>
+      <div class="city-grid-head">
+        <span data-i18n="chooseCity">Or show one city</span
+        ><small data-i18n="cityCountHint"
+          >Cities with active finds are available</small
+        >
+      </div>
+      <div class="city-grid" id="cityGrid"></div>
+      <p class="privacy-note">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 11V8a5 5 0 0 1 10 0v3" />
+          <rect x="5" y="11" width="14" height="10" rx="2" /></svg
+        ><span data-i18n="privacy"
+          >Your location is used only for distance and is never sent to a
+          server.</span
+        >
+      </p>
+    </dialog>
+    <dialog
+      class="detail-modal"
+      id="detailDialog"
+      aria-labelledby="detailTitle"
+    >
+      <header class="detail-dialog-bar">
+        <button
+          class="detail-back-button"
+          data-close
+          type="button"
+          aria-label="Back"
+          data-i18n-aria="back"
+        >
+          <span aria-hidden="true">←</span><span data-i18n="back">Back</span>
+        </button>
+        <div class="detail-dialog-actions">
+          <button
+            class="detail-toolbar-button"
+            id="detailSave"
+            type="button"
+            aria-label="Save"
+            data-i18n-aria="save"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+              />
+            </svg></button
+          ><button
+            class="detail-toolbar-button"
+            id="detailShare"
+            type="button"
+            aria-label="Share"
+            data-i18n-aria="share"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 16V3M7 8l5-5 5 5" />
+              <path d="M5 12v8h14v-8" />
+            </svg></button
+          ><button
+            class="detail-close-button"
+            data-close
+            type="button"
+            aria-label="Close"
+            data-i18n-aria="close"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m7 7 10 10M17 7 7 17" />
+            </svg>
+          </button>
+        </div>
+      </header>
+      <div class="detail-scroll-area" id="detailScrollArea">
+        <div id="detailContent"></div>
+      </div>
+    </dialog>
+    <dialog
+      class="sheet sort-sheet"
+      id="sortDialog"
+      aria-labelledby="sortTitle"
+    >
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <h2 id="sortTitle" data-i18n="sortTitle">Sort by</h2>
+        <button
+          class="modal-close"
+          data-close
+          type="button"
+          aria-label="Close"
+          data-i18n-aria="close"
+        >
+          ×
+        </button>
+      </div>
+      <div class="sort-options">
+        <button data-sort="distance" type="button">
+          <span data-i18n="sortDistance">Nearest first</span
+          ><small data-i18n="sortDistanceDesc"
+            >Shortest distance from your selected location</small
+          ><i></i></button
+        ><button data-sort="soon" type="button">
+          <span data-i18n="sortSoon">Happening soon</span
+          ><small data-i18n="sortSoonDesc">Upcoming events first</small
+          ><i></i></button
+        ><button data-sort="verified" type="button">
+          <span data-i18n="sortVerified">Most sourced</span
+          ><small data-i18n="sortVerifiedDesc"
+            >Listings with more cross-check sources first</small
+          ><i></i>
+        </button>
+      </div>
+    </dialog>
+    <dialog
+      class="account-dialog"
+      id="accountDialog"
+      aria-labelledby="accountDialogTitle"
+    >
+      <button
+        class="account-dialog-close"
+        data-close
+        type="button"
+        aria-label="Close"
+        data-i18n-aria="close"
+      >
+        ×</button
+      ><span class="account-dialog-icon" aria-hidden="true">N.</span
+      ><span class="section-kicker" data-i18n="accountPreviewKicker"
+        >ACCOUNT PREVIEW</span
+      >
+      <h2 id="accountDialogTitle">Accounts are coming next.</h2>
+      <p id="accountDialogDesc">
+        Sign-in will launch with secure backend sync for saved finds, Radar
+        preferences and notification controls.
+      </p>
+      <div class="account-dialog-actions">
+        <a href="explore.html" data-i18n="keepExploring">Keep exploring</a
+        ><a href="radar.html" data-i18n="previewYourRadar"
+          >Preview your Radar</a
+        >
+      </div>
+      <small data-i18n="noDataCollected"
+        >No email, password or payment information is collected on this
+        version.</small
+      >
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="assets/app.f7367d40167c.js"></script>
+  </body>
+</html>

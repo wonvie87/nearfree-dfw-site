@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f3e9" />
+    <meta
+      name="description"
+      content="Compare the free NearFree public catalog with the planned $2.99 monthly NearFree Radar membership."
+    />
+    <title>NearFree plans and pricing</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.91a22b48f2fd.css" />
+  </head>
+  <body
+    data-page="pricing"
+    data-title-key="pricingMetaTitle"
+    data-description-key="pricingMetaDescription"
+  >
+    <a class="skip-link" href="#plans" data-i18n="skipPricing">Skip to plans</a>
+    <header class="topbar">
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="NearFree home"
+        data-i18n-aria="brandHome"
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span
+        ><span class="brand-copy"
+          ><strong>NearFree<span class="brand-dot">.</span></strong></span
+        ></a
+      >
+      <nav
+        class="desktop-nav"
+        aria-label="Primary navigation"
+        data-i18n-aria="primaryNavigation"
+      >
+        <a href="explore.html" data-i18n="explore">Explore</a
+        ><a href="radar.html" data-i18n="radarNav">Radar</a
+        ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+        ><a
+          class="active"
+          href="pricing.html"
+          aria-current="page"
+          data-i18n="pricingNav"
+          >Pricing</a
+        >
+      </nav>
+      <div class="top-actions">
+        <button
+          class="location-pill"
+          id="locationButton"
+          type="button"
+          aria-haspopup="dialog"
+        >
+          <span class="location-pulse" aria-hidden="true"></span
+          ><span class="location-copy"
+            ><small id="locationModeLabel">Browse area</small
+            ><strong id="locationName">All DFW</strong></span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m7 10 5 5 5-5" />
+          </svg></button
+        ><label class="language-control"
+          ><span class="sr-only" data-i18n="language">Language</span
+          ><select id="languageSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="ko">한국어</option>
+          </select></label
+        ><a
+          class="icon-button saved-trigger"
+          id="savedButton"
+          href="explore.html?saved=1"
+          aria-label="View saved finds"
+          data-i18n-aria="savedView"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+            /></svg
+          ><span class="saved-count" id="savedCount" hidden>0</span></a
+        ><button
+          class="account-trigger"
+          type="button"
+          data-account-cta
+          data-account-intent="signin"
+          data-i18n="signIn"
+        >
+          Sign in</button
+        ><button
+          class="top-radar-cta"
+          type="button"
+          data-account-cta
+          data-account-intent="membership"
+        >
+          <span class="radar-status-dot" aria-hidden="true"></span
+          ><span data-i18n="joinRadar">Join Radar</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="site-main page-main pricing-page-main">
+      <section
+        class="page-hero pricing-page-hero"
+        aria-labelledby="pricingPageTitle"
+      >
+        <div>
+          <span class="section-kicker" data-i18n="pricingPageKicker"
+            >SIMPLE BY DESIGN</span
+          >
+          <h1 id="pricingPageTitle" data-i18n="pricingPageTitle">
+            The catalog is free. Radar pays for the watching.
+          </h1>
+          <p data-i18n="pricingPageDesc">
+            Public benefits and their terms stay public. Membership is for
+            personalized monitoring, change checks and alerts—not access to
+            information that should be free.
+          </p>
+        </div>
+        <aside>
+          <span data-i18n="plannedPrice">PLANNED PRICE</span>
+          <div class="membership-price">
+            <span>$</span><strong>2.99</strong
+            ><small data-i18n="monthly">/ month</small>
+          </div>
+          <p data-i18n="priceAsideDesc">
+            No annual lock-in is planned. Billing begins only after secure
+            accounts and member controls launch.
+          </p>
+        </aside>
+      </section>
+
+      <section class="plans-section" id="plans" aria-labelledby="plansTitle">
+        <header class="home-section-heading">
+          <span class="section-kicker" data-i18n="plansKicker"
+            >CHOOSE WHAT YOU NEED</span
+          >
+          <h2 id="plansTitle" data-i18n="plansTitle">
+            Explore on your own or let Radar remember.
+          </h2>
+          <p data-i18n="plansDesc">
+            Both paths use the same verified catalog and show the same
+            conditions.
+          </p>
+        </header>
+        <div class="plan-grid">
+          <article class="plan-card">
+            <div class="plan-card-head">
+              <span data-i18n="explorePlan">NEARFREE EXPLORE</span>
+              <div>
+                <small>$</small><strong>0</strong
+                ><em data-i18n="forever">forever</em>
+              </div>
+              <p data-i18n="explorePlanDesc">
+                For anyone who wants to search the current DFW catalog.
+              </p>
+            </div>
+            <ul>
+              <li>
+                <span>✓</span
+                ><span data-i18n="planFullCatalog"
+                  >Full verified public catalog</span
+                >
+              </li>
+              <li>
+                <span>✓</span
+                ><span data-i18n="planSearchFilters"
+                  >Search, city and intent filters</span
+                >
+              </li>
+              <li>
+                <span>✓</span
+                ><span data-i18n="planSourceTerms"
+                  >Sources and all eligibility terms</span
+                >
+              </li>
+              <li>
+                <span>✓</span
+                ><span data-i18n="planDeviceSaves">Saves on this device</span>
+              </li>
+            </ul>
+            <a href="explore.html"
+              ><span data-i18n="exploreNow">Explore now</span
+              ><span aria-hidden="true">→</span></a
+            >
+          </article>
+          <article class="plan-card plan-card-featured">
+            <div class="plan-popular" data-i18n="plannedMembership">
+              PLANNED MEMBERSHIP
+            </div>
+            <div class="plan-card-head">
+              <span data-i18n="membershipKicker">NEARFREE RADAR</span>
+              <div>
+                <small>$</small><strong>2.99</strong
+                ><em data-i18n="monthly">/ month</em>
+              </div>
+              <p data-i18n="radarPlanDesc">
+                For people who want NearFree to keep looking after they leave.
+              </p>
+            </div>
+            <ul>
+              <li>
+                <span>✓</span
+                ><span data-i18n="membershipFeatureWeekly"
+                  >Personalized weekly matches</span
+                >
+              </li>
+              <li>
+                <span>✓</span
+                ><span data-i18n="membershipFeatureUrgent"
+                  >New and ending-soon alerts</span
+                >
+              </li>
+              <li>
+                <span>✓</span
+                ><span data-i18n="membershipFeatureChanges"
+                  >Saved-benefit change monitoring</span
+                >
+              </li>
+              <li>
+                <span>✓</span
+                ><span data-i18n="membershipFeatureRadius"
+                  >Your interests and travel radius</span
+                >
+              </li>
+              <li>
+                <span>✓</span
+                ><span data-i18n="planCrossDevice"
+                  >Cross-device saves and preferences</span
+                >
+              </li>
+            </ul>
+            <button
+              type="button"
+              data-account-cta
+              data-account-intent="membership"
+            >
+              <span data-i18n="joinRadar">Join Radar</span
+              ><span aria-hidden="true">→</span>
+            </button>
+            <div class="membership-status">
+              <span class="radar-status-dot" aria-hidden="true"></span
+              ><span data-i18n="membershipPreviewStatus"
+                >Personalized preview available now · notifications are the next
+                release</span
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="pricing-principles"
+        aria-labelledby="pricingPrinciplesTitle"
+      >
+        <div>
+          <span class="section-kicker" data-i18n="pricingPrinciplesKicker"
+            >WHAT NEVER MOVES BEHIND THE PAYWALL</span
+          >
+          <h2 id="pricingPrinciplesTitle" data-i18n="pricingPrinciplesTitle">
+            The facts you need to use a benefit.
+          </h2>
+        </div>
+        <ul>
+          <li data-i18n="pricingPrincipleOne">
+            The complete listing and verified conditions
+          </li>
+          <li data-i18n="pricingPrincipleTwo">
+            Official action and source links
+          </li>
+          <li data-i18n="pricingPrincipleThree">
+            Price, date, address, booking and eligibility
+          </li>
+          <li data-i18n="pricingPrincipleFour">
+            Manual browsing, filters and on-device saves
+          </li>
+        </ul>
+      </section>
+
+      <section class="pricing-faq" aria-labelledby="faqTitle">
+        <header class="home-section-heading">
+          <span class="section-kicker" data-i18n="faqKicker"
+            >BEFORE YOU DECIDE</span
+          >
+          <h2 id="faqTitle" data-i18n="faqTitle">
+            Questions, answered plainly.
+          </h2>
+        </header>
+        <div class="faq-list">
+          <details>
+            <summary data-i18n="faqAccountQuestion">
+              Can I create an account today?
+            </summary>
+            <p data-i18n="faqAccountAnswer">
+              Not yet. The buttons show where sign-in and membership will live,
+              but this version does not collect account or billing information.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faqChargeQuestion">
+              Will clicking Join Radar charge me?
+            </summary>
+            <p data-i18n="faqChargeAnswer">
+              No. It opens a clear product-status notice. Real billing will be
+              added only with a secure backend and full account controls.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faqFreeQuestion">
+              Will free users lose listing details?
+            </summary>
+            <p data-i18n="faqFreeAnswer">
+              No. Verified price, date, place, eligibility, booking conditions
+              and source links remain available to everyone.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faqCancelQuestion">
+              What is planned for cancellation?
+            </summary>
+            <p data-i18n="faqCancelAnswer">
+              The product is planned as a monthly subscription with self-service
+              cancellation. Final terms will be shown before any real purchase.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faqPreviewQuestion">
+              What can I try now?
+            </summary>
+            <p data-i18n="faqPreviewAnswer">
+              You can build a Radar preview, view real current matches and save
+              those preferences on this device without an account.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="pricing-cta-band">
+        <div>
+          <span class="radar-kicker"
+            ><span class="radar-status-dot" aria-hidden="true"></span
+            ><span data-i18n="tryBeforeJoin">TRY BEFORE YOU JOIN</span></span
+          >
+          <h2 data-i18n="pricingCtaTitle">
+            See your matches before membership exists.
+          </h2>
+          <p data-i18n="pricingCtaDesc">
+            Choose a city, radius and interests. The preview uses the live
+            verified catalog.
+          </p>
+        </div>
+        <div>
+          <a href="radar.html" data-i18n="previewYourRadar"
+            >Preview your Radar</a
+          ><button
+            type="button"
+            data-account-cta
+            data-account-intent="membership"
+            data-i18n="joinRadar"
+          >
+            Join Radar
+          </button>
+        </div>
+      </section>
+      <footer class="site-footer">
+        <a
+          class="brand footer-brand"
+          href="index.html"
+          aria-label="NearFree home"
+          data-i18n-aria="brandHome"
+          ><span class="brand-mark" aria-hidden="true"
+            ><i></i><i></i><i></i></span
+          ><span class="brand-copy"
+            ><strong>NearFree<span class="brand-dot">.</span></strong></span
+          ></a
+        >
+        <p data-i18n="footerPromise">
+          DFW benefits, found and checked for you.
+        </p>
+        <nav aria-label="Footer navigation" data-i18n-aria="footerNavigation">
+          <a href="explore.html" data-i18n="explore">Explore</a
+          ><a href="radar.html" data-i18n="radarNav">Radar</a
+          ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+          ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+        </nav>
+      </footer>
+    </main>
+
+    <nav
+      class="mobile-nav"
+      aria-label="Mobile menu"
+      data-i18n-aria="mobileMenu"
+    >
+      <a href="index.html" aria-label="Home" data-i18n-aria="home"
+        ><svg viewBox="0 0 24 24">
+          <path d="m3 11 9-7 9 7v9H6v-9" />
+          <path d="M10 20v-6h4v6" /></svg
+        ><span data-i18n="home">Home</span></a
+      ><a href="explore.html" aria-label="Explore" data-i18n-aria="explore"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" /></svg
+        ><span data-i18n="explore">Explore</span></a
+      ><a class="mobile-radar-button" href="radar.html"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M12 12 18 6" /></svg
+        ><span data-i18n="radarNav">Radar</span></a
+      ><a id="mobileSaved" href="explore.html?saved=1"
+        ><svg viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          /></svg
+        ><span data-i18n="saved">Saved</span></a
+      >
+    </nav>
+    <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+    <dialog
+      class="sheet location-sheet"
+      id="locationDialog"
+      aria-labelledby="locationTitle"
+    >
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <div>
+          <span class="section-kicker" data-i18n="locationKicker"
+            >YOUR AREA</span
+          >
+          <h2 id="locationTitle" data-i18n="locationTitle">
+            Where should we start?
+          </h2>
+        </div>
+        <button
+          class="modal-close"
+          data-close
+          type="button"
+          aria-label="Close"
+          data-i18n-aria="close"
+        >
+          ×
+        </button>
+      </div>
+      <button
+        class="all-dfw-option"
+        id="allDfwOption"
+        type="button"
+        data-scope="all"
+        aria-pressed="true"
+      >
+        <span class="all-dfw-icon" aria-hidden="true">DFW</span
+        ><span
+          ><strong data-i18n="allDfw">All DFW</strong
+          ><small data-i18n="allDfwDesc"
+            >See every verified find across the metroplex</small
+          ></span
+        ><span class="area-check" aria-hidden="true">✓</span></button
+      ><button class="detect-location" id="detectLocation" type="button">
+        <span class="detect-icon"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+            <circle cx="12" cy="12" r="7" /></svg></span
+        ><span
+          ><strong data-i18n="currentLocation">Use current location</strong
+          ><small data-i18n="locationPermission"
+            >Browser location permission required</small
+          ></span
+        ><span class="arrow">→</span>
+      </button>
+      <p class="location-status" id="locationStatus" role="status"></p>
+      <div class="city-grid-head">
+        <span data-i18n="chooseCity">Or show one city</span
+        ><small data-i18n="cityCountHint"
+          >Cities with active finds are available</small
+        >
+      </div>
+      <div class="city-grid" id="cityGrid"></div>
+      <p class="privacy-note">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 11V8a5 5 0 0 1 10 0v3" />
+          <rect x="5" y="11" width="14" height="10" rx="2" /></svg
+        ><span data-i18n="privacy"
+          >Your location is used only for distance and is never sent to a
+          server.</span
+        >
+      </p>
+    </dialog>
+    <dialog
+      class="account-dialog"
+      id="accountDialog"
+      aria-labelledby="accountDialogTitle"
+    >
+      <button
+        class="account-dialog-close"
+        data-close
+        type="button"
+        aria-label="Close"
+        data-i18n-aria="close"
+      >
+        ×</button
+      ><span class="account-dialog-icon" aria-hidden="true">N.</span
+      ><span class="section-kicker" data-i18n="accountPreviewKicker"
+        >ACCOUNT PREVIEW</span
+      >
+      <h2 id="accountDialogTitle">Accounts are coming next.</h2>
+      <p id="accountDialogDesc">
+        Sign-in will launch with secure backend sync for saved finds, Radar
+        preferences and notification controls.
+      </p>
+      <div class="account-dialog-actions">
+        <a href="explore.html" data-i18n="keepExploring">Keep exploring</a
+        ><a href="radar.html" data-i18n="previewYourRadar"
+          >Preview your Radar</a
+        >
+      </div>
+      <small data-i18n="noDataCollected"
+        >No email, password or payment information is collected on this
+        version.</small
+      >
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="assets/app.f7367d40167c.js"></script>
+  </body>
+</html>

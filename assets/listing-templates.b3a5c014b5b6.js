@@ -22,12 +22,7 @@ export function createListingTemplates(context) {
     return `<span class="detail-title-base">${escapeHtml(base)}</span>${benefit}`;
   }
 
-  function imageOrPlaceholder(
-    listing,
-    className,
-    loading = "lazy",
-    alt = listing.imageAlt || "",
-  ) {
+  function imageOrPlaceholder(listing, className, loading = "lazy", alt = listing.imageAlt || "") {
     return listing.image
       ? `<img src="${escapeHtml(listing.image)}" alt="${escapeHtml(alt)}" loading="${loading}" />`
       : `<span class="${className}" aria-hidden="true"><span>NearFree</span></span>`;
@@ -59,9 +54,7 @@ export function createListingTemplates(context) {
   }
 
   function categoryLabel(listing) {
-    const key = categoryKey(listing).replace(/-([a-z])/g, (_, letter) =>
-      letter.toUpperCase(),
-    );
+    const key = categoryKey(listing).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
     return t(`category${key[0].toUpperCase()}${key.slice(1)}`);
   }
 
@@ -86,8 +79,7 @@ export function createListingTemplates(context) {
     if (listing.kind === "benefit" && end) return `~${end.month}.${end.day}`;
     if (
       !end ||
-      `${start.year}-${start.month}-${start.day}` ===
-        `${end.year}-${end.month}-${end.day}`
+      `${start.year}-${start.month}-${start.day}` === `${end.year}-${end.month}-${end.day}`
     ) {
       return `${start.month}.${start.day}`;
     }
@@ -106,10 +98,7 @@ export function createListingTemplates(context) {
     ).slice(0, 10);
     const place = isAllDfw()
       ? listing.city
-      : [
-          listing.city,
-          formatDistance(context.distanceFromSelected(listing)),
-        ].join(" · ");
+      : [listing.city, formatDistance(context.distanceFromSelected(listing))].join(" · ");
     const dateClass = isEndingSoon(listing) ? " is-urgent" : "";
     return `
       <article class="listing-card listing-${listing.kind} ${tone}" data-id="${listing.id}">
@@ -141,10 +130,8 @@ export function createListingTemplates(context) {
     const descKey = `${titleKey}Desc`;
     const title = section.title || t(titleKey);
     const description = section.description ?? t(descKey);
-    const hasMore =
-      section.catalogView && section.total > section.items.length;
-    const variantClass =
-      section.variant === "month" ? " listing-section-month" : "";
+    const hasMore = section.catalogView && section.total > section.items.length;
+    const variantClass = section.variant === "month" ? " listing-section-month" : "";
     return `
       <section class="listing-section${variantClass}" aria-labelledby="section-${escapeHtml(section.key)}">
         <div class="listing-section-head">

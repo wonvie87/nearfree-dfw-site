@@ -57,8 +57,7 @@ export const UI = {
     promiseConflict: "A separate conflict check",
     promiseTerms: "Conditions shown to everyone",
     readVerification: "Read the verification standard",
-    homeMembershipTitle:
-      "Browse for free. Pay only when you want us to keep watching.",
+    homeMembershipTitle: "Browse for free. Pay only when you want us to keep watching.",
     homeMembershipDesc:
       "The public catalog stays open. When accounts launch, Radar will use the area, household details and interests you choose to monitor matching events and benefits.",
     plannedPrice: "PLANNED PRICE",
@@ -71,8 +70,7 @@ export const UI = {
     membershipComingTitle: "Membership billing is not live yet.",
     membershipComingDesc:
       "This is the planned join point. Secure account creation, billing and self-service cancellation will launch together.",
-    noDataCollected:
-      "No email, password or payment information is collected on this version.",
+    noDataCollected: "No email, password or payment information is collected on this version.",
     radarHeroTitle: "All your local benefits, in one place.",
     landingHeroAlt:
       "NearFree gathering local museum, library, zoo, music, market and dining benefits into one app.",
@@ -118,8 +116,7 @@ export const UI = {
       "One pass confirms the offer. A second, separate pass looks for cancellations, changes and price conflicts.",
     howFlowKicker: "FROM AREA TO MATCH",
     verificationPageKicker: "THE PUBLICATION GATE",
-    verificationPageTitle:
-      "Found once. Checked twice. Published only when the details agree.",
+    verificationPageTitle: "Found once. Checked twice. Published only when the details agree.",
     verificationPageDesc:
       "Every core fact must be supported. Missing conditions and conflicting information stop publication instead of becoming a vague disclaimer.",
     firstPassLabel: "FIRST PASS",
@@ -133,25 +130,19 @@ export const UI = {
     whatWeCheckKicker: "WHAT WE CHECK",
     whatWeCheckTitle: "The facts that decide whether you can actually use it.",
     checkPriceTitle: "Real price",
-    checkPriceDesc:
-      "Fees, required purchases and who qualifies for the stated price.",
+    checkPriceDesc: "Fees, required purchases and who qualifies for the stated price.",
     checkTimeTitle: "Valid time",
-    checkTimeDesc:
-      "The current year, exact date window, recurring schedule and expiration.",
+    checkTimeDesc: "The current year, exact date window, recurring schedule and expiration.",
     checkPlaceTitle: "Usable place",
-    checkPlaceDesc:
-      "Participating location, address and whether the offer is online or in person.",
+    checkPlaceDesc: "Participating location, address and whether the offer is online or in person.",
     checkAccessTitle: "Access conditions",
     checkAccessDesc:
       "Reservation, membership, ID, age, residency and benefit-program requirements.",
     checkActionTitle: "Working next step",
-    checkActionDesc:
-      "The exact official page a person needs to verify, reserve or attend.",
+    checkActionDesc: "The exact official page a person needs to verify, reserve or attend.",
     checkConflictTitle: "No unresolved conflict",
-    checkConflictDesc:
-      "Contradictory dates, prices or terms send a find back for review.",
-    transparencyTitle:
-      "If we cannot verify it, you will not see it presented as verified.",
+    checkConflictDesc: "Contradictory dates, prices or terms send a find back for review.",
+    transparencyTitle: "If we cannot verify it, you will not see it presented as verified.",
     transparencyPageDesc:
       "Search snippets, social posts, copied aggregators and memory are leads—not evidence. The listing detail shows sources and the date checked so you can make your own decision.",
     inspectListings: "Inspect the live listings",
@@ -163,8 +154,7 @@ export const UI = {
       "No annual lock-in is planned. Billing begins only after secure accounts and member controls launch.",
     plansKicker: "CHOOSE WHAT YOU NEED",
     plansTitle: "Explore on your own or let Radar remember.",
-    plansDesc:
-      "Both paths use the same verified catalog and show the same conditions.",
+    plansDesc: "Both paths use the same verified catalog and show the same conditions.",
     explorePlan: "NEARFREE EXPLORE",
     explorePlanDesc: "For anyone who wants to search the current DFW catalog.",
     forever: "forever",
@@ -173,8 +163,7 @@ export const UI = {
     planSourceTerms: "Sources and all eligibility terms",
     planDeviceSaves: "Saves on this device",
     plannedMembership: "PLANNED MEMBERSHIP",
-    radarPlanDesc:
-      "For people who want NearFree to keep looking after they leave.",
+    radarPlanDesc: "For people who want NearFree to keep looking after they leave.",
     planCrossDevice: "Cross-device saves and preferences",
     pricingPrinciplesKicker: "WHAT NEVER MOVES BEHIND THE PAYWALL",
     pricingPrinciplesTitle: "The facts you need to use a benefit.",
@@ -210,14 +199,11 @@ export const UI = {
     howAreaTitle: "Set your area",
     howAreaDesc: "Choose a starting city and how far you are willing to go.",
     howMonitorTitle: "We monitor",
-    howMonitorDesc:
-      "We look across official city, venue and institution sources.",
+    howMonitorDesc: "We look across official city, venue and institution sources.",
     howVerifyTitle: "We verify",
-    howVerifyDesc:
-      "Price, date, location, eligibility and booking terms are checked.",
+    howVerifyDesc: "Price, date, location, eligibility and booking terms are checked.",
     howMatchTitle: "You get matched",
-    howMatchDesc:
-      "Useful nearby finds rise above everything that does not fit.",
+    howMatchDesc: "Useful nearby finds rise above everything that does not fit.",
     previewKicker: "TRY YOUR RADAR",
     previewTitle: "See what NearFree would watch for you.",
     previewDesc:
@@ -232,8 +218,7 @@ export const UI = {
     saveRadarPreview: "Save this Radar preview",
     previewNotSubscribed:
       "Saved previews stay on this device. Email and instant alerts are not active yet.",
-    previewSaved:
-      "Radar preview saved on this device. Notifications are not active yet.",
+    previewSaved: "Radar preview saved on this device. Notifications are not active yet.",
     yourMatches: "Your current matches",
     benefitMatches: "ongoing benefits",
     eventMatches: "scheduled events",
@@ -254,8 +239,7 @@ export const UI = {
     radarHappeningSignal: "HAPPENING NOW",
     radarUpcomingSignal: "UPCOMING",
     radarAvailableSignal: "AVAILABLE",
-    radarEmptyMatches:
-      "No current match in this radius. Try a wider area or another interest.",
+    radarEmptyMatches: "No current match in this radius. Try a wider area or another interest.",
     nearby: "Near me",
     savedView: "View saved finds",
     searchPlaceholder: "Search events and benefits",
@@ -272,8 +256,7 @@ export const UI = {
     filtersDesc: "Choose only what matters right now.",
     showResults: "Show results",
     verifiedFeedTitle: "Every find checked twice",
-    verifiedFeedDesc:
-      "Official sources first, then a separate conflict check.",
+    verifiedFeedDesc: "Official sources first, then a separate conflict check.",
     removeFilter: "Remove {filter} filter",
     filterWhen: "When",
     filterPrice: "Price",
@@ -314,8 +297,7 @@ export const UI = {
     sectionHappening: "Happening now",
     sectionHappeningDesc: "Events currently in progress.",
     sectionRecent: "New this week",
-    sectionRecentDesc:
-      "Listings NearFree added or refreshed in the last 7 days.",
+    sectionRecentDesc: "Listings NearFree added or refreshed in the last 7 days.",
     sectionUpcoming: "Scheduled events",
     sectionUpcomingDesc: "The next verified dates in the public catalog.",
     sectionOngoing: "Ongoing benefits",
@@ -352,8 +334,7 @@ export const UI = {
     back: "Back",
     currentLocation: "Use current location",
     locationPermission: "Browser location permission required",
-    privacy:
-      "Your location is used only for distance and is never sent to a server.",
+    privacy: "Your location is used only for distance and is never sent to a server.",
     sortTitle: "Sort by",
     sortDistance: "Nearest first",
     sortDistanceDesc: "Shortest distance from your selected location",
@@ -388,8 +369,7 @@ export const UI = {
     citySelected: "Showing finds in {city} only.",
     cityOnly: "Showing {city} only",
     sortedNear: "Sorted near {city}",
-    geoUnsupported:
-      "Location is not supported in this browser. Choose a city below.",
+    geoUnsupported: "Location is not supported in this browser. Choose a city below.",
     locating: "Finding your location…",
     currentNear: "Current location · near {city}",
     located: "Location found. Results are sorted by distance.",
@@ -453,8 +433,7 @@ export const UI = {
     cardShows: "What every card shows",
     transparencyLabel: "TRANSPARENT",
     accurateTerms: "Exact free or near-free terms",
-    accurateTermsDesc:
-      "Including parking, reservations and proof-of-eligibility exceptions",
+    accurateTermsDesc: "Including parking, reservations and proof-of-eligibility exceptions",
     directLinks: "Direct links to the original page",
     directLinksDesc: "The actual institution or event page—not a search result",
     visualsSeparated: "Visuals kept separate from evidence",
@@ -524,8 +503,7 @@ export const UI = {
     promiseConflict: "별도의 충돌 확인",
     promiseTerms: "모든 이용자에게 조건 공개",
     readVerification: "전체 확인 기준 읽기",
-    homeMembershipTitle:
-      "직접 둘러보는 건 무료. 대신 계속 살펴보는 일에만 비용을 내세요.",
+    homeMembershipTitle: "직접 둘러보는 건 무료. 대신 계속 살펴보는 일에만 비용을 내세요.",
     homeMembershipDesc:
       "공개 카탈로그는 계속 무료예요. 계정 출시 후에는 사용자가 선택한 지역·가족 정보·관심사를 바탕으로 Radar가 맞는 이벤트와 혜택을 계속 살펴봅니다.",
     plannedPrice: "예정 요금",
@@ -538,8 +516,7 @@ export const UI = {
     membershipComingTitle: "멤버십 결제는 아직 시작되지 않았어요.",
     membershipComingDesc:
       "이 버튼은 향후 가입 위치를 보여주는 미리보기예요. 안전한 계정 생성·결제·직접 해지 기능을 함께 제공할 예정입니다.",
-    noDataCollected:
-      "현재 버전에서는 이메일·비밀번호·결제 정보를 수집하지 않아요.",
+    noDataCollected: "현재 버전에서는 이메일·비밀번호·결제 정보를 수집하지 않아요.",
     radarHeroTitle: "내 주변의 모든 혜택을 한곳에서.",
     landingHeroAlt:
       "박물관·도서관·동물원·공연·마켓·음식점의 지역 혜택을 하나의 앱에 모아 보여주는 NearFree.",
@@ -585,8 +562,7 @@ export const UI = {
       "첫 단계에서 혜택을 확인하고, 별도의 두 번째 단계에서 취소·변경·가격 충돌을 찾아봐요.",
     howFlowKicker: "지역 설정부터 맞춤 결과까지",
     verificationPageKicker: "게시 전 필수 관문",
-    verificationPageTitle:
-      "한 번 찾고, 두 번 확인한 뒤, 모든 정보가 일치할 때만 게시합니다.",
+    verificationPageTitle: "한 번 찾고, 두 번 확인한 뒤, 모든 정보가 일치할 때만 게시합니다.",
     verificationPageDesc:
       "핵심 정보에는 모두 근거가 있어야 해요. 조건이 빠졌거나 정보가 충돌하면 모호한 주의 문구를 붙이는 대신 게시를 멈춥니다.",
     firstPassLabel: "첫 번째 확인",
@@ -600,47 +576,39 @@ export const UI = {
     whatWeCheckKicker: "확인하는 정보",
     whatWeCheckTitle: "실제로 이용할 수 있는지를 결정하는 조건들.",
     checkPriceTitle: "실제 비용",
-    checkPriceDesc:
-      "추가 요금·필수 구매·표시 가격을 이용할 수 있는 대상까지 확인해요.",
+    checkPriceDesc: "추가 요금·필수 구매·표시 가격을 이용할 수 있는 대상까지 확인해요.",
     checkTimeTitle: "유효한 일정",
     checkTimeDesc: "현재 연도·정확한 기간·반복 일정·종료일을 확인해요.",
     checkPlaceTitle: "이용 가능한 장소",
     checkPlaceDesc: "참여 지점·주소·온라인 또는 현장 이용 여부를 확인해요.",
     checkAccessTitle: "이용 조건",
-    checkAccessDesc:
-      "예약·멤버십·신분증·연령·거주지·복지 프로그램 조건을 확인해요.",
+    checkAccessDesc: "예약·멤버십·신분증·연령·거주지·복지 프로그램 조건을 확인해요.",
     checkActionTitle: "실제로 작동하는 다음 단계",
     checkActionDesc: "확인·예약·방문에 필요한 정확한 공식 페이지로 연결해요.",
     checkConflictTitle: "해결되지 않은 충돌 없음",
-    checkConflictDesc:
-      "날짜·가격·조건이 서로 다르면 다시 검토하기 전까지 게시하지 않아요.",
-    transparencyTitle:
-      "확인할 수 없는 정보는 검증된 혜택처럼 보여드리지 않아요.",
+    checkConflictDesc: "날짜·가격·조건이 서로 다르면 다시 검토하기 전까지 게시하지 않아요.",
+    transparencyTitle: "확인할 수 없는 정보는 검증된 혜택처럼 보여드리지 않아요.",
     transparencyPageDesc:
       "검색 결과 문구·소셜 게시물·복제된 모음글·기억은 단서일 뿐 근거가 아니에요. 상세 화면에서 출처와 확인일을 직접 살펴보고 판단할 수 있습니다.",
     inspectListings: "실제 혜택 확인하기",
     pricingPageKicker: "단순하고 분명한 요금",
-    pricingPageTitle:
-      "카탈로그는 무료. Radar 요금은 계속 살펴보는 일에 사용됩니다.",
+    pricingPageTitle: "카탈로그는 무료. Radar 요금은 계속 살펴보는 일에 사용됩니다.",
     pricingPageDesc:
       "공개 혜택과 이용 조건은 계속 무료예요. 멤버십은 공개 정보 접근권이 아니라 맞춤 모니터링·변경 확인·알림을 위한 서비스입니다.",
     priceAsideDesc:
       "연간 약정은 계획하지 않고 있어요. 안전한 계정과 직접 관리 기능이 준비된 뒤에만 결제를 시작합니다.",
     plansKicker: "필요한 방식 선택",
     plansTitle: "직접 둘러보거나, Radar가 기억하게 하세요.",
-    plansDesc:
-      "어느 쪽이든 같은 검증 카탈로그와 동일한 이용 조건을 볼 수 있어요.",
+    plansDesc: "어느 쪽이든 같은 검증 카탈로그와 동일한 이용 조건을 볼 수 있어요.",
     explorePlan: "NEARFREE EXPLORE",
-    explorePlanDesc:
-      "현재 DFW 카탈로그를 직접 검색하고 싶은 모든 분을 위한 기능이에요.",
+    explorePlanDesc: "현재 DFW 카탈로그를 직접 검색하고 싶은 모든 분을 위한 기능이에요.",
     forever: "계속 무료",
     planFullCatalog: "전체 검증 공개 카탈로그",
     planSearchFilters: "검색·도시·목적별 필터",
     planSourceTerms: "출처와 모든 이용 조건",
     planDeviceSaves: "현재 기기에 혜택 저장",
     plannedMembership: "출시 예정 멤버십",
-    radarPlanDesc:
-      "사이트를 나간 뒤에도 NearFree가 계속 살펴봐 주길 원하는 분을 위한 기능이에요.",
+    radarPlanDesc: "사이트를 나간 뒤에도 NearFree가 계속 살펴봐 주길 원하는 분을 위한 기능이에요.",
     planCrossDevice: "기기 간 저장 목록과 설정 동기화",
     pricingPrinciplesKicker: "유료 전환하지 않는 정보",
     pricingPrinciplesTitle: "혜택을 실제로 이용하는 데 필요한 모든 사실.",
@@ -667,8 +635,7 @@ export const UI = {
       "계정 없이도 Radar 설정을 만들고, 현재 실제 일치 결과를 확인하고, 이 기기에 설정을 저장할 수 있어요.",
     tryBeforeJoin: "가입 전에 체험하세요",
     pricingCtaTitle: "멤버십 출시 전에 내 결과부터 확인해 보세요.",
-    pricingCtaDesc:
-      "출발 도시·이동 거리·관심사를 선택하면 현재 검증 카탈로그로 결과를 보여드려요.",
+    pricingCtaDesc: "출발 도시·이동 거리·관심사를 선택하면 현재 검증 카탈로그로 결과를 보여드려요.",
     howKicker: "늘 대신 확인해요",
     howTitle: "단순한 뉴스레터가 아닌 내 주변 혜택 레이더",
     howDesc:
@@ -695,8 +662,7 @@ export const UI = {
     saveRadarPreview: "이 레이더 미리보기 저장",
     previewNotSubscribed:
       "저장한 미리보기는 이 기기에만 남아요. 이메일과 즉시 알림은 아직 활성화되지 않아요.",
-    previewSaved:
-      "이 기기에 레이더 미리보기를 저장했어요. 알림은 아직 활성화되지 않아요.",
+    previewSaved: "이 기기에 레이더 미리보기를 저장했어요. 알림은 아직 활성화되지 않아요.",
     yourMatches: "현재 조건과 일치",
     benefitMatches: "상시 혜택",
     eventMatches: "예정된 이벤트",
@@ -708,8 +674,7 @@ export const UI = {
     membershipFeatureUrgent: "신규·마감 임박 혜택 알림",
     membershipFeatureChanges: "저장한 혜택 변경 확인",
     membershipFeatureRadius: "관심사와 이동 거리 반영",
-    membershipPreviewStatus:
-      "개인화 미리보기 제공 중 · 알림 기능은 다음 단계에서 준비돼요",
+    membershipPreviewStatus: "개인화 미리보기 제공 중 · 알림 기능은 다음 단계에서 준비돼요",
     footerPromise: "DFW 혜택을 대신 찾고 확인해 드려요.",
     radarNav: "레이더",
     radarNewSignal: "최근 확인",
@@ -776,8 +741,7 @@ export const UI = {
     sectionHappening: "현재 진행 중",
     sectionHappeningDesc: "지금 진행되고 있는 이벤트예요.",
     sectionRecent: "이번 주 새로 확인",
-    sectionRecentDesc:
-      "최근 7일 안에 새로 확인하거나 정보를 갱신한 이벤트와 혜택이에요.",
+    sectionRecentDesc: "최근 7일 안에 새로 확인하거나 정보를 갱신한 이벤트와 혜택이에요.",
     sectionUpcoming: "예정 이벤트",
     sectionUpcomingDesc: "공개 카탈로그에서 날짜가 가까운 이벤트부터 보여드려요.",
     sectionOngoing: "상시 혜택",
@@ -849,14 +813,12 @@ export const UI = {
     citySelected: "{city} 혜택만 보여드려요.",
     cityOnly: "{city} 혜택만 보는 중",
     sortedNear: "{city} 근처부터 정렬 중",
-    geoUnsupported:
-      "이 브라우저는 위치 기능을 지원하지 않아요. 도시를 선택해 주세요.",
+    geoUnsupported: "이 브라우저는 위치 기능을 지원하지 않아요. 도시를 선택해 주세요.",
     locating: "현재 위치를 확인하고 있어요…",
     currentNear: "현재 위치 · {city} 근처",
     located: "현재 위치에서 가까운 순으로 정렬했어요.",
     locationSorted: "현재 위치 기준으로 다시 정렬했어요.",
-    locationDenied:
-      "위치 권한이 꺼져 있어요. 아래에서 가까운 도시를 선택해 주세요.",
+    locationDenied: "위치 권한이 꺼져 있어요. 아래에서 가까운 도시를 선택해 주세요.",
     locationFailed: "위치를 확인하지 못했어요. 아래에서 도시를 선택해 주세요.",
     directions: "길찾기",
     officialSite: "공식 사이트",
@@ -916,11 +878,9 @@ export const UI = {
     accurateTerms: "정확한 무료·할인 조건",
     accurateTermsDesc: "주차비·예약·자격 증빙처럼 놓치기 쉬운 조건도 확인해요.",
     directLinks: "공식 안내로 바로 가는 링크",
-    directLinksDesc:
-      "검색 결과가 아니라 기관이나 주최 측의 실제 안내 페이지로 연결해요.",
+    directLinksDesc: "검색 결과가 아니라 기관이나 주최 측의 실제 안내 페이지로 연결해요.",
     visualsSeparated: "카드 이미지는 참고용",
-    visualsSeparatedDesc:
-      "분위기 이해를 돕는 용도이며 사실 확인 자료로 사용하지 않아요.",
+    visualsSeparatedDesc: "분위기 이해를 돕는 용도이며 사실 확인 자료로 사용하지 않아요.",
     transparencyLabel: "확인 기준 공개",
     saveRemoved: "저장을 취소했어요.",
     saveAdded: "저장했어요. 하단 저장 메뉴에서 다시 볼 수 있어요.",

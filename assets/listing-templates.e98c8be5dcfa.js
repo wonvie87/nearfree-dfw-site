@@ -134,14 +134,6 @@ export function createListingTemplates(context) {
   }
 
   function sectionTemplate(section, startIndex) {
-    const icon = {
-      good: "✦",
-      worth: "🔥",
-      weekend: "☀",
-      budget: "$",
-      more: "+",
-      results: "✦",
-    }[section.key];
     const sectionName = section.key[0].toUpperCase() + section.key.slice(1);
     const titleKey =
       section.key === "good" && isAllDfw()
@@ -154,7 +146,7 @@ export function createListingTemplates(context) {
     return `
       <section class="listing-section" aria-labelledby="section-${section.key}">
         <div class="listing-section-head">
-          <div><span class="section-symbol" aria-hidden="true">${icon}</span><h2 id="section-${section.key}">${escapeHtml(t(titleKey))}</h2></div>
+          <div><h2 id="section-${section.key}">${escapeHtml(t(titleKey))}</h2></div>
           <p>${escapeHtml(t(descKey))}</p>
         </div>
         <div class="listing-grid" data-section="${escapeHtml(section.key)}">${section.items.map((listing, index) => cardTemplate(listing, startIndex + index)).join("")}</div>

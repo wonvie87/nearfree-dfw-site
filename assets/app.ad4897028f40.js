@@ -12,7 +12,7 @@ import {
   weekendWindow,
 } from "./discovery.121bc0c1385c.js";
 import { createBrowserStorage } from "./browser-storage.05ba53c5f819.js";
-import { createListingTemplates } from "./listing-templates.d3d73005c10c.js";
+import { createListingTemplates } from "./listing-templates.e98c8be5dcfa.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];

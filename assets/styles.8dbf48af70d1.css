@@ -844,16 +844,12 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) { line-height: 1.8; text-
 .detail-section { padding: 29px 30px; border: 1px solid #dedbd3; border-radius: 20px; background: var(--card); }
 .detail-section > h3 { margin: 4px 0 0; font-size: 23px; font-weight: 800; letter-spacing: -.4px; }
 .detail-section-kicker { color: #687169; font-size: 10px; font-weight: 850; letter-spacing: .9px; text-transform: uppercase; }
-.highlights-section { background: var(--card); }
-.detail-highlight-list { margin-top: 15px; display: grid; gap: 0; }
-.detail-highlight { min-width: 0; display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: center; gap: 12px; padding: 14px 0; border: 0; border-bottom: 1px solid #dedbd1; border-radius: 0; background: transparent; box-shadow: none; }
-.detail-highlight:last-child { border-bottom: 0; }
-.detail-highlight-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--ink); color: var(--acid); font-size: 11px; font-weight: 800; letter-spacing: .2px; }
-.detail-highlight-mark { background: var(--ink); color: var(--listing-accent); }
-.detail-highlight p { margin: 0; color: #2f3833; font-size: 15px; font-weight: 650; line-height: 1.62; text-wrap: pretty; }
 .experience-section { background: #fffdfa; }
-.detail-description { margin-top: 19px; display: grid; gap: 15px; }
-.detail-description p { max-width: 66ch; margin: 0; color: #39453e; font-size: 16px; line-height: 1.78; text-wrap: pretty; }
+.detail-expectation-list { margin-top: 15px; display: grid; gap: 0; }
+.detail-expectation { min-width: 0; display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: center; gap: 12px; padding: 14px 0; border: 0; border-bottom: 1px solid #dedbd1; border-radius: 0; background: transparent; box-shadow: none; }
+.detail-expectation:last-child { border-bottom: 0; }
+.detail-expectation-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--ink); color: var(--listing-accent); font-size: 11px; font-weight: 800; letter-spacing: .2px; }
+.detail-expectation p { max-width: 66ch; margin: 0; color: #2f3833; font-size: 15px; font-weight: 650; line-height: 1.62; text-wrap: pretty; }
 .visit-section { background: #fffdfa; }
 .visit-fact-grid { margin-top: 18px; overflow: hidden; display: grid; grid-template-columns: 1fr; gap: 0; border: 1px solid #dcd9d1; border-radius: 15px; background: white; }
 .visit-fact { min-width: 0; display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: start; gap: 13px; padding: 17px 18px; border: 0; border-bottom: 1px solid #e0ddd5; border-radius: 0; background: transparent; }
@@ -930,7 +926,7 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) { line-height: 1.8; text-
   .detail-story, .detail-sidebar { gap: 12px; }
   .detail-section { padding: 24px 20px; border-radius: 17px; }
   .detail-section > h3 { font-size: 21px; }
-  .detail-highlight { padding: 14px 0; }
+  .detail-expectation { padding: 14px 0; }
   .visit-fact { padding: 15px 14px; }
   .before-callout { padding: 15px 14px; }
   .practical-tip-list { grid-template-columns: 1fr; }
@@ -1277,7 +1273,7 @@ button, input, select { font: inherit; }
 .detail-action-row .official-action { border-color: var(--blue); background: var(--blue); box-shadow: 0 9px 22px rgba(89,91,255,.18); }
 .detail-content-grid { grid-template-columns: minmax(0, 1.18fr) minmax(370px, .82fr); gap: 24px; padding: 25px; }
 .detail-section { border-color: #ddd8cd; border-radius: 22px 22px 22px 8px; }
-.detail-highlight-mark { border-radius: 9px 9px 9px 3px; background: var(--blue); color: white; }
+.detail-expectation-mark { border-radius: 9px 9px 9px 3px; background: var(--blue); color: white; }
 .visit-fact-grid { border-radius: 15px 15px 15px 5px; }
 .visit-fact-icon { border-radius: 11px 11px 11px 4px; background: #ececff; color: var(--blue); }
 .practical-tips { border-color: #d8d8ee; background: #f1f1ff; }
@@ -2199,4 +2195,37 @@ body {
   .listing-title { font-size: 21px; }
   .listing-card-hook { margin-right: 0; font-size: 13px; -webkit-line-clamp: 1; }
   .empty-state { margin: 0 16px; }
+
+  .detail-modal {
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    transform: none;
+  }
+  .detail-scroll-area {
+    width: 100%;
+    overflow-x: hidden;
+    scrollbar-gutter: auto;
+    scrollbar-width: none;
+  }
+  .detail-scroll-area::-webkit-scrollbar { display: none; width: 0; }
+  .detail-dialog-bar {
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
+  }
+  .detail-decision {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  .detail-content-grid {
+    width: 100%;
+    margin: 0;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
 }

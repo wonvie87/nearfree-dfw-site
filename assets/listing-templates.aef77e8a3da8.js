@@ -188,7 +188,6 @@ export function createListingTemplates(context) {
   function detailTemplate(listing) {
     const distance = formatDistance(context.distanceFromSelected(listing));
     const similar = similarListings(listing);
-    const highlights = listing.highlights || [];
     const description = listing.description || [];
     const practicalTips = listing.practicalTips || [];
     const bookingDetail = listing.booking?.detail || listing.reservation;
@@ -220,30 +219,21 @@ export function createListingTemplates(context) {
         <div class="detail-content-grid">
           <main class="detail-story">
             ${
-              highlights.length
-                ? `<section class="detail-section highlights-section">
-              <span class="detail-section-kicker">${escapeHtml(t("atAGlance"))}</span>
-              <h3>${escapeHtml(t("whyWorthIt"))}</h3>
-              <div class="detail-highlight-list">
-                ${highlights
-                  .map(
-                    (highlight, index) => `
-                  <article class="detail-highlight">
-                    <span class="detail-highlight-mark">${String(index + 1).padStart(2, "0")}</span>
-                    <p>${escapeHtml(highlight)}</p>
-                  </article>`,
-                  )
-                  .join("")}
-              </div>
-            </section>`
-                : ""
-            }
-            ${
               description.length
                 ? `<section class="detail-section experience-section">
               <span class="detail-section-kicker">${escapeHtml(t("experienceKicker"))}</span>
               <h3>${escapeHtml(t("whatToExpect"))}</h3>
-              <div class="detail-description">${description.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}</div>
+              <div class="detail-expectation-list">
+                ${description
+                  .map(
+                    (paragraph, index) => `
+                  <article class="detail-expectation">
+                    <span class="detail-expectation-mark">${String(index + 1).padStart(2, "0")}</span>
+                    <p>${escapeHtml(paragraph)}</p>
+                  </article>`,
+                  )
+                  .join("")}
+              </div>
             </section>`
                 : ""
             }

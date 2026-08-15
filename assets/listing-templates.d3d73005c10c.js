@@ -10,16 +10,8 @@ export function createListingTemplates(context) {
     mapUrl,
     similarListings,
     t,
-    verificationAge
+    verificationAge,
   } = context;
-
-  function cardTitleContent(listing) {
-    const base = listing.titleBase || listing.title;
-    const benefit = listing.titleBenefit
-      ? `<span class="listing-title-benefit">${escapeHtml(listing.titleBenefit)}</span>`
-      : "";
-    return `<span class="listing-title-base">${escapeHtml(base)}</span>${benefit}`;
-  }
 
   function detailTitleContent(listing) {
     const base = listing.titleBase || listing.title;
@@ -29,7 +21,12 @@ export function createListingTemplates(context) {
     return `<span class="detail-title-base">${escapeHtml(base)}</span>${benefit}`;
   }
 
-  function imageOrPlaceholder(listing, className, loading = "lazy", alt = listing.imageAlt || "") {
+  function imageOrPlaceholder(
+    listing,
+    className,
+    loading = "lazy",
+    alt = listing.imageAlt || "",
+  ) {
     return listing.image
       ? `<img src="${escapeHtml(listing.image)}" alt="${escapeHtml(alt)}" loading="${loading}" />`
       : `<span class="${className}" aria-hidden="true"><span>NearFree</span></span>`;
@@ -53,17 +50,17 @@ export function createListingTemplates(context) {
     library: "tone-library",
     "local-deals": "tone-local-deals",
     recreation: "tone-recreation",
-    transit: "tone-transit"
+    transit: "tone-transit",
   });
   const categoryKeys = new Set(Object.keys(categoryToneClasses));
-  const cardLayoutClasses = new Set(["card-standard", "card-featured", "card-spotlight", "card-event", "card-value"]);
-
   function categoryKey(listing) {
     return categoryKeys.has(listing.category) ? listing.category : "community";
   }
 
   function categoryLabel(listing) {
-    const key = categoryKey(listing).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+    const key = categoryKey(listing).replace(/-([a-z])/g, (_, letter) =>
+      letter.toUpperCase(),
+    );
     return t(`category${key[0].toUpperCase()}${key.slice(1)}`);
   }
 
@@ -75,82 +72,92 @@ export function createListingTemplates(context) {
     return t(listing.kind === "event" ? "eventLabel" : "benefitLabel");
   }
 
-  function bookingLabel(listing) {
-    const key = {
-      required: "bookingRequired",
-      recommended: "bookingRecommended",
-      "not-required": "bookingNotRequired"
-    }[listing.booking?.mode];
-    return key ? t(key) : "";
+  function calendarDateParts(value) {
+    const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})/);
+    return match ? { year: match[1], month: match[2], day: match[3] } : null;
   }
 
-  function cardTemplate(listing, index, layoutClass = "card-standard") {
+  function compactCardDate(listing) {
+    const start = calendarDateParts(listing.start);
+    const end = calendarDateParts(listing.end);
+    if (listing.kind === "benefit" && !end) return t("ongoingShort");
+    if (!start) return getTimeStatus(listing);
+    if (listing.kind === "benefit" && end) return `~${end.month}.${end.day}`;
+    if (
+      !end ||
+      `${start.year}-${start.month}-${start.day}` ===
+        `${end.year}-${end.month}-${end.day}`
+    ) {
+      return `${start.month}.${start.day}`;
+    }
+    if (start.year === end.year && start.month === end.month) {
+      return `${start.month}.${start.day}–${end.day}`;
+    }
+    return `${start.month}.${start.day}–${end.month}.${end.day}`;
+  }
+
+  function cardTemplate(listing, index) {
     const saved = isSaved(listing.id);
-    const booking = bookingLabel(listing);
     const tone = categoryToneClass(listing);
-    const layout = cardLayoutClasses.has(layoutClass) ? layoutClass : "card-standard";
-    const placeMeta = isAllDfw()
-      ? listing.city
-      : `${listing.city} · ${formatDistance(listing.distance)}`;
+    const cardDate = compactCardDate(listing);
+    const dateTime = String(
+      listing.kind === "benefit" ? listing.end || "" : listing.start || "",
+    ).slice(0, 10);
+    const costLabel = t(
+      listing.costType === "free" ? "valueFreeLabel" : "dealLabel",
+    );
     return `
-      <article class="listing-card ${layout} listing-${listing.kind} ${tone}" data-id="${listing.id}">
+      <article class="listing-card listing-${listing.kind} ${tone}" data-id="${listing.id}">
         <div class="listing-media">
           <button class="listing-media-open" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
             ${imageOrPlaceholder(listing, "listing-media-placeholder", index < 4 ? "eager" : "lazy")}
-            <span class="listing-media-shade"></span>
           </button>
-          <span class="listing-price ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(compactCost(listing))}</span>
-          <span class="listing-cover-status">${escapeHtml(getTimeStatus(listing))}</span>
           <button class="listing-save ${saved ? "saved" : ""}" data-action="save" type="button" aria-label="${escapeHtml(saved ? t("unsave") : t("save"))}">
             <svg viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
           </button>
         </div>
         <div class="listing-body">
-          <div class="listing-eyebrow">
-            <span>${escapeHtml(categoryLabel(listing))}</span>
-            <span>${escapeHtml(kindLabel(listing))}</span>
+          <div class="listing-card-meta">
+            ${dateTime ? `<time class="listing-card-date" datetime="${escapeHtml(dateTime)}">${escapeHtml(cardDate)}</time>` : `<span class="listing-card-date">${escapeHtml(cardDate)}</span>`}
+            <div class="listing-card-tags">
+              <span>${escapeHtml(categoryLabel(listing))}</span>
+              <span class="listing-cost-tag ${listing.costType === "discount" ? "discount" : ""}">${escapeHtml(costLabel)}</span>
+            </div>
           </div>
-          <button class="listing-title" data-action="details" type="button" aria-label="${escapeHtml(listing.title)}">${cardTitleContent(listing)}</button>
-          <p class="listing-card-hook">${escapeHtml(listing.cardHook || listing.summary)}</p>
-          <div class="listing-decision-facts">
-            <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg>${escapeHtml(listing.dateLabel)}</span>
-            ${booking ? `<span class="listing-booking-fact">${escapeHtml(booking)}</span>` : ""}
-            ${conditionalBadge(listing)}
-          </div>
-          <div class="listing-place">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>
-            <span class="listing-place-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(placeMeta)}</span></span>
-          </div>
-          <button class="listing-verification" data-action="details" type="button">
-            <span class="verified-check" aria-hidden="true">✓</span>
-            <span>${escapeHtml(verificationAge(listing.verifiedAt))}</span>
-            <span aria-hidden="true">→</span>
+          <button class="listing-title" data-action="details" type="button" aria-label="${escapeHtml(listing.title)}">
+            <span>${escapeHtml(listing.title)}</span>
+            <span class="listing-open-arrow" aria-hidden="true">↗</span>
           </button>
+          <p class="listing-card-hook">${escapeHtml(listing.cardHook || listing.summary)}</p>
         </div>
       </article>`;
   }
 
   function sectionTemplate(section, startIndex) {
-    const icon = { good: "✦", worth: "🔥", weekend: "☀", budget: "$", more: "+", results: "✦" }[section.key];
+    const icon = {
+      good: "✦",
+      worth: "🔥",
+      weekend: "☀",
+      budget: "$",
+      more: "+",
+      results: "✦",
+    }[section.key];
     const sectionName = section.key[0].toUpperCase() + section.key.slice(1);
-    const titleKey = section.key === "good" && isAllDfw() ? "sectionGoodAll" : `section${sectionName}`;
-    const descKey = section.key === "good" && isAllDfw() ? "sectionGoodAllDesc" : `section${sectionName}Desc`;
+    const titleKey =
+      section.key === "good" && isAllDfw()
+        ? "sectionGoodAll"
+        : `section${sectionName}`;
+    const descKey =
+      section.key === "good" && isAllDfw()
+        ? "sectionGoodAllDesc"
+        : `section${sectionName}Desc`;
     return `
       <section class="listing-section" aria-labelledby="section-${section.key}">
         <div class="listing-section-head">
           <div><span class="section-symbol" aria-hidden="true">${icon}</span><h2 id="section-${section.key}">${escapeHtml(t(titleKey))}</h2></div>
           <p>${escapeHtml(t(descKey))}</p>
         </div>
-        <div class="listing-grid" data-section="${escapeHtml(section.key)}">${section.items.map((listing, index) => {
-          const layoutClass = section.key === "good"
-            ? (index === 0 ? "card-featured" : "card-spotlight")
-            : section.key === "worth"
-              ? "card-event"
-              : section.key === "budget"
-                ? "card-value"
-                : "card-standard";
-          return cardTemplate(listing, startIndex + index, layoutClass);
-        }).join("")}</div>
+        <div class="listing-grid" data-section="${escapeHtml(section.key)}">${section.items.map((listing, index) => cardTemplate(listing, startIndex + index)).join("")}</div>
       </section>`;
   }
 
@@ -201,22 +208,34 @@ export function createListingTemplates(context) {
         </div>
         <div class="detail-content-grid">
           <main class="detail-story">
-            ${highlights.length ? `<section class="detail-section highlights-section">
+            ${
+              highlights.length
+                ? `<section class="detail-section highlights-section">
               <span class="detail-section-kicker">${escapeHtml(t("atAGlance"))}</span>
               <h3>${escapeHtml(t("whyWorthIt"))}</h3>
               <div class="detail-highlight-list">
-                ${highlights.map((highlight, index) => `
+                ${highlights
+                  .map(
+                    (highlight, index) => `
                   <article class="detail-highlight">
                     <span class="detail-highlight-mark">${String(index + 1).padStart(2, "0")}</span>
                     <p>${escapeHtml(highlight)}</p>
-                  </article>`).join("")}
+                  </article>`,
+                  )
+                  .join("")}
               </div>
-            </section>` : ""}
-            ${description.length ? `<section class="detail-section experience-section">
+            </section>`
+                : ""
+            }
+            ${
+              description.length
+                ? `<section class="detail-section experience-section">
               <span class="detail-section-kicker">${escapeHtml(t("experienceKicker"))}</span>
               <h3>${escapeHtml(t("whatToExpect"))}</h3>
-              <div class="detail-description">${description.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("")}</div>
-            </section>` : ""}
+              <div class="detail-description">${description.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}</div>
+            </section>`
+                : ""
+            }
           </main>
           <aside class="detail-sidebar">
             <section class="detail-section visit-section">
@@ -227,30 +246,46 @@ export function createListingTemplates(context) {
                   <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V7Z"/><path d="M12 7v12"/></svg></span>
                   <div><span>${escapeHtml(t("dealCost"))}</span><strong>${escapeHtml(listing.cost)}</strong></div>
                 </article>
-                ${bookingDetail ? `<article class="visit-fact">
+                ${
+                  bookingDetail
+                    ? `<article class="visit-fact">
                   <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 11 15l4.8-6"/></svg></span>
                   <div><span>${escapeHtml(t("entryDetails"))}</span><strong>${escapeHtml(bookingDetail)}</strong></div>
-                </article>` : ""}
-                ${eligibilityDetail ? `<article class="visit-fact eligibility-fact">
+                </article>`
+                    : ""
+                }
+                ${
+                  eligibilityDetail
+                    ? `<article class="visit-fact eligibility-fact">
                   <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20c.8-4 3.1-6 7-6s6.2 2 7 6"/></svg></span>
                   <div><span>${escapeHtml(t("eligibilityDetails"))}</span><strong>${escapeHtml(eligibilityDetail)}</strong></div>
-                </article>` : ""}
+                </article>`
+                    : ""
+                }
                 <article class="visit-fact">
                   <span class="visit-fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg></span>
                   <div><span>${escapeHtml(t("addressLabel"))}</span><strong>${escapeHtml(listing.address)}</strong></div>
                 </article>
               </div>
-              ${practicalTips.length ? `
+              ${
+                practicalTips.length
+                  ? `
                 <section class="practical-tips" aria-labelledby="practicalTipsTitle">
                   <h4 id="practicalTipsTitle">${escapeHtml(t("practicalTips"))}</h4>
                   <ul class="practical-tip-list">
-                    ${practicalTips.map(tip => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
+                    ${practicalTips.map((tip) => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
                   </ul>
-                </section>` : ""}
-              ${listing.finePrint ? `<aside class="before-callout">
+                </section>`
+                  : ""
+              }
+              ${
+                listing.finePrint
+                  ? `<aside class="before-callout">
                 <span class="before-callout-mark" aria-hidden="true">!</span>
                 <div><h4>${escapeHtml(t("beforeGo"))}</h4><p>${escapeHtml(listing.finePrint)}</p></div>
-              </aside>` : ""}
+              </aside>`
+                  : ""
+              }
             </section>
             <section class="detail-section verification-section">
               <div class="verification-title">
@@ -266,22 +301,30 @@ export function createListingTemplates(context) {
               <details class="detail-sources">
                 <summary>${escapeHtml(t("sourcesChecked", { count: listing.sources.length }))}<span>›</span></summary>
                 <div class="detail-source-list">
-                  ${listing.sources.map((source, index) => `
+                  ${listing.sources
+                    .map(
+                      (source, index) => `
                     <a class="source-item" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
                       <span class="source-index">0${index + 1}</span>
                       <span class="source-copy"><strong>${escapeHtml(source.name)} · ${escapeHtml(source.official ? t("official") : t("supporting"))}</strong><small>${escapeHtml(source.note)}</small></span>
                       <span>↗</span>
-                    </a>`).join("")}
+                    </a>`,
+                    )
+                    .join("")}
                 </div>
               </details>
             </section>
           </aside>
         </div>
-        ${similar.length ? `
+        ${
+          similar.length
+            ? `
           <section class="detail-section similar-section">
             <h3>${escapeHtml(t("similarNearby"))}</h3>
             <div class="similar-list">${similar.map(similarTemplate).join("")}</div>
-          </section>` : ""}
+          </section>`
+            : ""
+        }
       </article>`;
   }
 

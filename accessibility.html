@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f6f3" />
+    <meta
+      name="description"
+      content="Read NearFree's WCAG 2.2 AA accessibility target, current measures, known limitations and feedback route."
+    />
+    <title>Accessibility statement | NearFree</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.51efe1e8ab61.css" />
+  </head>
+  <body
+    data-page="accessibility"
+    data-title-key="accessibilityMetaTitle"
+    data-description-key="accessibilityMetaDescription"
+  >
+    <a class="skip-link" href="#pageContent" data-i18n="skipTrust">Skip to page content</a>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="NearFree home" data-i18n-aria="brandHome"
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span
+        ><span class="brand-copy"
+          ><strong>NearFree<span class="brand-dot">.</span></strong></span
+        ></a
+      >
+      <nav class="desktop-nav" aria-label="Primary navigation" data-i18n-aria="primaryNavigation">
+        <a href="explore.html" data-i18n="explore">Explore</a
+        ><a href="radar.html" data-i18n="radarNav">Radar</a
+        ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a>
+      </nav>
+      <div class="top-actions trust-top-actions">
+        <label class="language-control"
+          ><span class="sr-only" data-i18n="language">Language</span
+          ><select id="languageSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="ko">한국어</option>
+          </select></label
+        ><a
+          class="icon-button saved-trigger"
+          id="savedButton"
+          href="explore.html?saved=1"
+          aria-label="View saved finds"
+          data-i18n-aria="savedView"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+            /></svg
+          ><span class="saved-count" id="savedCount" hidden>0</span></a
+        ><a class="top-radar-cta" href="radar.html"
+          ><span class="radar-status-dot" aria-hidden="true"></span
+          ><span data-i18n="previewYourRadar">Preview your Radar</span></a
+        >
+      </div>
+    </header>
+    <main class="site-main trust-main" id="pageContent">
+      <section class="trust-hero" aria-labelledby="pageTitle">
+        <span class="section-kicker" data-i18n="accessibilityKicker">ACCESSIBILITY</span>
+        <h1 id="pageTitle" data-i18n="accessibilityTitle">
+          Local discovery should work for more ways of reading and moving.
+        </h1>
+        <p data-i18n="accessibilityLead">
+          NearFree targets WCAG 2.2 Level AA across English and Korean, keyboard and touch use, and
+          mobile and desktop layouts.
+        </p>
+        <p class="trust-updated" data-i18n="trustUpdated">Last updated August 16, 2026</p>
+      </section>
+      <div class="trust-layout">
+        <aside class="trust-toc">
+          <nav aria-label="On this page" data-i18n-aria="onThisPage">
+            <strong data-i18n="onThisPage">On this page</strong
+            ><a href="#status" data-i18n="accessibilityStatusTitle">Current status</a
+            ><a href="#measures" data-i18n="accessibilityMeasuresTitle"
+              >Measures in the current site</a
+            ><a href="#limitations" data-i18n="accessibilityLimitsTitle">Known limitations</a
+            ><a href="#compatibility" data-i18n="accessibilityCompatibilityTitle"
+              >Technical compatibility</a
+            ><a href="#feedback" data-i18n="accessibilityFeedbackTitle">Report a barrier</a>
+          </nav>
+        </aside>
+        <article class="trust-content">
+          <section class="trust-section trust-notice" id="status">
+            <h2 data-i18n="accessibilityStatusTitle">Current status</h2>
+            <p data-i18n="accessibilityStatusBody">
+              Accessibility is a release requirement, but NearFree has not completed an independent
+              accessibility audit and does not claim full conformance. Automated browser
+              accessibility coverage is also a documented next-stage improvement.
+            </p>
+          </section>
+          <section class="trust-section" id="measures">
+            <h2 data-i18n="accessibilityMeasuresTitle">Measures in the current site</h2>
+            <ul class="trust-check-list">
+              <li data-i18n="accessibilityMeasureKeyboard">
+                Semantic controls, visible focus, skip links and keyboard-operable dialogs.
+              </li>
+              <li data-i18n="accessibilityMeasureStructure">
+                Headings, landmarks, accessible names and status announcements.
+              </li>
+              <li data-i18n="accessibilityMeasureReflow">
+                Responsive reflow at narrow widths, readable text sizing and 44-pixel touch targets.
+              </li>
+              <li data-i18n="accessibilityMeasureMotion">
+                Reduced-motion support and no required drag-only interaction.
+              </li>
+              <li data-i18n="accessibilityMeasureLanguage">
+                A complete English and Korean interface with the document language updated on
+                change.
+              </li>
+            </ul>
+          </section>
+          <section class="trust-section" id="limitations">
+            <h2 data-i18n="accessibilityLimitsTitle">Known limitations</h2>
+            <p data-i18n="accessibilityLimitsBody">
+              The current report path opens GitHub, requires a GitHub account and is not a fully
+              equivalent first-party contact option. External organizer pages are outside NearFree's
+              control. A full screen-reader and independent audit is still pending, so additional
+              barriers may exist.
+            </p>
+          </section>
+          <section class="trust-section" id="compatibility">
+            <h2 data-i18n="accessibilityCompatibilityTitle">Technical compatibility</h2>
+            <p data-i18n="accessibilityCompatibilityBody">
+              NearFree uses HTML, CSS, JavaScript and SVG in current standards-based browsers. Core
+              page content and navigation remain understandable if optional interactive behavior is
+              unavailable, while filtering, saves and Radar preview require JavaScript.
+            </p>
+            <a
+              class="trust-text-link"
+              href="https://www.w3.org/TR/WCAG22/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="accessibilityWcagAction"
+              >Read WCAG 2.2</a
+            >
+          </section>
+          <section class="trust-section trust-next" id="feedback">
+            <h2 data-i18n="accessibilityFeedbackTitle">Report a barrier</h2>
+            <p data-i18n="accessibilityFeedbackBody">
+              Include the page URL, what happened, what you expected and optional browser or
+              assistive-technology details. Do not include medical or other personal information in
+              the public report.
+            </p>
+            <a
+              class="trust-primary-action"
+              href="https://github.com/wonvie87/nearfree-dfw-site/issues/new?template=accessibility.yml"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><span data-i18n="accessibilityReportAction">Open an accessibility report</span
+              ><span aria-hidden="true">↗</span></a
+            >
+          </section>
+        </article>
+      </div>
+      <footer class="site-footer">
+        <div class="footer-identity">
+          <a
+            class="brand footer-brand"
+            href="index.html"
+            aria-label="NearFree home"
+            data-i18n-aria="brandHome"
+            ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span
+            ><span class="brand-copy"
+              ><strong>NearFree<span class="brand-dot">.</span></strong></span
+            ></a
+          >
+          <p data-i18n="footerPromise">DFW benefits, found and checked for you.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation" data-i18n-aria="footerNavigation">
+          <div class="footer-nav-group">
+            <strong data-i18n="footerDiscover">Discover</strong>
+            <div>
+              <a href="explore.html" data-i18n="explore">Explore</a
+              ><a href="radar.html" data-i18n="radarNav">Radar</a
+              ><a href="how-it-works.html" data-i18n="howItWorksNav">How it works</a
+              ><a href="pricing.html" data-i18n="pricingNav">Pricing</a>
+            </div>
+          </div>
+          <div class="footer-nav-group">
+            <strong data-i18n="footerTrust">Trust & support</strong>
+            <div>
+              <a href="about.html" data-i18n="aboutNav">About</a
+              ><a href="contact.html" data-i18n="contactNav">Contact & corrections</a
+              ><a href="privacy.html" data-i18n="privacyNav">Privacy</a
+              ><a href="terms.html" data-i18n="termsNav">Terms</a
+              ><a href="accessibility.html" aria-current="page" data-i18n="accessibilityNav"
+                >Accessibility</a
+              ><a href="editorial.html" data-i18n="editorialNav">Editorial & sponsorship</a>
+            </div>
+          </div>
+        </nav>
+        <p class="footer-independent" data-i18n="footerIndependent">
+          Independent DFW discovery project. Details can change.
+        </p>
+      </footer>
+    </main>
+    <nav class="mobile-nav" aria-label="Mobile menu" data-i18n-aria="mobileMenu">
+      <a href="index.html" aria-label="Home" data-i18n-aria="home"
+        ><svg viewBox="0 0 24 24">
+          <path d="m3 11 9-7 9 7v9H6v-9" />
+          <path d="M10 20v-6h4v6" /></svg
+        ><span data-i18n="home">Home</span></a
+      ><a href="explore.html" aria-label="Explore" data-i18n-aria="explore"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" /></svg
+        ><span data-i18n="explore">Explore</span></a
+      ><a class="mobile-radar-button" href="radar.html"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M12 12 18 6" /></svg
+        ><span data-i18n="radarNav">Radar</span></a
+      ><a id="mobileSaved" href="explore.html?saved=1"
+        ><svg viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          /></svg
+        ><span data-i18n="saved">Saved</span></a
+      >
+    </nav>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="assets/app.4854589d07f5.js"></script>
+  </body>
+</html>

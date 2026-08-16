@@ -10,6 +10,15 @@ export const UI = {
     brandHome: "NearFree home",
     primaryNavigation: "Primary navigation",
     footerNavigation: "Footer navigation",
+    footerDiscover: "Discover",
+    footerTrust: "Trust & support",
+    aboutNav: "About",
+    contactNav: "Contact & corrections",
+    privacyNav: "Privacy",
+    termsNav: "Terms",
+    accessibilityNav: "Accessibility",
+    editorialNav: "Editorial & sponsorship",
+    footerIndependent: "Independent DFW discovery project. Details can change.",
     howItWorksNav: "How it works",
     pricingNav: "Pricing",
     turnOnRadar: "Build my Radar",
@@ -21,6 +30,9 @@ export const UI = {
     skipRadar: "Skip to Radar setup",
     skipHow: "Skip to how it works",
     skipPricing: "Skip to plans",
+    skipTrust: "Skip to page content",
+    onThisPage: "On this page",
+    trustUpdated: "Last updated August 16, 2026",
     exploreMetaTitle: "Explore local DFW events and benefits | NearFree",
     exploreMetaDescription:
       "Browse verified events happening now or scheduled across DFW, plus ongoing local benefits.",
@@ -33,6 +45,190 @@ export const UI = {
     pricingMetaTitle: "NearFree plans and pricing",
     pricingMetaDescription:
       "Compare the free NearFree public catalog with the planned $2.99 monthly NearFree Radar membership.",
+    aboutMetaTitle: "About NearFree | Independent DFW discovery",
+    aboutMetaDescription:
+      "Learn what NearFree does today, how the independent DFW discovery project verifies information and what it does not yet offer.",
+    aboutKicker: "ABOUT NEARFREE",
+    aboutTitle: "Local information should be useful before it asks for your trust.",
+    aboutLead:
+      "NearFree is an independent DFW discovery project that organizes changing event and benefit information around the questions people need answered before they go.",
+    aboutMissionTitle: "Why NearFree exists",
+    aboutMissionBody:
+      "Local events and benefits are scattered across organizer pages, city calendars and institution sites. NearFree brings verified dates, prices, locations, eligibility and next steps into one bilingual public catalog.",
+    aboutCurrentTitle: "What the service does today",
+    aboutCurrentBody:
+      "The current product is a static public website. You can browse, filter, save finds on your device and preview Radar matches. NearFree does not currently create accounts, charge payments, send alerts or reserve tickets.",
+    aboutOperatorTitle: "Independent operation",
+    aboutOperatorBody:
+      "NearFree is maintained as an independent pre-launch project through the public repository linked on the Contact page. It is not a venue, event organizer, ticket seller or government service, and inclusion does not imply an endorsement or partnership.",
+    aboutPrinciplesTitle: "The operating principles",
+    aboutPrincipleAccuracy: "Verify the decision-making facts and show the source.",
+    aboutPrincipleClarity: "Put price, time, eligibility and booking conditions in plain view.",
+    aboutPrinciplePrivacy:
+      "Keep the static service useful without behavioral tracking or account collection.",
+    aboutPrincipleAccess: "Support English and Korean, keyboard use and narrow-screen reflow.",
+    aboutLearnTitle: "See how the decisions are made",
+    aboutLearnBody:
+      "The verification and editorial pages explain what can publish, how corrections are handled and how any future commercial relationship must be disclosed.",
+    aboutVerificationAction: "Read the verification standard",
+    aboutEditorialAction: "Read the editorial policy",
+    aboutContactAction: "Contact NearFree",
+    contactMetaTitle: "Contact and corrections | NearFree",
+    contactMetaDescription:
+      "Report a changed NearFree listing, accessibility barrier, product question or security vulnerability through the correct channel.",
+    contactKicker: "CONTACT & CORRECTIONS",
+    contactTitle: "Send the right report to the right place.",
+    contactLead:
+      "NearFree has no contact form or support mailbox yet. The public deployment repository provides the current feedback paths without pretending a private support backend exists.",
+    contactPublicTitle: "Public feedback notice",
+    contactPublicBody:
+      "Listing, accessibility and general reports open as public GitHub issues and require a GitHub account. Do not include your name, contact details, account information, payment data, medical information or precise personal location. GitHub's terms and privacy practices apply after you leave NearFree.",
+    contactCorrectionTitle: "Correct listing information",
+    contactCorrectionBody:
+      "Report a changed date, time, price, address, eligibility rule, reservation condition, cancellation or broken official link. Include the NearFree title and a direct official source URL.",
+    contactCorrectionAction: "Open a listing correction",
+    contactAccessibilityTitle: "Report an accessibility barrier",
+    contactAccessibilityBody:
+      "Tell us about a keyboard, screen-reader, focus, contrast, zoom, motion, language or narrow-screen problem.",
+    contactAccessibilityAction: "Open an accessibility report",
+    contactGeneralTitle: "Ask a general question",
+    contactGeneralBody:
+      "Use this for product feedback, feature ideas, or editorial, sponsorship, privacy and terms questions. It is public and no response time is promised.",
+    contactGeneralAction: "Open general feedback",
+    contactSecurityTitle: "Report a security vulnerability privately",
+    privateChannel: "PRIVATE CHANNEL",
+    contactSecurityBody:
+      "Do not reveal a suspected vulnerability in a public issue. Use GitHub's private security-advisory channel and exclude real credentials, payment data and precise location.",
+    contactSecurityAction: "Open private security report",
+    contactReviewTitle: "What happens after a correction",
+    contactReviewBody:
+      "A report is a lead, not publication evidence. NearFree checks the official organizer, venue, city or institution source and runs a separate conflict search before changing the catalog.",
+    contactGithubPrivacyAction: "Read GitHub's privacy statement",
+    contactNearfreePrivacyAction: "Read NearFree's privacy notice",
+    privacyPolicyMetaTitle: "Privacy notice | NearFree",
+    privacyPolicyMetaDescription:
+      "Understand NearFree's current local browser storage, optional location use, static hosting and external GitHub feedback boundary.",
+    privacyPolicyKicker: "PRIVACY NOTICE",
+    privacyPolicyTitle: "Useful discovery without a hidden profile.",
+    privacyPolicyLead:
+      "This notice describes the current static NearFree service. The site has no accounts, advertising, behavioral analytics, email subscription or payment collection.",
+    privacyOverviewTitle: "What NearFree does not collect",
+    privacyOverviewBody:
+      "NearFree site code does not ask for your name, email, phone number, password, payment details or demographic profile. It does not set advertising cookies, load analytics scripts or send your activity to a NearFree server.",
+    privacyStorageTitle: "Information kept on your device",
+    privacyStorageBody:
+      "Your browser may store your language, selected DFW city and browsing scope, saved listing IDs, and Radar preview city, radius and interests. NearFree uses these values only to restore your choices. They remain until you clear this site's browser data or your browser removes them.",
+    privacyLocationTitle: "Optional current location",
+    privacyLocationBody:
+      "If you choose Use current location, the browser asks permission. NearFree uses the coordinates in memory to calculate distance, does not put them in browser storage and does not transmit them through site code. The browser or operating system may use its own location provider under its own terms.",
+    privacyHostingTitle: "Static hosting and external pages",
+    privacyHostingBody:
+      "GitHub Pages serves the site and may process standard connection information under GitHub's privacy statement. NearFree does not add a tracking request or receive a personal analytics profile. Opening an organizer or other external link leaves NearFree and that destination's policy applies.",
+    privacyFeedbackTitle: "Feedback sent through GitHub",
+    privacyFeedbackBody:
+      "Listing corrections, accessibility reports and general feedback are public GitHub issues. GitHub stores the content and requires an account. Do not submit personal or sensitive information. Private vulnerability reports use GitHub's restricted security-advisory channel.",
+    privacyChildrenTitle: "Children's privacy",
+    privacyChildrenBody:
+      "NearFree is designed for adults and guardians planning local activities. It does not knowingly collect children's personal information. A child under 13 should not submit a public report; a parent or guardian can report a factual correction without sharing the child's information.",
+    privacyChoicesTitle: "Your practical controls",
+    privacyChoicesBody:
+      "You can deny location permission and still choose a city, clear NearFree browser data at any time, avoid the public feedback channel, and confirm details directly with the official organizer. If you already posted sensitive information publicly, use GitHub's controls and notify the repository owner through that issue so removal can be reviewed.",
+    privacyChangesTitle: "Changes to this notice",
+    privacyChangesBody:
+      "NearFree will update this page before adding accounts, analytics, notifications, payments or a first-party contact system. The updated date identifies the version currently in effect.",
+    privacyGithubAction: "Read GitHub's privacy statement",
+    privacyContactAction: "Ask a privacy question",
+    termsMetaTitle: "Terms of use | NearFree",
+    termsMetaDescription:
+      "Read the terms for using NearFree's informational DFW event and benefit discovery service.",
+    termsKicker: "TERMS OF USE",
+    termsTitle: "NearFree helps you discover. Official providers make the final call.",
+    termsLead:
+      "These terms apply to the current public NearFree website. By using it, you agree to use the information responsibly and understand the limits of a changing local discovery catalog.",
+    termsRoleTitle: "An informational service",
+    termsRoleBody:
+      "NearFree organizes public information about events and benefits. It is not the organizer, venue, merchant, ticket seller, benefits administrator or government agency, and it does not make reservations or complete transactions.",
+    termsOfficialTitle: "Verify before relying on a listing",
+    termsOfficialBody:
+      "Dates, capacity, weather plans, prices, fees, eligibility and reservation rules can change after verification. The linked official provider's current terms control. Confirm there before traveling, purchasing or relying on availability.",
+    termsUseTitle: "Responsible use",
+    termsUseBody:
+      "Do not interfere with the site, evade security controls, misrepresent NearFree or an organizer, reuse the service to deceive others, or place personal or sensitive information in public feedback. Automated use must not impair access or bypass source rights.",
+    termsRightsTitle: "Content and third-party rights",
+    termsRightsBody:
+      "NearFree's original interface, editorial copy and illustrations are protected by applicable rights. Organizer names, marks, source pages and third-party materials remain the property of their respective owners. Linking or inclusion does not transfer ownership or imply endorsement.",
+    termsAvailabilityTitle: "Availability and warranties",
+    termsAvailabilityBody:
+      "The service is provided as available for general information. NearFree works to verify core facts but does not promise uninterrupted access, complete coverage, continued availability or error-free information. To the extent permitted by law, you use the service and external destinations at your own discretion.",
+    termsLiabilityTitle: "Limits",
+    termsLiabilityBody:
+      "To the extent permitted by law, NearFree is not responsible for a provider's cancellation, refusal, price change, injury, loss, external-site conduct or indirect loss resulting from reliance on a listing. Nothing here excludes a right or responsibility that cannot legally be excluded.",
+    termsChildrenTitle: "Use by children",
+    termsChildrenBody:
+      "The service is intended for adults and guardians. Children under 13 should use it with a parent or guardian and must not submit public feedback or personal information.",
+    termsChangesTitle: "Changes and questions",
+    termsChangesBody:
+      "Material changes will be posted here with a new updated date. Continued use after a change means the current terms apply to later use. Questions can be submitted through the public general-feedback path without including sensitive information.",
+    termsContactAction: "Ask a terms question",
+    accessibilityMetaTitle: "Accessibility statement | NearFree",
+    accessibilityMetaDescription:
+      "Read NearFree's WCAG 2.2 AA accessibility target, current measures, known limitations and feedback route.",
+    accessibilityKicker: "ACCESSIBILITY",
+    accessibilityTitle: "Local discovery should work for more ways of reading and moving.",
+    accessibilityLead:
+      "NearFree targets WCAG 2.2 Level AA across English and Korean, keyboard and touch use, and mobile and desktop layouts.",
+    accessibilityStatusTitle: "Current status",
+    accessibilityStatusBody:
+      "Accessibility is a release requirement, but NearFree has not completed an independent accessibility audit and does not claim full conformance. Automated browser accessibility coverage is also a documented next-stage improvement.",
+    accessibilityMeasuresTitle: "Measures in the current site",
+    accessibilityMeasureKeyboard:
+      "Semantic controls, visible focus, skip links and keyboard-operable dialogs.",
+    accessibilityMeasureStructure:
+      "Headings, landmarks, accessible names and status announcements.",
+    accessibilityMeasureReflow:
+      "Responsive reflow at narrow widths, readable text sizing and 44-pixel touch targets.",
+    accessibilityMeasureMotion: "Reduced-motion support and no required drag-only interaction.",
+    accessibilityMeasureLanguage:
+      "A complete English and Korean interface with the document language updated on change.",
+    accessibilityLimitsTitle: "Known limitations",
+    accessibilityLimitsBody:
+      "The current report path opens GitHub, requires a GitHub account and is not a fully equivalent first-party contact option. External organizer pages are outside NearFree's control. A full screen-reader and independent audit is still pending, so additional barriers may exist.",
+    accessibilityCompatibilityTitle: "Technical compatibility",
+    accessibilityCompatibilityBody:
+      "NearFree uses HTML, CSS, JavaScript and SVG in current standards-based browsers. Core page content and navigation remain understandable if optional interactive behavior is unavailable, while filtering, saves and Radar preview require JavaScript.",
+    accessibilityFeedbackTitle: "Report a barrier",
+    accessibilityFeedbackBody:
+      "Include the page URL, what happened, what you expected and optional browser or assistive-technology details. Do not include medical or other personal information in the public report.",
+    accessibilityReportAction: "Open an accessibility report",
+    accessibilityWcagAction: "Read WCAG 2.2",
+    editorialMetaTitle: "Editorial and sponsorship policy | NearFree",
+    editorialMetaDescription:
+      "Learn how NearFree selects, verifies, corrects and labels DFW event and benefit information and any future sponsorship.",
+    editorialKicker: "EDITORIAL & SPONSORSHIP",
+    editorialTitle: "Money cannot turn an unverified lead into a listing.",
+    editorialLead:
+      "NearFree's publication gate is editorially independent from any current or future commercial relationship.",
+    editorialSelectionTitle: "Selection and coverage",
+    editorialSelectionBody:
+      "NearFree looks across configured DFW cities, event types, recurring benefits, eligibility programs and community sources. Prominence or popularity is not a publication requirement; complete, current and usable facts are.",
+    editorialVerificationTitle: "Verification and corrections",
+    editorialVerificationBody:
+      "Official organizers, venues, cities and institutions are checked first, followed by a separate search for cancellations, changes and price conflicts. Missing or conflicting core facts stop publication. A correction report remains an unverified lead until the same gate passes again.",
+    editorialSponsorshipTitle: "Current sponsorship status",
+    editorialSponsorshipBody:
+      "As of August 16, 2026, NearFree has no paid listings, sponsors, affiliate links or paid ranking. If that changes, the material relationship will be labeled clearly next to the affected content in English and Korean before publication; this page alone will not be treated as sufficient disclosure.",
+    editorialRankingTitle: "Ranking and commercial influence",
+    editorialRankingBody:
+      "No provider can pay for verification, favorable wording, higher placement or removal of eligibility and fee conditions. Public ordering follows the selected catalog view, date, city, distance or verification recency—not payment.",
+    editorialVisualsTitle: "Editorial visuals",
+    editorialVisualsBody:
+      "Some listing images are original, AI-assisted editorial illustrations reviewed before publication. They are visual context, not documentary evidence or a promise of the exact scene. Listing facts come from the cited sources, not the image.",
+    editorialConflictTitle: "Conflicts and future commercial work",
+    editorialConflictBody:
+      "A material relationship must be disclosed where a user sees the related claim. Sponsored content must still pass the same factual gate, and editorial corrections cannot be delayed or softened for a commercial partner.",
+    editorialVerificationAction: "Read how verification works",
+    editorialCorrectionAction: "Submit a correction",
+    editorialFtcAction: "Read the FTC endorsement guidance",
     homeChoicesKicker: "WHAT NEARFREE TRACKS",
     homeChoicesTitle: "Happening now, coming up, and always available.",
     homeChoicesDesc:
@@ -445,6 +641,15 @@ export const UI = {
     brandHome: "NearFree 홈",
     primaryNavigation: "주요 메뉴",
     footerNavigation: "하단 메뉴",
+    footerDiscover: "둘러보기",
+    footerTrust: "신뢰와 지원",
+    aboutNav: "NearFree 소개",
+    contactNav: "문의와 정보 정정",
+    privacyNav: "개인정보 안내",
+    termsNav: "이용약관",
+    accessibilityNav: "접근성",
+    editorialNav: "편집·후원 정책",
+    footerIndependent: "독립적으로 운영하는 DFW 탐색 프로젝트입니다. 정보는 바뀔 수 있어요.",
     howItWorksNav: "이용 방법",
     pricingNav: "이용 요금",
     turnOnRadar: "내 레이더 만들기",
@@ -456,6 +661,9 @@ export const UI = {
     skipRadar: "Radar 설정으로 바로가기",
     skipHow: "이용 방법으로 바로가기",
     skipPricing: "요금제로 바로가기",
+    skipTrust: "페이지 내용으로 바로가기",
+    onThisPage: "이 페이지의 내용",
+    trustUpdated: "최종 수정: 2026년 8월 16일",
     exploreMetaTitle: "DFW 지역 이벤트와 혜택 둘러보기 | NearFree",
     exploreMetaDescription:
       "DFW에서 진행 중이거나 예정된 이벤트와 현재 이용 가능한 상시 혜택을 확인해 보세요.",
@@ -468,6 +676,186 @@ export const UI = {
     pricingMetaTitle: "NearFree 요금제 안내",
     pricingMetaDescription:
       "무료 공개 카탈로그와 월 $2.99로 예정된 NearFree Radar 멤버십을 비교해 보세요.",
+    aboutMetaTitle: "NearFree 소개 | 독립적인 DFW 지역 정보 탐색",
+    aboutMetaDescription:
+      "NearFree가 현재 제공하는 기능과 지역 정보를 확인하는 방법, 아직 제공하지 않는 기능을 알아보세요.",
+    aboutKicker: "NEARFREE 소개",
+    aboutTitle: "지역 정보는 신뢰를 요구하기 전에 먼저 쓸모 있어야 해요.",
+    aboutLead:
+      "NearFree는 DFW 지역의 이벤트와 혜택처럼 자주 바뀌는 정보를, 사람들이 방문 전에 확인해야 할 질문을 중심으로 정리하는 독립 프로젝트입니다.",
+    aboutMissionTitle: "NearFree를 만든 이유",
+    aboutMissionBody:
+      "지역 이벤트와 혜택은 주최 측 페이지·도시 일정표·기관 사이트 곳곳에 흩어져 있어요. NearFree는 날짜·가격·장소·이용 대상·다음 단계를 확인해 영문과 한국어 공개 카탈로그 한곳에 모읍니다.",
+    aboutCurrentTitle: "현재 제공하는 기능",
+    aboutCurrentBody:
+      "현재 서비스는 정적 공개 웹사이트입니다. 정보를 둘러보고 조건을 적용하며, 관심 항목을 기기에 저장하고 Radar 일치 결과를 미리 볼 수 있어요. 아직 계정을 만들거나 결제·알림·예약을 처리하지 않습니다.",
+    aboutOperatorTitle: "독립적인 운영",
+    aboutOperatorBody:
+      "NearFree는 문의 페이지에 연결된 공개 저장소를 통해 관리하는 출시 전 독립 프로젝트입니다. 행사장·주최 측·티켓 판매처·정부 서비스가 아니며, 정보가 포함되었다고 해서 추천이나 제휴를 뜻하지 않습니다.",
+    aboutPrinciplesTitle: "운영 원칙",
+    aboutPrincipleAccuracy: "결정에 필요한 사실을 확인하고 출처를 보여줍니다.",
+    aboutPrincipleClarity: "가격·시간·이용 대상·예약 조건을 알아보기 쉽게 공개합니다.",
+    aboutPrinciplePrivacy: "행동 추적이나 계정 정보 수집 없이도 쓸모 있는 정적 서비스를 만듭니다.",
+    aboutPrincipleAccess: "영문·한국어, 키보드 사용과 좁은 화면 재배치를 지원합니다.",
+    aboutLearnTitle: "게시 결정 방법 알아보기",
+    aboutLearnBody:
+      "확인 방법과 편집 정책 페이지에서 어떤 정보가 게시될 수 있는지, 정정을 어떻게 처리하는지, 향후 상업적 관계를 어떻게 공개해야 하는지 설명합니다.",
+    aboutVerificationAction: "전체 확인 기준 읽기",
+    aboutEditorialAction: "편집 정책 읽기",
+    aboutContactAction: "NearFree에 문의하기",
+    contactMetaTitle: "문의와 정보 정정 | NearFree",
+    contactMetaDescription:
+      "NearFree의 변경된 정보, 접근성 문제, 일반 문의 또는 보안 취약점을 알맞은 경로로 알려주세요.",
+    contactKicker: "문의와 정보 정정",
+    contactTitle: "내용에 맞는 안전한 경로로 알려주세요.",
+    contactLead:
+      "NearFree에는 아직 자체 문의 양식이나 지원 메일함이 없습니다. 실제로 없는 비공개 지원 기능이 있는 것처럼 보이지 않도록 공개 배포 저장소의 제보 경로를 사용합니다.",
+    contactPublicTitle: "공개 제보 안내",
+    contactPublicBody:
+      "정보 정정·접근성·일반 문의는 공개 GitHub 이슈로 열리며 GitHub 계정이 필요합니다. 이름·연락처·계정 정보·결제 정보·의료 정보·개인의 정확한 위치를 적지 마세요. NearFree를 떠난 뒤에는 GitHub의 약관과 개인정보 처리 기준이 적용됩니다.",
+    contactCorrectionTitle: "게시 정보 바로잡기",
+    contactCorrectionBody:
+      "날짜·시간·가격·주소·이용 대상·예약 조건·취소 여부·공식 링크가 바뀌었다면 알려주세요. NearFree의 제목과 공식 원문 URL을 함께 적어주세요.",
+    contactCorrectionAction: "정보 정정 이슈 열기",
+    contactAccessibilityTitle: "접근성 문제 알리기",
+    contactAccessibilityBody:
+      "키보드·스크린 리더·포커스·명암·화면 확대·움직임·언어 또는 좁은 화면에서 겪은 문제를 알려주세요.",
+    contactAccessibilityAction: "접근성 이슈 열기",
+    contactGeneralTitle: "일반 문의하기",
+    contactGeneralBody:
+      "서비스 의견과 기능 제안, 편집·후원·개인정보·약관 관련 질문에 이용하세요. 공개 글이며 답변 시간을 보장하지 않습니다.",
+    contactGeneralAction: "일반 문의 이슈 열기",
+    contactSecurityTitle: "보안 취약점 비공개 신고",
+    privateChannel: "비공개 경로",
+    contactSecurityBody:
+      "의심되는 취약점을 공개 이슈에 적지 마세요. GitHub의 비공개 보안 신고 경로를 이용하고 실제 인증 정보·결제 정보·정확한 위치를 포함하지 마세요.",
+    contactSecurityAction: "비공개 보안 신고 열기",
+    contactReviewTitle: "정정 제보 뒤에 진행되는 일",
+    contactReviewBody:
+      "제보 자체는 게시 근거가 아니라 확인 전 정보입니다. NearFree는 주최 측·행사장·도시·기관의 공식 원문을 확인하고, 별도로 변경·취소·가격 충돌을 다시 검색한 뒤 카탈로그를 수정합니다.",
+    contactGithubPrivacyAction: "GitHub 개인정보 처리방침 읽기",
+    contactNearfreePrivacyAction: "NearFree 개인정보 안내 읽기",
+    privacyPolicyMetaTitle: "개인정보 안내 | NearFree",
+    privacyPolicyMetaDescription:
+      "NearFree의 브라우저 저장 정보, 선택적 위치 사용, 정적 호스팅과 외부 GitHub 제보 경계를 확인하세요.",
+    privacyPolicyKicker: "개인정보 안내",
+    privacyPolicyTitle: "숨은 사용자 프로필 없이도 쓸모 있는 지역 탐색.",
+    privacyPolicyLead:
+      "이 안내는 현재의 정적 NearFree 서비스를 설명합니다. 사이트에는 계정·광고·행동 분석·이메일 구독·결제 정보 수집이 없습니다.",
+    privacyOverviewTitle: "NearFree가 수집하지 않는 정보",
+    privacyOverviewBody:
+      "NearFree 사이트 코드는 이름·이메일·전화번호·비밀번호·결제 정보·개인 특성 정보를 요구하지 않습니다. 광고 쿠키나 분석 스크립트를 사용하지 않으며, 사용 활동을 NearFree 서버로 보내지 않습니다.",
+    privacyStorageTitle: "내 기기에 저장되는 정보",
+    privacyStorageBody:
+      "브라우저에는 언어, 선택한 DFW 도시와 탐색 범위, 저장한 항목 ID, Radar 미리보기의 도시·반경·관심사가 저장될 수 있어요. 이 값은 선택을 복원하는 데만 사용하며, 브라우저에서 이 사이트의 데이터를 지우거나 브라우저가 삭제할 때까지 남습니다.",
+    privacyLocationTitle: "선택적으로 사용하는 현재 위치",
+    privacyLocationBody:
+      "현재 위치 사용을 직접 선택하면 브라우저가 권한을 요청합니다. NearFree는 좌표를 메모리에서 거리 계산에만 사용하고 브라우저 저장소에 넣거나 사이트 코드를 통해 전송하지 않습니다. 브라우저나 운영체제의 위치 제공 기능에는 해당 서비스의 기준이 적용될 수 있습니다.",
+    privacyHostingTitle: "정적 호스팅과 외부 페이지",
+    privacyHostingBody:
+      "GitHub Pages가 사이트를 제공하며 GitHub 개인정보 처리방침에 따라 일반적인 접속 정보를 처리할 수 있습니다. NearFree는 별도 추적 요청을 추가하거나 개인별 분석 프로필을 받지 않습니다. 주최 측 등 외부 링크를 열면 NearFree를 떠나며 해당 사이트의 정책이 적용됩니다.",
+    privacyFeedbackTitle: "GitHub를 통한 제보",
+    privacyFeedbackBody:
+      "정보 정정·접근성·일반 문의는 공개 GitHub 이슈이며 GitHub가 내용을 저장하고 계정을 요구합니다. 개인정보나 민감한 정보를 적지 마세요. 취약점 신고는 GitHub의 접근이 제한된 비공개 보안 경로를 사용합니다.",
+    privacyChildrenTitle: "어린이 개인정보",
+    privacyChildrenBody:
+      "NearFree는 지역 활동을 계획하는 성인과 보호자를 위한 서비스이며 어린이의 개인정보를 의도적으로 수집하지 않습니다. 만 13세 미만 어린이는 공개 제보를 작성하지 않아야 하며, 보호자가 어린이 정보를 적지 않고 사실 정정을 대신 알릴 수 있습니다.",
+    privacyChoicesTitle: "사용자가 직접 선택할 수 있는 것",
+    privacyChoicesBody:
+      "위치 권한을 거부하고 도시를 직접 고를 수 있으며, 언제든 브라우저에서 NearFree 사이트 데이터를 지우고 공개 제보 경로를 이용하지 않을 수 있습니다. 민감한 정보를 이미 공개했다면 GitHub의 기능을 이용하고 해당 이슈에서 저장소 관리자에게 삭제 검토를 요청하세요.",
+    privacyChangesTitle: "안내 변경",
+    privacyChangesBody:
+      "계정·분석·알림·결제 또는 자체 문의 시스템을 추가하기 전에 이 페이지를 먼저 수정합니다. 최종 수정일로 현재 적용되는 안내의 버전을 확인할 수 있습니다.",
+    privacyGithubAction: "GitHub 개인정보 처리방침 읽기",
+    privacyContactAction: "개인정보 관련 문의하기",
+    termsMetaTitle: "이용약관 | NearFree",
+    termsMetaDescription:
+      "DFW 이벤트와 혜택을 정리하는 NearFree 정보 탐색 서비스를 이용하기 전에 약관을 확인하세요.",
+    termsKicker: "이용약관",
+    termsTitle: "NearFree는 탐색을 돕고, 최종 결정은 공식 제공처가 합니다.",
+    termsLead:
+      "이 약관은 현재 공개 NearFree 웹사이트에 적용됩니다. 서비스를 이용하면 자주 바뀌는 지역 정보 카탈로그의 한계를 이해하고 책임 있게 정보를 이용하는 데 동의하는 것으로 봅니다.",
+    termsRoleTitle: "정보를 정리하는 서비스",
+    termsRoleBody:
+      "NearFree는 이벤트와 혜택에 관한 공개 정보를 정리합니다. 주최 측·행사장·판매처·티켓 판매처·혜택 운영 기관·정부 기관이 아니며 예약이나 거래를 처리하지 않습니다.",
+    termsOfficialTitle: "정보를 이용하기 전에 공식 원문 확인",
+    termsOfficialBody:
+      "날짜·정원·날씨 대응·가격·추가 비용·이용 대상·예약 규정은 확인 이후에도 바뀔 수 있습니다. 연결된 공식 제공처의 최신 조건이 우선합니다. 이동·구매·이용 여부를 결정하기 전에 공식 원문을 확인하세요.",
+    termsUseTitle: "책임 있는 이용",
+    termsUseBody:
+      "사이트 작동을 방해하거나 보안 통제를 우회하지 말고, NearFree 또는 주최 측을 사칭하거나 다른 사람을 속이는 데 서비스를 이용하지 마세요. 공개 제보에 개인정보나 민감한 정보를 적지 말아야 하며, 자동화된 이용으로 접근을 방해하거나 원문 권리를 침해해서는 안 됩니다.",
+    termsRightsTitle: "콘텐츠와 제3자의 권리",
+    termsRightsBody:
+      "NearFree가 만든 화면·편집 문구·일러스트에는 관련 권리가 적용됩니다. 주최 측 이름과 상표, 원문 페이지와 제3자 자료의 권리는 각 소유자에게 있습니다. 링크하거나 포함했다고 해서 소유권이 이전되거나 추천을 뜻하지 않습니다.",
+    termsAvailabilityTitle: "서비스 제공과 보증의 범위",
+    termsAvailabilityBody:
+      "서비스는 일반 정보 제공을 위해 현재 가능한 상태로 제공됩니다. NearFree는 핵심 사실을 확인하려 노력하지만 중단 없는 접속, 모든 정보의 포함, 혜택의 지속 또는 오류 없는 정보를 보장하지 않습니다. 법이 허용하는 범위에서 서비스와 외부 페이지는 사용자가 판단해 이용합니다.",
+    termsLiabilityTitle: "책임의 한계",
+    termsLiabilityBody:
+      "법이 허용하는 범위에서 NearFree는 제공처의 취소·이용 거부·가격 변경·부상·손실·외부 사이트의 행위 또는 정보에 의존해 발생한 간접 손실을 책임지지 않습니다. 법으로 배제할 수 없는 권리나 책임까지 제한하지는 않습니다.",
+    termsChildrenTitle: "어린이의 이용",
+    termsChildrenBody:
+      "서비스는 성인과 보호자를 대상으로 합니다. 만 13세 미만 어린이는 보호자와 함께 이용해야 하며 공개 제보나 개인정보를 제출하면 안 됩니다.",
+    termsChangesTitle: "약관 변경과 문의",
+    termsChangesBody:
+      "중요한 변경은 새로운 최종 수정일과 함께 이 페이지에 게시합니다. 변경 후 계속 이용하면 이후 이용에는 현재 약관이 적용됩니다. 민감한 정보를 제외하고 공개 일반 문의 경로로 질문할 수 있습니다.",
+    termsContactAction: "약관 관련 문의하기",
+    accessibilityMetaTitle: "접근성 안내 | NearFree",
+    accessibilityMetaDescription:
+      "NearFree의 WCAG 2.2 AA 목표, 현재 적용한 방법, 알려진 한계와 의견 전달 경로를 확인하세요.",
+    accessibilityKicker: "접근성",
+    accessibilityTitle: "지역 탐색은 다양한 읽기 방식과 조작 방법을 지원해야 해요.",
+    accessibilityLead:
+      "NearFree는 영문·한국어, 키보드·터치, 모바일·데스크톱 환경에서 WCAG 2.2 AA 수준을 목표로 합니다.",
+    accessibilityStatusTitle: "현재 상태",
+    accessibilityStatusBody:
+      "접근성은 출시 필수 조건이지만 아직 독립적인 접근성 감사를 완료하지 않아 완전한 준수를 주장하지 않습니다. 실제 브라우저 자동 접근성 검사도 다음 개선 단계로 기록되어 있습니다.",
+    accessibilityMeasuresTitle: "현재 사이트에 적용한 방법",
+    accessibilityMeasureKeyboard:
+      "의미에 맞는 조작 요소, 눈에 보이는 포커스, 바로가기 링크와 키보드로 여닫는 대화상자.",
+    accessibilityMeasureStructure: "제목 구조·영역 표시·접근 가능한 이름과 상태 안내.",
+    accessibilityMeasureReflow: "좁은 화면에서의 재배치, 읽기 쉬운 글자 크기와 44픽셀 터치 영역.",
+    accessibilityMeasureMotion: "움직임 감소 설정 지원과 드래그만 요구하는 조작 없음.",
+    accessibilityMeasureLanguage: "언어 전환 시 문서 언어도 함께 바뀌는 영문·한국어 전체 화면.",
+    accessibilityLimitsTitle: "알려진 한계",
+    accessibilityLimitsBody:
+      "현재 신고 경로는 GitHub를 열고 GitHub 계정이 필요하므로 동등한 자체 문의 수단은 아닙니다. 주최 측 외부 페이지의 접근성은 NearFree가 제어할 수 없습니다. 전체 스크린 리더 검사와 독립 감사가 아직 진행 전이라 추가 문제가 있을 수 있습니다.",
+    accessibilityCompatibilityTitle: "기술 호환성",
+    accessibilityCompatibilityBody:
+      "NearFree는 표준을 지원하는 최신 브라우저에서 HTML·CSS·JavaScript·SVG를 사용합니다. 선택 기능이 작동하지 않아도 핵심 페이지 내용과 메뉴는 이해할 수 있지만, 필터·저장·Radar 미리보기에는 JavaScript가 필요합니다.",
+    accessibilityFeedbackTitle: "접근성 문제 알리기",
+    accessibilityFeedbackBody:
+      "페이지 URL, 발생한 문제, 기대한 동작과 필요한 경우 브라우저·보조 기술 정보를 적어주세요. 공개 글에 의료 정보나 다른 개인정보를 포함하지 마세요.",
+    accessibilityReportAction: "접근성 이슈 열기",
+    accessibilityWcagAction: "WCAG 2.2 읽기",
+    editorialMetaTitle: "편집·후원 정책 | NearFree",
+    editorialMetaDescription:
+      "NearFree가 DFW 이벤트와 혜택을 선택·확인·정정하는 방법과 향후 후원 정보를 표시하는 원칙을 알아보세요.",
+    editorialKicker: "편집·후원 정책",
+    editorialTitle: "비용을 낸다고 확인되지 않은 정보가 게시될 수는 없습니다.",
+    editorialLead:
+      "NearFree의 게시 기준은 현재 또는 향후의 어떤 상업적 관계와도 분리해 적용합니다.",
+    editorialSelectionTitle: "선정과 조사 범위",
+    editorialSelectionBody:
+      "NearFree는 설정된 DFW 도시·행사 유형·반복 혜택·이용 대상 프로그램·지역 정보원을 폭넓게 확인합니다. 유명하거나 인기 있는지가 아니라 현재 이용할 수 있는 완전한 사실을 갖췄는지가 게시 조건입니다.",
+    editorialVerificationTitle: "확인과 정정",
+    editorialVerificationBody:
+      "주최 측·행사장·도시·기관의 공식 원문을 먼저 확인하고, 별도로 취소·변경·가격 충돌을 찾습니다. 핵심 사실이 빠지거나 충돌하면 게시하지 않습니다. 정정 제보도 같은 기준을 다시 통과하기 전까지는 확인 전 정보로 남습니다.",
+    editorialSponsorshipTitle: "현재 후원 상태",
+    editorialSponsorshipBody:
+      "2026년 8월 16일 현재 NearFree에는 유료 게시 정보·후원사·제휴 링크·유료 상위 배치가 없습니다. 향후 변경된다면 관련 내용을 게시하기 전에 해당 콘텐츠 가까이에 영문과 한국어로 이해하기 쉽게 표시하며, 이 정책 페이지만으로 공개를 대신하지 않습니다.",
+    editorialRankingTitle: "정렬과 상업적 영향",
+    editorialRankingBody:
+      "어떤 제공처도 확인 통과·유리한 표현·상위 배치 또는 이용 대상과 추가 비용 조건 삭제를 구매할 수 없습니다. 공개 순서는 결제가 아니라 사용자가 고른 카탈로그 보기와 날짜·도시·거리·최근 확인 시점을 따릅니다.",
+    editorialVisualsTitle: "편집용 이미지",
+    editorialVisualsBody:
+      "일부 이미지는 생성 도구의 도움을 받아 제작하고 게시 전에 검토한 NearFree의 편집용 일러스트입니다. 현장을 기록한 사진이나 실제 장면을 보장하는 자료가 아닙니다. 사실 확인은 이미지가 아니라 표시된 출처를 기준으로 합니다.",
+    editorialConflictTitle: "이해관계와 향후 상업 활동",
+    editorialConflictBody:
+      "중요한 관계는 관련 주장을 보는 자리에서 함께 공개해야 합니다. 후원 콘텐츠도 같은 사실 확인 기준을 통과해야 하며, 상업 파트너를 위해 정정을 늦추거나 약하게 표현할 수 없습니다.",
+    editorialVerificationAction: "확인 방법 읽기",
+    editorialCorrectionAction: "정보 정정 제출하기",
+    editorialFtcAction: "FTC 추천·광고 공개 지침 읽기",
     homeChoicesKicker: "NEARFREE가 확인하는 정보",
     homeChoicesTitle: "현재 진행 중인 것부터 예정된 일정과 상시 혜택까지.",
     homeChoicesDesc:

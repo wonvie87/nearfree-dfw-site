@@ -6,15 +6,21 @@
     "listingTemplates": "listing-templates.8bcda709033c.js",
     "data": "data.9880fdf73d13.js",
     "listingLocales": "listing-locales.94ff27769a98.js",
-    "locales": "locales.7dd1719e3fd6.js",
-    "app": "app.28d75b0dfb95.js",
-    "styles": "styles.770e215af51d.css"
+    "locales": "locales.68006be9a3b5.js",
+    "app": "app.4854589d07f5.js",
+    "styles": "styles.51efe1e8ab61.css"
   },
   "pages": [
     "index.html",
     "explore.html",
     "radar.html",
     "how-it-works.html",
-    "pricing.html"
+    "pricing.html",
+    "about.html",
+    "contact.html",
+    "privacy.html",
+    "terms.html",
+    "accessibility.html",
+    "editorial.html"
   ]
 }

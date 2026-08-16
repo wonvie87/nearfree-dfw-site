@@ -1,0 +1,35 @@
+name: General feedback / 일반 문의
+description: Share product feedback that is not a listing correction, accessibility barrier or security report.
+title: "[Feedback]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. It is not a private support channel. Do not include personal, account, payment, medical, security-sensitive or precise-location information. NearFree does not currently promise a response time.
+
+        이 이슈는 공개되며 비공개 고객 지원 채널이 아닙니다. 개인정보·계정·결제·의료·보안 민감 정보·정확한 위치를 적지 마세요. 현재 NearFree는 답변 시간을 보장하지 않습니다.
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic / 주제
+      options:
+        - Product question / 서비스 문의
+        - Feature suggestion / 기능 제안
+        - Editorial or sponsorship question / 편집 또는 후원 문의
+        - Privacy or terms question / 개인정보 또는 이용약관 문의
+        - Other / 기타
+    validations:
+      required: true
+  - type: textarea
+    id: message
+    attributes:
+      label: Message / 내용
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public report confirmation / 공개 제보 확인
+      options:
+        - label: I understand this is public and did not include sensitive information. / 공개 글임을 이해하며 민감한 정보를 적지 않았습니다.
+          required: true

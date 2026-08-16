@@ -1,0 +1,60 @@
+name: Listing correction / 정보 정정
+description: Report a changed date, price, location, eligibility term, cancellation or broken official link.
+title: "[Listing correction]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep NearFree accurate. This issue is public. Do not include names, contact details, account information, payment data or precise personal location. A report is treated as an unverified lead and will be checked against official sources before the catalog changes.
+
+        정확한 정보 제공에 도움을 주셔서 감사합니다. 이 이슈는 공개됩니다. 이름·연락처·계정 정보·결제 정보·개인의 정확한 위치를 적지 마세요. 제보는 확인 전 정보로 취급하며, 공식 출처로 다시 검증한 뒤에만 카탈로그를 수정합니다.
+  - type: input
+    id: listing
+    attributes:
+      label: NearFree listing title or URL / NearFree 정보 제목 또는 URL
+      placeholder: "Example: 7th Annual Frisco Oktoberfest"
+    validations:
+      required: true
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: What changed? / 무엇이 바뀌었나요?
+      options:
+        - Date or time / 날짜 또는 시간
+        - Price or fee / 가격 또는 추가 비용
+        - Location or address / 장소 또는 주소
+        - Eligibility or reservation / 이용 대상 또는 예약
+        - Cancellation or availability / 취소 또는 운영 여부
+        - Official link / 공식 링크
+        - Other factual detail / 기타 사실 정보
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Correction details / 정정 내용
+      description: State the current page text and what the official information now says.
+    validations:
+      required: true
+  - type: input
+    id: official_source
+    attributes:
+      label: Official source URL / 공식 출처 URL
+      description: Link directly to the organizer, venue, city or institution page when possible.
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: observed
+    attributes:
+      label: Date observed / 확인한 날짜
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public report confirmation / 공개 제보 확인
+      options:
+        - label: I did not include personal, payment, account, security-sensitive or precise-location information. / 개인정보·결제·계정·보안 민감 정보·정확한 개인 위치를 적지 않았습니다.
+          required: true

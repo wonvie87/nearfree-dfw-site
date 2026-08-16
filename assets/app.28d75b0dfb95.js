@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.e94ec02966b1.js";
+import { UI, localizeListing } from "./locales.7dd1719e3fd6.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -120,9 +120,6 @@ const elements = {
   radarPreviewArea: $("#radarPreviewArea"),
   radarMatches: $("#radarMatches"),
   radarPreviewStatus: $("#radarPreviewStatus"),
-  accountDialog: $("#accountDialog"),
-  accountDialogTitle: $("#accountDialogTitle"),
-  accountDialogDesc: $("#accountDialogDesc"),
 };
 
 let toastTimer;
@@ -1071,7 +1068,6 @@ function closeDialogs({ clearRoute = true } = {}) {
     elements.detailDialog,
     elements.sortDialog,
     elements.filterDialog,
-    elements.accountDialog,
   ].forEach((dialog) => {
     if (dialog?.open) dialog.close();
     else dialog?.removeAttribute("open");
@@ -1168,18 +1164,6 @@ function setLocale(locale) {
   renderFeed();
   renderRadarCityOptions();
   renderRadarExperience();
-}
-
-function openAccountNotice(intent = "signin") {
-  if (!elements.accountDialog) return;
-  const isMembership = intent === "membership";
-  elements.accountDialogTitle.textContent = t(
-    isMembership ? "membershipComingTitle" : "accountComingTitle",
-  );
-  elements.accountDialogDesc.textContent = t(
-    isMembership ? "membershipComingDesc" : "accountComingDesc",
-  );
-  openDialog(elements.accountDialog);
 }
 
 function bindEvents() {
@@ -1332,18 +1316,9 @@ function bindEvents() {
     if (button) removeActiveFilter(button.dataset.removeFilter);
   });
   $("#emptyReset")?.addEventListener("click", resetFilters);
-  $$("[data-account-cta]").forEach((button) =>
-    button.addEventListener("click", () => openAccountNotice(button.dataset.accountIntent)),
-  );
   elements.modalBackdrop?.addEventListener("click", requestCloseDialogs);
   $$("[data-close]").forEach((button) => button.addEventListener("click", requestCloseDialogs));
-  [
-    elements.locationDialog,
-    elements.detailDialog,
-    elements.sortDialog,
-    elements.filterDialog,
-    elements.accountDialog,
-  ]
+  [elements.locationDialog, elements.detailDialog, elements.sortDialog, elements.filterDialog]
     .filter(Boolean)
     .forEach((dialog) => {
       dialog.addEventListener("cancel", (event) => {

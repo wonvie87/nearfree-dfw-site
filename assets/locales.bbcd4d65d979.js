@@ -7,6 +7,8 @@ export const UI = {
     metaDescription:
       "NearFree organizes verified DFW events and ongoing benefits, with personalized Radar monitoring planned for members.",
     skip: "Skip to the discovery feed",
+    listingPageSkip: "Skip to listing details",
+    listingPageBack: "Back to Explore",
     brandHome: "NearFree home",
     primaryNavigation: "Primary navigation",
     footerNavigation: "Footer navigation",
@@ -679,6 +681,8 @@ export const UI = {
     metaDescription:
       "NearFree가 DFW에서 진행 중이거나 예정된 이벤트와 상시 혜택을 확인해 한곳에 정리하고, 향후 멤버에게 맞춤 Radar 모니터링을 제공합니다.",
     skip: "콘텐츠로 바로가기",
+    listingPageSkip: "상세 정보로 바로가기",
+    listingPageBack: "둘러보기로 돌아가기",
     brandHome: "NearFree 홈",
     primaryNavigation: "주요 메뉴",
     footerNavigation: "하단 메뉴",

@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.37c04ae2a7e5.js";
+import { UI, localizeListing } from "./locales.bbcd4d65d979.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -12,7 +12,8 @@ import {
   overlapsWindow,
 } from "./discovery.d93910c29cef.js";
 import { createBrowserStorage } from "./browser-storage.aba7afe3e62a.js";
-import { createListingTemplates } from "./listing-templates.8bcda709033c.js";
+import { listingPermalink } from "./listing-permalinks.84badb268a19.js";
+import { createListingTemplates } from "./listing-templates.9ef0bfca1127.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -968,6 +969,7 @@ const templates = createListingTemplates({
   isAllDfw: () => state.scope === "all",
   isEndingSoon: (listing) => endsWithin(listing, 30),
   isSaved: (id) => state.saved.has(id),
+  listingPath: listingPermalink,
   mapUrl,
   similarListings,
   t,
@@ -1006,7 +1008,7 @@ function openDetails(id) {
   const listing = sourceListing(id);
   if (!listing) return;
   if (!elements.detailDialog) {
-    window.location.href = `explore.html?listing=${encodeURIComponent(id)}`;
+    window.location.href = listingPermalink(listing);
     return;
   }
   const wasOpen = Boolean(elements.detailDialog.open);
@@ -1108,8 +1110,7 @@ function toggleSave(id) {
 }
 
 async function shareListing(listing) {
-  const url = new URL(window.location.href);
-  url.searchParams.set("listing", listing.id);
+  const url = new URL(listingPermalink(listing), window.location.href);
   const shareData = {
     title: `${listing.title} | NearFree DFW`,
     text: `${displayCost(listing)} · ${listing.dateLabel}\n${listing.venue}, ${listing.city}\n${listing.actionUrl}`,
@@ -1127,6 +1128,17 @@ async function shareListing(listing) {
   } catch (error) {
     if (error?.name !== "AbortError") showToast(t("shareFailed"));
   }
+}
+
+function isUnmodifiedPrimaryClick(event) {
+  return (
+    event.button === 0 &&
+    !event.defaultPrevented &&
+    !event.metaKey &&
+    !event.ctrlKey &&
+    !event.shiftKey &&
+    !event.altKey
+  );
 }
 
 function showToast(message) {
@@ -1262,12 +1274,18 @@ function bindEvents() {
     if (!original) return;
     const listing = translatedListing(original);
     const action = target.dataset.action;
-    if (action === "details") openDetails(listing.id);
+    if (action === "details") {
+      if (!isUnmodifiedPrimaryClick(event)) return;
+      event.preventDefault();
+      openDetails(listing.id);
+    }
     if (action === "save") toggleSave(listing.id);
   });
   elements.detailContent?.addEventListener("click", (event) => {
     const similar = event.target.closest("[data-similar-id]");
     if (similar) {
+      if (!isUnmodifiedPrimaryClick(event)) return;
+      event.preventDefault();
       openDetails(similar.dataset.similarId);
       elements.detailScrollArea?.scrollTo({ top: 0, behavior: "smooth" });
     }

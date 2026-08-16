@@ -7,6 +7,7 @@ export function createListingTemplates(context) {
     isAllDfw,
     isEndingSoon,
     isSaved,
+    listingPath,
     mapUrl,
     similarListings,
     t,
@@ -96,14 +97,14 @@ export function createListingTemplates(context) {
     return `
       <article class="listing-card listing-${listing.kind} ${tone}" data-id="${listing.id}">
         <div class="listing-media">
-          <button class="listing-media-open" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
+          <a class="listing-media-open" data-action="details" href="${escapeHtml(listingPath(listing))}" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
             ${imageOrPlaceholder(listing, "listing-media-placeholder", index < 4 ? "eager" : "lazy")}
-          </button>
+          </a>
           <button class="listing-save ${saved ? "saved" : ""}" data-action="save" type="button" aria-label="${escapeHtml(saved ? t("unsave") : t("save"))}">
             <svg viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
           </button>
         </div>
-        <button class="listing-body" data-action="details" type="button" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
+        <a class="listing-body" data-action="details" href="${escapeHtml(listingPath(listing))}" aria-label="${escapeHtml(t("detailsAria", { title: listing.title }))}">
           <div class="listing-card-meta">
             ${dateTime ? `<time class="listing-card-date${dateClass}" datetime="${escapeHtml(dateTime)}">${escapeHtml(cardDate)}</time>` : `<span class="listing-card-date${dateClass}">${escapeHtml(cardDate)}</span>`}
             <span class="listing-card-location">${escapeHtml(place)}</span>
@@ -113,7 +114,7 @@ export function createListingTemplates(context) {
             <span class="listing-open-arrow" aria-hidden="true">↗</span>
           </span>
           <span class="listing-card-hook">${escapeHtml(listing.cardHook || listing.summary)}</span>
-        </button>
+        </a>
       </article>`;
   }
 
@@ -144,7 +145,7 @@ export function createListingTemplates(context) {
 
   function similarTemplate(listing) {
     return `
-      <button class="similar-card" data-similar-id="${listing.id}" type="button">
+      <a class="similar-card" data-similar-id="${listing.id}" href="${escapeHtml(listingPath(listing))}">
         ${imageOrPlaceholder(listing, "similar-media-placeholder", "lazy", "")}
         <span class="similar-copy">
           <small>${escapeHtml(compactCost(listing))} · ${escapeHtml(getTimeStatus(listing))}</small>
@@ -152,7 +153,7 @@ export function createListingTemplates(context) {
           <span>${escapeHtml(listing.city)} · ${escapeHtml(formatDistance(listing.nearbyDistance))}</span>
         </span>
         <span aria-hidden="true">→</span>
-      </button>`;
+      </a>`;
   }
 
   function expectationTemplate(description) {
@@ -182,7 +183,7 @@ export function createListingTemplates(context) {
     return `<strong class="detail-date-lines">${scheduleLines.map((line) => `<span>${escapeHtml(line)}</span>`).join("")}</strong>`;
   }
 
-  function usefulDetailsTemplate(listing, practicalTips) {
+  function usefulDetailsTemplate(listing, practicalTips, idPrefix = "") {
     if (!practicalTips.length && !listing.finePrint) return "";
 
     return `
@@ -191,8 +192,8 @@ export function createListingTemplates(context) {
         <h3>${escapeHtml(t("usefulToKnow"))}</h3>
         ${
           practicalTips.length
-            ? `<section class="practical-tips" aria-labelledby="practicalTipsTitle">
-          <h4 id="practicalTipsTitle">${escapeHtml(t("practicalTips"))}</h4>
+            ? `<section class="practical-tips" aria-labelledby="${escapeHtml(idPrefix)}practicalTipsTitle">
+          <h4 id="${escapeHtml(idPrefix)}practicalTipsTitle">${escapeHtml(t("practicalTips"))}</h4>
           <ul class="practical-tip-list">
             ${practicalTips.map((tip) => `<li><span aria-hidden="true">✓</span><p>${escapeHtml(tip)}</p></li>`).join("")}
           </ul>
@@ -210,7 +211,7 @@ export function createListingTemplates(context) {
       </section>`;
   }
 
-  function detailTemplate(listing) {
+  function detailTemplate(listing, { headingLevel = 2, idPrefix = "" } = {}) {
     const distance = formatDistance(context.distanceFromSelected(listing));
     const similar = similarListings(listing);
     const description = listing.description || [];
@@ -218,13 +219,14 @@ export function createListingTemplates(context) {
     const bookingDetail = listing.booking?.detail || listing.reservation;
     const eligibilityDetail = listing.eligibility?.detail || "";
     const tone = categoryToneClass(listing);
+    const titleTag = headingLevel === 1 ? "h1" : "h2";
     return `
       <article class="listing-detail ${tone}">
         <div class="detail-layout${listing.image ? "" : " detail-layout-without-photo"}">
           ${listing.image ? `<figure class="detail-photo">${imageOrPlaceholder(listing, "detail-media-placeholder", "eager")}<figcaption>${escapeHtml(t("editorialVisual"))}</figcaption></figure>` : ""}
           <section class="detail-decision">
             <div class="detail-eyebrow"><span>${escapeHtml(categoryLabel(listing))}</span><span>${escapeHtml(kindLabel(listing))}</span></div>
-            <h2 id="detailTitle" aria-label="${escapeHtml(listing.title)}">${detailTitleContent(listing)}</h2>
+            <${titleTag} class="detail-title" id="${escapeHtml(idPrefix)}detailTitle" aria-label="${escapeHtml(listing.title)}">${detailTitleContent(listing)}</${titleTag}>
             <p class="detail-overview">${escapeHtml(listing.overview || listing.summary)}</p>
             <div class="detail-primary-facts">
               <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg>${detailDateTemplate(listing.dateLabel)}</p>
@@ -236,7 +238,7 @@ export function createListingTemplates(context) {
               <a class="official-action" href="${escapeHtml(listing.actionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("officialSite"))} ↗</a>
             </div>
           </section>
-          <main class="detail-story">
+          <div class="detail-story">
             ${
               description.length
                 ? `<section class="detail-section experience-section">
@@ -276,8 +278,8 @@ export function createListingTemplates(context) {
                 </article>
               </div>
             </section>
-            ${usefulDetailsTemplate(listing, practicalTips)}
-          </main>
+            ${usefulDetailsTemplate(listing, practicalTips, idPrefix)}
+          </div>
         </div>
         <section class="detail-section verification-section">
           <div class="verification-title">

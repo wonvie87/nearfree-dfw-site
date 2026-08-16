@@ -1,14 +1,16 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "files": {
     "discovery": "discovery.d93910c29cef.js",
     "browserStorage": "browser-storage.aba7afe3e62a.js",
-    "listingTemplates": "listing-templates.8bcda709033c.js",
+    "listingPermalinks": "listing-permalinks.84badb268a19.js",
+    "listingTemplates": "listing-templates.9ef0bfca1127.js",
     "data": "data.9880fdf73d13.js",
     "listingLocales": "listing-locales.94ff27769a98.js",
-    "locales": "locales.37c04ae2a7e5.js",
-    "app": "app.8e5731c91f0a.js",
-    "styles": "styles.bfa726fc4912.css"
+    "locales": "locales.bbcd4d65d979.js",
+    "app": "app.b51b0738c39f.js",
+    "listingPage": "listing-page.9e64af87ef19.js",
+    "styles": "styles.3731b0d56c0f.css"
   },
   "pages": [
     "index.html",
@@ -22,5 +24,35 @@
     "terms.html",
     "accessibility.html",
     "editorial.html"
+  ],
+  "listingPageCount": 27,
+  "listingPages": [
+    "events/dma-free-sunday/index.html",
+    "events/carrollton-culture-fest/index.html",
+    "events/cottonwood-art-festival-fall/index.html",
+    "events/the-colony-family-fright-fest/index.html",
+    "events/grand-prairie-main-street-fest/index.html",
+    "events/allen-pass-play-expo/index.html",
+    "benefits/action-park-grand-prairie-bogo-skate/index.html",
+    "benefits/african-american-museum-dallas-free-admission/index.html",
+    "benefits/allen-leap-days-2026/index.html",
+    "benefits/allen-show-your-badge-discounts/index.html",
+    "benefits/arlington-summer-music-series-2026/index.html",
+    "benefits/carrollton-library-card-free/index.html",
+    "benefits/dallas-arboretum-museums-for-all/index.html",
+    "benefits/dcta-reduced-fares/index.html",
+    "benefits/fort-worth-botanic-garden-access-to-nature/index.html",
+    "events/frisco-oktoberfest-2026/index.html",
+    "events/grapefest-free-thursday-2026/index.html",
+    "benefits/heard-museum-museums-for-all-5/index.html",
+    "benefits/irving-tribute-to-summer-2026/index.html",
+    "benefits/juice-box-the-colony-free-toppings-2026/index.html",
+    "benefits/knapp-heritage-park-free-admission/index.html",
+    "events/lewisville-fiesta-charra-2026/index.html",
+    "benefits/lewisville-library-card-free-texas/index.html",
+    "events/mckinney-trick-or-treat-trail-2026/index.html",
+    "benefits/modern-fort-worth-free-fridays/index.html",
+    "benefits/plano-dine-discover-pass-2026/index.html",
+    "benefits/strikz-kids-bowl-free-2026/index.html"
   ]
 }

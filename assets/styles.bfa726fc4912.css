@@ -6459,6 +6459,18 @@ body {
   font-weight: 800;
   letter-spacing: 0.04em;
 }
+.policy-main .trust-hero {
+  padding: clamp(38px, 5vw, 58px) clamp(28px, 6vw, 68px);
+  border-radius: 20px 20px 20px 6px;
+  background: var(--card);
+}
+.policy-main .trust-hero h1 {
+  max-width: 760px;
+  margin: 14px 0 16px;
+  font-size: clamp(36px, 4.6vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -0.042em;
+}
 .trust-layout {
   margin-top: 60px;
   display: grid;
@@ -6466,6 +6478,9 @@ body {
   justify-content: center;
   align-items: start;
   gap: clamp(38px, 7vw, 88px);
+}
+.policy-main .trust-layout {
+  margin-top: 48px;
 }
 .trust-toc {
   position: sticky;
@@ -6523,6 +6538,9 @@ body {
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
+.policy-main :where(.trust-section h2) {
+  font-size: clamp(26px, 2.7vw, 34px);
+}
 .trust-section h3 {
   margin: 32px 0 12px;
   color: var(--ink);
@@ -6535,6 +6553,9 @@ body {
   font-size: 16px;
   line-height: 1.78;
   text-wrap: pretty;
+}
+.trust-followup {
+  margin-top: 20px;
 }
 .trust-check-list {
   margin: 24px 0 0;
@@ -6715,6 +6736,10 @@ html[lang="ko"] :is(.trust-toc strong, .footer-nav-group > strong) {
     margin-top: 14px;
     padding: 36px 22px;
     border-radius: 22px 22px 22px 7px;
+  }
+  .policy-main .trust-hero {
+    padding: 30px 22px;
+    border-radius: 16px 16px 16px 5px;
   }
   .trust-hero h1 {
     margin-top: 14px;

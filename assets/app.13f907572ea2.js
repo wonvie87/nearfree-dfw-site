@@ -12,7 +12,7 @@ import {
   overlapsWindow,
 } from "./discovery.d93910c29cef.js";
 import { createBrowserStorage } from "./browser-storage.aba7afe3e62a.js";
-import { createListingTemplates } from "./listing-templates.3966152ef472.js";
+import { createListingTemplates } from "./listing-templates.8bcda709033c.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];

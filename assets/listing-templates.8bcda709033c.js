@@ -173,6 +173,15 @@ export function createListingTemplates(context) {
     </div>`;
   }
 
+  function detailDateTemplate(dateLabel) {
+    const scheduleLines = String(dateLabel)
+      .split(/\s+·\s+/u)
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    return `<strong class="detail-date-lines">${scheduleLines.map((line) => `<span>${escapeHtml(line)}</span>`).join("")}</strong>`;
+  }
+
   function usefulDetailsTemplate(listing, practicalTips) {
     if (!practicalTips.length && !listing.finePrint) return "";
 
@@ -206,21 +215,20 @@ export function createListingTemplates(context) {
     const similar = similarListings(listing);
     const description = listing.description || [];
     const practicalTips = listing.practicalTips || [];
-    const hasUsefulDetails = practicalTips.length > 0 || Boolean(listing.finePrint);
     const bookingDetail = listing.booking?.detail || listing.reservation;
     const eligibilityDetail = listing.eligibility?.detail || "";
     const tone = categoryToneClass(listing);
     return `
       <article class="listing-detail ${tone}">
-        <div class="detail-hero-grid${listing.image ? "" : " detail-hero-without-photo"}">
+        <div class="detail-layout${listing.image ? "" : " detail-layout-without-photo"}">
           ${listing.image ? `<figure class="detail-photo">${imageOrPlaceholder(listing, "detail-media-placeholder", "eager")}<figcaption>${escapeHtml(t("editorialVisual"))}</figcaption></figure>` : ""}
           <section class="detail-decision">
             <div class="detail-eyebrow"><span>${escapeHtml(categoryLabel(listing))}</span><span>${escapeHtml(kindLabel(listing))}</span></div>
             <h2 id="detailTitle" aria-label="${escapeHtml(listing.title)}">${detailTitleContent(listing)}</h2>
             <p class="detail-overview">${escapeHtml(listing.overview || listing.summary)}</p>
             <div class="detail-primary-facts">
-              <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><strong>${escapeHtml(listing.dateLabel)}</strong></p>
-              <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)}</span></p>
+              <p><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg>${detailDateTemplate(listing.dateLabel)}</p>
+              <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><span class="detail-primary-fact-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)}</span></span></p>
               ${isAllDfw() ? "" : `<p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M5 17l2-7h10l2 7M8 17v2M16 17v2"/></svg><strong>${escapeHtml(t("approxDistance", { distance }))}</strong></p>`}
             </div>
             <div class="detail-action-row">
@@ -228,8 +236,6 @@ export function createListingTemplates(context) {
               <a class="official-action" href="${escapeHtml(listing.actionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("officialSite"))} ↗</a>
             </div>
           </section>
-        </div>
-        <div class="detail-content-grid${hasUsefulDetails ? " has-useful-details" : ""}">
           <main class="detail-story">
             ${
               description.length
@@ -240,8 +246,6 @@ export function createListingTemplates(context) {
             </section>`
                 : ""
             }
-          </main>
-          <aside class="detail-sidebar">
             <section class="detail-section visit-section">
               <span class="detail-section-kicker">${escapeHtml(t("visitSnapshot"))}</span>
               <h3>${escapeHtml(t("planVisit"))}</h3>
@@ -272,8 +276,8 @@ export function createListingTemplates(context) {
                 </article>
               </div>
             </section>
-          </aside>
-          ${usefulDetailsTemplate(listing, practicalTips)}
+            ${usefulDetailsTemplate(listing, practicalTips)}
+          </main>
         </div>
         <section class="detail-section verification-section">
           <div class="verification-title">

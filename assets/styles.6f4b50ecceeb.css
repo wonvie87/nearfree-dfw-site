@@ -1932,20 +1932,26 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) {
   --listing-accent: #b990e7;
   --listing-soft: #f4ebfb;
 }
-.detail-hero-grid {
+.detail-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(360px, 0.82fr);
-  border-bottom: 1px solid #dfddd6;
-  background: var(--card);
+  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.9fr);
+  grid-template-areas:
+    "photo decision"
+    "story decision";
+  align-items: start;
+  gap: 20px;
+  padding: 22px;
 }
-.detail-hero-grid.detail-hero-without-photo {
-  grid-template-columns: 1fr;
+.detail-layout-without-photo {
+  grid-template-areas: "story decision";
 }
 .detail-photo {
+  grid-area: photo;
   position: relative;
   min-height: 545px;
   margin: 0;
   overflow: hidden;
+  border-radius: 20px;
   background: #39423d;
 }
 .detail-photo img {
@@ -1976,12 +1982,19 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) {
   backdrop-filter: blur(8px);
 }
 .detail-decision {
+  grid-area: decision;
+  position: sticky;
+  top: 18px;
+  align-self: start;
   min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 42px 38px;
+  border: 1px solid #dedbd3;
   border-left: 5px solid var(--listing-accent);
+  border-radius: 20px;
+  background: var(--card);
 }
 .detail-eyebrow {
   display: flex;
@@ -2043,10 +2056,10 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) {
 }
 .detail-primary-facts p {
   margin: 0;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 19px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
   color: #343d37;
   font-size: 14px;
   line-height: 1.55;
@@ -2060,8 +2073,20 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) {
 .detail-primary-facts strong {
   font-weight: 700;
 }
-.detail-primary-facts span {
+.detail-primary-fact-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.detail-primary-fact-copy > span {
   color: var(--muted);
+}
+.detail-date-lines {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
 }
 .detail-action-row {
   margin-top: 23px;
@@ -2095,35 +2120,13 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) {
   outline: 3px solid var(--acid);
   outline-offset: 2px;
 }
-.detail-content-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.9fr);
-  grid-template-areas: "story sidebar";
-  align-items: start;
-  gap: 20px;
-  padding: 22px;
-}
-.detail-content-grid.has-useful-details {
-  grid-template-areas:
-    "story sidebar"
-    "useful sidebar";
-}
-.detail-story,
-.detail-sidebar {
+.detail-story {
+  grid-area: story;
   min-width: 0;
   display: grid;
   gap: 20px;
 }
-.detail-story {
-  grid-area: story;
-}
-.detail-sidebar {
-  grid-area: sidebar;
-  position: sticky;
-  top: 18px;
-}
 .useful-section {
-  grid-area: useful;
   background: #fffdfa;
 }
 .detail-section {
@@ -2487,27 +2490,9 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) {
 }
 
 @media (max-width: 900px) {
-  .detail-hero-grid {
-    grid-template-columns: 1fr;
-  }
   .detail-photo {
     min-height: 0;
     aspect-ratio: 16 / 9;
-  }
-  .detail-decision {
-    border-top: 5px solid var(--listing-accent);
-    border-left: 0;
-  }
-  .detail-content-grid,
-  .detail-content-grid.has-useful-details {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "story"
-      "sidebar"
-      "useful";
-  }
-  .detail-sidebar {
-    position: static;
   }
   .similar-list {
     grid-template-columns: 1fr;
@@ -2559,14 +2544,6 @@ html[lang="ko"] :is(.detail-summary, .condition-box p) {
     margin-bottom: 22px;
     font-size: 15px;
     line-height: 1.7;
-  }
-  .detail-content-grid {
-    gap: 12px;
-    padding: 12px;
-  }
-  .detail-story,
-  .detail-sidebar {
-    gap: 12px;
   }
   .detail-section {
     padding: 24px 20px;
@@ -3674,12 +3651,14 @@ select {
 .detail-close-button {
   background: #f0ede5;
 }
-.detail-hero-grid {
-  grid-template-columns: minmax(0, 1.28fr) minmax(390px, 0.72fr);
-  background: var(--card);
+.detail-layout {
+  grid-template-columns: minmax(0, 1.18fr) minmax(370px, 0.82fr);
+  gap: 24px;
+  padding: 25px;
 }
 .detail-photo {
   min-height: 590px;
+  border-radius: 22px 22px 22px 8px;
   background: #292c40;
 }
 .detail-photo::after {
@@ -3692,7 +3671,9 @@ select {
 }
 .detail-decision {
   padding: 48px 42px;
+  border-color: #ddd8cd;
   border-left-color: var(--blue);
+  border-radius: 22px 22px 22px 8px;
   background: linear-gradient(180deg, #fffdf8, #f4f3ff);
 }
 .detail-eyebrow span:first-child {
@@ -3717,20 +3698,6 @@ select {
   border-color: var(--blue);
   background: var(--blue);
   box-shadow: 0 9px 22px rgba(89, 91, 255, 0.18);
-}
-.detail-content-grid {
-  grid-template-columns: minmax(0, 1.18fr) minmax(370px, 0.82fr);
-  gap: 24px;
-  padding: 25px;
-}
-.detail-content-grid:not(.has-useful-details) {
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "story"
-    "sidebar";
-}
-.detail-content-grid:not(.has-useful-details) .detail-sidebar {
-  position: static;
 }
 .detail-section {
   border-color: #ddd8cd;
@@ -3792,18 +3759,35 @@ select {
 }
 
 @media (max-width: 900px) {
-  .detail-hero-grid {
+  .detail-layout {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "decision"
+      "story";
+    gap: 0;
+    padding: 0;
+  }
+  .detail-layout-without-photo {
+    grid-template-areas:
+      "decision"
+      "story";
   }
   .detail-decision {
+    position: static;
+    top: auto;
     border-top: 5px solid var(--blue);
+    border-right: 0;
+    border-bottom: 0;
     border-left: 0;
+    border-radius: 0;
   }
   .detail-photo {
     min-height: 0;
+    border-radius: 0;
   }
-  .detail-content-grid {
-    grid-template-columns: 1fr;
+  .detail-story {
+    padding: 24px;
   }
 }
 
@@ -3887,6 +3871,10 @@ select {
   }
   .detail-decision {
     padding: 26px 20px 24px;
+  }
+  .detail-story {
+    gap: 12px;
+    padding: 12px;
   }
   .detail-decision h2 {
     font-size: 31px;
@@ -6241,7 +6229,7 @@ body {
     padding-left: max(20px, env(safe-area-inset-left));
     padding-right: max(20px, env(safe-area-inset-right));
   }
-  .detail-content-grid {
+  .detail-story {
     width: 100%;
     margin: 0;
     padding-left: max(12px, env(safe-area-inset-left));

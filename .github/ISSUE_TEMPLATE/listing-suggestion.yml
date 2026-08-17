@@ -1,0 +1,64 @@
+name: Listing suggestion / 새 정보 제안
+description: Suggest a possible free or near-free DFW event, program or recurring benefit for verification.
+title: "[Listing suggestion]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for sharing a possible find. This issue is public. Do not include names, contact details, account information, payment data, medical information or precise personal location. A suggestion is an unverified lead, not publication evidence. NearFree will check official sources and run a separate conflict search before anything can enter the catalog.
+
+        새로운 정보를 알려주셔서 감사합니다. 이 이슈는 공개됩니다. 이름·연락처·계정 정보·결제 정보·의료 정보·개인의 정확한 위치를 적지 마세요. 제안은 게시 근거가 아닌 확인 전 정보입니다. NearFree가 공식 출처와 별도의 변경·충돌 검색을 모두 확인한 뒤에만 카탈로그 게시를 검토합니다.
+  - type: input
+    id: listing_name
+    attributes:
+      label: Event, program or benefit name / 이벤트·프로그램·혜택 이름
+      placeholder: "Example: Free community museum day"
+    validations:
+      required: true
+  - type: input
+    id: city
+    attributes:
+      label: DFW city / DFW 도시
+      description: Give the city or cities served; do not provide a person's location.
+      placeholder: "Example: Dallas"
+    validations:
+      required: true
+  - type: dropdown
+    id: listing_type
+    attributes:
+      label: Listing type / 정보 유형
+      options:
+        - Scheduled event / 날짜가 정해진 이벤트
+        - Ongoing or recurring benefit / 상시·반복 혜택
+        - Not sure / 잘 모르겠음
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: Source URL / 발견한 페이지 URL
+      description: Share the page where you found it. A direct organizer, venue, city or institution URL is preferred, but every suggestion is independently verified.
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: known_details
+    attributes:
+      label: Known date, price and access details / 알고 있는 날짜·가격·이용 조건
+      description: Share only public facts that NearFree should verify. Do not include personal information.
+    validations:
+      required: true
+  - type: input
+    id: observed
+    attributes:
+      label: Date observed / 확인한 날짜
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public suggestion confirmation / 공개 제안 확인
+      options:
+        - label: I understand this is public and did not include personal, payment, account, medical, security-sensitive or precise-location information. / 공개 글임을 이해하며 개인정보·결제·계정·의료·보안 민감 정보·정확한 위치를 적지 않았습니다.
+          required: true

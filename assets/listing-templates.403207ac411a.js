@@ -1,6 +1,8 @@
 export function createListingTemplates(context) {
   const {
+    calendarLinks,
     compactCost,
+    correctionUrl,
     escapeHtml,
     formatDistance,
     getTimeStatus,
@@ -220,6 +222,8 @@ export function createListingTemplates(context) {
     const eligibilityDetail = listing.eligibility?.detail || "";
     const tone = categoryToneClass(listing);
     const titleTag = headingLevel === 1 ? "h1" : "h2";
+    const eventCalendar = listing.kind === "event" ? calendarLinks(listing) : null;
+    const correctionHref = correctionUrl(listing);
     return `
       <article class="listing-detail ${tone}">
         <div class="detail-layout${listing.image ? "" : " detail-layout-without-photo"}">
@@ -233,8 +237,14 @@ export function createListingTemplates(context) {
               <p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg><span class="detail-primary-fact-copy"><strong>${escapeHtml(listing.venue)}</strong><span>${escapeHtml(listing.city)}</span></span></p>
               ${isAllDfw() ? "" : `<p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M5 17l2-7h10l2 7M8 17v2M16 17v2"/></svg><strong>${escapeHtml(t("approxDistance", { distance }))}</strong></p>`}
             </div>
-            <div class="detail-action-row">
+            <div class="detail-action-row${eventCalendar ? " has-calendar" : ""}">
               <a href="${escapeHtml(mapUrl(listing))}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("directions"))}</a>
+              ${
+                eventCalendar
+                  ? `<a class="calendar-action" href="${escapeHtml(eventCalendar.google)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("addGoogleCalendar"))} ↗</a>
+              <a class="calendar-download" href="${escapeHtml(eventCalendar.download)}" download>${escapeHtml(t("downloadCalendarFile"))}</a>`
+                  : ""
+              }
               <a class="official-action" href="${escapeHtml(listing.actionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("officialSite"))} ↗</a>
             </div>
           </section>
@@ -307,6 +317,10 @@ export function createListingTemplates(context) {
                 .join("")}
             </div>
           </details>
+          <div class="detail-correction">
+            <p class="detail-correction-copy"><strong class="detail-correction-title">${escapeHtml(t("listingChangedTitle"))}</strong><span class="detail-correction-body">${escapeHtml(t("listingChangedBody"))}</span></p>
+            <a class="detail-correction-action" href="${escapeHtml(correctionHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(t("reportListingChange"))}<span aria-hidden="true">↗</span></a>
+          </div>
         </section>
         ${
           similar.length

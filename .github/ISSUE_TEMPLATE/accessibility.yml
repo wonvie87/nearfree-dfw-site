@@ -12,7 +12,7 @@ body:
     id: page
     attributes:
       label: Page URL / 페이지 URL
-      placeholder: https://wonvie87.github.io/nearfree-dfw-site/
+      placeholder: https://nearfree.app/
     validations:
       required: true
   - type: dropdown

@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:allen-pass-play-expo@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20260901T230000Z
+DTEND:20260902T010000Z
+SUMMARY:Pass & Play Expo — 30% Off Fall Classes
+DESCRIPTION:Tuesday\, September 1 · 6-8 PM\n\nAllen's free Rec Center Leap
+  Day evening lets visitors explore the facility and receive 30% off Fall c
+ lass sign-ups in arts\, music\, preschool programs\, archery\, dance\, mar
+ tial arts\, fitness\, and more.\n\nNearFree details: https://nearfree.app/
+ events/allen-pass-play-expo/
+LOCATION:Stephen G. Terrell Recreation Center\, 1680 W Exchange Pkwy\, Alle
+ n\, TX 75013
+URL:https://nearfree.app/events/allen-pass-play-expo/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

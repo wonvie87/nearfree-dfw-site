@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:lewisville-fiesta-charra-2026@nearfree.app
+DTSTAMP:20260807T213252Z
+DTSTART:20260906T210000Z
+DTEND:20260907T033000Z
+SUMMARY:Fiesta Charra 2026
+DESCRIPTION:9월 6일 일요일 · 오후 4시–10시 30분\n\n전통 차
+ 레아다에서 영감을 받은 승마 공연\, 라이브 음악\, 레슬
+ 링과 문화 공연을 무료로 즐길 수 있습니다.\n\nNearFree 상
+ 세 정보: https://nearfree.app/ko/events/lewisville-fiesta-charra-2026/
+LOCATION:Bill Weaver Arena\, 101 Parkway Dr\, Lewisville\, TX 75057
+URL:https://nearfree.app/ko/events/lewisville-fiesta-charra-2026/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

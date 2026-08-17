@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mckinney-trick-or-treat-trail-2026@nearfree.app
+DTSTAMP:20260807T213252Z
+DTSTART:20261017T200000Z
+DTEND:20261017T230000Z
+SUMMARY:McKinney Trick or Treat Trail
+DESCRIPTION:Saturday\, October 17 · 3-6 PM\n\nFamilies can follow the 1.2-
+ mile Towne Lake trail for trick-or-treating and children's activities.\n\n
+ NearFree details: https://nearfree.app/events/mckinney-trick-or-treat-trai
+ l-2026/
+LOCATION:Towne Lake Park\, 1405 Wilson Creek Pkwy\, McKinney\, TX 75069
+URL:https://nearfree.app/events/mckinney-trick-or-treat-trail-2026/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

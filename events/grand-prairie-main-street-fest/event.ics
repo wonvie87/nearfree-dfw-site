@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:grand-prairie-main-street-fest@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20261023T220000Z
+DTEND:20261026T010000Z
+SUMMARY:Main Street Fest
+DESCRIPTION:Friday\, October 23\, 5 PM-midnight · Saturday\, 10 AM-midnigh
+ t · Sunday\, noon-8 PM\n\nGrand Prairie's three-day downtown festival bri
+ ngs live music\, regional bands\, a kid zone\, and vendors to the City Hal
+ l campus.\n\nNearFree details: https://nearfree.app/events/grand-prairie-m
+ ain-street-fest/
+LOCATION:Downtown Grand Prairie\, 300 W Main St\, Grand Prairie\, TX 75050
+URL:https://nearfree.app/events/grand-prairie-main-street-fest/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

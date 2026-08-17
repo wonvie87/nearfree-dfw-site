@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:the-colony-family-fright-fest@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20261024T200000Z
+DTEND:20261025T000000Z
+SUMMARY:패밀리 프라이트 페스트
+DESCRIPTION:10월 24일 토요일 · 오후 3시–7시\n\n스튜어트 크
+ 리크 공원에서 헤이라이드(마차 타기)\, 게임\, 트릭 오
+ 어 트리트 부스\, 공예\, 연령대별 코스튬 콘테스트를 즐
+ 길 수 있어요. 행사 체험은 무료예요.\n\nNearFree 상세 정
+ 보: https://nearfree.app/ko/events/the-colony-family-fright-fest/
+LOCATION:Stewart Creek Park\, 3700 Sparks Rd\, The Colony\, TX 75056
+URL:https://nearfree.app/ko/events/the-colony-family-fright-fest/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

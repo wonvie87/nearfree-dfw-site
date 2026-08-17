@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:frisco-oktoberfest-2026@nearfree.app
+DTSTAMP:20260807T213252Z
+DTSTART:20261003T160000Z
+DTEND:20261004T020000Z
+SUMMARY:7th Annual Frisco Oktoberfest
+DESCRIPTION:Saturday\, October 3 · 11 AM-9 PM\n\nSpend the day at The Star
+  with live music\, traditional games\, and German food culture.\n\nNearFre
+ e details: https://nearfree.app/events/frisco-oktoberfest-2026/
+LOCATION:The Star\, 9 Cowboys Way\, Frisco\, TX 75034
+URL:https://nearfree.app/events/frisco-oktoberfest-2026/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:dma-free-sunday@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20260906T160000Z
+DTEND:20260906T220000Z
+SUMMARY:DMA FREE First Sundays: Access for All
+DESCRIPTION:Sunday\, September 6 · 11 AM-5 PM\n\nDMA's September free Sund
+ ay includes exhibition admission\, Open Studio from noon-4 PM\, and a 2 PM
+  Collection Highlights Tour at no cost.\n\nNearFree details: https://nearf
+ ree.app/events/dma-free-sunday/
+LOCATION:Dallas Museum of Art\, 1717 N Harwood St\, Dallas\, TX 75201
+URL:https://nearfree.app/events/dma-free-sunday/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

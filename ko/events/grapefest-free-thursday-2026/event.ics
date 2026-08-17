@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:grapefest-free-thursday-2026@nearfree.app
+DTSTAMP:20260807T213252Z
+DTSTART:20260917T160000Z
+DTEND:20260918T030000Z
+SUMMARY:제40회 GrapeFest 목요일 — 하루 종일 입장 무료
+DESCRIPTION:9월 17일 목요일 · 오전 11시–오후 10시\n\nGrapeFes
+ t 첫날인 목요일에는 히스토릭 메인 스트리트 축제 구역
+ 에 하루 종일 무료로 입장할 수 있습니다.\n\nNearFree 상세
+  정보: https://nearfree.app/ko/events/grapefest-free-thursday-2026/
+LOCATION:Historic Main Street Grapevine\, Historic Main Street District\, G
+ rapevine\, TX 76051
+URL:https://nearfree.app/ko/events/grapefest-free-thursday-2026/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

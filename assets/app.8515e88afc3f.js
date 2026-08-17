@@ -1,5 +1,5 @@
 import { CITY_PRESETS, LISTINGS, RESEARCH_NOTE } from "./data.9880fdf73d13.js";
-import { UI, localizeListing } from "./locales.bbcd4d65d979.js";
+import { UI, localizeListing } from "./locales.791b31bf6d13.js";
 import {
   createDiscoveryIndex,
   calendarDayDifference,
@@ -12,8 +12,11 @@ import {
   overlapsWindow,
 } from "./discovery.d93910c29cef.js";
 import { createBrowserStorage } from "./browser-storage.aba7afe3e62a.js";
-import { listingPermalink } from "./listing-permalinks.84badb268a19.js";
-import { createListingTemplates } from "./listing-templates.9ef0bfca1127.js";
+import { calendarFilePath, googleCalendarUrl } from "./calendar.05d4af2de89d.js";
+import { listingCorrectionUrl } from "./feedback.1e4ec69915a8.js";
+import { listingPermalink } from "./listing-permalinks.67fda15d5c1a.js";
+import { createListingTemplates } from "./listing-templates.403207ac411a.js";
+import { siteUrl } from "./site-url.bcec63b02a0e.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -962,14 +965,28 @@ function similarListings(listing) {
 }
 
 const templates = createListingTemplates({
+  calendarLinks: (listing) => {
+    const canonicalUrl = siteUrl(`/${listingPermalink(listing, { locale: state.locale })}`);
+    return {
+      google: googleCalendarUrl(listing, {
+        canonicalUrl,
+        detailsLabel: t("calendarDetailsLabel"),
+      }),
+      download: calendarFilePath(listing, { locale: state.locale }),
+    };
+  },
   compactCost,
+  correctionUrl: (listing) =>
+    listingCorrectionUrl(listing, {
+      canonicalUrl: siteUrl(`/${listingPermalink(listing, { locale: state.locale })}`),
+    }),
   escapeHtml,
   formatDistance,
   getTimeStatus,
   isAllDfw: () => state.scope === "all",
   isEndingSoon: (listing) => endsWithin(listing, 30),
   isSaved: (id) => state.saved.has(id),
-  listingPath: listingPermalink,
+  listingPath: (listing) => listingPermalink(listing, { locale: state.locale }),
   mapUrl,
   similarListings,
   t,
@@ -1008,7 +1025,7 @@ function openDetails(id) {
   const listing = sourceListing(id);
   if (!listing) return;
   if (!elements.detailDialog) {
-    window.location.href = listingPermalink(listing);
+    window.location.href = listingPermalink(listing, { locale: state.locale });
     return;
   }
   const wasOpen = Boolean(elements.detailDialog.open);
@@ -1110,7 +1127,9 @@ function toggleSave(id) {
 }
 
 async function shareListing(listing) {
-  const url = new URL(listingPermalink(listing), window.location.href);
+  const canonical = document.querySelector("link[rel='canonical']");
+  const baseUrl = canonical instanceof HTMLLinkElement ? canonical.href : window.location.href;
+  const url = new URL(`/${listingPermalink(listing, { locale: state.locale })}`, baseUrl);
   const shareData = {
     title: `${listing.title} | NearFree DFW`,
     text: `${displayCost(listing)} · ${listing.dateLabel}\n${listing.venue}, ${listing.city}\n${listing.actionUrl}`,

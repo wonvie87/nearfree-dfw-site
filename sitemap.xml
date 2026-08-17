@@ -1,36 +1,225 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/</loc>
+    <loc>https://nearfree.app/</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/explore.html</loc>
+    <loc>https://nearfree.app/explore</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/radar.html</loc>
+    <loc>https://nearfree.app/guides</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/how-it-works.html</loc>
+    <loc>https://nearfree.app/radar</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/pricing.html</loc>
+    <loc>https://nearfree.app/how-it-works</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/about.html</loc>
+    <loc>https://nearfree.app/pricing</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/contact.html</loc>
+    <loc>https://nearfree.app/about</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/privacy.html</loc>
+    <loc>https://nearfree.app/contact</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/terms.html</loc>
+    <loc>https://nearfree.app/privacy</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/accessibility.html</loc>
+    <loc>https://nearfree.app/terms</loc>
   </url>
   <url>
-    <loc>https://wonvie87.github.io/nearfree-dfw-site/editorial.html</loc>
+    <loc>https://nearfree.app/accessibility</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/editorial</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/guides/weekend-plans/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/guides/weekend-plans/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/guides/free-museum-days/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/guides/free-museum-days/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/guides/newly-verified/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/guides/newly-verified/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/guides/ongoing-benefits/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/guides/ongoing-benefits/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/dma-free-sunday/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/dma-free-sunday/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/carrollton-culture-fest/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/carrollton-culture-fest/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/cottonwood-art-festival-fall/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/cottonwood-art-festival-fall/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/the-colony-family-fright-fest/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/the-colony-family-fright-fest/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/grand-prairie-main-street-fest/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/grand-prairie-main-street-fest/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/allen-pass-play-expo/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/allen-pass-play-expo/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/action-park-grand-prairie-bogo-skate/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/action-park-grand-prairie-bogo-skate/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/african-american-museum-dallas-free-admission/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/african-american-museum-dallas-free-admission/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/allen-leap-days-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/allen-leap-days-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/allen-show-your-badge-discounts/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/allen-show-your-badge-discounts/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/arlington-summer-music-series-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/arlington-summer-music-series-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/carrollton-library-card-free/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/carrollton-library-card-free/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/dallas-arboretum-museums-for-all/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/dallas-arboretum-museums-for-all/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/dcta-reduced-fares/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/dcta-reduced-fares/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/fort-worth-botanic-garden-access-to-nature/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/fort-worth-botanic-garden-access-to-nature/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/frisco-oktoberfest-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/frisco-oktoberfest-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/grapefest-free-thursday-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/grapefest-free-thursday-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/heard-museum-museums-for-all-5/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/heard-museum-museums-for-all-5/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/irving-tribute-to-summer-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/irving-tribute-to-summer-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/juice-box-the-colony-free-toppings-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/juice-box-the-colony-free-toppings-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/knapp-heritage-park-free-admission/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/knapp-heritage-park-free-admission/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/lewisville-fiesta-charra-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/lewisville-fiesta-charra-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/lewisville-library-card-free-texas/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/lewisville-library-card-free-texas/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/events/mckinney-trick-or-treat-trail-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/events/mckinney-trick-or-treat-trail-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/modern-fort-worth-free-fridays/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/modern-fort-worth-free-fridays/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/plano-dine-discover-pass-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/plano-dine-discover-pass-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/benefits/strikz-kids-bowl-free-2026/</loc>
+  </url>
+  <url>
+    <loc>https://nearfree.app/ko/benefits/strikz-kids-bowl-free-2026/</loc>
   </url>
 </urlset>

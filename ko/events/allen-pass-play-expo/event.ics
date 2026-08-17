@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:allen-pass-play-expo@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20260901T230000Z
+DTEND:20260902T010000Z
+SUMMARY:패스 & 플레이 엑스포 — 가을 강좌 30% 할인
+DESCRIPTION:9월 1일 화요일 · 오후 6시–8시\n\n앨런 레크리
+ 에이션 센터를 무료로 둘러보고 예술·음악·유아 프로
+ 그램·양궁·댄스·무술·피트니스 등 가을 강좌를 알아
+ 보는 행사예요. 행사 참석자는 가을 강좌 등록비를 30% 
+ 할인받을 수 있어요.\n\nNearFree 상세 정보: https://nearfree.ap
+ p/ko/events/allen-pass-play-expo/
+LOCATION:Stephen G. Terrell Recreation Center\, 1680 W Exchange Pkwy\, Alle
+ n\, TX 75013
+URL:https://nearfree.app/ko/events/allen-pass-play-expo/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

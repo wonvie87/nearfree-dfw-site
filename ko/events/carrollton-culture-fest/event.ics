@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:carrollton-culture-fest@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20260926T200000Z
+DTEND:20260927T020000Z
+SUMMARY:캐럴턴 컬처 페스트
+DESCRIPTION:9월 26일 토요일 · 오후 3시–9시\n\n트리니티 밀
+ 스역 광장에서 여러 나라의 음식과 라이브 공연\, 세계 
+ 각지의 공예품 판매 부스와 어린이 공예 체험을 만날 수
+  있는 문화 축제예요.\n\nNearFree 상세 정보: https://nearfree.a
+ pp/ko/events/carrollton-culture-fest/
+LOCATION:Trinity Mills Station Esplanade\, 1450 Sunrise Ave\, Carrollton\, 
+ TX 75006
+URL:https://nearfree.app/ko/events/carrollton-culture-fest/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

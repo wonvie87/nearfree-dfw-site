@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:grand-prairie-main-street-fest@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20261023T220000Z
+DTEND:20261026T010000Z
+SUMMARY:그랜드프레리 메인 스트리트 페스트
+DESCRIPTION:10월 23일 금요일 오후 5시–자정 · 24일 오전 10
+ 시–자정 · 25일 정오–오후 8시\n\n그랜드프레리 시청 
+ 일대에서 라이브 음악과 지역 밴드 공연\, 키즈존\, 다양
+ 한 판매 부스를 즐길 수 있는 사흘간의 도심 축제예요.\n
+ \nNearFree 상세 정보: https://nearfree.app/ko/events/grand-prairie-mai
+ n-street-fest/
+LOCATION:Downtown Grand Prairie\, 300 W Main St\, Grand Prairie\, TX 75050
+URL:https://nearfree.app/ko/events/grand-prairie-main-street-fest/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

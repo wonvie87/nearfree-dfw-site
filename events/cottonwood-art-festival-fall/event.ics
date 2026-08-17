@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:cottonwood-art-festival-fall@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20261003T150000Z
+DTEND:20261004T220000Z
+SUMMARY:Cottonwood Art Festival
+DESCRIPTION:Saturday\, October 3\, 10 AM-7 PM · Sunday\, October 4\, 10 AM
+ -5 PM\n\nThe two-day fall festival at Cottonwood Park brings together juri
+ ed artists\, a food court\, and the children's ArtStop area.\n\nNearFree d
+ etails: https://nearfree.app/events/cottonwood-art-festival-fall/
+LOCATION:Cottonwood Park\, 1321 W Belt Line Rd\, Richardson\, TX 75080
+URL:https://nearfree.app/events/cottonwood-art-festival-fall/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

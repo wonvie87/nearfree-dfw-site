@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:dma-free-sunday@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20260906T160000Z
+DTEND:20260906T220000Z
+SUMMARY:DMA 무료 첫째 일요일: Access for All
+DESCRIPTION:9월 6일 일요일 · 오전 11시–오후 5시\n\nDMA의 9
+ 월 무료 개방일에는 전시를 무료로 보고\, 정오부터 오
+ 후 4시까지 오픈 스튜디오와 오후 2시 컬렉션 하이라이
+ 트 투어에도 참여할 수 있어요.\n\nNearFree 상세 정보: https
+ ://nearfree.app/ko/events/dma-free-sunday/
+LOCATION:Dallas Museum of Art\, 1717 N Harwood St\, Dallas\, TX 75201
+URL:https://nearfree.app/ko/events/dma-free-sunday/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

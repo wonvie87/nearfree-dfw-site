@@ -9,6 +9,8 @@ export const UI = {
     skip: "Skip to the discovery feed",
     listingPageSkip: "Skip to listing details",
     listingPageBack: "Back to Explore",
+    homeNav: "Home",
+    breadcrumbLabel: "Breadcrumb",
     brandHome: "NearFree home",
     primaryNavigation: "Primary navigation",
     footerNavigation: "Footer navigation",
@@ -20,6 +22,7 @@ export const UI = {
     termsNav: "Terms",
     accessibilityNav: "Accessibility",
     editorialNav: "Editorial & sponsorship",
+    guidesNav: "Guides",
     footerIndependent: "Independent DFW discovery project. Details can change.",
     howItWorksNav: "How it works",
     pricingNav: "Pricing",
@@ -34,10 +37,51 @@ export const UI = {
     skipPricing: "Skip to plans",
     skipTrust: "Skip to page content",
     onThisPage: "On this page",
-    trustUpdated: "Last updated August 16, 2026",
+    trustUpdated: "Last updated August 17, 2026",
     exploreMetaTitle: "Explore local DFW events and benefits | NearFree",
     exploreMetaDescription:
       "Browse verified events happening now or scheduled across DFW, plus ongoing local benefits.",
+    guidesMetaTitle: "Curated DFW guides | NearFree",
+    guidesMetaDescription:
+      "Use focused DFW guides for weekend events, free museum visits, newly checked finds and ongoing benefits.",
+    guidesKicker: "CURATED DFW GUIDES",
+    guidesTitle: "Start with a useful shortlist.",
+    guidesLead:
+      "These focused collections are generated from the same verified catalog as Explore, so dates, prices and conditions stay attached to their source listing.",
+    guidesBrowseAll: "Browse the complete catalog →",
+    guidesGridLabel: "DFW guides",
+    guidesHowKicker: "HOW COLLECTIONS WORK",
+    guidesHowTitle: "One catalog, clearer ways into it.",
+    guidesHowBody:
+      "A guide does not create or re-rank unverified facts. It selects published records using a documented rule and always links to the full detail page and checked sources.",
+    guideWeekendKicker: "WEEKEND PLANNER",
+    guideWeekendTitle: "Weekend events worth planning for",
+    guideWeekendDescription:
+      "Upcoming verified events that take place on Saturday or Sunday across DFW.",
+    guideMuseumKicker: "FREE CULTURE",
+    guideMuseumTitle: "Free museum and culture visits",
+    guideMuseumDescription:
+      "Free verified art and culture options, including scheduled days and ongoing admission.",
+    guideLatestKicker: "LATEST CHECKS",
+    guideLatestTitle: "Newly verified finds",
+    guideLatestDescription:
+      "A rotating shortlist from the listings NearFree checked most recently.",
+    guideOngoingKicker: "USE IT BEYOND ONE DATE",
+    guideOngoingTitle: "Ongoing DFW benefits",
+    guideOngoingDescription:
+      "Programs, passes and recurring local offers that remain useful beyond a single event.",
+    guideOpen: "Open guide →",
+    guidePageSkip: "Skip to the guides",
+    guideBreadcrumbLabel: "Guide breadcrumb",
+    guideListingCount: "{count} verified finds",
+    guideOpenListing: "View details",
+    guideEmptyTitle: "No matching find is published right now.",
+    guideEmptyBody:
+      "The guide stays honest when the current verified catalog has no match. Explore the complete catalog for other options.",
+    guideExploreKicker: "KEEP EXPLORING",
+    guideExploreTitle: "Need a different kind of plan?",
+    guideBackToGuides: "See all guides",
+    guideExploreAll: "Browse all finds",
     radarMetaTitle: "Preview your NearFree Radar",
     radarMetaDescription:
       "Preview NearFree Radar matches using your DFW area, travel radius and interests before personalized member monitoring launches.",
@@ -77,18 +121,22 @@ export const UI = {
     aboutContactAction: "Contact NearFree",
     contactMetaTitle: "Contact and corrections | NearFree",
     contactMetaDescription:
-      "Report a changed NearFree listing, accessibility barrier, product question or security vulnerability through the correct channel.",
+      "Report a changed NearFree listing, suggest a new find, or route accessibility, product and security feedback through the correct channel.",
     contactKicker: "CONTACT & CORRECTIONS",
     contactTitle: "Contact and corrections",
     contactLead:
       "Use the channel that matches your report. Most reports are public GitHub issues; suspected security vulnerabilities use a separate private channel.",
     contactPublicTitle: "Public feedback notice",
     contactPublicBody:
-      "Listing, accessibility and general reports open as public GitHub issues and require a GitHub account. Do not include your name, contact details, account information, payment data, medical information or precise personal location. GitHub's terms and privacy practices apply after you leave NearFree.",
+      "Listing corrections and suggestions, accessibility reports and general feedback open as public GitHub issues and require a GitHub account. Do not include your name, contact details, account information, payment data, medical information or precise personal location. GitHub's terms and privacy practices apply after you leave NearFree.",
     contactCorrectionTitle: "Correct listing information",
     contactCorrectionBody:
       "Report a changed date, time, price, address, eligibility rule, reservation condition, cancellation or broken official link. Include the NearFree title and a direct official source URL.",
     contactCorrectionAction: "Open a listing correction",
+    contactSuggestionTitle: "Suggest a new find",
+    contactSuggestionBody:
+      "Share a possible free or near-free DFW event, program or recurring benefit. Include the page where you found it; a direct organizer, venue, city or institution URL helps us verify it faster.",
+    contactSuggestionAction: "Open a listing suggestion",
     contactAccessibilityTitle: "Report an accessibility barrier",
     contactAccessibilityBody:
       "Tell us about a keyboard, screen-reader, focus, contrast, zoom, motion, language or narrow-screen problem.",
@@ -132,16 +180,16 @@ export const UI = {
       "If you choose Use current location, the browser asks permission. NearFree uses the coordinates in memory to calculate distance, does not put them in browser storage and does not transmit them through site code. The browser or operating system may use its own location provider under its own terms.",
     privacyHostingTitle: "Static hosting and external pages",
     privacyHostingBody:
-      "GitHub Pages serves the site and may process standard connection information under GitHub's privacy statement. NearFree does not add a tracking request or receive a personal analytics profile. Opening an organizer or other external link leaves NearFree and that destination's policy applies.",
+      "Cloudflare Pages serves the site and may process standard connection and security information under Cloudflare's privacy policy. NearFree does not enable Cloudflare Web Analytics, add another tracking request or receive a personal analytics profile. Opening an organizer or other external link leaves NearFree and that destination's policy applies.",
     privacyFeedbackTitle: "Feedback sent through GitHub",
     privacyFeedbackBody:
-      "Listing corrections, accessibility reports and general feedback are public GitHub issues. GitHub stores the content and requires an account. Do not submit personal or sensitive information. Private vulnerability reports use GitHub's restricted security-advisory channel.",
+      "Listing corrections and suggestions, accessibility reports and general feedback are public GitHub issues. A correction link pre-fills only the public listing title and canonical page URL. GitHub stores the content and requires an account. Do not submit personal or sensitive information. Private vulnerability reports use GitHub's restricted security-advisory channel.",
     privacyDisclosureTitle: "Disclosure, sale and advertising",
     privacyDisclosureBody:
-      "NearFree does not sell personal data, share it for cross-context behavioral advertising, or use it for targeted advertising. NearFree does not disclose a first-party user profile because it does not create one. GitHub and external destinations may independently process information you provide or connection data under their own policies.",
+      "NearFree does not sell personal data, share it for cross-context behavioral advertising, or use it for targeted advertising. NearFree does not disclose a first-party user profile because it does not create one. Cloudflare, GitHub and external destinations may independently process connection data or information you provide under their own policies.",
     privacyRetentionTitle: "Retention and deletion",
     privacyRetentionBody:
-      "Device preferences remain until you clear this site's data or your browser removes them. Precise location is kept only in page memory for the active visit. NearFree has no first-party server record to retain, export or delete. GitHub controls retention of hosting logs, account data, public issues and private security reports under its own policies and tools.",
+      "Device preferences remain until you clear this site's data or your browser removes them. Precise location is kept only in page memory for the active visit. NearFree has no first-party server record to retain, export or delete. Cloudflare controls its hosting and security records; GitHub controls account data, public issues and private security reports under each provider's policies and tools.",
     privacyChildrenTitle: "Children's privacy",
     privacyChildrenBody:
       "NearFree is designed for adults and guardians planning local activities. It does not knowingly collect children's personal information. A child under 13 should not submit a public report; a parent or guardian can report a factual correction without sharing the child's information.",
@@ -156,7 +204,7 @@ export const UI = {
     privacyChangesTitle: "Changes to this notice",
     privacyChangesBody:
       "NearFree will update this page before adding accounts, analytics, notifications, payments or a first-party contact system. The updated date identifies the version currently in effect.",
-    privacyGithubAction: "Read GitHub's privacy statement",
+    privacyCloudflareAction: "Read Cloudflare's privacy policy",
     privacyContactAction: "Ask a privacy question",
     termsMetaTitle: "Terms of Use | NearFree",
     termsMetaDescription:
@@ -604,7 +652,14 @@ export const UI = {
     locationDenied: "Location permission is off. Choose a nearby city below.",
     locationFailed: "We couldn’t find your location. Choose a city below.",
     directions: "Directions",
+    addGoogleCalendar: "Add to Google Calendar",
+    downloadCalendarFile: "Download calendar file",
+    calendarDetailsLabel: "NearFree details",
     officialSite: "Official site",
+    listingChangedTitle: "Has this information changed?",
+    listingChangedBody:
+      "Open a public GitHub report without personal information. Your listing and page URL are filled in, but every change is verified again before publication.",
+    reportListingChange: "Report changed information",
     planVisit: "Plan your visit",
     dealCost: "Cost & inclusions",
     entryDetails: "Entry & eligibility",
@@ -683,6 +738,8 @@ export const UI = {
     skip: "콘텐츠로 바로가기",
     listingPageSkip: "상세 정보로 바로가기",
     listingPageBack: "둘러보기로 돌아가기",
+    homeNav: "홈",
+    breadcrumbLabel: "현재 위치",
     brandHome: "NearFree 홈",
     primaryNavigation: "주요 메뉴",
     footerNavigation: "하단 메뉴",
@@ -694,6 +751,7 @@ export const UI = {
     termsNav: "이용약관",
     accessibilityNav: "접근성",
     editorialNav: "편집·후원 정책",
+    guidesNav: "가이드",
     footerIndependent: "독립적으로 운영하는 DFW 탐색 프로젝트입니다. 정보는 바뀔 수 있어요.",
     howItWorksNav: "이용 방법",
     pricingNav: "이용 요금",
@@ -708,10 +766,51 @@ export const UI = {
     skipPricing: "요금제로 바로가기",
     skipTrust: "페이지 내용으로 바로가기",
     onThisPage: "이 페이지의 내용",
-    trustUpdated: "최종 수정: 2026년 8월 16일",
+    trustUpdated: "최종 수정: 2026년 8월 17일",
     exploreMetaTitle: "DFW 지역 이벤트와 혜택 둘러보기 | NearFree",
     exploreMetaDescription:
       "DFW에서 진행 중이거나 예정된 이벤트와 현재 이용 가능한 상시 혜택을 확인해 보세요.",
+    guidesMetaTitle: "DFW 큐레이션 가이드 | NearFree",
+    guidesMetaDescription:
+      "주말 이벤트, 무료 박물관 방문, 최근 확인한 정보와 상시 혜택을 주제별 DFW 가이드에서 살펴보세요.",
+    guidesKicker: "DFW 큐레이션 가이드",
+    guidesTitle: "쓸모 있는 목록부터 가볍게 시작하세요.",
+    guidesLead:
+      "각 가이드는 둘러보기와 같은 검증 카탈로그에서 자동으로 구성됩니다. 날짜·가격·이용 조건과 확인한 출처는 상세 페이지에 그대로 이어져요.",
+    guidesBrowseAll: "전체 카탈로그 둘러보기 →",
+    guidesGridLabel: "DFW 가이드",
+    guidesHowKicker: "가이드 구성 방식",
+    guidesHowTitle: "하나의 카탈로그를 더 쉽게 둘러보는 방법이에요.",
+    guidesHowBody:
+      "가이드는 확인되지 않은 사실을 만들거나 임의로 순위를 정하지 않습니다. 공개된 항목을 문서화된 규칙으로 골라 전체 상세 정보와 확인 출처로 연결합니다.",
+    guideWeekendKicker: "주말 계획",
+    guideWeekendTitle: "미리 계획해 둘 DFW 주말 이벤트",
+    guideWeekendDescription:
+      "토요일이나 일요일에 열리는 DFW 지역의 확인된 예정 이벤트를 모았습니다.",
+    guideMuseumKicker: "무료 문화생활",
+    guideMuseumTitle: "무료 박물관·문화 공간 방문",
+    guideMuseumDescription:
+      "날짜가 정해진 무료 개방일과 상시 무료 입장을 포함한 미술·문화 정보를 모았습니다.",
+    guideLatestKicker: "최근 확인",
+    guideLatestTitle: "새로 확인한 지역 정보",
+    guideLatestDescription:
+      "NearFree가 가장 최근에 확인한 항목 가운데 일부를 계속 새롭게 보여드립니다.",
+    guideOngoingKicker: "하루보다 오래 쓰는 혜택",
+    guideOngoingTitle: "DFW 상시 혜택",
+    guideOngoingDescription:
+      "한 번의 이벤트 날짜를 넘어 이용할 수 있는 프로그램·패스·반복 지역 혜택입니다.",
+    guideOpen: "가이드 열기 →",
+    guidePageSkip: "가이드로 바로가기",
+    guideBreadcrumbLabel: "가이드 현재 위치",
+    guideListingCount: "확인된 정보 {count}개",
+    guideOpenListing: "상세 정보 보기",
+    guideEmptyTitle: "현재 공개된 항목 중 일치하는 정보가 없습니다.",
+    guideEmptyBody:
+      "확인된 항목이 없을 때는 빈 상태를 그대로 안내합니다. 전체 카탈로그에서 다른 선택지를 살펴보세요.",
+    guideExploreKicker: "더 둘러보기",
+    guideExploreTitle: "다른 종류의 계획이 필요한가요?",
+    guideBackToGuides: "전체 가이드 보기",
+    guideExploreAll: "모든 정보 둘러보기",
     radarMetaTitle: "내 NearFree Radar 미리보기",
     radarMetaDescription:
       "지역과 이동 거리, 관심사를 선택해 NearFree Radar 결과를 미리 보고 향후 맞춤 모니터링 방식을 확인해 보세요.",
@@ -750,18 +849,22 @@ export const UI = {
     aboutContactAction: "NearFree에 문의하기",
     contactMetaTitle: "문의와 정보 정정 | NearFree",
     contactMetaDescription:
-      "NearFree의 변경된 정보, 접근성 문제, 일반 문의 또는 보안 취약점을 알맞은 경로로 알려주세요.",
+      "NearFree의 변경된 정보를 알리거나 새 정보를 제안하고, 접근성·일반 문의·보안 취약점을 알맞은 경로로 보내세요.",
     contactKicker: "문의와 정보 정정",
     contactTitle: "문의와 정보 정정",
     contactLead:
       "내용에 맞는 경로를 이용해 주세요. 대부분의 제보는 공개 GitHub 이슈로 접수하며, 의심되는 보안 취약점은 별도의 비공개 경로로 받습니다.",
     contactPublicTitle: "공개 제보 안내",
     contactPublicBody:
-      "정보 정정·접근성·일반 문의는 공개 GitHub 이슈로 열리며 GitHub 계정이 필요합니다. 이름·연락처·계정 정보·결제 정보·의료 정보·개인의 정확한 위치를 적지 마세요. NearFree를 떠난 뒤에는 GitHub의 약관과 개인정보 처리 기준이 적용됩니다.",
+      "정보 정정·새 정보 제안·접근성·일반 문의는 공개 GitHub 이슈로 열리며 GitHub 계정이 필요합니다. 이름·연락처·계정 정보·결제 정보·의료 정보·개인의 정확한 위치를 적지 마세요. NearFree를 떠난 뒤에는 GitHub의 약관과 개인정보 처리 기준이 적용됩니다.",
     contactCorrectionTitle: "게시 정보 바로잡기",
     contactCorrectionBody:
       "날짜·시간·가격·주소·이용 대상·예약 조건·취소 여부·공식 링크가 바뀌었다면 알려주세요. NearFree의 제목과 공식 원문 URL을 함께 적어주세요.",
     contactCorrectionAction: "정보 정정 이슈 열기",
+    contactSuggestionTitle: "새 정보 제안하기",
+    contactSuggestionBody:
+      "DFW에서 찾은 무료·소액 이벤트, 프로그램 또는 반복 혜택을 알려주세요. 발견한 페이지를 함께 적어주세요. 주최 측·행사장·도시·기관의 공식 URL이면 더 빠르게 확인할 수 있어요.",
+    contactSuggestionAction: "새 정보 제안 이슈 열기",
     contactAccessibilityTitle: "접근성 문제 알리기",
     contactAccessibilityBody:
       "키보드·스크린 리더·포커스·명암·화면 확대·움직임·언어 또는 좁은 화면에서 겪은 문제를 알려주세요.",
@@ -805,16 +908,16 @@ export const UI = {
       "현재 위치 사용을 직접 선택하면 브라우저가 권한을 요청합니다. NearFree는 좌표를 메모리에서 거리 계산에만 사용하고 브라우저 저장소에 넣거나 사이트 코드를 통해 전송하지 않습니다. 브라우저나 운영체제의 위치 제공 기능에는 해당 서비스의 기준이 적용될 수 있습니다.",
     privacyHostingTitle: "정적 호스팅과 외부 페이지",
     privacyHostingBody:
-      "GitHub Pages가 사이트를 제공하며 GitHub 개인정보 처리방침에 따라 일반적인 접속 정보를 처리할 수 있습니다. NearFree는 별도 추적 요청을 추가하거나 개인별 분석 프로필을 받지 않습니다. 주최 측 등 외부 링크를 열면 NearFree를 떠나며 해당 사이트의 정책이 적용됩니다.",
+      "Cloudflare Pages가 사이트를 제공하며 Cloudflare 개인정보 처리방침에 따라 일반적인 접속 정보와 보안 정보를 처리할 수 있습니다. NearFree는 Cloudflare Web Analytics를 활성화하거나 별도 추적 요청을 추가하지 않으며 개인별 분석 프로필을 받지 않습니다. 주최 측 등 외부 링크를 열면 NearFree를 떠나며 해당 사이트의 정책이 적용됩니다.",
     privacyFeedbackTitle: "GitHub를 통한 제보",
     privacyFeedbackBody:
-      "정보 정정·접근성·일반 문의는 공개 GitHub 이슈이며 GitHub가 내용을 저장하고 계정을 요구합니다. 개인정보나 민감한 정보를 적지 마세요. 취약점 신고는 GitHub의 접근이 제한된 비공개 보안 경로를 사용합니다.",
+      "정보 정정·새 정보 제안·접근성·일반 문의는 공개 GitHub 이슈입니다. 정정 링크에는 공개된 항목 제목과 canonical 페이지 주소만 미리 채웁니다. GitHub가 내용을 저장하고 계정을 요구하므로 개인정보나 민감한 정보를 적지 마세요. 취약점 신고는 GitHub의 접근이 제한된 비공개 보안 경로를 사용합니다.",
     privacyDisclosureTitle: "제공·판매·광고 이용",
     privacyDisclosureBody:
-      "NearFree는 개인정보를 판매하거나, 다른 서비스 사이의 행동을 바탕으로 한 광고를 위해 공유하거나, 맞춤형 광고에 이용하지 않습니다. 자체 사용자 프로필을 만들지 않으므로 그러한 프로필을 외부에 제공하지도 않습니다. GitHub와 외부 사이트는 사용자가 제공한 정보나 접속 정보를 각자의 방침에 따라 별도로 처리할 수 있습니다.",
+      "NearFree는 개인정보를 판매하거나, 다른 서비스 사이의 행동을 바탕으로 한 광고를 위해 공유하거나, 맞춤형 광고에 이용하지 않습니다. 자체 사용자 프로필을 만들지 않으므로 그러한 프로필을 외부에 제공하지도 않습니다. Cloudflare, GitHub와 외부 사이트는 접속 정보나 사용자가 제공한 정보를 각자의 방침에 따라 별도로 처리할 수 있습니다.",
     privacyRetentionTitle: "보관과 삭제",
     privacyRetentionBody:
-      "기기 설정값은 사용자가 이 사이트의 데이터를 지우거나 브라우저가 삭제할 때까지 남습니다. 정확한 위치는 현재 방문 중 페이지 메모리에만 둡니다. NearFree 자체 서버에는 보관·내보내기·삭제할 사용자 기록이 없습니다. 호스팅 접속 기록·계정 정보·공개 이슈·비공개 보안 신고의 보관은 GitHub의 방침과 기능에 따릅니다.",
+      "기기 설정값은 사용자가 이 사이트의 데이터를 지우거나 브라우저가 삭제할 때까지 남습니다. 정확한 위치는 현재 방문 중 페이지 메모리에만 둡니다. NearFree 자체 서버에는 보관·내보내기·삭제할 사용자 기록이 없습니다. Cloudflare는 자체 호스팅·보안 기록을, GitHub는 계정 정보·공개 이슈·비공개 보안 신고를 각 제공자의 방침과 기능에 따라 관리합니다.",
     privacyChildrenTitle: "어린이 개인정보",
     privacyChildrenBody:
       "NearFree는 지역 활동을 계획하는 성인과 보호자를 위한 서비스이며 어린이의 개인정보를 의도적으로 수집하지 않습니다. 만 13세 미만 어린이는 공개 제보를 작성하지 않아야 하며, 보호자가 어린이 정보를 적지 않고 사실 정정을 대신 알릴 수 있습니다.",
@@ -829,7 +932,7 @@ export const UI = {
     privacyChangesTitle: "안내 변경",
     privacyChangesBody:
       "계정·분석·알림·결제 또는 자체 문의 시스템을 추가하기 전에 이 페이지를 먼저 수정합니다. 최종 수정일로 현재 적용되는 안내의 버전을 확인할 수 있습니다.",
-    privacyGithubAction: "GitHub 개인정보 처리방침 읽기",
+    privacyCloudflareAction: "Cloudflare 개인정보 처리방침 읽기",
     privacyContactAction: "개인정보 관련 문의하기",
     termsMetaTitle: "이용약관 | NearFree",
     termsMetaDescription:
@@ -1272,7 +1375,14 @@ export const UI = {
     locationDenied: "위치 권한이 꺼져 있어요. 아래에서 가까운 도시를 선택해 주세요.",
     locationFailed: "위치를 확인하지 못했어요. 아래에서 도시를 선택해 주세요.",
     directions: "길찾기",
+    addGoogleCalendar: "Google 캘린더에 추가",
+    downloadCalendarFile: "캘린더 파일 받기",
+    calendarDetailsLabel: "NearFree 상세 정보",
     officialSite: "공식 사이트",
+    listingChangedTitle: "정보가 바뀌었나요?",
+    listingChangedBody:
+      "개인정보 없이 공개 GitHub 제보를 열 수 있어요. 이 항목과 페이지 주소는 자동으로 채워지지만, 변경 내용은 다시 검증한 뒤에만 게시합니다.",
+    reportListingChange: "변경된 정보 알리기",
     planVisit: "방문 전 확인사항",
     dealCost: "가격·포함 항목",
     entryDetails: "입장·예약",

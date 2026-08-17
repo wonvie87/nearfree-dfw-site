@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mckinney-trick-or-treat-trail-2026@nearfree.app
+DTSTAMP:20260807T213252Z
+DTSTART:20261017T200000Z
+DTEND:20261017T230000Z
+SUMMARY:맥키니 Trick or Treat Trail
+DESCRIPTION:10월 17일 토요일 · 오후 3시–6시\n\nTowne Lake Park
+ 의 1.2마일 트레일을 따라 가족과 함께 트릭 오어 트릿과
+  어린이 활동을 즐길 수 있습니다.\n\nNearFree 상세 정보: h
+ ttps://nearfree.app/ko/events/mckinney-trick-or-treat-trail-2026/
+LOCATION:Towne Lake Park\, 1405 Wilson Creek Pkwy\, McKinney\, TX 75069
+URL:https://nearfree.app/ko/events/mckinney-trick-or-treat-trail-2026/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

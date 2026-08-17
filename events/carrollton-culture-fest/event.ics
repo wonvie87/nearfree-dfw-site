@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NearFree//DFW Event//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:carrollton-culture-fest@nearfree.app
+DTSTAMP:20260802T183341Z
+DTSTART:20260926T200000Z
+DTEND:20260927T020000Z
+SUMMARY:Carrollton Culture Fest
+DESCRIPTION:Saturday\, September 26 · 3-9 PM\n\nCarrollton Culture Fest br
+ ings international food\, live performances\, globally inspired craft vend
+ ors\, and children's crafts to Trinity Mills Station Esplanade.\n\nNearFre
+ e details: https://nearfree.app/events/carrollton-culture-fest/
+LOCATION:Trinity Mills Station Esplanade\, 1450 Sunrise Ave\, Carrollton\, 
+ TX 75006
+URL:https://nearfree.app/events/carrollton-culture-fest/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
